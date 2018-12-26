@@ -4,13 +4,24 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1000, 1000), "My window");
+    sf::RenderWindow window(sf::VideoMode(550*2, 600*2), "My window");
     window.setFramerateLimit(60);
+    sf::Texture texture;
+    if(!texture.loadFromFile("../mall2.png"))
+    {
+
+    }
+
+    sf::Sprite background;
+    background.setTexture(texture);
+    background.scale(2.0f,2.0f);
 
     sf::Clock clock;
     sf::Clock t0;
 
     Car_squares cars = Car_squares();
+    double spawn_counter = 0.0;
+    double threshold = 0.0;
 
     // run the program as long as the window is open
     while (window.isOpen())
@@ -27,13 +38,15 @@ int main()
 
         sf::Time elapsed = clock.restart();
 
-        cars.update(elapsed);
+        cars.update(elapsed,spawn_counter,threshold);
 
         window.clear(sf::Color(255,255,255,255));
+
+        window.draw(background);
         window.draw(cars);
         window.display();
 
-        cars.car_debug(t0.getElapsedTime());
+        //cars.car_debug(t0.getElapsedTime());
     }
 
     return 0;

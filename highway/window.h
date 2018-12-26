@@ -13,14 +13,13 @@ class Car_squares : public sf::Drawable, public sf::Transformable{
 public:
     Car_squares();
 
-    void update(sf::Time elapsed);
+    void update(sf::Time elapsed, double & spawn_counter, double & threshold);
     void car_debug(sf::Time t0);
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 private:
-    sf::VertexArray m_vertices;
-    std::vector<Car> m_cars;
+    Traffic m_traffic;
     sf::Texture m_texture;
 };
 

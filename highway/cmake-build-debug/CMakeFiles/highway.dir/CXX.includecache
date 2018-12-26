@@ -19,8 +19,24 @@ traffic.h
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/traffic.h
 cmath
 -
+fstream
+-
+sstream
+-
+iostream
+-
+map
+-
+random
+-
+vector
+-
 
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/traffic.h
+random
+-
+vector
+-
 SFML/Graphics.hpp
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/SFML/Graphics.hpp
 
