@@ -15,6 +15,7 @@ int main()
 
     sf::Sprite background;
     background.setTexture(texture);
+    //background.setColor(sf::Color::Black);
     background.scale(2.0f,2.0f);
 
     sf::Clock clock;

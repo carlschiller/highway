@@ -80,37 +80,57 @@ float & Car::width() { return m_width; }
 
 float & Car::theta() { return m_theta; }
 
-void Car::avoid_collision(std::vector<Car> &cars, int i,sf::Time elapsed) {
+Car * find_closest_car(std::vector<Car> &cars, int i, Car & ref_car){
+    Car * answer = nullptr;
+
+    std::vector<Car*> candidates;
+    candidates.reserve(cars.size());
+
+    float radius_to_next_car, theta_to_car, theta_diff_to_car_position,
+    theta_diff_between_car_directions;
+
+    float best_radius = 100000000;
     for(int j = 0; j < cars.size(); j++){
-        float radius_to_next_car,theta_to_car,
-                theta_diff_to_car_position,theta_diff_between_car_directions,
-                delta_speed, three_second;
-
-        const float min_distance_to = 10.0f;
-        three_second = abs(m_vel*3.0f);
         if(i!=j){
-            radius_to_next_car = sqrt(pow(cars[j].x_pos()-m_x_pos,2.0f)
-                    +pow(cars[j].y_pos()-m_y_pos,2.0f));
+            radius_to_next_car = sqrt(abs(pow(cars[j].x_pos()-ref_car.x_pos(),2.0f))
+                                      +abs(pow(cars[j].y_pos()-ref_car.y_pos(),2.0f)));
+            theta_to_car = atan2(-cars[j].y_pos()+ref_car.y_pos(),cars[j].x_pos()-ref_car.x_pos());
 
+            theta_diff_to_car_position = get_min_angle(theta_to_car,ref_car.theta());
+            theta_diff_between_car_directions = get_min_angle(ref_car.theta(),cars[j].theta());
 
-            theta_to_car = atan2(-cars[j].m_y_pos+m_y_pos,-cars[j].x_pos()+m_x_pos);
-            theta_diff_to_car_position = get_min_angle(theta_to_car,m_theta);
-            theta_diff_between_car_directions = get_min_angle(m_theta,cars[j].m_theta);
-            delta_speed = (m_vel-cars[j].m_vel);
-
-            if(theta_diff_to_car_position < M_PI*0.3 &&
-               theta_diff_between_car_directions < M_PI*0.30 && delta_speed < 0){
-                if(radius_to_next_car < three_second){
-                    m_vel -= delta_speed*m_aggressiveness*pow(1-radius_to_next_car/three_second,2.0f);
-                    if(m_vel < 0){
-                        m_vel = 0;
-                    }
-                }
-                if(radius_to_next_car < min_distance_to){
-
-                }
+            if(abs(theta_diff_to_car_position) < M_PI*0.3 &&
+               abs(theta_diff_between_car_directions) < M_PI*0.3 && radius_to_next_car < best_radius){
+                best_radius = radius_to_next_car;
+                answer = &cars[j];
             }
         }
+    }
+    return answer;
+}
+
+void Car::avoid_collision(std::vector<Car> &cars, int i,float & elapsed, float delta_theta) {
+    const float min_distance = 10.0f;
+    float three_second = abs(m_target_speed*1.0f);
+
+    Car * closest_car = find_closest_car(cars,i,cars[i]);
+
+    if(closest_car != nullptr){
+        float radius_to_car = sqrt(abs(pow(this->x_pos()-closest_car->x_pos(),2.0f))+
+                abs(pow(this->y_pos()-closest_car->y_pos(),2.0f)));
+        float delta_speed = closest_car->vel()-this->vel();
+        if(delta_speed < 2.0f && radius_to_car < three_second){
+            m_vel -= m_aggressiveness*0.25*pow(three_second/radius_to_car,3.0f)*abs(delta_speed);
+            if(m_vel < 0){
+                m_vel = 0;
+            }
+        }
+        else{
+            accelerate(delta_theta);
+        }
+    }
+    else{
+        accelerate(delta_theta);
     }
 }
 
@@ -160,27 +180,37 @@ std::mt19937& Traffic::my_engine() {
 void Traffic::spawn_cars(double & spawn_counter, sf::Time & elapsed, double & threshold) {
     spawn_counter += elapsed.asSeconds();
     if(spawn_counter > threshold + 1){
-        std::exponential_distribution<double> dis(1.0);
-        std::normal_distribution<float> sp(20.0,3.0);
+        if(m_cars.size() < 100){
+            std::exponential_distribution<double> dis(1.0);
+            std::normal_distribution<float> aggro(0.05f,0.01f);
+            std::normal_distribution<float> sp(30.0,5.0);
 
-        float speed = sp(my_engine());
-        threshold = dis(my_engine());
 
-        spawn_counter = 0;
-        std::vector<float> start_pos = m_spawn_positions[Spawn_positions::LOWER_LEFT];
-        m_cars.emplace_back(Car(start_pos[0],start_pos[1],speed,start_pos[2],speed,0.05f));
+            float speed = sp(my_engine());
+            threshold = dis(my_engine());
+            float aggressiveness = aggro(my_engine());
+
+            spawn_counter = 0;
+            std::vector<float> start_pos = m_spawn_positions[Spawn_positions::LOWER_LEFT];
+            Car new_car = Car(start_pos[0],start_pos[1],speed,start_pos[2],speed,aggressiveness);
+            // look if car is near spawn point
+            Car * closest_car = find_closest_car(m_cars,m_cars.size(),new_car);
+            if(closest_car != nullptr){
+                float radius = sqrt(abs(pow(new_car.x_pos()-closest_car->x_pos(),2.0f))+abs(pow(new_car.y_pos()-closest_car->y_pos(),2.0f)));
+                if(radius > 20){
+                    m_cars.push_back(new_car);
+                }
+            }
+            else{
+                m_cars.push_back(new_car);
+            }
+        }
     }
 }
 
 float Traffic::get_theta(float xpos, float ypos, float speed, float current_theta) {
     std::vector<float> theta_candidates;
-    float radius;
-    if(speed > 8.0){
-        radius = speed/4.0f;
-    }
-    else{
-        radius = 2.0f;
-    }
+    float radius = 2.0f;
 
     const int divisions = 60;
 
@@ -213,22 +243,24 @@ float Traffic::get_theta(float xpos, float ypos, float speed, float current_thet
     }
 }
 
-void Traffic::update_position(int i, sf::Time & elapsed_time) {
+void Traffic::update_speed(int i, float & elapsed_time) {
     // look in a circle speed/4 m around car to find next angle to drive in.
     Car & car = m_cars[i];
     float old_theta = car.theta();
     float theta = get_theta(car.x_pos(),car.y_pos(),car.vel(),car.theta());
+
     car.steer(theta);
-    car.accelerate(theta-old_theta);
-
-    car.avoid_collision(m_cars,i,elapsed_time);
-
-    car.update_pos(elapsed_time.asSeconds());
+    //car.accelerate(theta-old_theta);
+    car.avoid_collision(m_cars,i,elapsed_time,theta-old_theta);
 }
 
 void Traffic::update(sf::Time & elapsed_time) {
+    float elapsed = elapsed_time.asSeconds();
     for(int i = 0; i < m_cars.size(); i++){
-        update_position(i,elapsed_time);
+        update_speed(i,elapsed);
+    }
+    for(Car & car : m_cars){
+        car.update_pos(elapsed);
     }
 }
 
