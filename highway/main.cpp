@@ -6,6 +6,7 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(550*2, 600*2), "My window");
     window.setFramerateLimit(60);
+
     sf::Texture texture;
     if(!texture.loadFromFile("../mall2.png"))
     {

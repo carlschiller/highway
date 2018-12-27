@@ -39,6 +39,7 @@ public:
     void update_pos(float delta_t);
     void accelerate(float dtheta);
     void steer(float delta_theta);
+    void avoid_collision(std::vector<Car> & cars, int i, sf::Time elapsed);
     float & x_pos();
     float & y_pos();
     float & vel();
@@ -62,7 +63,7 @@ private:
 
     std::mt19937 & my_engine();
 
-    void update_position(Car& car, sf::Time & elapsed_time);
+    void update_position(int i, sf::Time & elapsed_time);
     float get_theta(float xpos, float ypos, float speed, float current_theta);
 public:
     Traffic();
