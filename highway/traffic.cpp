@@ -17,6 +17,10 @@ float get_min_angle(const float ang1, const float ang2){
     return score;
 }
 
+float sgn(float x){
+    return x/abs(x);
+}
+
 Car::Car() = default;
 
 Car::Car(float x_pos, float y_pos, float vel, float theta, float target_speed, float aggressiveness) {
@@ -82,36 +86,79 @@ float & Car::width() { return m_width; }
 
 float & Car::theta() { return m_theta; }
 
-Car * find_closest_car(std::vector<Car> &cars, int i, Car & ref_car, float view_angle){
+
+// if a is behind of b, return true. else false
+bool is_car_behind(Car * a, Car * b){
+    if(a!=b){
+        float theta_to_car_b = atan2(a->y_pos()-b->y_pos(),b->x_pos()-a->x_pos());
+        float theta_difference = get_min_angle(a->theta(),theta_to_car_b);
+        return theta_difference < M_PI*0.5;
+    }
+    else{
+        return false;
+    }
+
+}
+
+float distance_to_line(const float theta, const float x, const float y){
+    float x_hat,y_hat;
+    x_hat = cos(theta);
+    y_hat = -sin(theta);
+
+    float proj_x = (x*x_hat+y*y_hat)*x_hat;
+    float proj_y = (x*x_hat+y*y_hat)*y_hat;
+    float dist = sqrt(abs(pow(x-proj_x,2.0f))+abs(pow(y-proj_y,2.0f)));
+
+    return dist;
+}
+
+float distance_to_proj_point(const float theta, const float x, const float y){
+    float x_hat,y_hat;
+    x_hat = cos(theta);
+    y_hat = -sin(theta);
+    float proj_x = (x*x_hat+y*y_hat)*x_hat;
+    float proj_y = (x*x_hat+y*y_hat)*y_hat;
+    float dist = sqrt(abs(pow(proj_x,2.0f))+abs(pow(proj_y,2.0f)));
+
+    return dist;
+}
+
+Car * find_closest_car(std::vector<Car> &cars, const int i, float min_radius, float line_threshold){
     Car * answer = nullptr;
 
-    std::vector<Car*> candidates;
-    candidates.reserve(cars.size());
+    std::map<int,Car*> candidates;
 
-    float radius_to_next_car, theta_to_car, theta_diff_to_car_position,
-    theta_diff_between_car_directions;
-
-    float best_radius = 100000000;
     for(int j = 0; j < cars.size(); j++){
-        if(i!=j){
-            radius_to_next_car = sqrt(abs(pow(cars[j].x_pos()-ref_car.x_pos(),2.0f))
-                                      +abs(pow(cars[j].y_pos()-ref_car.y_pos(),2.0f)));
-            theta_to_car = atan2(-cars[j].y_pos()+ref_car.y_pos(),cars[j].x_pos()-ref_car.x_pos());
-
-            theta_diff_to_car_position = get_min_angle(theta_to_car,ref_car.theta());
-            theta_diff_between_car_directions = get_min_angle(ref_car.theta(),cars[j].theta());
-
-
-            if(abs(theta_diff_to_car_position) < view_angle &&
-               abs(theta_diff_between_car_directions) < view_angle && radius_to_next_car < best_radius){
-                best_radius = radius_to_next_car;
-                answer = &cars[j];
-            }
+        if(i!=j && is_car_behind(&cars[i],&cars[j])){
+            candidates[j] = (&cars[j]);
         }
     }
+
+    float score = 100000;
+    int index;
+    for(auto it : candidates){
+        float delta_x = it.second->x_pos()-cars[i].x_pos();
+        float delta_y = cars[i].y_pos()-it.second->y_pos();
+
+        float radius = sqrt(abs(pow(delta_x,2.0f))+abs(pow(delta_y,2.0f)));
+        float line_dist = distance_to_line(cars[i].theta(),delta_x,delta_y);
+        float proj_dist = distance_to_proj_point(cars[i].theta(),delta_x,delta_y);
+
+        if(line_dist/proj_dist > line_threshold && radius < score && radius < min_radius){
+            score = radius;
+            answer = it.second;
+            index = it.first;
+        }
+    }
+
+    if(answer != nullptr){
+        std::cout << "Car " << i << " has car " << index << "in front\n";
+    }
+
     return answer;
 }
 
+/*
 Car * find_car_to_side(std::vector<Car> &cars, int i, Car & ref_car, float min_radius ,float view_angle){
     Car * answer = nullptr;
 
@@ -141,46 +188,26 @@ Car * find_car_to_side(std::vector<Car> &cars, int i, Car & ref_car, float min_r
     }
     return answer;
 }
+*/
 
 void Car::avoid_collision(std::vector<Car> &cars, int i,float & elapsed, float delta_theta) {
-    const float min_distance = 10.0f;
-    float three_second = abs(m_target_speed*1.0f);
+    float three_second = abs(m_vel*3.0f);
+    float line_threshold = 1.0f;
 
-    Car * closest_car_ahead = find_closest_car(cars,i,cars[i],(float)M_PI*0.1f);
+    Car * closest_car_ahead = find_closest_car(cars,i,three_second,line_threshold);
 
     if(closest_car_ahead != nullptr){
-        float radius_to_car = sqrt(abs(pow(this->x_pos()-closest_car_ahead->x_pos(),2.0f))+
-                                   abs(pow(this->y_pos()-closest_car_ahead->y_pos(),2.0f)));
-        Car * closest_car_to_side = find_car_to_side(cars,i,cars[i],min_distance,(float)M_PI*0.1f);
+        float delta_x = closest_car_ahead->x_pos()-this->x_pos();
+        float delta_y = this->y_pos()-closest_car_ahead->y_pos();
+        float radius_to_car = sqrt(abs(pow(delta_x,2.0f))+
+                                   abs(pow(delta_y,2.0f)));
 
         float delta_speed = closest_car_ahead->vel()-this->vel();
-        if(delta_speed < 2.0f && radius_to_car < three_second){
-            m_vel -= std::min(0.05f*pow(three_second*10/radius_to_car,2.0f)*pow(abs(delta_speed*15),2.0f),15.0f*elapsed);
-            if(m_vel < 0){
-                m_vel = 0;
-            }
-        }
-        else if(radius_to_car < min_distance){
-            m_vel -= std::min(0.02f*pow(min_distance*10/radius_to_car,2.0f),15.0f*elapsed);
-            if(m_vel < 0){
-                m_vel = 0;
-            }
-        }
 
-        // cars to sides
-        else if(closest_car_to_side != nullptr){
-            delta_speed = closest_car_to_side->vel()-this->vel();
-            radius_to_car = sqrt(abs(pow(this->x_pos()-closest_car_to_side->x_pos(),2.0f))+
-                                 abs(pow(this->y_pos()-closest_car_to_side->y_pos(),2.0f)));
-            if(radius_to_car < min_distance && delta_speed < 0){
-                m_vel -= std::min(0.05f*pow(min_distance*10/radius_to_car,2.0f),15.0f*elapsed);
-                if(m_vel < 0){
-                    m_vel = 0;
-                }
-            }
-        }
-        else{
-            accelerate(delta_theta);
+        m_vel -= std::min(abs(pow(delta_speed,2.0f))*pow(three_second/radius_to_car,2.0f)*0.02f,10.0f);
+
+        if(m_vel < 0){
+            m_vel = 0;
         }
 
     }
@@ -255,9 +282,9 @@ std::mt19937& Traffic::my_engine() {
 
 void Traffic::spawn_cars(double & spawn_counter, sf::Time & elapsed, double & threshold) {
     spawn_counter += elapsed.asSeconds();
-    if(spawn_counter > threshold){
-        std::exponential_distribution<double> dis(2.0);
-        std::normal_distribution<float> aggro(0.1f,0.02f);
+    if(spawn_counter > threshold + 1 && m_cars.size() < 100){
+        std::exponential_distribution<double> dis(1.0);
+        std::normal_distribution<float> aggro(0.05f,0.01f);
         std::normal_distribution<float> sp(25.0,5.0);
         std::uniform_real_distribution<float> ramp(0.0f,1.0f);
 
@@ -269,7 +296,7 @@ void Traffic::spawn_cars(double & spawn_counter, sf::Time & elapsed, double & th
         Spawn_positions pos;
 
         spawn_counter = 0;
-        if(ramp_spawn > 0.8){
+        if(ramp_spawn > 1.0){
             pos = Spawn_positions ::RAMP;
             speed = speed*0.25f;
         }
@@ -280,7 +307,7 @@ void Traffic::spawn_cars(double & spawn_counter, sf::Time & elapsed, double & th
         std::vector<float> start_pos = m_spawn_positions[pos];
         Car new_car = Car(start_pos[0],start_pos[1],speed,start_pos[2],target,aggressiveness);
         // look if car is near spawn point
-        Car * closest_car = find_closest_car(m_cars,m_cars.size(),new_car,(float)M_PI*0.2f);
+        Car * closest_car = find_closest_car(m_cars,m_cars.size(),0,10);
         if(closest_car != nullptr){
             float radius = sqrt(abs(pow(new_car.x_pos()-closest_car->x_pos(),2.0f))+abs(pow(new_car.y_pos()-closest_car->y_pos(),2.0f)));
             if(radius > 10){
@@ -303,7 +330,6 @@ void Traffic::despawn_cars() {
         for(int i =0; i< size; i++){
             float despawn_radius = sqrt(abs(pow(m_cars[i].x_pos()-it.second[0],2.0f))+abs(pow(m_cars[i].y_pos()-it.second[1],2.0f)));
             if(despawn_radius < 2){
-                std::cout << "despawned car at: " << m_cars[i].x_pos() << ", " << m_cars[i].y_pos() << std::endl;
                 m_cars.erase(m_cars.begin()+i);
                 size--;
                 i--;
