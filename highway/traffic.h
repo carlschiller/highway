@@ -32,7 +32,11 @@ private:
     float m_aggressiveness; // how fast to accelerate;
     float m_target_speed;
 
+
+
 public:
+    bool lane_switch;
+
     Car();
     Car(float x_pos, float y_pos, float vel, float theta, float target_speed, float aggressiveness);
 
@@ -52,7 +56,16 @@ public:
 
 enum class Spawn_positions{
     LOWER_LEFT,
-    UPPER_RIGHT
+    RAMP
+};
+
+enum class Despawn_positions{
+    UPPER_RIGHT,
+    RAMP,
+};
+
+enum class Lane_positions{
+    LOWER_LEFT
 };
 
 class Traffic{
@@ -60,17 +73,20 @@ private:
     std::vector<std::vector<int>> m_allowed_zone;
     std::vector<Car> m_cars;
     std::map<Spawn_positions,std::vector<float>> m_spawn_positions;
+    std::map<Despawn_positions,std::vector<float>> m_despawn_positions;
+    std::map<Lane_positions ,std::vector<float>> m_lane_switch_points;
 
     std::mt19937 & my_engine();
 
     void update_speed(int i, float & elapsed_time);
-    float get_theta(float xpos, float ypos, float speed, float current_theta);
+    float get_theta(float xpos, float ypos, float speed, float current_theta, bool & lane_switch);
 public:
     Traffic();
     explicit Traffic(std::string filename);
 
     unsigned long n_of_cars();
     void spawn_cars(double & spawn_counter, sf::Time & time, double & threshold);
+    void despawn_cars();
     void force_spawn_car();
     void debug(sf::Time t0);
     void update(sf::Time & elapsed_time);

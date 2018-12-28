@@ -19,13 +19,14 @@ void Car_squares::draw(sf::RenderTarget &target, sf::RenderStates states) const 
     sf::RectangleShape rectangle;
     rectangle.setSize(sf::Vector2f(9.4,3.4));
     rectangle.setFillColor(sf::Color::Green);
+    rectangle.setOutlineColor(sf::Color::Black);
+    rectangle.setOutlineThickness(2.0f);
     for(Car car : m_traffic.get_cars()){
         rectangle.setPosition(car.x_pos()*2,car.y_pos()*2);
         rectangle.setRotation(car.theta()*(float)360.0f/(-2.0f*(float)M_PI));
 
-        sf::Uint8 colorspeed = static_cast<sf::Uint8> ((unsigned int)std::round(255 * pow(car.vel(),2.0f) / pow(car.target_speed(),2.0f)));
+        sf::Uint8 colorspeed = static_cast<sf::Uint8> ((unsigned int)std::round(255 * car.vel() / car.target_speed()));
         rectangle.setFillColor(sf::Color(255-colorspeed,colorspeed,0,255));
-
         target.draw(rectangle,states);
 
 
@@ -39,6 +40,7 @@ Car_squares::Car_squares() {
 
 void Car_squares::update(sf::Time elapsed, double & spawn_counter, double & threshold) {
     m_traffic.update(elapsed);
+    m_traffic.despawn_cars();
     m_traffic.spawn_cars(spawn_counter,elapsed,threshold);
 }
 
