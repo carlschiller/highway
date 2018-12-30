@@ -11,16 +11,6 @@
 #include <random>
 #include <vector>
 
-float get_min_angle(const float ang1, const float ang2){
-    float abs_diff = abs(ang1-ang2);
-    float score = std::min(2.0f*(float)M_PI-abs_diff,abs_diff);
-    return score;
-}
-
-float sgn(float x){
-    return x/abs(x);
-}
-
 Car::Car() = default;
 
 Car::Car(float x_pos, float y_pos, float vel, float theta, float target_speed, float aggressiveness) {
@@ -34,6 +24,7 @@ Car::Car(float x_pos, float y_pos, float vel, float theta, float target_speed, f
     m_theta = theta;
 
     lane_switch = false;
+    m_breaking = false;
 
     // target speed and how fast to reach speed.
     m_target_speed = target_speed;
@@ -45,19 +36,18 @@ void Car::update_pos(float delta_t) {
     m_y_pos += -sin(m_theta)*m_vel*delta_t;
 }
 
-void Car::accelerate(float delta_theta){
+void Car::accelerate(float delta_theta, Car * ahead){
     float target = m_target_speed*(1-abs(delta_theta)/(2.0f*3.141f));
-
     float d_vel; // proportional control.
+
     if(m_vel < target*0.75){
         d_vel = m_aggressiveness;
     }
     else{
         d_vel = m_aggressiveness*(target-m_vel)*4;
     }
-    if(m_vel + d_vel > 0){
-        m_vel += d_vel;
-    }
+
+    m_vel += d_vel;
 }
 
 void Car::steer(float new_theta) {
@@ -88,7 +78,7 @@ float & Car::theta() { return m_theta; }
 
 
 // if a is behind of b, return true. else false
-bool is_car_behind(Car * a, Car * b){
+bool Util::is_car_behind(Car * a, Car * b){
     if(a!=b){
         float theta_to_car_b = atan2(a->y_pos()-b->y_pos(),b->x_pos()-a->x_pos());
         float theta_difference = get_min_angle(a->theta(),theta_to_car_b);
@@ -100,7 +90,7 @@ bool is_car_behind(Car * a, Car * b){
 
 }
 
-float distance_to_line(const float theta, const float x, const float y){
+float Util::distance_to_line(const float theta, const float x, const float y){
     float x_hat,y_hat;
     x_hat = cos(theta);
     y_hat = -sin(theta);
@@ -112,7 +102,7 @@ float distance_to_line(const float theta, const float x, const float y){
     return dist;
 }
 
-float distance_to_proj_point(const float theta, const float x, const float y){
+float Util::distance_to_proj_point(const float theta, const float x, const float y){
     float x_hat,y_hat;
     x_hat = cos(theta);
     y_hat = -sin(theta);
@@ -123,7 +113,7 @@ float distance_to_proj_point(const float theta, const float x, const float y){
     return dist;
 }
 
-float distance_to_car(Car & a, Car & b){
+float Util::distance_to_car(Car & a, Car & b){
     float delta_x = a.x_pos()-b.x_pos();
     float delta_y = b.y_pos()-a.y_pos();
 
@@ -131,7 +121,7 @@ float distance_to_car(Car & a, Car & b){
 }
 
 
-bool find_connected_path(Car & ref, Car & car, std::vector<std::vector<int>> & allowed_zone, const int buffer){
+bool Util::find_connected_path(Car & ref, Car & car, std::vector<std::vector<int>> & allowed_zone, const int buffer){
     auto init_x = (int)std::round(ref.x_pos());
     auto init_y = (int)std::round(ref.y_pos());
     auto target_x = (int)std::round(car.x_pos());
@@ -190,10 +180,10 @@ bool find_connected_path(Car & ref, Car & car, std::vector<std::vector<int>> & a
     return connected;
 }
 
-Car * find_closest_car(std::vector<Car> &cars, Car * ref, std::vector<std::vector<int>> & allowed_zone){
+Car * Util::find_closest_car(std::vector<Car> &cars, Car * ref, std::vector<std::vector<int>> & allowed_zone){
     Car * answer = nullptr;
     float search_radius = 100;
-    int buffer = 20;
+    int buffer = 10;
 
     std::map<float,Car*> candidates;
 
@@ -218,7 +208,7 @@ Car * find_closest_car(std::vector<Car> &cars, Car * ref, std::vector<std::vecto
     return answer;
 }
 
-Car * find_closest_radius(std::vector<Car> &cars, const float x, const float y){
+Car * Util::find_closest_radius(std::vector<Car> &cars, const float x, const float y){
     Car * answer = nullptr;
 
     float score = 100000;
@@ -232,6 +222,13 @@ Car * find_closest_radius(std::vector<Car> &cars, const float x, const float y){
 
     return answer;
 }
+
+float Util::get_min_angle(const float ang1, const float ang2){
+    float abs_diff = abs(ang1-ang2);
+    float score = std::min(2.0f*(float)M_PI-abs_diff,abs_diff);
+    return score;
+}
+
 /*
 Car * find_car_to_side(std::vector<Car> &cars, int i, Car & ref_car, float min_radius ,float view_angle){
     Car * answer = nullptr;
@@ -266,39 +263,58 @@ Car * find_car_to_side(std::vector<Car> &cars, int i, Car & ref_car, float min_r
 
 void Car::avoid_collision(std::vector<Car> &cars, int i,float & elapsed, float delta_theta,
                           std::vector<std::vector<int>> & allowed_zone) {
-    float min_distance = 8.0f;
+    float min_distance = 8.0f; // for car distance.
     float ideal = min_distance+min_distance*(m_vel/20.f);
     float detection_distance = m_vel*4.0f;
 
-    Car * closest_car_ahead = find_closest_car(cars,this,allowed_zone);
+    Car * closest_car_ahead = Util::find_closest_car(cars,this,allowed_zone);
 
-    if(closest_car_ahead != nullptr){
-        float radius_to_car = distance_to_car(*this,*closest_car_ahead);
-        float delta_speed = closest_car_ahead->vel()-this->vel();
+    float delta_speed = 0;
+    float radius_to_car = 200;
 
-        if(radius_to_car < min_distance){
-            m_vel -= abs(delta_speed)+(min_distance-radius_to_car)*0.5f;
-        }
-        else if(radius_to_car < ideal){
-            m_vel -= std::min((ideal-radius_to_car)*0.5f,10.0f*elapsed);
-        }
+    if(closest_car_ahead != nullptr) {
+        radius_to_car = Util::distance_to_car(*this, *closest_car_ahead);
+        delta_speed = closest_car_ahead->vel() - this->vel();
 
-        else if(radius_to_car < detection_distance && delta_speed < 0){
-            m_vel -= std::min(abs(pow(delta_speed,2.0f))*pow(ideal*0.5f/radius_to_car,2.0f)*0.1f,10.0f*elapsed);
-        }
-
-        else{
-            accelerate(delta_theta);
-        }
-
-        if(m_vel < 0){
-            m_vel = 0;
+        if (radius_to_car < ideal) {
+            m_breaking = true;
         }
 
     }
+
+    if(m_breaking) {
+        m_vel -= std::min(std::max((ideal - radius_to_car),0.0f) * 0.5f + abs(pow(delta_speed,2.0f)), 10.0f * elapsed);
+        if(radius_to_car > ideal*1.3f){
+            m_breaking = false;
+        }
+    } else if(radius_to_car < detection_distance && delta_speed < 0){
+        m_vel -= std::min(
+                abs(pow(delta_speed, 2.0f)) * pow(ideal * 0.25f / radius_to_car, 2.0f) * m_aggressiveness * 2,
+                10.0f * elapsed);
+    }
+    else {
+        accelerate(delta_theta,closest_car_ahead);
+    }
+
+    if(m_vel < 0){
+        m_vel = 0;
+    }
+    /*
     else{
-        accelerate(delta_theta);
+        m_vel -= std::min(abs(delta_speed)*ideal/radius_to_car + abs(pow(delta_speed,2.0f))*0.25f , 10.0f*elapsed);
     }
+    else if () {
+        m_vel -= std::min(
+                abs(pow(delta_speed, 2.0f)) * pow(ideal * 0.5f / radius_to_car, 2.0f) * m_aggressiveness * 2,
+                10.0f * elapsed);
+        } else{
+            accelerate(delta_theta,closest_car_ahead);
+        }
+    else {
+
+    }
+    */
+
 }
 
 std::vector<std::vector<int>> load_from_text(const std::string & name){
@@ -356,7 +372,7 @@ Traffic::Traffic(std::string filename) {
     m_lane_switch_points = load_lane_points();
 }
 
-unsigned long Traffic::n_of_cars() {
+const unsigned long Traffic::n_of_cars() const{
     return m_cars.size();
 }
 
@@ -368,9 +384,9 @@ std::mt19937& Traffic::my_engine() {
 void Traffic::spawn_cars(double & spawn_counter, sf::Time & elapsed, double & threshold, float sim_speed) {
     spawn_counter += elapsed.asSeconds()*sim_speed;
     if(spawn_counter > threshold){
-        std::exponential_distribution<double> dis(2.0);
+        std::exponential_distribution<double> dis(0.5);
         std::normal_distribution<float> aggro(0.05f,0.01f);
-        std::normal_distribution<float> sp(30.0,4.0);
+        std::normal_distribution<float> sp(20.0,2.0);
         std::uniform_real_distribution<float> ramp(0.0f,1.0f);
 
         float speed = sp(my_engine());
@@ -381,7 +397,7 @@ void Traffic::spawn_cars(double & spawn_counter, sf::Time & elapsed, double & th
         Spawn_positions pos;
 
         spawn_counter = 0;
-        if(ramp_spawn > 0.8){
+        if(ramp_spawn > 0.95){
             pos = Spawn_positions ::RAMP;
             speed = speed*0.25f;
         }
@@ -393,9 +409,9 @@ void Traffic::spawn_cars(double & spawn_counter, sf::Time & elapsed, double & th
         Car new_car = Car(start_pos[0],start_pos[1],speed,start_pos[2],target,aggressiveness);
 
         // look if car is near spawn point
-        Car * closest_car = find_closest_radius(m_cars,start_pos[0],start_pos[1]);
+        Car * closest_car = Util::find_closest_radius(m_cars,start_pos[0],start_pos[1]);
         if(closest_car != nullptr){
-            float distance = distance_to_car(*closest_car,new_car);
+            float distance = Util::distance_to_car(*closest_car,new_car);
             if(distance < 50 && distance > 10){
                 new_car.vel() = closest_car->vel();
                 m_cars.push_back(new_car);
@@ -451,7 +467,7 @@ float Traffic::get_theta(float xpos, float ypos, float speed, float current_thet
         float best_score = 100000;
         float best_theta = 100000;
         for(float c : theta_candidates){
-            float score = get_min_angle(c,current_theta);
+            float score = Util::get_min_angle(c,current_theta);
             if( score < best_score){
                 best_score = score;
                 best_theta = c;
@@ -463,7 +479,7 @@ float Traffic::get_theta(float xpos, float ypos, float speed, float current_thet
             if(!lane_switch && rad < 2){
                 std::uniform_real_distribution<float> prob(0.0f,1.0f);
                 float coin_flip = prob(my_engine());
-                if(coin_flip > 0.5){
+                if(coin_flip > 1.0){
                     best_theta = it.second[3];
                 }
                 lane_switch = true;
@@ -513,4 +529,12 @@ void Traffic::force_spawn_car() {
 
 const std::vector<Car> &Traffic::get_cars()const {
     return m_cars;
+}
+
+float Traffic::get_avg_flow() {
+    float flow = 0;
+    for(Car & car : m_cars){
+        flow += car.vel()/car.target_speed();
+    }
+    return flow/(float)n_of_cars();
 }

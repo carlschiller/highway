@@ -14,6 +14,7 @@ public:
     Car_squares();
 
     void update(sf::Time elapsed, double & spawn_counter, double & threshold, float sim_speed);
+    float get_flow();
     void car_debug(sf::Time t0);
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

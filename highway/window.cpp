@@ -21,15 +21,13 @@ void Car_squares::draw(sf::RenderTarget &target, sf::RenderStates states) const 
     rectangle.setFillColor(sf::Color::Green);
     rectangle.setOutlineColor(sf::Color::Black);
     rectangle.setOutlineThickness(2.0f);
+
     for(Car car : m_traffic.get_cars()){
         rectangle.setPosition(car.x_pos()*2,car.y_pos()*2);
         rectangle.setRotation(car.theta()*(float)360.0f/(-2.0f*(float)M_PI));
-
         sf::Uint8 colorspeed = static_cast<sf::Uint8> ((unsigned int)std::round(255 * car.vel() / car.target_speed()));
         rectangle.setFillColor(sf::Color(255-colorspeed,colorspeed,0,255));
         target.draw(rectangle,states);
-
-
     }
 }
 
@@ -47,4 +45,8 @@ void Car_squares::update(sf::Time elapsed, double & spawn_counter, double & thre
 
 void Car_squares::car_debug(sf::Time t0){
     m_traffic.debug(t0);
+}
+
+float Car_squares::get_flow() {
+    return m_traffic.get_avg_flow();
 }
