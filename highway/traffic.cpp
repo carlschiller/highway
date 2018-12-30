@@ -92,7 +92,7 @@ bool is_car_behind(Car * a, Car * b){
     if(a!=b){
         float theta_to_car_b = atan2(a->y_pos()-b->y_pos(),b->x_pos()-a->x_pos());
         float theta_difference = get_min_angle(a->theta(),theta_to_car_b);
-        return theta_difference < M_PI*0.5;
+        return theta_difference < M_PI*0.45;
     }
     else{
         return false;
@@ -123,41 +123,115 @@ float distance_to_proj_point(const float theta, const float x, const float y){
     return dist;
 }
 
-Car * find_closest_car(std::vector<Car> &cars, const int i, float min_radius, float line_threshold){
+float distance_to_car(Car & a, Car & b){
+    float delta_x = a.x_pos()-b.x_pos();
+    float delta_y = b.y_pos()-a.y_pos();
+
+    return sqrt(abs(pow(delta_x,2.0f))+abs(pow(delta_y,2.0f)));
+}
+
+
+bool find_connected_path(Car & ref, Car & car, std::vector<std::vector<int>> & allowed_zone, const int buffer){
+    auto init_x = (int)std::round(ref.x_pos());
+    auto init_y = (int)std::round(ref.y_pos());
+    auto target_x = (int)std::round(car.x_pos());
+    auto target_y =  (int)std::round(car.y_pos());
+
+    auto search_radius = (unsigned int)ceil(std::max(abs(init_x-target_x),abs(target_y-init_y)))+buffer;
+    unsigned int search_diameter = 2*search_radius+1;
+
+    std::vector<std::vector<bool>> visited(search_diameter,std::vector<bool>(search_diameter,false));
+    bool connected = false;
+
+    std::vector<std::vector<int>> next_square;
+    int current_x = init_x;
+    int current_y = init_y;
+    std::vector<int> current_square = {current_x,current_y};
+    next_square.push_back(current_square);
+
+    while(!next_square.empty()){
+        current_square = next_square.back();
+        next_square.pop_back();
+
+        if(current_square[0] == target_x && current_square[1] == target_y){
+            connected = true;
+            break;
+        }
+
+        if(current_square[0] >= 0 && current_square[0] < allowed_zone[0].size() && current_square[1] >= 0 && current_square[1] < allowed_zone.size()){
+            if(allowed_zone[current_square[1]][current_square[0]] == 1){
+                if(abs(current_square[1]-init_y) <= search_radius &&abs(current_square[0]-init_x) <= search_radius){
+                    if(!visited[current_square[1]-init_y+search_radius][current_square[0]-init_x+search_radius]){
+
+                        visited[current_square[1]-init_y+search_radius][current_square[0]-init_x+search_radius] = true;
+
+                        std::vector<int> new_square = current_square;
+
+                        new_square[0]++;
+                        next_square.push_back(new_square);
+                        new_square[0]--;
+
+                        new_square[0]--;
+                        next_square.push_back(new_square);
+                        new_square[0]++;
+
+                        new_square[1]++;
+                        next_square.push_back(new_square);
+                        new_square[1]--;
+
+                        new_square[1]--;
+                        next_square.push_back(new_square);
+                    }
+                }
+            }
+        }
+    }
+
+    return connected;
+}
+
+Car * find_closest_car(std::vector<Car> &cars, Car * ref, std::vector<std::vector<int>> & allowed_zone){
     Car * answer = nullptr;
+    float search_radius = 100;
+    int buffer = 20;
 
-    std::map<int,Car*> candidates;
+    std::map<float,Car*> candidates;
 
-    for(int j = 0; j < cars.size(); j++){
-        if(i!=j && is_car_behind(&cars[i],&cars[j])){
-            candidates[j] = (&cars[j]);
+    // calculate distances
+    for(Car & car : cars){
+        if(ref!=&car){
+            float dist = distance_to_car(*ref,car);
+            if(is_car_behind(ref,&car) && dist < search_radius){
+                candidates[dist] = &car;
+            }
         }
     }
 
-    float score = 100000;
-    int index;
+    // loop through by smallest distance and check if it is connected.
     for(auto it : candidates){
-        float delta_x = it.second->x_pos()-cars[i].x_pos();
-        float delta_y = cars[i].y_pos()-it.second->y_pos();
-
-        float radius = sqrt(abs(pow(delta_x,2.0f))+abs(pow(delta_y,2.0f)));
-        float line_dist = distance_to_line(cars[i].theta(),delta_x,delta_y);
-        float proj_dist = distance_to_proj_point(cars[i].theta(),delta_x,delta_y);
-
-        if(line_dist/proj_dist > line_threshold && radius < score && radius < min_radius){
-            score = radius;
+        if(find_connected_path(*ref,*it.second,allowed_zone,buffer)){
             answer = it.second;
-            index = it.first;
+            break;
         }
-    }
-
-    if(answer != nullptr){
-        std::cout << "Car " << i << " has car " << index << "in front\n";
     }
 
     return answer;
 }
 
+Car * find_closest_radius(std::vector<Car> &cars, const float x, const float y){
+    Car * answer = nullptr;
+
+    float score = 100000;
+    for(Car & car : cars){
+        float distance = sqrt(abs(pow(car.x_pos()-x,2.0f))+abs(pow(car.y_pos()-y,2.0f)));
+        if(distance < score){
+            score = distance;
+            answer = &car;
+        }
+    }
+
+    return answer;
+}
 /*
 Car * find_car_to_side(std::vector<Car> &cars, int i, Car & ref_car, float min_radius ,float view_angle){
     Car * answer = nullptr;
@@ -190,21 +264,32 @@ Car * find_car_to_side(std::vector<Car> &cars, int i, Car & ref_car, float min_r
 }
 */
 
-void Car::avoid_collision(std::vector<Car> &cars, int i,float & elapsed, float delta_theta) {
-    float three_second = abs(m_vel*3.0f);
-    float line_threshold = 1.0f;
+void Car::avoid_collision(std::vector<Car> &cars, int i,float & elapsed, float delta_theta,
+                          std::vector<std::vector<int>> & allowed_zone) {
+    float min_distance = 8.0f;
+    float ideal = min_distance+min_distance*(m_vel/20.f);
+    float detection_distance = m_vel*4.0f;
 
-    Car * closest_car_ahead = find_closest_car(cars,i,three_second,line_threshold);
+    Car * closest_car_ahead = find_closest_car(cars,this,allowed_zone);
 
     if(closest_car_ahead != nullptr){
-        float delta_x = closest_car_ahead->x_pos()-this->x_pos();
-        float delta_y = this->y_pos()-closest_car_ahead->y_pos();
-        float radius_to_car = sqrt(abs(pow(delta_x,2.0f))+
-                                   abs(pow(delta_y,2.0f)));
-
+        float radius_to_car = distance_to_car(*this,*closest_car_ahead);
         float delta_speed = closest_car_ahead->vel()-this->vel();
 
-        m_vel -= std::min(abs(pow(delta_speed,2.0f))*pow(three_second/radius_to_car,2.0f)*0.02f,10.0f);
+        if(radius_to_car < min_distance){
+            m_vel -= abs(delta_speed)+(min_distance-radius_to_car)*0.5f;
+        }
+        else if(radius_to_car < ideal){
+            m_vel -= std::min((ideal-radius_to_car)*0.5f,10.0f*elapsed);
+        }
+
+        else if(radius_to_car < detection_distance && delta_speed < 0){
+            m_vel -= std::min(abs(pow(delta_speed,2.0f))*pow(ideal*0.5f/radius_to_car,2.0f)*0.1f,10.0f*elapsed);
+        }
+
+        else{
+            accelerate(delta_theta);
+        }
 
         if(m_vel < 0){
             m_vel = 0;
@@ -280,12 +365,12 @@ std::mt19937& Traffic::my_engine() {
     return e;
 }
 
-void Traffic::spawn_cars(double & spawn_counter, sf::Time & elapsed, double & threshold) {
-    spawn_counter += elapsed.asSeconds();
-    if(spawn_counter > threshold + 1 && m_cars.size() < 100){
-        std::exponential_distribution<double> dis(1.0);
+void Traffic::spawn_cars(double & spawn_counter, sf::Time & elapsed, double & threshold, float sim_speed) {
+    spawn_counter += elapsed.asSeconds()*sim_speed;
+    if(spawn_counter > threshold){
+        std::exponential_distribution<double> dis(2.0);
         std::normal_distribution<float> aggro(0.05f,0.01f);
-        std::normal_distribution<float> sp(25.0,5.0);
+        std::normal_distribution<float> sp(30.0,4.0);
         std::uniform_real_distribution<float> ramp(0.0f,1.0f);
 
         float speed = sp(my_engine());
@@ -296,7 +381,7 @@ void Traffic::spawn_cars(double & spawn_counter, sf::Time & elapsed, double & th
         Spawn_positions pos;
 
         spawn_counter = 0;
-        if(ramp_spawn > 1.0){
+        if(ramp_spawn > 0.8){
             pos = Spawn_positions ::RAMP;
             speed = speed*0.25f;
         }
@@ -306,14 +391,16 @@ void Traffic::spawn_cars(double & spawn_counter, sf::Time & elapsed, double & th
 
         std::vector<float> start_pos = m_spawn_positions[pos];
         Car new_car = Car(start_pos[0],start_pos[1],speed,start_pos[2],target,aggressiveness);
+
         // look if car is near spawn point
-        Car * closest_car = find_closest_car(m_cars,m_cars.size(),0,10);
+        Car * closest_car = find_closest_radius(m_cars,start_pos[0],start_pos[1]);
         if(closest_car != nullptr){
-            float radius = sqrt(abs(pow(new_car.x_pos()-closest_car->x_pos(),2.0f))+abs(pow(new_car.y_pos()-closest_car->y_pos(),2.0f)));
-            if(radius > 10){
-                if(radius < 30){
-                    new_car.vel() = closest_car->vel();
-                }
+            float distance = distance_to_car(*closest_car,new_car);
+            if(distance < 50 && distance > 10){
+                new_car.vel() = closest_car->vel();
+                m_cars.push_back(new_car);
+            }
+            else if(distance > 50){
                 m_cars.push_back(new_car);
             }
         }
@@ -396,11 +483,11 @@ void Traffic::update_speed(int i, float & elapsed_time) {
     float old_theta = car.theta();
     float theta = get_theta(car.x_pos(),car.y_pos(),car.vel(),car.theta(),car.lane_switch);
     car.steer(theta);
-    car.avoid_collision(m_cars,i,elapsed_time,theta-old_theta);
+    car.avoid_collision(m_cars,i,elapsed_time,theta-old_theta,m_allowed_zone);
 }
 
-void Traffic::update(sf::Time & elapsed_time) {
-    float elapsed = elapsed_time.asSeconds();
+void Traffic::update(sf::Time & elapsed_time, float sim_speed) {
+    float elapsed = elapsed_time.asSeconds()*sim_speed;
     for(int i = 0; i < m_cars.size(); i++){
         update_speed(i,elapsed);
     }

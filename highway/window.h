@@ -13,7 +13,7 @@ class Car_squares : public sf::Drawable, public sf::Transformable{
 public:
     Car_squares();
 
-    void update(sf::Time elapsed, double & spawn_counter, double & threshold);
+    void update(sf::Time elapsed, double & spawn_counter, double & threshold, float sim_speed);
     void car_debug(sf::Time t0);
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

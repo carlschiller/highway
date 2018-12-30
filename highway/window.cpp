@@ -38,10 +38,10 @@ Car_squares::Car_squares() {
     //m_traffic.force_spawn_car();
 }
 
-void Car_squares::update(sf::Time elapsed, double & spawn_counter, double & threshold) {
-    m_traffic.update(elapsed);
+void Car_squares::update(sf::Time elapsed, double & spawn_counter, double & threshold, float sim_speed) {
+    m_traffic.update(elapsed,sim_speed);
     m_traffic.despawn_cars();
-    m_traffic.spawn_cars(spawn_counter,elapsed,threshold);
+    m_traffic.spawn_cars(spawn_counter,elapsed,threshold,sim_speed);
 }
 
 

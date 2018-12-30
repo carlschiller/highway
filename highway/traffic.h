@@ -43,7 +43,8 @@ public:
     void update_pos(float delta_t);
     void accelerate(float dtheta);
     void steer(float delta_theta);
-    void avoid_collision(std::vector<Car> & cars, int i, float & elapsed,float delta_theta);
+    void avoid_collision(std::vector<Car> & cars, int i, float & elapsed,float delta_theta,
+                         std::vector<std::vector<int>> & allowed_zon);
     float & x_pos();
     float & y_pos();
     float & vel();
@@ -85,11 +86,11 @@ public:
     explicit Traffic(std::string filename);
 
     unsigned long n_of_cars();
-    void spawn_cars(double & spawn_counter, sf::Time & time, double & threshold);
+    void spawn_cars(double & spawn_counter, sf::Time & time, double & threshold,float sim_speed);
     void despawn_cars();
     void force_spawn_car();
     void debug(sf::Time t0);
-    void update(sf::Time & elapsed_time);
+    void update(sf::Time & elapsed_time, float sim_speed);
     const std::vector<Car> & get_cars()const;
 };
 

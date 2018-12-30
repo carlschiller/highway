@@ -7,6 +7,22 @@ int main()
     sf::RenderWindow window(sf::VideoMode(550*2, 600*2), "My window");
     window.setFramerateLimit(60);
 
+    float sim_speed = 2.0f;
+
+    std::string speedy = " fps, speed: " + std::to_string(sim_speed).substr(0,1) + " x";
+
+    sf::Font font;
+    if (!font.loadFromFile("/Library/Fonts/Arial.ttf"))
+    {
+        // error...
+    }
+
+    sf::Text fps;
+    fps.setFont(font);
+    fps.setCharacterSize(24);
+    fps.setFillColor(sf::Color::Green);
+    fps.setStyle(sf::Text::Bold);
+
     sf::Texture texture;
     if(!texture.loadFromFile("../mall2.png"))
     {
@@ -40,11 +56,16 @@ int main()
 
         sf::Time elapsed = clock.restart();
 
-        cars.update(elapsed,spawn_counter,threshold);
+        float frames = 1/elapsed.asSeconds();
+        std::string frm = std::to_string(frames).substr(0,2) + speedy;
+        fps.setString(frm);
+
+        cars.update(elapsed,spawn_counter,threshold,sim_speed);
 
         window.clear(sf::Color(255,255,255,255));
 
         window.draw(background);
+        window.draw(fps);
         window.draw(cars);
         window.display();
 
