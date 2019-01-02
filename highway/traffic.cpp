@@ -77,6 +77,213 @@ float & Car::width() { return m_width; }
 float & Car::theta() { return m_theta; }
 
 
+RoadNode::RoadNode() = default;
+
+RoadNode::~RoadNode() = default;
+
+RoadNode::RoadNode(float x, float y) {
+    m_x = x;
+    m_y = y;
+}
+
+void RoadNode::set_pointer(RoadNode * next_node) {
+    m_connecting_nodes.push_back(next_node);
+}
+
+float RoadNode::get_theta(int node_number) {
+    return atan2(m_y-m_connecting_nodes[node_number]->m_y,m_connecting_nodes[node_number]->m_x-m_x);
+}
+
+
+RoadSegment::RoadSegment() = default;
+
+RoadSegment::~RoadSegment() = default;
+
+RoadSegment::RoadSegment(float x, float y, RoadSegment * next_segment, int lanes) {
+    m_x = x;
+    m_y = y;
+
+    m_next_segment = next_segment;
+
+    m_theta = atan2(m_y-m_next_segment->m_y,m_next_segment->m_x-m_x);
+
+    m_n_lanes = lanes;
+    m_nodes.reserve(lanes);
+
+    calculate_and_populate_nodes();
+}
+
+RoadSegment::RoadSegment(float x, float y, float theta, int lanes) {
+    m_x = x;
+    m_y = y;
+
+    m_next_segment = nullptr;
+
+    m_theta = theta;
+
+    m_n_lanes = lanes;
+    m_nodes.reserve(lanes);
+
+    calculate_and_populate_nodes();
+}
+
+RoadSegment::RoadSegment(float x, float y, int lanes) {
+    m_x = x;
+    m_y = y;
+
+    m_next_segment = nullptr;
+
+    m_n_lanes = lanes;
+    m_nodes.reserve(m_n_lanes);
+
+    // can't set nodes if we don't have a theta.
+}
+
+float RoadSegment::get_theta() {
+    return m_theta;
+}
+
+void RoadSegment::set_theta(float theta) {
+    m_theta = theta;
+}
+
+void RoadSegment::calculate_and_populate_nodes() {
+    // calculates placement of nodes.
+    float total_length = M_LANE_WIDTH*(m_n_lanes-1);
+    float current_length = -total_length/2.0f;
+
+    for(int i = 0; i < m_n_lanes; i++){
+        float x_pos = m_x+current_length*cos(m_theta);
+        float y_pos = m_y-current_length*sin(m_theta);
+        m_nodes.emplace_back(RoadNode(x_pos,y_pos));
+        current_length += M_LANE_WIDTH;
+    }
+}
+
+void RoadSegment::set_next_road_segment(RoadSegment * next_segment) {
+    m_next_segment = next_segment;
+}
+
+void RoadSegment::calculate_theta() {
+    m_theta = atan2(m_y-m_next_segment->m_y,m_next_segment->m_x-m_x);
+}
+
+RoadNode* RoadSegment::get_node_pointer(int n) {
+    return &m_nodes[n];
+}
+
+void RoadSegment::set_all_node_pointers_to_next_segment() {
+    for(RoadNode & node: m_nodes){
+        for(int i = 0; i < m_next_segment->m_n_lanes; i++){
+            node.set_pointer(m_next_segment->get_node_pointer(i));
+        }
+    }
+}
+
+void RoadSegment::set_node_pointer_to_node(int from_node_n, int to_node_n, RoadSegment *next_segment) {
+    RoadNode * pointy = next_segment->get_node_pointer(to_node_n);
+
+    m_nodes[from_node_n].set_pointer(pointy);
+}
+
+Road::Road() {
+    if(!load_road()){
+       std::cout << "Error in loading road.\n";
+    };
+}
+
+Road::~Road() = default;
+
+void Road::insert_segment(RoadSegment & segment) {
+    m_segments.push_back(segment);
+}
+
+bool Road::load_road() {
+    bool loading = true;
+    std::ifstream stream;
+    stream.open(M_FILENAME);
+
+    std::vector<std::vector<std::string>> road_vector;
+    road_vector.reserve(100);
+
+    if(stream.is_open()){
+        std::string line;
+        std::vector<std::string> tokens;
+        while(std::getline(stream,line)){
+            tokens = Util::split_string_by_delimiter(line,' ');
+            if(tokens[0] != "#"){
+                road_vector.push_back(tokens);
+            }
+        }
+    }
+    else{
+        loading = false;
+    }
+
+
+    // load segments into memory.
+    for(std::vector<std::string> & vec : road_vector){
+        m_segments.emplace_back(RoadSegment(std::stof(vec[1]),std::stof(vec[2]),std::stoi(vec[3])));
+    }
+
+    // connect nodes.
+    for (int i = 0; i < m_segments.size(); ++i) {
+        // do normal connection, ie connect all nodes.
+        if(road_vector[i].size() == 4){
+            m_segments[i].set_next_road_segment(&m_segments[i+1]);
+            m_segments[i].calculate_theta();
+            m_segments[i].set_all_node_pointers_to_next_segment();
+        }
+        // else we do not connect to new.
+        else if(road_vector[i].size() == 5){
+            if(road_vector[i][4] == "false"){
+                // take previous direction and populate nodes.
+                m_segments[i].set_theta(m_segments[i-1].get_theta());
+                m_segments[i].calculate_and_populate_nodes();
+                // but do not connect nodes to new ones.
+
+                // make this a despawn segment
+                m_despawn_positions.push_back(&m_segments[i]);
+            }
+            else if(road_vector[i][4] == "true"){
+                m_segments[i].set_next_road_segment(&m_segments[i+1]);
+                m_segments[i].calculate_theta();
+                m_segments[i].set_all_node_pointers_to_next_segment();
+
+                // make this a spawn segment
+                m_spawn_positions.push_back(&m_segments[i]);
+            }
+
+        }
+        // else we connect one by one.
+        else{
+            // take previous direction and populate nodes.
+            m_segments[i].set_theta(m_segments[i-1].get_theta());
+            m_segments[i].calculate_and_populate_nodes();
+
+            // manually connect nodes.
+            int amount_of_pointers = (int)road_vector[i].size()-4;
+            for(int j = 0; j < amount_of_pointers/3; j++){
+                int current_pos = 4+j*3;
+                RoadSegment * next_segment = &m_segments[std::stoi(road_vector[i][current_pos+2])];
+                m_segments[i].set_node_pointer_to_node(std::stoi(road_vector[i][current_pos]),std::stoi(road_vector[i][current_pos+1]),next_segment);
+            }
+        }
+    }
+
+    return loading;
+}
+
+std::vector<std::string> Util::split_string_by_delimiter(const std::string &str, const char delim) {
+    std::stringstream ss(str);
+    std::string item;
+    std::vector<std::string> answer;
+    while(std::getline(ss,item,delim)){
+        answer.push_back(item);
+    }
+    return answer;
+}
+
 // if a is behind of b, return true. else false
 bool Util::is_car_behind(Car * a, Car * b){
     if(a!=b){

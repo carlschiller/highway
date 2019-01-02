@@ -8,6 +8,7 @@
 #ifndef HIGHWAY_TRAFFIC_H
 #define HIGHWAY_TRAFFIC_H
 
+
 /**
  * Car class
  * =========
@@ -54,6 +55,61 @@ public:
     float & theta();
 };
 
+
+class RoadNode{
+private:
+    float m_x, m_y;
+    std::vector<RoadNode*> m_connecting_nodes;
+public:
+    RoadNode();
+    ~RoadNode();
+    RoadNode(float x, float y);
+
+    void set_pointer(RoadNode*);
+    float get_theta(int node_number);
+};
+
+
+class RoadSegment{
+private:
+    float m_x, m_y, m_theta;
+    int m_n_lanes;
+    constexpr static float M_LANE_WIDTH = 3.0f;
+    std::vector<RoadNode> m_nodes;
+    RoadSegment * m_next_segment;
+
+public:
+    RoadSegment();
+    RoadSegment(float x, float y, RoadSegment * next_segment, int lanes);
+    RoadSegment(float x, float y, float theta, int lanes);
+    RoadSegment(float x, float y, int lanes);
+    ~RoadSegment();
+
+    RoadNode * get_node_pointer(int n);
+    float get_theta();
+    void set_theta(float theta);
+    void set_next_road_segment(RoadSegment*);
+    void calculate_theta();
+    void calculate_and_populate_nodes();
+    void set_all_node_pointers_to_next_segment();
+    void set_node_pointer_to_node(int from_node_n, int to_node_n, RoadSegment *);
+};
+
+class Road{
+private:
+    std::vector<RoadSegment> m_segments;
+    std::vector<RoadSegment*> m_spawn_positions;
+    std::vector<RoadSegment*> m_despawn_positions;
+
+    const std::string M_FILENAME = "../road.txt";
+public:
+    Road();
+    ~Road();
+
+    void insert_segment(RoadSegment &);
+    bool load_road();
+};
+
 enum class Spawn_positions{
     LOWER_LEFT,
     RAMP
@@ -70,6 +126,7 @@ enum class Lane_positions{
 
 class Util{
 public:
+    static std::vector<std::string> split_string_by_delimiter(const std::string & str, const char delim);
     static bool is_car_behind(Car * a, Car * b);
     static float distance_to_line(float theta,  float x,  float y);
     static float distance_to_proj_point( float theta,  float x,  float y);
