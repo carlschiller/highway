@@ -9,64 +9,26 @@
 #define HIGHWAY_TRAFFIC_H
 
 
-/**
- * Car class
- * =========
- * Private:
- * position, width of car, and velocities are stored.
- * -------------------
- * Public:
- * .update_pos(float delta_t): updates position by updating position.
- * .accelerate(float delta_v): accelerates car.
- * .steer(float delta_theta): change direction of speed.
- * .x_pos(): return reference to x_pos.
- * .y_pos(): -||- y_pos.
- */
 
-class Car{
-private:
-    float m_x_pos, m_y_pos;
-    float m_width, m_length;
-    float m_vel; // vel and direction
-    float m_theta; // radians
-
-    float m_aggressiveness; // how fast to accelerate;
-    float m_target_speed;
-    bool m_breaking;
-
-public:
-    bool lane_switch;
-
-    Car();
-    Car(float x_pos, float y_pos, float vel, float theta, float target_speed, float aggressiveness);
-
-    void update_pos(float delta_t);
-    void accelerate(float dtheta, Car * ahead);
-    void steer(float delta_theta);
-    void avoid_collision(std::vector<Car> & cars, int i, float & elapsed,float delta_theta,
-                         std::vector<std::vector<int>> & allowed_zon);
-    float & x_pos();
-    float & y_pos();
-    float & vel();
-    float & target_speed();
-
-    float & width();
-    float & length();
-    float & theta();
-};
-
+class RoadSegment;
 
 class RoadNode{
 private:
     float m_x, m_y;
     std::vector<RoadNode*> m_connecting_nodes;
+    RoadSegment* m_is_child_of;
 public:
     RoadNode();
     ~RoadNode();
-    RoadNode(float x, float y);
+    RoadNode(float x, float y, RoadSegment * segment);
 
     void set_pointer(RoadNode*);
-    float get_theta(int node_number);
+    RoadSegment* get_parent_segment();
+    RoadNode * get_next_node(int lane);
+    std::vector<RoadNode*> & get_connections();
+    float get_x();
+    float get_y();
+    float get_theta(RoadNode*);
 };
 
 
@@ -75,9 +37,9 @@ private:
     float m_x, m_y, m_theta;
     int m_n_lanes;
     constexpr static float M_LANE_WIDTH = 3.0f;
+
     std::vector<RoadNode> m_nodes;
     RoadSegment * m_next_segment;
-
 public:
     RoadSegment();
     RoadSegment(float x, float y, RoadSegment * next_segment, int lanes);
@@ -86,7 +48,10 @@ public:
     ~RoadSegment();
 
     RoadNode * get_node_pointer(int n);
+    std::vector<RoadNode> & get_nodes();
+    RoadSegment * next_segment();
     float get_theta();
+    int get_lane_number(RoadNode *);
     void set_theta(float theta);
     void set_next_road_segment(RoadSegment*);
     void calculate_theta();
@@ -108,21 +73,58 @@ public:
 
     void insert_segment(RoadSegment &);
     bool load_road();
+    std::vector<RoadSegment*> & spawn_positions();
+    std::vector<RoadSegment*> & despawn_positions();
 };
 
-enum class Spawn_positions{
-    LOWER_LEFT,
-    RAMP
+/**
+ * Car class
+ * =========
+ * Private:
+ * position, width of car, and velocities are stored.
+ * -------------------
+ * Public:
+ * .update_pos(float delta_t): updates position by updating position.
+ * .accelerate(float delta_v): accelerates car.
+ * .steer(float delta_theta): change direction of speed.
+ * .x_pos(): return reference to x_pos.
+ * .y_pos(): -||- y_pos.
+ */
+
+class Car{
+private:
+    float m_dist_to_next_node;
+    float m_speed;
+    float m_theta; // radians
+
+    RoadSegment * m_current_segment;
+    RoadNode * m_current_node;
+    RoadNode * m_heading_to;
+
+    float m_aggressiveness; // how fast to accelerate;
+    float m_target_speed;
+    bool m_breaking;
+
+public:
+    Car();
+    Car(RoadSegment * spawn_point, int lane, float vel, float target_speed, float agressivness);
+
+    void update_pos(float delta_t);
+    void accelerate();
+
+    //void avoid_collision(std::vector<Car> & cars, int i, float & elapsed,float delta_theta,
+    //                     std::vector<std::vector<int>> & allowed_zon);
+
+    float x_pos();
+    float y_pos();
+
+    float & speed();
+    float & target_speed();
+    float & theta();
+
+    RoadSegment * get_segment();
 };
 
-enum class Despawn_positions{
-    UPPER_RIGHT,
-    RAMP,
-};
-
-enum class Lane_positions{
-    LOWER_LEFT
-};
 
 class Util{
 public:
@@ -135,28 +137,25 @@ public:
     static Car * find_closest_car(std::vector<Car> &cars, Car * ref, std::vector<std::vector<int>> & allowed_zone);
     static Car * find_closest_radius(std::vector<Car> &cars, float x, float y);
     static float get_min_angle(float ang1, float ang2);
+    static float distance(float x1, float x2, float y1, float y2);
 };
 
 class Traffic{
 private:
-    std::vector<std::vector<int>> m_allowed_zone;
+    Road m_road = Road();
     std::vector<Car> m_cars;
-    std::map<Spawn_positions,std::vector<float>> m_spawn_positions;
-    std::map<Despawn_positions,std::vector<float>> m_despawn_positions;
-    std::map<Lane_positions ,std::vector<float>> m_lane_switch_points;
 
     std::mt19937 & my_engine();
 
-    void update_speed(int i, float & elapsed_time);
-    float get_theta(float xpos, float ypos, float speed, float current_theta, bool & lane_switch);
+    //void update_speed(int i, float & elapsed_time);
+    //float get_theta(float xpos, float ypos, float speed, float current_theta, bool & lane_switch);
 public:
     Traffic();
-    explicit Traffic(std::string filename);
 
     const unsigned long n_of_cars()const;
     void spawn_cars(double & spawn_counter, sf::Time & time, double & threshold,float sim_speed);
     void despawn_cars();
-    void force_spawn_car();
+    //void force_spawn_car();
     void debug(sf::Time t0);
     void update(sf::Time & elapsed_time, float sim_speed);
     const std::vector<Car> & get_cars()const;

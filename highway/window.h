@@ -20,7 +20,7 @@ private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 private:
-    Traffic m_traffic;
+    Traffic m_traffic = Traffic();
     sf::Texture m_texture;
 };
 

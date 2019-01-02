@@ -3,7 +3,7 @@
 #include "window.h"
 
 int main() {
-    if(true){
+    if(false){
         Road road = Road();
     }
     else{
@@ -44,6 +44,8 @@ int main() {
         double spawn_counter = 0.0;
         double threshold = 0.0;
 
+        std::cout << "starting\n";
+
         // run the program as long as the window is open
         while (window.isOpen())
         {
@@ -60,7 +62,6 @@ int main() {
             sf::Time elapsed = clock.restart();
 
             float frames = 1/elapsed.asSeconds();
-
 
             cars.update(elapsed,spawn_counter,threshold,sim_speed);
             float flow = cars.get_flow();
