@@ -12,6 +12,8 @@
 
 class RoadSegment;
 
+class Car;
+
 class RoadNode{
 private:
     float m_x, m_y;
@@ -36,9 +38,10 @@ class RoadSegment{
 private:
     float m_x, m_y, m_theta;
     int m_n_lanes;
-    constexpr static float M_LANE_WIDTH = 3.0f;
+    constexpr static float M_LANE_WIDTH = 4.0f;
 
     std::vector<RoadNode> m_nodes;
+    std::map<int,bool> m_car_ids;
     RoadSegment * m_next_segment;
 public:
     RoadSegment();
@@ -49,8 +52,14 @@ public:
 
     RoadNode * get_node_pointer(int n);
     std::vector<RoadNode> & get_nodes();
+    void append_car(Car*);
+    void remove_car(Car*);
+    std::map<int,bool> & get_car_map();
     RoadSegment * next_segment();
     float get_theta();
+    float get_x();
+    float get_y();
+
     int get_lane_number(RoadNode *);
     void set_theta(float theta);
     void set_next_road_segment(RoadSegment*);
@@ -75,6 +84,7 @@ public:
     bool load_road();
     std::vector<RoadSegment*> & spawn_positions();
     std::vector<RoadSegment*> & despawn_positions();
+    const std::vector<RoadSegment> & segments()const;
 };
 
 /**
@@ -97,17 +107,19 @@ private:
     float m_speed;
     float m_theta; // radians
 
-    RoadSegment * m_current_segment;
-    RoadNode * m_current_node;
-    RoadNode * m_heading_to;
-
     float m_aggressiveness; // how fast to accelerate;
     float m_target_speed;
     bool m_breaking;
 
 public:
     Car();
-    Car(RoadSegment * spawn_point, int lane, float vel, float target_speed, float agressivness);
+    Car(RoadSegment * spawn_point, int lane, float vel, float target_speed, float agressivness, int unique_id);
+
+    int id;
+
+    RoadSegment * current_segment;
+    RoadNode * current_node;
+    RoadNode * heading_to_node;
 
     void update_pos(float delta_t);
     void accelerate();
@@ -144,6 +156,7 @@ class Traffic{
 private:
     Road m_road = Road();
     std::vector<Car> m_cars;
+    int m_id;
 
     std::mt19937 & my_engine();
 
@@ -153,11 +166,12 @@ public:
     Traffic();
 
     const unsigned long n_of_cars()const;
-    void spawn_cars(double & spawn_counter, sf::Time & time, double & threshold,float sim_speed);
+    const Road & road()const;
+    void spawn_cars(double & spawn_counter, float elapsed, double & threshold);
     void despawn_cars();
     //void force_spawn_car();
     void debug(sf::Time t0);
-    void update(sf::Time & elapsed_time, float sim_speed);
+    void update(float elapsed_time);
     const std::vector<Car> & get_cars()const;
     float get_avg_flow();
 };
