@@ -41,7 +41,7 @@ private:
     constexpr static float M_LANE_WIDTH = 4.0f;
 
     std::vector<RoadNode> m_nodes;
-    std::map<int,bool> m_car_ids;
+    std::vector<Car*> m_cars;
     RoadSegment * m_next_segment;
 public:
     RoadSegment();
@@ -54,13 +54,14 @@ public:
     std::vector<RoadNode> & get_nodes();
     void append_car(Car*);
     void remove_car(Car*);
-    std::map<int,bool> & get_car_map();
+    std::vector<Car*> & get_car_vector();
     RoadSegment * next_segment();
     float get_theta();
     float get_x();
     float get_y();
 
     int get_lane_number(RoadNode *);
+    int get_total_amount_of_lanes();
     void set_theta(float theta);
     void set_next_road_segment(RoadSegment*);
     void calculate_theta();
@@ -113,19 +114,16 @@ private:
 
 public:
     Car();
-    Car(RoadSegment * spawn_point, int lane, float vel, float target_speed, float agressivness, int unique_id);
-
-    int id;
+    Car(RoadSegment * spawn_point, int lane, float vel, float target_speed, float agressivness);
 
     RoadSegment * current_segment;
     RoadNode * current_node;
     RoadNode * heading_to_node;
 
     void update_pos(float delta_t);
-    void accelerate();
-
-    //void avoid_collision(std::vector<Car> & cars, int i, float & elapsed,float delta_theta,
-    //                     std::vector<std::vector<int>> & allowed_zon);
+    void accelerate(float delta_t);
+    void avoid_collision(float delta_t);
+    Car * find_closest_car();
 
     float x_pos();
     float y_pos();
@@ -142,9 +140,11 @@ class Util{
 public:
     static std::vector<std::string> split_string_by_delimiter(const std::string & str, const char delim);
     static bool is_car_behind(Car * a, Car * b);
+    static bool will_car_paths_cross(Car *a, Car*b);
+    static bool is_cars_in_same_lane(Car*a,Car*b);
     static float distance_to_line(float theta,  float x,  float y);
     static float distance_to_proj_point( float theta,  float x,  float y);
-    static float distance_to_car(Car & a, Car & b);
+    static float distance_to_car(Car * a, Car * b);
     static bool find_connected_path(Car & ref, Car & car, std::vector<std::vector<int>> & allowed_zone, int buffer);
     static Car * find_closest_car(std::vector<Car> &cars, Car * ref, std::vector<std::vector<int>> & allowed_zone);
     static Car * find_closest_radius(std::vector<Car> &cars, float x, float y);
@@ -155,8 +155,7 @@ public:
 class Traffic{
 private:
     Road m_road = Road();
-    std::vector<Car> m_cars;
-    int m_id;
+    std::vector<Car*> m_cars;
 
     std::mt19937 & my_engine();
 
@@ -164,6 +163,7 @@ private:
     //float get_theta(float xpos, float ypos, float speed, float current_theta, bool & lane_switch);
 public:
     Traffic();
+    ~Traffic();
 
     const unsigned long n_of_cars()const;
     const Road & road()const;
@@ -172,7 +172,7 @@ public:
     //void force_spawn_car();
     void debug(sf::Time t0);
     void update(float elapsed_time);
-    const std::vector<Car> & get_cars()const;
+    const std::vector<Car*> & get_cars()const;
     float get_avg_flow();
 };
 

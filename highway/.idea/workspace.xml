@@ -15,15 +15,23 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/CXX.includecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/main.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/traffic.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/traffic.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/traffic.cpp.o" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/window.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/window.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/highway" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/highway" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/road.txt" beforeDir="false" afterPath="$PROJECT_DIR$/road.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/traffic.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/traffic.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/traffic.h" beforeDir="false" afterPath="$PROJECT_DIR$/traffic.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/window.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/window.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/window.h" beforeDir="false" afterPath="$PROJECT_DIR$/window.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../latex/report.aux" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../latex/report.fdb_latexmk" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.fdb_latexmk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../latex/report.fls" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.fls" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../latex/report.log" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../latex/report.out" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../latex/report.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../latex/report.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.synctex.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../latex/report.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../latex/report.toc" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.toc" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -64,8 +72,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/window.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="22" column="37" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
+            <state relative-caret-position="520">
+              <caret line="98" column="2" selection-start-line="98" selection-start-column="2" selection-end-line="98" selection-end-column="2" />
               <folding>
                 <element signature="e#50#69#0" expanded="true" />
               </folding>
@@ -76,8 +84,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/window.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="16" column="76" selection-start-line="16" selection-start-column="76" selection-end-line="16" selection-end-column="76" />
+            <state relative-caret-position="270">
+              <caret line="18" column="6" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
               <folding>
                 <element signature="e#50#67#0" expanded="true" />
               </folding>
@@ -88,8 +96,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/traffic.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-9740">
-              <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
+            <state relative-caret-position="-24">
+              <caret line="900" column="13" lean-forward="true" selection-start-line="900" selection-start-column="13" selection-end-line="900" selection-end-column="13" />
               <folding>
                 <element signature="e#50#70#0" expanded="true" />
               </folding>
@@ -100,8 +108,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/traffic.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="553">
-              <caret line="53" column="23" selection-start-line="53" selection-start-column="23" selection-end-line="53" selection-end-column="23" />
+            <state relative-caret-position="1860">
+              <caret line="126" lean-forward="true" selection-start-line="126" selection-end-line="126" />
             </state>
           </provider>
         </entry>
@@ -109,8 +117,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/road.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+            <state relative-caret-position="243">
+              <caret line="43" column="6" selection-start-line="43" selection-start-column="6" selection-end-line="43" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -134,6 +142,8 @@
       <find>get_next_node</find>
       <find>update</find>
       <find>boop</find>
+      <find>car_deb</find>
+      <find>find_clos</find>
     </findStrings>
     <replaceStrings>
       <replace>m_theta</replace>
@@ -149,12 +159,12 @@
         <option value="$PROJECT_DIR$/cmake_modules/SFMLConfig.cmake" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/kontur.txt" />
-        <option value="$PROJECT_DIR$/window.h" />
-        <option value="$PROJECT_DIR$/main.cpp" />
         <option value="$PROJECT_DIR$/window.cpp" />
-        <option value="$PROJECT_DIR$/traffic.h" />
-        <option value="$PROJECT_DIR$/traffic.cpp" />
+        <option value="$PROJECT_DIR$/window.h" />
         <option value="$PROJECT_DIR$/road.txt" />
+        <option value="$PROJECT_DIR$/traffic.h" />
+        <option value="$PROJECT_DIR$/main.cpp" />
+        <option value="$PROJECT_DIR$/traffic.cpp" />
       </list>
     </option>
   </component>
@@ -242,12 +252,12 @@
       <workItem from="1546178575454" duration="28830000" />
       <workItem from="1546431806014" duration="6878000" />
       <workItem from="1546441104981" duration="8258000" />
-      <workItem from="1546452777154" duration="10114000" />
+      <workItem from="1546452777154" duration="22733000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="140531000" />
+    <option name="totallyTimeSpent" value="153150000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -258,7 +268,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.328877" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.15068494" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.29041097" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -267,7 +277,7 @@
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.45342466" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.32739726" />
+      <window_info active="true" anchor="bottom" id="Messages" order="11" visible="true" weight="0.32739726" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -310,6 +320,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/road.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="43" column="6" selection-start-line="43" selection-start-column="6" selection-end-line="43" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/window.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="6" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
+          <folding>
+            <element signature="e#50#67#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/window.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="98" column="2" selection-start-line="98" selection-start-column="2" selection-end-line="98" selection-end-column="2" />
+          <folding>
+            <element signature="e#50#69#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/traffic.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1860">
+          <caret line="126" lean-forward="true" selection-start-line="126" selection-end-line="126" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -320,44 +364,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/window.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="16" column="76" selection-start-line="16" selection-start-column="76" selection-end-line="16" selection-end-column="76" />
-          <folding>
-            <element signature="e#50#67#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/window.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="22" column="37" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
-          <folding>
-            <element signature="e#50#69#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/traffic.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="553">
-          <caret line="53" column="23" selection-start-line="53" selection-start-column="23" selection-end-line="53" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/road.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/traffic.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-9740">
-          <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
+        <state relative-caret-position="-24">
+          <caret line="900" column="13" lean-forward="true" selection-start-line="900" selection-start-column="13" selection-end-line="900" selection-end-column="13" />
           <folding>
             <element signature="e#50#70#0" expanded="true" />
           </folding>

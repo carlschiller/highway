@@ -16,7 +16,7 @@ public:
 
     void update(sf::Time elapsed, double & spawn_counter, double & threshold);
     float get_flow();
-    void car_debug(sf::Time t0);
+    //void car_debug(sf::Time t0);
     void get_info(sf::Text & text, sf::Time &elapsed);
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
