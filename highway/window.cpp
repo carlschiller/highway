@@ -27,7 +27,8 @@ void Simulation::draw(sf::RenderTarget &target, sf::RenderStates states) const {
         line[1].color = sf::Color::Blue;
 
         int i = 0;
-        for(RoadSegment segment: m_traffic.road().segments()){
+
+        for(RoadSegment segment : m_traffic.road().segments()){
             for(RoadNode & node : segment.get_nodes()){
                 circle.setPosition(sf::Vector2f(node.get_x()*2-4,node.get_y()*2-4));
                 line[0].position = sf::Vector2f(node.get_x()*2,node.get_y()*2);
@@ -59,8 +60,19 @@ void Simulation::draw(sf::RenderTarget &target, sf::RenderStates states) const {
         sf::Uint8 colorspeed = static_cast<sf::Uint8> ((unsigned int)std::round(255 * car->speed() / car->target_speed()));
         rectangle.setFillColor(sf::Color(255-colorspeed,colorspeed,0,255));
         target.draw(rectangle,states);
-    }
 
+        // print debug info about node placements and stuff
+        sf::CircleShape circle;
+        circle.setRadius(4.0f);
+        circle.setOutlineColor(sf::Color::Red);
+        circle.setOutlineThickness(2.0f);
+        circle.setFillColor(sf::Color::Transparent);
+        circle.setPosition(sf::Vector2f(car->current_node->get_x()*2-4,car->current_node->get_y()*2-4));
+        target.draw(circle,states);
+        circle.setOutlineColor(sf::Color::Green);
+        circle.setPosition(sf::Vector2f(car->heading_to_node->get_x()*2-4,car->heading_to_node->get_y()*2-4));
+        target.draw(circle,states);
+    }
 }
 
 Simulation::Simulation() {
@@ -77,7 +89,7 @@ Simulation::Simulation(bool debug, int speed) {
     m_debug = debug;
     m_sim_speed = speed;
 
-    if (!m_font.loadFromFile("/Library/Fonts/Arial.ttf"))
+    if (!m_font.loadFromFile("/Library/Fonts/Andale Mono.ttf"))
     {
         // error...
     }

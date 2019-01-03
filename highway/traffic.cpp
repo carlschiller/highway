@@ -16,6 +16,7 @@ Car::Car() = default;
 Car::Car(RoadSegment *spawn_point, int lane, float vel, float target_speed, float aggressivness) {
     current_segment = spawn_point;
 
+
     current_segment->append_car(this);
     current_node = current_segment->get_node_pointer(lane);
     heading_to_node = current_node->get_next_node(lane);
@@ -32,6 +33,7 @@ Car::Car(RoadSegment *spawn_point, int lane, float vel, float target_speed, floa
 void Car::update_pos(float delta_t) {
     m_dist_to_next_node -= m_speed*delta_t;
     // if we are at a new node.
+
     if(m_dist_to_next_node < 0){
         current_segment->remove_car(this); // remove car from this segment
         current_segment = heading_to_node->get_parent_segment(); // set new segment
@@ -44,9 +46,72 @@ void Car::update_pos(float delta_t) {
         std::vector<RoadNode*> connections = current_node->get_connections();
 
         if(!connections.empty()){
-            heading_to_node = connections[connections.size()-1];
+            // check if we merge
+            int current_lane = current_segment->get_lane_number(current_node);
+
+            if(current_segment->merge){
+                if(current_lane == 0 && connections[0]->get_parent_segment()->get_total_amount_of_lanes() != 2){
+                    if(!Util::merge_helper(this,1)){
+                        heading_to_node = connections[1];
+                    }
+                    else{
+                        heading_to_node = connections[0];
+                    }
+                }
+                else if(connections[0]->get_parent_segment()->get_total_amount_of_lanes() == 2){
+                    current_lane = std::max(current_lane-1,0);
+                    heading_to_node = connections[current_lane];
+                }
+                else{
+                    heading_to_node = connections[current_lane];
+                }
+            }
+            // if we are in start section
+            else if(current_segment->get_total_amount_of_lanes() == 3){
+                if(connections.size() == 1){
+                    heading_to_node = connections[0];
+                }
+                else{
+                    heading_to_node = connections[current_lane];
+                }
+            }
+            // if we are in middle section
+            else if(current_segment->get_total_amount_of_lanes() == 2){
+                // normal way
+                if(connections[0]->get_parent_segment()->get_total_amount_of_lanes() == 2){
+                    if(current_lane == 0){
+                        if(m_speed < m_target_speed*0.75f){
+                            if(!Util::merge_helper(this,1)){
+                                heading_to_node = connections[1];
+                            }
+                            else{
+                                heading_to_node = connections[current_lane];
+                            }
+                        }
+                        else{
+                            heading_to_node = connections[current_lane];
+                        }
+                    }
+                    else if(current_lane == 1){
+                        if(!Util::merge_helper(this,0)){
+                            heading_to_node = connections[0];
+                        }
+                        else{
+                            heading_to_node = connections[current_lane];
+                        }
+                    }
+                }
+                else{
+                    heading_to_node = connections[0];
+                }
+            }
+            else if(current_segment->get_total_amount_of_lanes() == 1){
+                heading_to_node = connections[0];
+            }
+
             m_dist_to_next_node += Util::distance(current_node->get_x(),heading_to_node->get_x(),current_node->get_y(),heading_to_node->get_y());
             m_theta = current_node->get_theta(heading_to_node);
+
         }
     }
 }
@@ -69,7 +134,7 @@ void Car::accelerate(float elapsed){
 void Car::avoid_collision(float delta_t) {
     float min_distance = 8.0f; // for car distance.
     float ideal = min_distance+min_distance*(m_speed/20.f);
-    float detection_distance = 80;
+    float detection_distance = m_speed*4.0f;
 
     Car * closest_car = find_closest_car();
     float radius_to_car = 1000;
@@ -103,21 +168,7 @@ void Car::avoid_collision(float delta_t) {
         m_speed = 0;
     }
 
-    /*
-    else{
-        m_vel -= std::min(abs(delta_speed)*ideal/radius_to_car + abs(pow(delta_speed,2.0f))*0.25f , 10.0f*elapsed);
-    }
-    else if () {
-        m_vel -= std::min(
-                abs(pow(delta_speed, 2.0f)) * pow(ideal * 0.5f / radius_to_car, 2.0f) * m_aggressiveness * 2,
-                10.0f * elapsed);
-    } else{
-        accelerate(delta_theta,closest_car_ahead);
-    }
-    else {
 
-    }
-    */
 }
 
 Car* Car::find_closest_car() {
@@ -266,9 +317,10 @@ RoadSegment::RoadSegment(float x, float y, float theta, int lanes) {
     calculate_and_populate_nodes();
 }
 
-RoadSegment::RoadSegment(float x, float y, int lanes) {
+RoadSegment::RoadSegment(float x, float y, int lanes,bool mer) {
     m_x = x;
     m_y = y;
+    merge = mer;
 
     m_next_segment = nullptr;
 
@@ -415,7 +467,18 @@ bool Road::load_road() {
 
     // load segments into memory.
     for(std::vector<std::string> & vec : road_vector){
-        m_segments.emplace_back(RoadSegment(std::stof(vec[1]),std::stof(vec[2]),std::stoi(vec[3])));
+        if(vec.size() == 5){
+            if(vec[4] == "merge"){
+                m_segments.emplace_back(RoadSegment(std::stof(vec[1]),std::stof(vec[2]),std::stoi(vec[3]),true));
+            }
+            else{
+                m_segments.emplace_back(RoadSegment(std::stof(vec[1]),std::stof(vec[2]),std::stoi(vec[3]),false));
+            }
+        }
+        else{
+            m_segments.emplace_back(RoadSegment(std::stof(vec[1]),std::stof(vec[2]),std::stoi(vec[3]),false));
+        }
+
     }
 
     // populate nodes.
@@ -447,6 +510,12 @@ bool Road::load_road() {
                 // make this a spawn segment
                 m_spawn_positions.push_back(&m_segments[i]);
             }
+            else if(road_vector[i][4] == "merge"){
+                m_segments[i].set_next_road_segment(&m_segments[i+1]);
+                m_segments[i].calculate_theta();
+                // calculate nodes based on theta.
+                m_segments[i].calculate_and_populate_nodes();
+            }
 
         }
         // else we connect one by one.
@@ -472,6 +541,9 @@ bool Road::load_road() {
             else if(road_vector[i][4] == "true"){
                 m_segments[i].set_all_node_pointers_to_next_segment();
             }
+            else if(road_vector[i][4] == "merge"){
+                m_segments[i].set_all_node_pointers_to_next_segment();
+            }
 
         }
             // else we connect one by one.
@@ -485,7 +557,6 @@ bool Road::load_road() {
             }
         }
     }
-
     return loading;
 }
 
@@ -558,6 +629,20 @@ bool Util::will_car_paths_cross(Car *a, Car *b) {
         return false;
     }
 
+}
+
+bool Util::merge_helper(Car *a, int merge_to_lane) {
+    RoadSegment * seg = a->current_segment;
+    std::vector<Car*> cars = seg->get_car_vector();
+    for(Car * car : cars){
+        if(car != a){
+            float delta_speed = a->speed()-car->speed();
+            if(car->heading_to_node == a->current_node->get_connections()[merge_to_lane] && delta_speed < 0){
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 // this works only if a's heading to is b's current segment
@@ -732,7 +817,7 @@ std::mt19937& Traffic::my_engine() {
 void Traffic::spawn_cars(double & spawn_counter, float elapsed, double & threshold) {
     spawn_counter += elapsed;
     if(spawn_counter > threshold){
-        std::exponential_distribution<double> dis(2);
+        std::exponential_distribution<double> dis(1);
         std::normal_distribution<float> aggro(3.0f,0.5f);
         std::normal_distribution<float> sp(20.0,2.0);
         std::uniform_real_distribution<float> lane(0.0f,1.0f);
@@ -749,7 +834,7 @@ void Traffic::spawn_cars(double & spawn_counter, float elapsed, double & thresho
         std::vector<RoadSegment*> segments = m_road.spawn_positions();
         RoadSegment * seg;
         Car * new_car;
-        if(spawn_pos < 0.9){
+        if(spawn_pos < 0.95){
             seg = segments[0];
             if(start_lane < 0.33){
                 new_car = new Car(seg,0,speed,target,aggressiveness);
@@ -806,6 +891,7 @@ void Traffic::despawn_cars() {
 }
 
 void Traffic::update(float elapsed_time) {
+
     for(Car * car : m_cars){
         car->avoid_collision(elapsed_time);
     }

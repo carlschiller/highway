@@ -38,6 +38,7 @@ class RoadSegment{
 private:
     float m_x, m_y, m_theta;
     int m_n_lanes;
+
     constexpr static float M_LANE_WIDTH = 4.0f;
 
     std::vector<RoadNode> m_nodes;
@@ -47,8 +48,10 @@ public:
     RoadSegment();
     RoadSegment(float x, float y, RoadSegment * next_segment, int lanes);
     RoadSegment(float x, float y, float theta, int lanes);
-    RoadSegment(float x, float y, int lanes);
+    RoadSegment(float x, float y, int lanes,bool merge);
     ~RoadSegment();
+
+    bool merge;
 
     RoadNode * get_node_pointer(int n);
     std::vector<RoadNode> & get_nodes();
@@ -142,6 +145,7 @@ public:
     static bool is_car_behind(Car * a, Car * b);
     static bool will_car_paths_cross(Car *a, Car*b);
     static bool is_cars_in_same_lane(Car*a,Car*b);
+    static bool merge_helper(Car*a, int merge_to_lane);
     static float distance_to_line(float theta,  float x,  float y);
     static float distance_to_proj_point(float theta,  float x,  float y);
     static float distance_to_car(Car * a, Car * b);
@@ -167,8 +171,7 @@ public:
     const Road & road()const;
     void spawn_cars(double & spawn_counter, float elapsed, double & threshold);
     void despawn_cars();
-    //void force_spawn_car();
-    void debug(sf::Time t0);
+
     void update(float elapsed_time);
     const std::vector<Car*> & get_cars()const;
     float get_avg_flow();

@@ -6,39 +6,23 @@
 
 #IncludeRegexTransform: 
 
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/main.cpp
-iostream
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/traffic.h
+random
+-
+vector
 -
 SFML/Graphics.hpp
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/SFML/Graphics.hpp
-window.h
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/window.h
 
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/traffic.cpp
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/window.cpp
+iostream
+-
 traffic.h
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/traffic.h
+window.h
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/window.h
 cmath
 -
-fstream
--
-sstream
--
-iostream
--
-map
--
-random
--
-vector
--
-
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/traffic.h
-random
--
-vector
--
-SFML/Graphics.hpp
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/SFML/Graphics.hpp
 
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/window.h
 vector
