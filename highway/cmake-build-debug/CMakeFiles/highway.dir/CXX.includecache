@@ -31,6 +31,8 @@ random
 -
 vector
 -
+list
+-
 
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/traffic.h
 random
@@ -39,6 +41,16 @@ vector
 -
 SFML/Graphics.hpp
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/SFML/Graphics.hpp
+
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/window.cpp
+iostream
+-
+traffic.h
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/traffic.h
+window.h
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/window.h
+cmath
+-
 
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/window.h
 vector

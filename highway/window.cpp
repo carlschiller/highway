@@ -98,6 +98,7 @@ Simulation::Simulation(bool debug, int speed) {
 void Simulation::update(sf::Time elapsed, double & spawn_counter, double & threshold) {
     float elapsed_time = elapsed.asSeconds();
     for(int i = 0; i < m_sim_speed; i++){
+
         m_traffic.update(elapsed_time);
         m_traffic.despawn_cars();
         m_traffic.spawn_cars(spawn_counter,elapsed_time,threshold);
@@ -115,11 +116,12 @@ float Simulation::get_flow() {
 }
 
 void Simulation::get_info(sf::Text & text,sf::Time &elapsed) {
+    //TODO: SOME BUG HERE.
     float fps = 1.0f/elapsed.asSeconds();
     float flow = get_flow();
     std::string speedy = std::to_string(fps).substr(0,2) +
             " fps, speed: " + std::to_string(m_sim_speed).substr(0,1) + " x\nFlow " +
-            std::to_string(get_flow()).substr(0,4);
+            std::to_string(flow).substr(0,4);
     text.setString(speedy);
     text.setPosition(0,0);
     text.setFillColor(sf::Color::Green);

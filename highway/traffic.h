@@ -117,11 +117,16 @@ private:
 
 public:
     Car();
+    ~Car();
     Car(RoadSegment * spawn_point, int lane, float vel, float target_speed, float agressivness);
 
     RoadSegment * current_segment;
     RoadNode * current_node;
     RoadNode * heading_to_node;
+    Car * overtake_this_car;
+    std::vector<Car*> want_to_overtake_me;
+
+    std::vector<Car*> & get_overtakers();
 
     void update_pos(float delta_t);
     void accelerate(float delta_t);
@@ -174,7 +179,7 @@ public:
 
     void update(float elapsed_time);
     const std::vector<Car*> & get_cars()const;
-    float get_avg_flow();
+    const float get_avg_flow()const;
 };
 
 #endif //HIGHWAY_TRAFFIC_H
