@@ -6,7 +6,7 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(550*2, 600*2), "My window");
     window.setFramerateLimit(60);
 
-    int sim_speed = 1;
+    int sim_speed = 2;
     bool debug = true;
 
     sf::Texture texture;

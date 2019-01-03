@@ -143,10 +143,8 @@ public:
     static bool will_car_paths_cross(Car *a, Car*b);
     static bool is_cars_in_same_lane(Car*a,Car*b);
     static float distance_to_line(float theta,  float x,  float y);
-    static float distance_to_proj_point( float theta,  float x,  float y);
+    static float distance_to_proj_point(float theta,  float x,  float y);
     static float distance_to_car(Car * a, Car * b);
-    static bool find_connected_path(Car & ref, Car & car, std::vector<std::vector<int>> & allowed_zone, int buffer);
-    static Car * find_closest_car(std::vector<Car> &cars, Car * ref, std::vector<std::vector<int>> & allowed_zone);
     static Car * find_closest_radius(std::vector<Car> &cars, float x, float y);
     static float get_min_angle(float ang1, float ang2);
     static float distance(float x1, float x2, float y1, float y2);
