@@ -177,6 +177,33 @@ traffic.cpp.s:
 	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/traffic.cpp.s
 .PHONY : traffic.cpp.s
 
+unittests.o: unittests.cpp.o
+
+.PHONY : unittests.o
+
+# target to build an object file
+unittests.cpp.o:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/unittests.cpp.o
+.PHONY : unittests.cpp.o
+
+unittests.i: unittests.cpp.i
+
+.PHONY : unittests.i
+
+# target to preprocess a source file
+unittests.cpp.i:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/unittests.cpp.i
+.PHONY : unittests.cpp.i
+
+unittests.s: unittests.cpp.s
+
+.PHONY : unittests.s
+
+# target to generate assembly for a file
+unittests.cpp.s:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/unittests.cpp.s
+.PHONY : unittests.cpp.s
+
 window.o: window.cpp.o
 
 .PHONY : window.o
@@ -219,6 +246,9 @@ help:
 	@echo "... traffic.o"
 	@echo "... traffic.i"
 	@echo "... traffic.s"
+	@echo "... unittests.o"
+	@echo "... unittests.i"
+	@echo "... unittests.s"
 	@echo "... window.o"
 	@echo "... window.i"
 	@echo "... window.s"

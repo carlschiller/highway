@@ -28,11 +28,11 @@ void Simulation::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 
         int i = 0;
 
-        for(RoadSegment segment : m_traffic.road().segments()){
-            for(RoadNode & node : segment.get_nodes()){
-                circle.setPosition(sf::Vector2f(node.get_x()*2-4,node.get_y()*2-4));
-                line[0].position = sf::Vector2f(node.get_x()*2,node.get_y()*2);
-                for(RoadNode * connected_node : node.get_connections()){
+        for(RoadSegment * segment : Traffic::m_road.segments()){
+            for(RoadNode * node : segment->get_nodes()){
+                circle.setPosition(sf::Vector2f(node->get_x()*2-4,node->get_y()*2-4));
+                line[0].position = sf::Vector2f(node->get_x()*2,node->get_y()*2);
+                for(RoadNode * connected_node : node->get_connections()){
                     line[1].position = sf::Vector2f(connected_node->get_x()*2,connected_node->get_y()*2);
                     target.draw(line,states);
                 }
@@ -54,7 +54,7 @@ void Simulation::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     rectangle.setOutlineColor(sf::Color::Black);
     rectangle.setOutlineThickness(2.0f);
 
-    for(Car * car : m_traffic.get_cars()){
+    for(Car * car : Traffic::get_cars()){
         rectangle.setPosition(car->x_pos()*2,car->y_pos()*2);
         rectangle.setRotation(car->theta()*(float)360.0f/(-2.0f*(float)M_PI));
         sf::Uint8 colorspeed = static_cast<sf::Uint8> ((unsigned int)std::round(255 * car->speed() / car->target_speed()));
@@ -98,9 +98,11 @@ Simulation::Simulation(bool debug, int speed) {
 void Simulation::update(sf::Time elapsed, double & spawn_counter, double & threshold) {
     float elapsed_time = elapsed.asSeconds();
     for(int i = 0; i < m_sim_speed; i++){
-
+        //std::cout<< "boop1\n";
         m_traffic.update(elapsed_time);
+        //std::cout<< "boop2\n";
         m_traffic.despawn_cars();
+        //std::cout<< "boop3\n";
         m_traffic.spawn_cars(spawn_counter,elapsed_time,threshold);
     }
 }

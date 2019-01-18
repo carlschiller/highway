@@ -13,6 +13,8 @@ SFML/Graphics.hpp
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/SFML/Graphics.hpp
 window.h
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/window.h
+unittests.h
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/unittests.h
 
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/traffic.cpp
 traffic.h
@@ -39,6 +41,20 @@ random
 -
 vector
 -
+SFML/Graphics.hpp
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/SFML/Graphics.hpp
+
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/unittests.cpp
+unittests.h
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/unittests.h
+unistd.h
+-
+iostream
+-
+
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/unittests.h
+traffic.h
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/traffic.h
 SFML/Graphics.hpp
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/SFML/Graphics.hpp
 

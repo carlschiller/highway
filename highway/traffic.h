@@ -17,8 +17,8 @@ class Car;
 class RoadNode{
 private:
     float m_x, m_y;
-    std::vector<RoadNode*> m_connecting_nodes;
-    RoadSegment* m_is_child_of;
+    std::vector<RoadNode*> m_connecting_nodes; // raw pointers, no ownership
+    RoadSegment* m_is_child_of; // raw pointer, no ownership
 public:
     RoadNode();
     ~RoadNode();
@@ -36,35 +36,38 @@ public:
 
 class RoadSegment{
 private:
-    float m_x, m_y, m_theta;
-    int m_n_lanes;
+    const float m_x, m_y;
+    float m_theta;
+    const int m_n_lanes;
 
     constexpr static float M_LANE_WIDTH = 4.0f;
 
-    std::vector<RoadNode> m_nodes;
-    std::vector<Car*> m_cars;
-    RoadSegment * m_next_segment;
+    std::vector<RoadNode*> m_nodes; // OWNERSHIP
+    std::vector<Car*> m_cars; // raw pointer, no ownership
+    RoadSegment * m_next_segment; // raw pointer, no ownership
 public:
-    RoadSegment();
+    RoadSegment() = delete;
     RoadSegment(float x, float y, RoadSegment * next_segment, int lanes);
     RoadSegment(float x, float y, float theta, int lanes);
     RoadSegment(float x, float y, int lanes,bool merge);
-    ~RoadSegment();
+    ~RoadSegment(); // rule of three
+    RoadSegment(const RoadSegment&) = delete; // rule of three
+    RoadSegment& operator=(const RoadSegment& rhs) = delete; // rule of three
 
     bool merge;
 
     RoadNode * get_node_pointer(int n);
-    std::vector<RoadNode> & get_nodes();
+    std::vector<RoadNode *> get_nodes();
     void append_car(Car*);
     void remove_car(Car*);
     std::vector<Car*> & get_car_vector();
     RoadSegment * next_segment();
     float get_theta();
-    float get_x();
-    float get_y();
+    const float get_x() const;
+    const float get_y() const;
 
     int get_lane_number(RoadNode *);
-    int get_total_amount_of_lanes();
+    const int get_total_amount_of_lanes() const;
     void set_theta(float theta);
     void set_next_road_segment(RoadSegment*);
     void calculate_theta();
@@ -75,20 +78,21 @@ public:
 
 class Road{
 private:
-    std::vector<RoadSegment> m_segments;
-    std::vector<RoadSegment*> m_spawn_positions;
-    std::vector<RoadSegment*> m_despawn_positions;
+    std::vector<RoadSegment*> m_segments; // OWNERSHIP
+    std::vector<RoadSegment*> m_spawn_positions; // raw pointers
+    std::vector<RoadSegment*> m_despawn_positions; // raw pointers
 
     const std::string M_FILENAME = "../road.txt";
 public:
     Road();
+    Road(const Road& copy) = delete;
+    Road& operator=(const Road& rhs) = delete;
     ~Road();
 
-    void insert_segment(RoadSegment &);
     bool load_road();
     std::vector<RoadSegment*> & spawn_positions();
     std::vector<RoadSegment*> & despawn_positions();
-    const std::vector<RoadSegment> & segments()const;
+    std::vector<RoadSegment*> & segments();
 };
 
 /**
@@ -120,6 +124,7 @@ public:
     ~Car();
     Car(RoadSegment * spawn_point, int lane, float vel, float target_speed, float agressivness);
 
+    // all are raw pointers
     RoadSegment * current_segment;
     RoadNode * current_node;
     RoadNode * heading_to_node;
@@ -161,8 +166,7 @@ public:
 
 class Traffic{
 private:
-    Road m_road = Road();
-    std::vector<Car*> m_cars;
+    static std::vector<Car*> m_cars; // OWNERSHIP
 
     std::mt19937 & my_engine();
 
@@ -171,14 +175,18 @@ private:
 public:
     Traffic();
     ~Traffic();
+    Traffic(const Traffic&) = delete; // rule of three
+    Traffic& operator=(const Traffic&) = delete; // rule of three
 
     const unsigned long n_of_cars()const;
-    const Road & road()const;
+    static Road m_road;
     void spawn_cars(double & spawn_counter, float elapsed, double & threshold);
     void despawn_cars();
+    static void force_place_car(Car * car);
+
 
     void update(float elapsed_time);
-    const std::vector<Car*> & get_cars()const;
+    static std::vector<Car*> & get_cars();
     const float get_avg_flow()const;
 };
 

@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/main.cpp" "/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cmake-build-release/CMakeFiles/highway.dir/main.cpp.o"
   "/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/traffic.cpp" "/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cmake-build-release/CMakeFiles/highway.dir/traffic.cpp.o"
+  "/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/unittests.cpp" "/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cmake-build-release/CMakeFiles/highway.dir/unittests.cpp.o"
   "/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/window.cpp" "/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cmake-build-release/CMakeFiles/highway.dir/window.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")

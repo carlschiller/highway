@@ -45,8 +45,6 @@ Car::~Car(){
     current_segment = nullptr;
     heading_to_node = nullptr;
     current_node = nullptr;
-
-
 }
 
 void Car::update_pos(float delta_t) {
@@ -185,8 +183,9 @@ void Car::avoid_collision(float delta_t) {
     float min_distance = 8.0f; // for car distance.
     float ideal = min_distance+min_distance*(m_speed/20.f);
     float detection_distance = m_speed*4.0f;
-
+    //std::cout << "boop1\n";
     Car * closest_car = find_closest_car();
+    //std::cout << "boop2\n";
     float radius_to_car = 1000;
     float delta_speed = 0;
 
@@ -224,8 +223,8 @@ Car* Car::find_closest_car() {
     std::map<RoadSegment*,bool> visited;
     std::list<RoadNode*> queue;
 
-    for(RoadNode & node : this->current_segment->get_nodes()){
-        queue.push_front(&node);
+    for(RoadNode * node : (this->current_segment->get_nodes())){
+        queue.push_front(node);
     }
 
     Car* answer = nullptr;
@@ -234,8 +233,8 @@ Car* Car::find_closest_car() {
     while(!queue.empty()){
         RoadNode * next_node = queue.back(); // get last element
         queue.pop_back();
-
         RoadSegment * next_segment = next_node->get_parent_segment();
+        //std::cout<< "hej\n";
         if(!visited[next_segment] && Util::distance(origin->get_x(),next_segment->get_x(),origin->get_y(),next_segment->get_y()) < search_radius){
             visited[next_segment] = true;
 
@@ -256,7 +255,7 @@ Car* Car::find_closest_car() {
                 queue.push_front(node);
             }
         }
-
+        //std::cout<< "hej2\n";
     }
 
     return answer;
@@ -334,46 +333,66 @@ RoadNode* RoadNode::get_next_node(int lane) {
     return m_connecting_nodes[lane];
 }
 
-RoadSegment::RoadSegment() = default;
+//RoadSegment::RoadSegment() = default;
 
-RoadSegment::~RoadSegment() = default;
+/*
+RoadSegment::RoadSegment(const RoadSegment & segment):
+    m_x(segment.m_x), m_y(segment.m_y), m_n_lanes(segment.m_n_lanes),
+    m_theta(segment.m_theta), m_next_segment(segment.m_next_segment),
+    m_cars(segment.m_cars), merge(segment.merge)
+{
+    m_nodes.reserve(segment.m_nodes.size());
+    for(RoadNode * node : m_nodes){
+        RoadNode * new_node = new RoadNode(); // new_node now is on heap.
+        *new_node = *node; // copy values.
+        m_nodes.push_back(new_node); // push back pointers.
+    }
+}
+*/
 
-RoadSegment::RoadSegment(float x, float y, RoadSegment * next_segment, int lanes) {
-    m_x = x;
-    m_y = y;
+/*
+RoadSegment& RoadSegment::operator=(const RoadSegment &rhs) {
+    RoadSegment tmp(rhs);
 
+    std::swap(m_nodes,tmp.m_nodes);
+
+    return *this;
+}
+
+*/
+
+RoadSegment::~RoadSegment(){
+    for(RoadNode * elem : m_nodes){
+        delete elem;
+    }
+    m_nodes.clear();
+}
+
+RoadSegment::RoadSegment(float x, float y, RoadSegment * next_segment, int lanes):
+    m_x(x), m_y(y), m_n_lanes(lanes)
+{
     m_next_segment = next_segment;
-
     m_theta = atan2(m_y-m_next_segment->m_y,m_next_segment->m_x-m_x);
 
-    m_n_lanes = lanes;
-    m_nodes.reserve(lanes);
+    m_nodes.reserve(m_n_lanes);
 
     calculate_and_populate_nodes();
 }
 
-RoadSegment::RoadSegment(float x, float y, float theta, int lanes) {
-    m_x = x;
-    m_y = y;
-
+RoadSegment::RoadSegment(float x, float y, float theta, int lanes) :
+    m_x(x), m_y(y), m_theta(theta), m_n_lanes(lanes)
+{
     m_next_segment = nullptr;
-
-    m_theta = theta;
-
-    m_n_lanes = lanes;
     m_nodes.reserve(lanes);
 
     calculate_and_populate_nodes();
 }
 
-RoadSegment::RoadSegment(float x, float y, int lanes,bool mer) {
-    m_x = x;
-    m_y = y;
+RoadSegment::RoadSegment(float x, float y, int lanes,bool mer):
+    m_x(x), m_y(y), merge(mer), m_n_lanes(lanes)
+{
     merge = mer;
-
     m_next_segment = nullptr;
-
-    m_n_lanes = lanes;
     m_nodes.reserve(m_n_lanes);
 
     // can't set nodes if we don't have a theta.
@@ -383,17 +402,17 @@ float RoadSegment::get_theta() {
     return m_theta;
 }
 
-float RoadSegment::get_x() {
+const float RoadSegment::get_x() const{
     return m_x;
 }
 
-float RoadSegment::get_y() {
+const float RoadSegment::get_y() const {
     return m_y;
 }
 
 int RoadSegment::get_lane_number(RoadNode * node) {
     for(int i = 0; i < m_n_lanes; i++){
-        if(node == &m_nodes[i]){
+        if(node == m_nodes[i]){
             return i;
         }
     }
@@ -436,7 +455,7 @@ void RoadSegment::calculate_and_populate_nodes() {
     for(int i = 0; i < m_n_lanes; i++){
         float x_pos = m_x+current_length*cos(m_theta+(float)M_PI*0.5f);
         float y_pos = m_y-current_length*sin(m_theta+(float)M_PI*0.5f);
-        m_nodes.emplace_back(RoadNode(x_pos,y_pos,this));
+        m_nodes.push_back(new RoadNode(x_pos,y_pos,this));
         current_length += M_LANE_WIDTH;
     }
 }
@@ -450,10 +469,10 @@ void RoadSegment::calculate_theta() {
 }
 
 RoadNode* RoadSegment::get_node_pointer(int n) {
-    return &m_nodes[n];
+    return m_nodes[n];
 }
 
-std::vector<RoadNode>& RoadSegment::get_nodes() {
+std::vector<RoadNode *> RoadSegment::get_nodes() {
     return m_nodes;
 }
 
@@ -462,20 +481,19 @@ RoadSegment* RoadSegment::next_segment() {
 }
 
 void RoadSegment::set_all_node_pointers_to_next_segment() {
-    for(RoadNode & node: m_nodes){
+    for(RoadNode * node: m_nodes){
         for(int i = 0; i < m_next_segment->m_n_lanes; i++){
-            node.set_pointer(m_next_segment->get_node_pointer(i));
+            node->set_pointer(m_next_segment->get_node_pointer(i));
         }
     }
 }
 
 void RoadSegment::set_node_pointer_to_node(int from_node_n, int to_node_n, RoadSegment *next_segment) {
     RoadNode * pointy = next_segment->get_node_pointer(to_node_n);
-
-    m_nodes[from_node_n].set_pointer(pointy);
+    m_nodes[from_node_n]->set_pointer(pointy);
 }
 
-int RoadSegment::get_total_amount_of_lanes() {
+const int RoadSegment::get_total_amount_of_lanes() const {
     return m_n_lanes;
 }
 
@@ -485,10 +503,11 @@ Road::Road() {
     };
 }
 
-Road::~Road() = default;
-
-void Road::insert_segment(RoadSegment & segment) {
-    m_segments.push_back(segment);
+Road::~Road() {
+    for(RoadSegment * seg : m_segments){
+        delete seg;
+    }
+    m_segments.clear();
 }
 
 bool Road::load_road() {
@@ -518,80 +537,83 @@ bool Road::load_road() {
     for(std::vector<std::string> & vec : road_vector){
         if(vec.size() == 5){
             if(vec[4] == "merge"){
-                m_segments.emplace_back(RoadSegment(std::stof(vec[1]),std::stof(vec[2]),std::stoi(vec[3]),true));
+                RoadSegment * seg = new RoadSegment(std::stof(vec[1]),std::stof(vec[2]),std::stoi(vec[3]),true);
+                m_segments.emplace_back(seg);
             }
             else{
-                m_segments.emplace_back(RoadSegment(std::stof(vec[1]),std::stof(vec[2]),std::stoi(vec[3]),false));
+                RoadSegment * seg = new RoadSegment(std::stof(vec[1]),std::stof(vec[2]),std::stoi(vec[3]),false);
+                m_segments.emplace_back(seg);
             }
         }
         else{
-            m_segments.emplace_back(RoadSegment(std::stof(vec[1]),std::stof(vec[2]),std::stoi(vec[3]),false));
+            RoadSegment * seg = new RoadSegment(std::stof(vec[1]),std::stof(vec[2]),std::stoi(vec[3]),false);
+            m_segments.emplace_back(seg);
         }
 
     }
+
 
     // populate nodes.
     for (int i = 0; i < m_segments.size(); ++i) {
         // populate nodes normally.
         if(road_vector[i].size() == 4){
-            m_segments[i].set_next_road_segment(&m_segments[i+1]);
-            m_segments[i].calculate_theta();
+            m_segments[i]->set_next_road_segment(m_segments[i+1]);
+            m_segments[i]->calculate_theta();
             // calculate nodes based on theta.
-            m_segments[i].calculate_and_populate_nodes();
+            m_segments[i]->calculate_and_populate_nodes();
 
         }
         else if(road_vector[i].size() == 5){
             if(road_vector[i][4] == "false"){
                 // take previous direction and populate nodes.
-                m_segments[i].set_theta(m_segments[i-1].get_theta());
-                m_segments[i].calculate_and_populate_nodes();
+                m_segments[i]->set_theta(m_segments[i-1]->get_theta());
+                m_segments[i]->calculate_and_populate_nodes();
                 // but do not connect nodes to new ones.
 
                 // make this a despawn segment
-                m_despawn_positions.push_back(&m_segments[i]);
+                m_despawn_positions.push_back(m_segments[i]);
             }
             else if(road_vector[i][4] == "true"){
-                m_segments[i].set_next_road_segment(&m_segments[i+1]);
-                m_segments[i].calculate_theta();
+                m_segments[i]->set_next_road_segment(m_segments[i+1]);
+                m_segments[i]->calculate_theta();
                 // calculate nodes based on theta.
-                m_segments[i].calculate_and_populate_nodes();
+                m_segments[i]->calculate_and_populate_nodes();
 
                 // make this a spawn segment
-                m_spawn_positions.push_back(&m_segments[i]);
+                m_spawn_positions.push_back(m_segments[i]);
             }
             else if(road_vector[i][4] == "merge"){
-                m_segments[i].set_next_road_segment(&m_segments[i+1]);
-                m_segments[i].calculate_theta();
+                m_segments[i]->set_next_road_segment(m_segments[i+1]);
+                m_segments[i]->calculate_theta();
                 // calculate nodes based on theta.
-                m_segments[i].calculate_and_populate_nodes();
+                m_segments[i]->calculate_and_populate_nodes();
             }
 
         }
         // else we connect one by one.
         else{
             // take previous direction and populate nodes.
-            m_segments[i].set_theta(m_segments[i-1].get_theta());
+            m_segments[i]->set_theta(m_segments[i-1]->get_theta());
             // calculate nodes based on theta.
-            m_segments[i].calculate_and_populate_nodes();
+            m_segments[i]->calculate_and_populate_nodes();
         }
     }
-
 
     // connect nodes.
     for (int i = 0; i < m_segments.size(); ++i) {
         // do normal connection, ie connect all nodes.
         if(road_vector[i].size() == 4){
-            m_segments[i].set_all_node_pointers_to_next_segment();
+            m_segments[i]->set_all_node_pointers_to_next_segment();
         }
         else if(road_vector[i].size() == 5){
             if(road_vector[i][4] == "false"){
                 // but do not connect nodes to new ones.
             }
             else if(road_vector[i][4] == "true"){
-                m_segments[i].set_all_node_pointers_to_next_segment();
+                m_segments[i]->set_all_node_pointers_to_next_segment();
             }
             else if(road_vector[i][4] == "merge"){
-                m_segments[i].set_all_node_pointers_to_next_segment();
+                m_segments[i]->set_all_node_pointers_to_next_segment();
             }
 
         }
@@ -601,8 +623,8 @@ bool Road::load_road() {
             int amount_of_pointers = (int)road_vector[i].size()-4;
             for(int j = 0; j < amount_of_pointers/3; j++){
                 int current_pos = 4+j*3;
-                RoadSegment * next_segment = &m_segments[std::stoi(road_vector[i][current_pos+2])];
-                m_segments[i].set_node_pointer_to_node(std::stoi(road_vector[i][current_pos]),std::stoi(road_vector[i][current_pos+1]),next_segment);
+                RoadSegment * next_segment = m_segments[std::stoi(road_vector[i][current_pos+2])];
+                m_segments[i]->set_node_pointer_to_node(std::stoi(road_vector[i][current_pos]),std::stoi(road_vector[i][current_pos+1]),next_segment);
             }
         }
     }
@@ -617,7 +639,7 @@ std::vector<RoadSegment*>& Road::despawn_positions() {
     return m_despawn_positions;
 }
 
-const std::vector<RoadSegment>& Road::segments()const {
+std::vector<RoadSegment*>& Road::segments() {
     return m_segments;
 }
 
@@ -904,6 +926,12 @@ void Car::avoid_collision(std::vector<Car> &cars, int i,float & elapsed, float d
 
 */
 
+/*
+Traffic::Traffic(const Traffic & traffic) {
+
+}
+*/
+
 Traffic::Traffic() = default;
 
 Traffic::~Traffic() {
@@ -967,9 +995,7 @@ void Traffic::spawn_cars(double & spawn_counter, float elapsed, double & thresho
         else{
             float dist = Util::distance_to_car(new_car,closest_car_ahead);
             if(dist < 10){
-                seg->remove_car(new_car);
                 delete new_car;
-                new_car = nullptr;
             }
             else if (dist < 40){
                 new_car->speed() = closest_car_ahead->speed();
@@ -988,8 +1014,7 @@ void Traffic::despawn_cars() {
         for(RoadSegment * seg : m_road.despawn_positions()){
             if(m_cars[i] != nullptr){
                 if(m_cars[i]->get_segment() == seg){
-                    delete m_cars[i]; // delete pointer
-                    m_cars[i] = nullptr; // set pointer to nullptr
+                    delete m_cars[i];
                 }
             }
         }
@@ -997,17 +1022,22 @@ void Traffic::despawn_cars() {
     m_cars.erase(std::remove(m_cars.begin(),m_cars.end(),nullptr),m_cars.end()); // safe remove all nullptrs
 }
 
-void Traffic::update(float elapsed_time) {
+void Traffic::force_place_car(Car * car) {
+    m_cars.push_back(car);
+}
 
+void Traffic::update(float elapsed_time) {
+    //std::cout<< "boop1\n";
     for(Car * car : m_cars){
         car->avoid_collision(elapsed_time);
     }
+    //std::cout<< "boop2\n";
     for(Car * car : m_cars){
         car->update_pos(elapsed_time);
     }
 }
 
-const std::vector<Car*> &Traffic::get_cars()const {
+std::vector<Car*> & Traffic::get_cars() {
     return m_cars;
 }
 
@@ -1019,8 +1049,4 @@ const float Traffic::get_avg_flow()const {
         flow += car->speed()/car->target_speed();
     }
     return flow/i;
-}
-
-const Road & Traffic::road() const {
-    return m_road;
 }

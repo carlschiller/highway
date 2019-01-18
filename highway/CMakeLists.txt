@@ -3,7 +3,7 @@ project(highway)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES main.cpp traffic.cpp traffic.h window.cpp window.h)
+set(SOURCE_FILES main.cpp traffic.cpp traffic.h window.cpp window.h unittests.cpp unittests.h)
 add_executable(highway ${SOURCE_FILES})
 
 set (CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules/")

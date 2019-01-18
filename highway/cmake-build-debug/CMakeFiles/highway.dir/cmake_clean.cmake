@@ -2,6 +2,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/highway.dir/main.cpp.o"
   "CMakeFiles/highway.dir/traffic.cpp.o"
   "CMakeFiles/highway.dir/window.cpp.o"
+  "CMakeFiles/highway.dir/unittests.cpp.o"
   "highway.pdb"
   "highway"
 )

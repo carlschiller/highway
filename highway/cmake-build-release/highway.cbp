@@ -91,6 +91,12 @@
 		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/traffic.h">
 			<Option target="highway"/>
 		</Unit>
+		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/unittests.cpp">
+			<Option target="highway"/>
+		</Unit>
+		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/unittests.h">
+			<Option target="highway"/>
+		</Unit>
 		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/window.cpp">
 			<Option target="highway"/>
 		</Unit>
