@@ -14,21 +14,29 @@
 
 Car::Car() = default;
 
-Car::Car(RoadSegment *spawn_point, int lane, float vel, float target_speed, float aggressivness) {
+Car::Car(RoadSegment *spawn_point, int lane, float vel, float target_speed, float aggressivness):
+    m_speed(vel), m_target_speed(target_speed), m_aggressiveness(aggressivness)
+{
     current_segment = spawn_point;
 
     overtake_this_car = nullptr;
 
     current_segment->append_car(this);
     current_node = current_segment->get_node_pointer(lane);
-    heading_to_node = current_node->get_next_node(lane);
 
-    m_dist_to_next_node = Util::distance(current_node->get_x(),heading_to_node->get_x(),current_node->get_y(),heading_to_node->get_y());
+    if(!current_node->get_connections().empty()){
+        heading_to_node = current_node->get_next_node(lane);
 
-    m_theta = current_node->get_theta(heading_to_node);
-    m_speed = vel;
-    m_target_speed = target_speed;
-    m_aggressiveness = aggressivness;
+        m_dist_to_next_node = Util::distance(current_node->get_x(),heading_to_node->get_x(),current_node->get_y(),heading_to_node->get_y());
+
+        m_theta = current_node->get_theta(heading_to_node);
+    }else{
+        std::cout << "aa\n";
+        heading_to_node = nullptr;
+        m_theta = 0;
+        m_dist_to_next_node = 0;
+    }
+
     m_breaking = false;
 }
 
@@ -262,14 +270,26 @@ Car* Car::find_closest_car() {
 }
 
 float Car::x_pos() {
-    float x_position = heading_to_node->get_x()-m_dist_to_next_node*cos(m_theta);
+    float x_position;
+    if(heading_to_node != nullptr){
+        x_position = heading_to_node->get_x()-m_dist_to_next_node*cos(m_theta);
+    }
+    else{
+        x_position = current_node->get_x();
+    }
 
     return x_position;
 }
 
 float Car::y_pos() {
-    float y_position = heading_to_node->get_y()+m_dist_to_next_node*sin(m_theta);
-
+    float y_position;
+    if(heading_to_node != nullptr){
+        y_position = heading_to_node->get_y()+m_dist_to_next_node*sin(m_theta);
+    }
+    else{
+        y_position = current_node->get_y();
+    }
+    
     return y_position;
 }
 

@@ -11,9 +11,10 @@ void Tests::placement_test() {
     std::cout << "Starting placement tests\n";
     std::vector<RoadSegment*> segments = Road::shared().segments();
     int i = 0;
+
     for(RoadSegment * seg : segments){
         usleep(200000);
-        std::cout<< "seg " << i << ", nlanes " << seg->get_total_amount_of_lanes() << ","<< &seg << std::endl;
+        std::cout<< "seg " << i << ", nlanes " << seg->get_total_amount_of_lanes() << ","<< seg << std::endl;
         std::cout << "next segment" << seg->next_segment() << std::endl;
         std::vector<RoadNode*> nodes =  seg->get_nodes();
         for(RoadNode * node : nodes){
@@ -54,7 +55,7 @@ void Tests::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     line[1].color = sf::Color::Blue;
 
     int i = 0;
-    std::cout << "drawing road\n";
+
     for(RoadSegment * segment : Road::shared().segments()){
         for(RoadNode * node : segment->get_nodes()){
             circle.setPosition(sf::Vector2f(node->get_x()*2-4,node->get_y()*2-4));
@@ -72,7 +73,7 @@ void Tests::draw(sf::RenderTarget &target, sf::RenderStates states) const {
         target.draw(segment_n,states);
         i++;
     }
-    std::cout << "drew road\n";
+
     // one rectangle is all we need :)
     sf::RectangleShape rectangle;
     rectangle.setSize(sf::Vector2f(9.4,3.4));
@@ -87,17 +88,21 @@ void Tests::draw(sf::RenderTarget &target, sf::RenderStates states) const {
         rectangle.setFillColor(sf::Color(255-colorspeed,colorspeed,0,255));
         target.draw(rectangle,states);
 
-        // print debug info about node placements and stuff
-        sf::CircleShape circle;
-        circle.setRadius(4.0f);
-        circle.setOutlineColor(sf::Color::Red);
-        circle.setOutlineThickness(2.0f);
-        circle.setFillColor(sf::Color::Transparent);
-        circle.setPosition(sf::Vector2f(car->current_node->get_x()*2-4,car->current_node->get_y()*2-4));
-        target.draw(circle,states);
-        circle.setOutlineColor(sf::Color::Green);
-        circle.setPosition(sf::Vector2f(car->heading_to_node->get_x()*2-4,car->heading_to_node->get_y()*2-4));
-        target.draw(circle,states);
+        // this caused crash earlier
+        if(car->heading_to_node!=nullptr){
+            // print debug info about node placements and stuff
+            sf::CircleShape circle;
+
+            circle.setRadius(4.0f);
+            circle.setOutlineColor(sf::Color::Red);
+            circle.setOutlineThickness(2.0f);
+            circle.setFillColor(sf::Color::Transparent);
+            circle.setPosition(sf::Vector2f(car->current_node->get_x()*2-4,car->current_node->get_y()*2-4));
+            target.draw(circle,states);
+            circle.setOutlineColor(sf::Color::Green);
+            circle.setPosition(sf::Vector2f(car->heading_to_node->get_x()*2-4,car->heading_to_node->get_y()*2-4));
+            target.draw(circle,states);
+        }
     }
 }
 
