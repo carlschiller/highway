@@ -79,6 +79,7 @@ int main() {
             {
                 // "close requested" event: we close the window
                 if (event.type == sf::Event::Closed){
+                    thread.terminate();
                     window.close();
                 }
             }

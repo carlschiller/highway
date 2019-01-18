@@ -13,7 +13,7 @@ void Tests::placement_test() {
     int i = 0;
 
     for(RoadSegment * seg : segments){
-        usleep(200000);
+        usleep(100000);
         std::cout<< "seg " << i << ", nlanes " << seg->get_total_amount_of_lanes() << ","<< seg << std::endl;
         std::cout << "next segment" << seg->next_segment() << std::endl;
         std::vector<RoadNode*> nodes =  seg->get_nodes();
@@ -25,16 +25,45 @@ void Tests::placement_test() {
             }
         }
         i++;
-        m_traffic.force_place_car(new Car(seg,0,1,1,0.01));
-        std::cout << "placed car\n";
+        auto car = new Car(seg,0,1,1,0.01);
+        m_traffic.force_place_car(car);
+        std::cout << "placed car" << car << std::endl;
     }
     std::cout << "Placement tests passed\n";
+}
+
+void Tests::delete_cars_test() {
+    std::vector<Car*> car_copies = m_traffic.get_cars();
+    for(Car * car : car_copies){
+        usleep(100000);
+        std::cout << "Removing car " << car << std::endl;
+        m_traffic.despawn_car(car);
+    }
+    std::cout << "Car despawn tests passed\n";
+}
+
+void Tests::run_one_car() {
+    double ten = 10.0;
+    double zero = 0;
+    m_traffic.spawn_cars(ten,0,zero);
+    double fps = 60.0;
+    double multiplier = 10.0;
+
+    std::cout << "running one car\n";
+    while(m_traffic.n_of_cars() != 0) {
+        usleep((useconds_t)(1000000.0/(fps*multiplier)));
+        m_traffic.update(1.0f/(float)fps);
+        m_traffic.despawn_cars();
+    }
 }
 
 // do all tests
 void Tests::run_all_tests() {
     usleep(2000000);
     placement_test();
+    delete_cars_test();
+    run_one_car();
+    std::cout << "all tests passed\n";
 }
 
 void Tests::draw(sf::RenderTarget &target, sf::RenderStates states) const {

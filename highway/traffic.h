@@ -183,11 +183,14 @@ public:
     unsigned long n_of_cars();
     void spawn_cars(double & spawn_counter, float elapsed, double & threshold);
     void despawn_cars();
+    void despawn_car(Car* car);
+    //void remove_car(Car * car);
+    void remove_dead_pointers();
     void force_place_car(Car * car);
 
 
     void update(float elapsed_time);
-    const std::vector<Car *> & get_cars() const;
+    std::vector<Car *> get_cars() const;
     float get_avg_flow();
 };
 

@@ -289,7 +289,7 @@ float Car::y_pos() {
     else{
         y_position = current_node->get_y();
     }
-    
+
     return y_position;
 }
 
@@ -1077,6 +1077,29 @@ void Traffic::spawn_cars(double & spawn_counter, float elapsed, double & thresho
     }
 }
 
+void Traffic::despawn_car(Car *car) {
+    for(int i = 0; i < m_cars.size(); i++){
+        if(car == m_cars[i]){
+            delete m_cars[i];
+            m_cars[i] = nullptr;
+        }
+    }
+    remove_dead_pointers();
+}
+/*
+void Traffic::remove_car(Car *car) {
+    for(int i = 0; i < m_cars.size(); i++){
+        if(car == m_cars[i]){
+            delete m_cars[i];
+            m_cars[i] = nullptr;
+        }
+    }
+}
+*/
+void Traffic::remove_dead_pointers() {
+    m_cars.erase(std::remove(m_cars.begin(),m_cars.end(),nullptr),m_cars.end()); // safe remove all nullptrs
+}
+
 void Traffic::despawn_cars() {
     int car_amount = static_cast<int>(m_cars.size());
     for(int i = 0; i < car_amount; i++){
@@ -1084,11 +1107,12 @@ void Traffic::despawn_cars() {
             if(m_cars[i] != nullptr){
                 if(m_cars[i]->get_segment() == seg){
                     delete m_cars[i];
+                    m_cars[i] = nullptr;
                 }
             }
         }
     }
-    m_cars.erase(std::remove(m_cars.begin(),m_cars.end(),nullptr),m_cars.end()); // safe remove all nullptrs
+    remove_dead_pointers();
 }
 
 void Traffic::force_place_car(Car * car) {
@@ -1106,7 +1130,7 @@ void Traffic::update(float elapsed_time) {
     }
 }
 
-const std::vector<Car *> & Traffic::get_cars() const {
+std::vector<Car *> Traffic::get_cars() const {
     return m_cars;
 }
 

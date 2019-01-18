@@ -18,6 +18,8 @@ public:
     void get_info(sf::Text & text, sf::Time &elapsed);
 
     void placement_test();
+    void delete_cars_test();
+    void run_one_car();
     void run_all_tests();
 };
 

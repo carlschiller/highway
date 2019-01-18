@@ -53,7 +53,6 @@ void Simulation::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     rectangle.setFillColor(sf::Color::Green);
     rectangle.setOutlineColor(sf::Color::Black);
     rectangle.setOutlineThickness(2.0f);
-
     for(Car * car : m_traffic.get_cars()){
         rectangle.setPosition(car->x_pos()*2,car->y_pos()*2);
         rectangle.setRotation(car->theta()*(float)360.0f/(-2.0f*(float)M_PI));
@@ -62,16 +61,19 @@ void Simulation::draw(sf::RenderTarget &target, sf::RenderStates states) const {
         target.draw(rectangle,states);
 
         // print debug info about node placements and stuff
-        sf::CircleShape circle;
-        circle.setRadius(4.0f);
-        circle.setOutlineColor(sf::Color::Red);
-        circle.setOutlineThickness(2.0f);
-        circle.setFillColor(sf::Color::Transparent);
-        circle.setPosition(sf::Vector2f(car->current_node->get_x()*2-4,car->current_node->get_y()*2-4));
-        target.draw(circle,states);
-        circle.setOutlineColor(sf::Color::Green);
-        circle.setPosition(sf::Vector2f(car->heading_to_node->get_x()*2-4,car->heading_to_node->get_y()*2-4));
-        target.draw(circle,states);
+
+        if(car->heading_to_node!=nullptr){
+            sf::CircleShape circle;
+            circle.setRadius(4.0f);
+            circle.setOutlineColor(sf::Color::Red);
+            circle.setOutlineThickness(2.0f);
+            circle.setFillColor(sf::Color::Transparent);
+            circle.setPosition(sf::Vector2f(car->current_node->get_x()*2-4,car->current_node->get_y()*2-4));
+            target.draw(circle,states);
+            circle.setOutlineColor(sf::Color::Green);
+            circle.setPosition(sf::Vector2f(car->heading_to_node->get_x()*2-4,car->heading_to_node->get_y()*2-4));
+            target.draw(circle,states);
+        }
     }
 }
 
