@@ -82,12 +82,15 @@ private:
     std::vector<RoadSegment*> m_spawn_positions; // raw pointers
     std::vector<RoadSegment*> m_despawn_positions; // raw pointers
 
-    const std::string M_FILENAME = "../road.txt";
-public:
+    const std::string M_FILENAME;
+private:
     Road();
+    ~Road();
+public:
+    static Road &shared() {static Road road; return road;}
+
     Road(const Road& copy) = delete;
     Road& operator=(const Road& rhs) = delete;
-    ~Road();
 
     bool load_road();
     std::vector<RoadSegment*> & spawn_positions();
@@ -166,8 +169,7 @@ public:
 
 class Traffic{
 private:
-    static std::vector<Car*> m_cars; // OWNERSHIP
-
+    std::vector<Car*> m_cars;
     std::mt19937 & my_engine();
 
     //void update_speed(int i, float & elapsed_time);
@@ -175,19 +177,18 @@ private:
 public:
     Traffic();
     ~Traffic();
-    Traffic(const Traffic&) = delete; // rule of three
-    Traffic& operator=(const Traffic&) = delete; // rule of three
+    Traffic(const Traffic&); // rule of three
+    Traffic& operator=(const Traffic&); // rule of three
 
-    const unsigned long n_of_cars()const;
-    static Road m_road;
+    unsigned long n_of_cars();
     void spawn_cars(double & spawn_counter, float elapsed, double & threshold);
     void despawn_cars();
-    static void force_place_car(Car * car);
+    void force_place_car(Car * car);
 
 
     void update(float elapsed_time);
-    static std::vector<Car*> & get_cars();
-    const float get_avg_flow()const;
+    const std::vector<Car *> & get_cars() const;
+    float get_avg_flow();
 };
 
 #endif //HIGHWAY_TRAFFIC_H

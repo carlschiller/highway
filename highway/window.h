@@ -21,7 +21,7 @@ public:
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 private:
-    static Traffic m_traffic;
+    Traffic m_traffic;
     sf::Texture m_texture;
     bool m_debug;
     int m_sim_speed;

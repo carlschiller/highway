@@ -64,7 +64,7 @@ int main() {
     else{
         Tests tests = Tests();
 
-        sf::Thread thread(&Tests::run_all_tests);
+        sf::Thread thread(&Tests::run_all_tests,&tests);
 
         thread.launch();
 

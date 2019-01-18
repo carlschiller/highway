@@ -28,7 +28,7 @@ void Simulation::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 
         int i = 0;
 
-        for(RoadSegment * segment : Traffic::m_road.segments()){
+        for(RoadSegment * segment : Road::shared().segments()){
             for(RoadNode * node : segment->get_nodes()){
                 circle.setPosition(sf::Vector2f(node->get_x()*2-4,node->get_y()*2-4));
                 line[0].position = sf::Vector2f(node->get_x()*2,node->get_y()*2);
@@ -41,7 +41,7 @@ void Simulation::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 
             }
             segment_n.setString(std::to_string(i));
-            segment_n.setPosition(sf::Vector2f(segment.get_x()*2+4,segment.get_y()*2+4));
+            segment_n.setPosition(sf::Vector2f(segment->get_x()*2+4,segment->get_y()*2+4));
             target.draw(segment_n,states);
             i++;
         }
@@ -54,7 +54,7 @@ void Simulation::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     rectangle.setOutlineColor(sf::Color::Black);
     rectangle.setOutlineThickness(2.0f);
 
-    for(Car * car : Traffic::get_cars()){
+    for(Car * car : m_traffic.get_cars()){
         rectangle.setPosition(car->x_pos()*2,car->y_pos()*2);
         rectangle.setRotation(car->theta()*(float)360.0f/(-2.0f*(float)M_PI));
         sf::Uint8 colorspeed = static_cast<sf::Uint8> ((unsigned int)std::round(255 * car->speed() / car->target_speed()));
@@ -78,7 +78,7 @@ void Simulation::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 Simulation::Simulation() {
     m_debug = false;
     m_sim_speed = 1;
-
+    m_traffic = Traffic();
     if (!m_font.loadFromFile("/Library/Fonts/Arial.ttf"))
     {
         // error...

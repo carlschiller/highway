@@ -497,7 +497,9 @@ const int RoadSegment::get_total_amount_of_lanes() const {
     return m_n_lanes;
 }
 
-Road::Road() {
+Road::Road() :
+    M_FILENAME("../road.txt")
+{
     if(!load_road()){
        std::cout << "Error in loading road.\n";
     };
@@ -538,16 +540,16 @@ bool Road::load_road() {
         if(vec.size() == 5){
             if(vec[4] == "merge"){
                 RoadSegment * seg = new RoadSegment(std::stof(vec[1]),std::stof(vec[2]),std::stoi(vec[3]),true);
-                m_segments.emplace_back(seg);
+                m_segments.push_back(seg);
             }
             else{
                 RoadSegment * seg = new RoadSegment(std::stof(vec[1]),std::stof(vec[2]),std::stoi(vec[3]),false);
-                m_segments.emplace_back(seg);
+                m_segments.push_back(seg);
             }
         }
         else{
             RoadSegment * seg = new RoadSegment(std::stof(vec[1]),std::stof(vec[2]),std::stoi(vec[3]),false);
-            m_segments.emplace_back(seg);
+            m_segments.push_back(seg);
         }
 
     }
@@ -934,14 +936,61 @@ Traffic::Traffic(const Traffic & traffic) {
 
 Traffic::Traffic() = default;
 
-Traffic::~Traffic() {
-    for(int i = 0; i<m_cars.size(); i++){
-        delete m_cars[i];
+Traffic::Traffic(const Traffic &ref) {
+    // clear values if there are any.
+    for(Car * delete_this : m_cars){
+        delete delete_this;
     }
     m_cars.clear();
+
+    // reserve place for new pointers.
+    m_cars.reserve(ref.m_cars.size());
+
+    // copy values into new pointers
+    for(Car * car : ref.m_cars){
+        auto new_car_pointer = new Car;
+        *new_car_pointer = *car;
+
+    }
+
+    // values we copied are good, except the car pointers inside the car class.
+    std::map<int,Car*> overtake_this_car;
+    std::map<Car*,int> labeling;
+    for(int i = 0; i < m_cars.size(); i++){
+        overtake_this_car[i] = ref.m_cars[i]->overtake_this_car;
+        labeling[ref.m_cars[i]] = i;
+        m_cars[i]->overtake_this_car = nullptr; // clear copied pointers
+        m_cars[i]->want_to_overtake_me.clear(); // clear copied pointers
+    }
+    std::map<int,int> from_to;
+    for(int i = 0; i < m_cars.size(); i++){
+        if(overtake_this_car[i] != nullptr){
+            from_to[i] = labeling[overtake_this_car[i]];
+        }
+    }
+
+    for(auto it : from_to){
+        m_cars[it.first]->overtake_this_car = m_cars[it.second];
+        m_cars[it.second]->want_to_overtake_me.push_back(m_cars[it.first]);
+    }
 }
 
-const unsigned long Traffic::n_of_cars() const{
+Traffic& Traffic::operator=(const Traffic & rhs) {
+    Traffic tmp(rhs);
+
+    std::swap(m_cars,tmp.m_cars);
+
+    return *this;
+}
+
+Traffic::~Traffic() {
+    for(int i = 0; i<m_cars.size(); i++){
+        delete Traffic::m_cars[i];
+    }
+    Traffic::m_cars.clear();
+}
+
+unsigned long Traffic::n_of_cars(){
     return m_cars.size();
 }
 
@@ -967,7 +1016,7 @@ void Traffic::spawn_cars(double & spawn_counter, float elapsed, double & thresho
         float start_lane = lane(my_engine());
         float spawn_pos = spawn(my_engine());
 
-        std::vector<RoadSegment*> segments = m_road.spawn_positions();
+        std::vector<RoadSegment*> segments = Road::shared().spawn_positions();
         RoadSegment * seg;
         Car * new_car;
         if(spawn_pos < 0.95){
@@ -1011,7 +1060,7 @@ void Traffic::spawn_cars(double & spawn_counter, float elapsed, double & thresho
 void Traffic::despawn_cars() {
     int car_amount = static_cast<int>(m_cars.size());
     for(int i = 0; i < car_amount; i++){
-        for(RoadSegment * seg : m_road.despawn_positions()){
+        for(RoadSegment * seg : Road::shared().despawn_positions()){
             if(m_cars[i] != nullptr){
                 if(m_cars[i]->get_segment() == seg){
                     delete m_cars[i];
@@ -1037,11 +1086,11 @@ void Traffic::update(float elapsed_time) {
     }
 }
 
-std::vector<Car*> & Traffic::get_cars() {
+const std::vector<Car *> & Traffic::get_cars() const {
     return m_cars;
 }
 
-const float Traffic::get_avg_flow()const {
+float Traffic::get_avg_flow() {
     float flow = 0;
     float i = 0;
     for(Car * car : m_cars){

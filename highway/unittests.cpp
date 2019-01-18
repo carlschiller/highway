@@ -9,7 +9,7 @@
 
 void Tests::placement_test() {
     std::cout << "Starting placement tests\n";
-    std::vector<RoadSegment*> segments = Traffic::m_road.segments();
+    std::vector<RoadSegment*> segments = Road::shared().segments();
     int i = 0;
     for(RoadSegment * seg : segments){
         usleep(200000);
@@ -24,7 +24,7 @@ void Tests::placement_test() {
             }
         }
         i++;
-        Traffic::force_place_car(new Car(seg,0,1,1,0.01));
+        m_traffic.force_place_car(new Car(seg,0,1,1,0.01));
         std::cout << "placed car\n";
     }
     std::cout << "Placement tests passed\n";
@@ -55,7 +55,7 @@ void Tests::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 
     int i = 0;
     std::cout << "drawing road\n";
-    for(RoadSegment * segment : Traffic::m_road.segments()){
+    for(RoadSegment * segment : Road::shared().segments()){
         for(RoadNode * node : segment->get_nodes()){
             circle.setPosition(sf::Vector2f(node->get_x()*2-4,node->get_y()*2-4));
             line[0].position = sf::Vector2f(node->get_x()*2,node->get_y()*2);
@@ -68,7 +68,7 @@ void Tests::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 
         }
         segment_n.setString(std::to_string(i));
-        segment_n.setPosition(sf::Vector2f(segment.get_x()*2+4,segment.get_y()*2+4));
+        segment_n.setPosition(sf::Vector2f(segment->get_x()*2+4,segment->get_y()*2+4));
         target.draw(segment_n,states);
         i++;
     }
@@ -106,6 +106,7 @@ Tests::Tests() {
     {
         // error...
     }
+    m_traffic = Traffic();
 }
 
 void Tests::get_info(sf::Text & text,sf::Time &elapsed) {

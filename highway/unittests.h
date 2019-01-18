@@ -13,12 +13,12 @@ private:
 public:
     Tests();
 
-    static Traffic m_traffic;
+    Traffic m_traffic;
     sf::Font m_font;
     void get_info(sf::Text & text, sf::Time &elapsed);
 
-    static void placement_test();
-    static void run_all_tests();
+    void placement_test();
+    void run_all_tests();
 };
 
 #endif //HIGHWAY_UNITTESTS_H
