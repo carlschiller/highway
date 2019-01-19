@@ -7,7 +7,7 @@
 #include "window.h"
 #include <cmath>
 
-
+/*
 void Simulation::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     if(m_debug){
         // print debug info about node placements and stuff
@@ -53,7 +53,7 @@ void Simulation::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     rectangle.setFillColor(sf::Color::Green);
     rectangle.setOutlineColor(sf::Color::Black);
     rectangle.setOutlineThickness(2.0f);
-    for(Car * car : m_traffic.get_cars()){
+    for(Car * car : m_traffic.get_car_copies()){
         rectangle.setPosition(car->x_pos()*2,car->y_pos()*2);
         rectangle.setRotation(car->theta()*(float)360.0f/(-2.0f*(float)M_PI));
         sf::Uint8 colorspeed = static_cast<sf::Uint8> ((unsigned int)std::round(255 * car->speed() / car->target_speed()));
@@ -76,25 +76,17 @@ void Simulation::draw(sf::RenderTarget &target, sf::RenderStates states) const {
         }
     }
 }
+*/
 
 Simulation::Simulation() {
     m_debug = false;
     m_sim_speed = 1;
     m_traffic = Traffic();
-    if (!m_font.loadFromFile("/Library/Fonts/Arial.ttf"))
-    {
-        // error...
-    }
 }
 
 Simulation::Simulation(bool debug, int speed) {
     m_debug = debug;
     m_sim_speed = speed;
-
-    if (!m_font.loadFromFile("/Library/Fonts/Andale Mono.ttf"))
-    {
-        // error...
-    }
 }
 
 void Simulation::update(sf::Time elapsed, double & spawn_counter, double & threshold) {
@@ -103,9 +95,9 @@ void Simulation::update(sf::Time elapsed, double & spawn_counter, double & thres
         //std::cout<< "boop1\n";
         m_traffic.update(elapsed_time);
         //std::cout<< "boop2\n";
-        m_traffic.despawn_cars();
-        //std::cout<< "boop3\n";
         m_traffic.spawn_cars(spawn_counter,elapsed_time,threshold);
+        //std::cout<< "boop3\n";
+        m_traffic.despawn_cars();
     }
 }
 
@@ -129,5 +121,5 @@ void Simulation::get_info(sf::Text & text,sf::Time &elapsed) {
     text.setString(speedy);
     text.setPosition(0,0);
     text.setFillColor(sf::Color::Green);
-    text.setFont(m_font);
+    //text.setFont(fonts::get_font());
 }

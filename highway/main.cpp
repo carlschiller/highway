@@ -3,6 +3,8 @@
 #include "window.h"
 #include "unittests.h"
 
+sf::Mutex mutex;
+
 int main() {
     sf::RenderWindow window(sf::VideoMode(550*2, 600*2), "My window");
     window.setFramerateLimit(60);
@@ -30,6 +32,10 @@ int main() {
         double spawn_counter = 0.0;
         double threshold = 0.0;
 
+        sf::Time elapsed = clock.restart();
+
+        //sf::Thread thread(std::bind(&Simulation::update,elapsed,spawn_counter,threshold),&simulation);
+
         sf::Text debug_info;
 
         // run the program as long as the window is open
@@ -45,14 +51,14 @@ int main() {
                 }
             }
 
-            sf::Time elapsed = clock.restart();
+            elapsed = clock.restart();
 
             simulation.update(elapsed,spawn_counter,threshold);
 
             window.clear(sf::Color(255,255,255,255));
 
             window.draw(background);
-            window.draw(simulation);
+            window.draw(simulation.m_traffic);
             if(debug){
                 simulation.get_info(debug_info,elapsed);
                 window.draw(debug_info);
@@ -62,12 +68,12 @@ int main() {
         }
     }
     else{
-        Tests tests = Tests();
+        //Tests tests = Tests();
 
-        sf::Thread thread(&Tests::run_all_tests,&tests);
+        //sf::Thread thread(&Tests::run_all_tests,&tests);
 
-        thread.launch();
-
+        //thread.launch();
+        Traffic traffic = Traffic();
         sf::Text debug_info;
         // run the program as long as the window is open
         while (window.isOpen())
@@ -79,19 +85,19 @@ int main() {
             {
                 // "close requested" event: we close the window
                 if (event.type == sf::Event::Closed){
-                    thread.terminate();
+                    //thread.terminate();
                     window.close();
                 }
             }
-
+            //Traffic copy = tests.m_traffic; // deep copy it
             sf::Time elapsed = clock.restart();
 
             window.clear(sf::Color(255,255,255,255));
-
+            Traffic copy = traffic;
             window.draw(background);
-            window.draw(tests);
+            window.draw(copy);
 
-            tests.get_info(debug_info,elapsed);
+            copy.get_info(debug_info,elapsed);
             window.draw(debug_info);
 
             window.display();

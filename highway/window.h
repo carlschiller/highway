@@ -9,7 +9,7 @@
 #ifndef HIGHWAY_WINDOW_H
 #define HIGHWAY_WINDOW_H
 
-class Simulation : public sf::Drawable, public sf::Transformable{
+class Simulation{
 public:
     Simulation();
     explicit Simulation(bool debug,int sim_speed);
@@ -18,14 +18,13 @@ public:
     float get_flow();
     //void car_debug(sf::Time t0);
     void get_info(sf::Text & text, sf::Time &elapsed);
-private:
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-private:
     Traffic m_traffic;
+private:
+    //virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+private:
     sf::Texture m_texture;
     bool m_debug;
     int m_sim_speed;
-    sf::Font m_font;
 };
 
 

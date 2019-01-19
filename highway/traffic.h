@@ -126,6 +126,7 @@ public:
     Car();
     ~Car();
     Car(RoadSegment * spawn_point, int lane, float vel, float target_speed, float agressivness);
+    Car(RoadSegment * spawn_point, RoadNode * lane, float vel, float target_speed, float agressivness);
 
     // all are raw pointers
     RoadSegment * current_segment;
@@ -167,10 +168,11 @@ public:
     static float distance(float x1, float x2, float y1, float y2);
 };
 
-class Traffic{
+class Traffic : public sf::Drawable, public sf::Transformable{
 private:
     std::vector<Car*> m_cars;
     std::mt19937 & my_engine();
+    sf::Font m_font;
 
     //void update_speed(int i, float & elapsed_time);
     //float get_theta(float xpos, float ypos, float speed, float current_theta, bool & lane_switch);
@@ -183,15 +185,27 @@ public:
     unsigned long n_of_cars();
     void spawn_cars(double & spawn_counter, float elapsed, double & threshold);
     void despawn_cars();
-    void despawn_car(Car* car);
+    void despawn_all_cars();
+    void despawn_car(Car*& car);
     //void remove_car(Car * car);
     void remove_dead_pointers();
-    void force_place_car(Car * car);
+    void force_place_car(RoadSegment * seg, RoadNode * node, float vel, float target, float aggro);
 
 
     void update(float elapsed_time);
-    std::vector<Car *> get_cars() const;
+    const std::vector<Car *> & get_cars() const;
+    std::vector<Car *> get_car_copies() const;
     float get_avg_flow();
+
+private:
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+public:
+    void get_info(sf::Text & text, sf::Time &elapsed);
 };
+
+struct car_deleter{
+    void operator()(Car*& car);
+};
+
 
 #endif //HIGHWAY_TRAFFIC_H

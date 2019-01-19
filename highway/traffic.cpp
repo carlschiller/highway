@@ -40,6 +40,33 @@ Car::Car(RoadSegment *spawn_point, int lane, float vel, float target_speed, floa
     m_breaking = false;
 }
 
+Car::Car(RoadSegment *spawn_point, RoadNode *lane, float vel, float target_speed, float agressivness) :
+m_speed(vel), m_target_speed(target_speed), m_aggressiveness(agressivness)
+{
+    current_segment = spawn_point;
+
+    overtake_this_car = nullptr;
+
+    current_segment->append_car(this);
+    current_node = lane;
+
+    if(!current_node->get_connections().empty() || current_segment->next_segment() != nullptr){
+        heading_to_node = current_node->get_next_node(0);
+
+        m_dist_to_next_node = Util::distance(current_node->get_x(),heading_to_node->get_x(),current_node->get_y(),heading_to_node->get_y());
+
+        m_theta = current_node->get_theta(heading_to_node);
+    }
+    else{
+        std::cout << "aa\n";
+        heading_to_node = nullptr;
+        m_theta = 0;
+        m_dist_to_next_node = 0;
+    }
+
+    m_breaking = false;
+}
+
 Car::~Car(){
     if(this->current_segment != nullptr){
         this->current_segment->remove_car(this); // remove this pointer shit
@@ -308,6 +335,8 @@ float & Car::theta() {
 RoadSegment* Car::get_segment() {
     return current_segment;
 }
+
+
 
 
 RoadNode::RoadNode() = default;
@@ -954,7 +983,11 @@ Traffic::Traffic(const Traffic & traffic) {
 }
 */
 
-Traffic::Traffic() = default;
+Traffic::Traffic() {
+    if(!m_font.loadFromFile("/Library/Fonts/Arial.ttf")){
+        //crash
+    }
+}
 
 Traffic::Traffic(const Traffic &ref) {
     // clear values if there are any.
@@ -970,7 +1003,7 @@ Traffic::Traffic(const Traffic &ref) {
     for(Car * car : ref.m_cars){
         auto new_car_pointer = new Car;
         *new_car_pointer = *car;
-
+        m_cars.push_back(new_car_pointer);
     }
 
     // values we copied are good, except the car pointers inside the car class.
@@ -1077,14 +1110,21 @@ void Traffic::spawn_cars(double & spawn_counter, float elapsed, double & thresho
     }
 }
 
-void Traffic::despawn_car(Car *car) {
-    for(int i = 0; i < m_cars.size(); i++){
+void Traffic::despawn_car(Car *& car) {
+    unsigned long size = m_cars.size();
+    for(int i = 0; i < size; i++){
         if(car == m_cars[i]){
+            std::cout << "found " << car << "," << m_cars[i] << std::endl;
             delete m_cars[i];
             m_cars[i] = nullptr;
+            std::cout << car << std::endl;
+            m_cars.erase(m_cars.begin()+i);
+            car = nullptr;
+            std::cout << "deleted\n";
+            break;
         }
     }
-    remove_dead_pointers();
+    //remove_dead_pointers();
 }
 /*
 void Traffic::remove_car(Car *car) {
@@ -1101,21 +1141,17 @@ void Traffic::remove_dead_pointers() {
 }
 
 void Traffic::despawn_cars() {
-    int car_amount = static_cast<int>(m_cars.size());
-    for(int i = 0; i < car_amount; i++){
-        for(RoadSegment * seg : Road::shared().despawn_positions()){
-            if(m_cars[i] != nullptr){
-                if(m_cars[i]->get_segment() == seg){
-                    delete m_cars[i];
-                    m_cars[i] = nullptr;
-                }
-            }
-        }
-    }
-    remove_dead_pointers();
+    std::for_each(m_cars.begin(),m_cars.end(),car_deleter());
+    std::vector<Car*>::iterator new_end = std::remove(m_cars.begin(),m_cars.end(),static_cast<Car*>(nullptr));
+    m_cars.erase(new_end,m_cars.end());
 }
 
-void Traffic::force_place_car(Car * car) {
+void Traffic::despawn_all_cars() {
+    *this = Traffic();
+}
+
+void Traffic::force_place_car(RoadSegment * seg, RoadNode * node, float vel, float target, float aggro) {
+    Car * car = new Car(seg,node,vel,target,aggro);
     m_cars.push_back(car);
 }
 
@@ -1130,7 +1166,11 @@ void Traffic::update(float elapsed_time) {
     }
 }
 
-std::vector<Car *> Traffic::get_cars() const {
+const std::vector<Car *> & Traffic::get_cars() const {
+    return m_cars;
+}
+
+std::vector<Car *> Traffic::get_car_copies() const {
     return m_cars;
 }
 
@@ -1143,3 +1183,100 @@ float Traffic::get_avg_flow() {
     }
     return flow/i;
 }
+
+void Traffic::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    // print debug info about node placements and stuff
+    sf::CircleShape circle;
+    circle.setRadius(4.0f);
+    circle.setOutlineColor(sf::Color::Cyan);
+    circle.setOutlineThickness(1.0f);
+    circle.setFillColor(sf::Color::Transparent);
+
+    sf::Text segment_n;
+    segment_n.setFont(m_font);
+    segment_n.setFillColor(sf::Color::Black);
+    segment_n.setCharacterSize(14);
+
+    sf::VertexArray line(sf::Lines,2);
+    line[0].color = sf::Color::Blue;
+    line[1].color = sf::Color::Blue;
+
+    int i = 0;
+
+    for(RoadSegment * segment : Road::shared().segments()){
+        for(RoadNode * node : segment->get_nodes()){
+            circle.setPosition(sf::Vector2f(node->get_x()*2-4,node->get_y()*2-4));
+            line[0].position = sf::Vector2f(node->get_x()*2,node->get_y()*2);
+            for(RoadNode * connected_node : node->get_connections()){
+                line[1].position = sf::Vector2f(connected_node->get_x()*2,connected_node->get_y()*2);
+                target.draw(line,states);
+            }
+            target.draw(circle,states);
+
+
+        }
+        segment_n.setString(std::to_string(i));
+        segment_n.setPosition(sf::Vector2f(segment->get_x()*2+4,segment->get_y()*2+4));
+        target.draw(segment_n,states);
+        i++;
+    }
+
+    // one rectangle is all we need :)
+    sf::RectangleShape rectangle;
+    rectangle.setSize(sf::Vector2f(9.4,3.4));
+    rectangle.setFillColor(sf::Color::Green);
+    rectangle.setOutlineColor(sf::Color::Black);
+    rectangle.setOutlineThickness(2.0f);
+
+    //std::cout << "start drawing\n";
+    for(Car * car : m_cars){
+        //std::cout << "drawing" << car << std::endl;
+        if(car != nullptr){
+            rectangle.setPosition(car->x_pos()*2,car->y_pos()*2);
+            rectangle.setRotation(car->theta()*(float)360.0f/(-2.0f*(float)M_PI));
+            sf::Uint8 colorspeed = static_cast<sf::Uint8> ((unsigned int)std::round(255 * car->speed() / car->target_speed()));
+            rectangle.setFillColor(sf::Color(255-colorspeed,colorspeed,0,255));
+            target.draw(rectangle,states);
+
+            // this caused crash earlier
+            if(car->heading_to_node!=nullptr){
+                // print debug info about node placements and stuff
+                sf::CircleShape circle;
+
+                circle.setRadius(4.0f);
+                circle.setOutlineColor(sf::Color::Red);
+                circle.setOutlineThickness(2.0f);
+                circle.setFillColor(sf::Color::Transparent);
+                circle.setPosition(sf::Vector2f(car->current_node->get_x()*2-4,car->current_node->get_y()*2-4));
+                target.draw(circle,states);
+                circle.setOutlineColor(sf::Color::Green);
+                circle.setPosition(sf::Vector2f(car->heading_to_node->get_x()*2-4,car->heading_to_node->get_y()*2-4));
+                target.draw(circle,states);
+            }
+        }
+    }
+}
+
+void Traffic::get_info(sf::Text & text,sf::Time &elapsed) {
+    //TODO: SOME BUG HERE.
+
+    float fps = 1.0f/elapsed.asSeconds();
+    unsigned long amount_of_cars = n_of_cars();
+    std::string speedy = std::to_string(fps).substr(0,2) +
+                         " fps, ncars: " + std::to_string(amount_of_cars) + "\n";
+    text.setString(speedy);
+    text.setPosition(0,0);
+    text.setFillColor(sf::Color::Black);
+    text.setFont(m_font);
+}
+
+void car_deleter::operator()(Car *&car) {
+    for(RoadSegment * seg : Road::shared().despawn_positions()){
+        if(car->get_segment() == seg){
+            delete car;
+            car = nullptr;
+            break;
+        }
+    }
+}
+

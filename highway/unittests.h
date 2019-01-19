@@ -7,19 +7,18 @@
 #ifndef HIGHWAY_UNITTESTS_H
 #define HIGHWAY_UNITTESTS_H
 
-class Tests: public sf::Drawable, public sf::Transformable{
-private:
-    virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const;
+class Tests{
 public:
     Tests();
 
     Traffic m_traffic;
-    sf::Font m_font;
     void get_info(sf::Text & text, sf::Time &elapsed);
 
     void placement_test();
     void delete_cars_test();
     void run_one_car();
+    void placement_test_2();
+    void placement_test_3();
     void run_all_tests();
 };
 
