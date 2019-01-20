@@ -43,7 +43,6 @@ private:
     constexpr static float M_LANE_WIDTH = 4.0f;
 
     std::vector<RoadNode*> m_nodes; // OWNERSHIP
-    std::vector<Car*> m_cars; // raw pointer, no ownership
     RoadSegment * m_next_segment; // raw pointer, no ownership
 public:
     RoadSegment() = delete;
@@ -55,12 +54,12 @@ public:
     RoadSegment& operator=(const RoadSegment& rhs) = delete; // rule of three
 
     bool merge;
+    std::vector<Car*> m_cars; // raw pointer, no ownership
 
     RoadNode * get_node_pointer(int n);
     std::vector<RoadNode *> get_nodes();
     void append_car(Car*);
     void remove_car(Car*);
-    std::vector<Car*> & get_car_vector();
     RoadSegment * next_segment();
     float get_theta();
     const float get_x() const;
@@ -133,9 +132,8 @@ public:
     RoadNode * current_node;
     RoadNode * heading_to_node;
     Car * overtake_this_car;
-    std::vector<Car*> want_to_overtake_me;
-
-    std::vector<Car*> & get_overtakers();
+    bool is_getting_overtaken;
+    //void remove_pointer(Car * car);
 
     void update_pos(float delta_t);
     void accelerate(float delta_t);
@@ -187,13 +185,10 @@ public:
     void despawn_cars();
     void despawn_all_cars();
     void despawn_car(Car*& car);
-    //void remove_car(Car * car);
-    void remove_dead_pointers();
     void force_place_car(RoadSegment * seg, RoadNode * node, float vel, float target, float aggro);
 
 
     void update(float elapsed_time);
-    const std::vector<Car *> & get_cars() const;
     std::vector<Car *> get_car_copies() const;
     float get_avg_flow();
 
@@ -201,11 +196,11 @@ private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 public:
     void get_info(sf::Text & text, sf::Time &elapsed);
+    double m_multiplier;
 };
 
 struct car_deleter{
     void operator()(Car*& car);
 };
-
 
 #endif //HIGHWAY_TRAFFIC_H

@@ -9,9 +9,9 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(550*2, 600*2), "My window");
     window.setFramerateLimit(60);
 
-    int sim_speed = 10;
+    int sim_speed = 1;
     bool debug = true;
-    bool super_debug = false;
+    bool super_debug = true;
 
     sf::Texture texture;
     if(!texture.loadFromFile("../mall2.png"))
@@ -40,9 +40,10 @@ int main() {
 
         sf::Thread thread(&Simulation::update,&sim);
         thread.launch();
-        /*
+
         // run the program as long as the window is open
         while (window.isOpen())
+        //while(false)
         {
             // check all the window's events that were triggered since the last iteration of the loop
             sf::Event event;
@@ -58,23 +59,24 @@ int main() {
             sf::Time elapsed = clock.restart();
 
             mutex.lock();
-            std::cout << "copying\n";
+            //std::cout << "copying\n";
             copy = *traffic;
-            std::cout << "copied\n";
+            //std::cout << "copied\n";
             mutex.unlock();
 
             window.clear(sf::Color(255,255,255,255));
 
             window.draw(background);
+            //mutex.lock();
             window.draw(copy);
 
             copy.get_info(debug_info,elapsed);
+            //mutex.unlock();
             window.draw(debug_info);
-
 
             window.display();
         }
-        */
+
     }
     else{
 
