@@ -218,12 +218,11 @@ void Car::avoid_collision(float delta_t) {
     float min_distance = 8.0f; // for car distance.
     float ideal = min_distance+min_distance*(m_speed/20.f);
     float detection_distance = m_speed*4.0f;
-    //std::cout << "boop1\n";
+    std::cout << "boop1\n";
     Car * closest_car = find_closest_car();
-    //std::cout << "boop2\n";
+    std::cout << "boop2\n";
     float radius_to_car = 1000;
     float delta_speed = 0;
-
 
     if(closest_car != nullptr) {
         radius_to_car = Util::distance_to_car(this, closest_car);
@@ -267,30 +266,33 @@ Car* Car::find_closest_car() {
 
     while(!queue.empty()){
         RoadNode * next_node = queue.back(); // get last element
-        queue.pop_back();
+        queue.pop_back(); // remove element
         RoadSegment * next_segment = next_node->get_parent_segment();
-        //std::cout<< "hej\n";
-        if(!visited[next_segment] && Util::distance(origin->get_x(),next_segment->get_x(),origin->get_y(),next_segment->get_y()) < search_radius){
-            visited[next_segment] = true;
+        std::cout << "hej1\n";
+        if(next_segment != nullptr){
+            if(!visited[next_segment] && Util::distance(origin->get_x(),next_segment->get_x(),origin->get_y(),next_segment->get_y()) < search_radius){
+                visited[next_segment] = true;
 
-            for(Car * car : next_segment->get_car_vector()){
-                if(this != car){
-                    float radius = Util::distance_to_car(this,car);
-                    if(Util::is_car_behind(this,car) && radius < best_radius){
-                        if(Util::will_car_paths_cross(this,car)){
-                            best_radius = radius;
-                            answer = car;
+                for(Car * car : next_segment->get_car_vector()){
+                    if(this != car){
+                        float radius = Util::distance_to_car(this,car);
+                        if(Util::is_car_behind(this,car) && radius < best_radius){
+                            if(Util::will_car_paths_cross(this,car)){
+                                best_radius = radius;
+                                answer = car;
+                            }
                         }
                     }
                 }
-            }
 
-            // push in new nodes in front of list.
-            for(RoadNode * node : next_node->get_connections()){
-                queue.push_front(node);
+                // push in new nodes in front of list.
+                for(RoadNode * node : next_node->get_connections()){
+                    //std::cout << node << "\n";
+                    queue.push_front(node);
+                }
             }
         }
-        //std::cout<< "hej2\n";
+        std::cout<< "hej2\n";
     }
 
     return answer;
@@ -1099,7 +1101,7 @@ void Traffic::spawn_cars(double & spawn_counter, float elapsed, double & thresho
             if(dist < 10){
                 delete new_car;
             }
-            else if (dist < 40){
+            else if (dist < 100){
                 new_car->speed() = closest_car_ahead->speed();
                 m_cars.push_back(new_car);
             }
@@ -1156,14 +1158,15 @@ void Traffic::force_place_car(RoadSegment * seg, RoadNode * node, float vel, flo
 }
 
 void Traffic::update(float elapsed_time) {
-    //std::cout<< "boop1\n";
+    std::cout<< "updatin1\n";
     for(Car * car : m_cars){
         car->avoid_collision(elapsed_time);
     }
-    //std::cout<< "boop2\n";
+    std::cout<< "updatin2\n";
     for(Car * car : m_cars){
         car->update_pos(elapsed_time);
     }
+    std::cout<< "updatin3\n";
 }
 
 const std::vector<Car *> & Traffic::get_cars() const {
@@ -1181,7 +1184,12 @@ float Traffic::get_avg_flow() {
         i++;
         flow += car->speed()/car->target_speed();
     }
-    return flow/i;
+    if(m_cars.size() == 0){
+        return 0;
+    }
+    else{
+        return flow/i;
+    }
 }
 
 void Traffic::draw(sf::RenderTarget &target, sf::RenderStates states) const {
@@ -1262,8 +1270,10 @@ void Traffic::get_info(sf::Text & text,sf::Time &elapsed) {
 
     float fps = 1.0f/elapsed.asSeconds();
     unsigned long amount_of_cars = n_of_cars();
+    float flow = get_avg_flow();
     std::string speedy = std::to_string(fps).substr(0,2) +
-                         " fps, ncars: " + std::to_string(amount_of_cars) + "\n";
+                         " fps, ncars: " + std::to_string(amount_of_cars) + "\n"
+                         + "avg_flow: " + std::to_string(flow).substr(0,4);
     text.setString(speedy);
     text.setPosition(0,0);
     text.setFillColor(sf::Color::Black);

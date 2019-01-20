@@ -10,21 +10,17 @@
 #define HIGHWAY_WINDOW_H
 
 class Simulation{
+private:
+    sf::Mutex * m_mutex;
+    Traffic * m_traffic;
+    bool * m_exit_bool;
+    const int M_SIM_SPEED;
+    const int M_FRAMERATE;
 public:
-    Simulation();
-    explicit Simulation(bool debug,int sim_speed);
+    Simulation() = delete;
+    Simulation(Traffic *& traffic,sf::Mutex *& mutex, int sim_speed, int m_framerate, bool *& exitbool);
 
-    void update(sf::Time elapsed, double & spawn_counter, double & threshold);
-    float get_flow();
-    //void car_debug(sf::Time t0);
-    void get_info(sf::Text & text, sf::Time &elapsed);
-    Traffic m_traffic;
-private:
-    //virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-private:
-    sf::Texture m_texture;
-    bool m_debug;
-    int m_sim_speed;
+    void update();
 };
 
 

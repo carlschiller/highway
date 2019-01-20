@@ -8,17 +8,18 @@
 #define HIGHWAY_UNITTESTS_H
 
 class Tests{
-public:
-    Tests();
-
-    Traffic m_traffic;
-    void get_info(sf::Text & text, sf::Time &elapsed);
-
+private:
+    Traffic * m_traffic;
+    sf::Mutex * m_mutex;
     void placement_test();
     void delete_cars_test();
     void run_one_car();
     void placement_test_2();
     void placement_test_3();
+public:
+    Tests() = delete;
+    Tests(Traffic *& traffic, sf::Mutex *& mutex);
+
     void run_all_tests();
 };
 

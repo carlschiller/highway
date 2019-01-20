@@ -9,9 +9,9 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(550*2, 600*2), "My window");
     window.setFramerateLimit(60);
 
-    int sim_speed = 4;
+    int sim_speed = 10;
     bool debug = true;
-    bool super_debug = true;
+    bool super_debug = false;
 
     sf::Texture texture;
     if(!texture.loadFromFile("../mall2.png"))
@@ -27,17 +27,20 @@ int main() {
     sf::Clock clock;
     sf::Clock t0;
 
+    bool exit_bool = false;
+
     if(!super_debug){
-        Simulation simulation = Simulation(debug,sim_speed);
-        double spawn_counter = 0.0;
-        double threshold = 0.0;
-
-        sf::Time elapsed = clock.restart();
-
-        //sf::Thread thread(std::bind(&Simulation::update,elapsed,spawn_counter,threshold),&simulation);
-
+        sf::Mutex * mutex1 = &mutex;
+        bool * exit = &exit_bool;
+        //thread.launch();
+        auto * traffic = new Traffic();
+        Simulation sim = Simulation(traffic, mutex1,sim_speed,60,exit);
         sf::Text debug_info;
+        Traffic copy;
 
+        sf::Thread thread(&Simulation::update,&sim);
+        thread.launch();
+        /*
         // run the program as long as the window is open
         while (window.isOpen())
         {
@@ -47,34 +50,46 @@ int main() {
             {
                 // "close requested" event: we close the window
                 if (event.type == sf::Event::Closed){
+                    exit_bool = true;
+                    thread.wait();
                     window.close();
                 }
             }
+            sf::Time elapsed = clock.restart();
 
-            elapsed = clock.restart();
-
-            simulation.update(elapsed,spawn_counter,threshold);
+            mutex.lock();
+            std::cout << "copying\n";
+            copy = *traffic;
+            std::cout << "copied\n";
+            mutex.unlock();
 
             window.clear(sf::Color(255,255,255,255));
 
             window.draw(background);
-            window.draw(simulation.m_traffic);
-            if(debug){
-                simulation.get_info(debug_info,elapsed);
-                window.draw(debug_info);
-            }
+            window.draw(copy);
+
+            copy.get_info(debug_info,elapsed);
+            window.draw(debug_info);
+
 
             window.display();
         }
+        */
     }
     else{
-        //Tests tests = Tests();
+
 
         //sf::Thread thread(&Tests::run_all_tests,&tests);
-
+        sf::Mutex * mutex1 = &mutex;
         //thread.launch();
-        Traffic traffic = Traffic();
+        auto * traffic = new Traffic();
+        Tests tests = Tests(traffic, mutex1);
+        Traffic copy;
         sf::Text debug_info;
+
+        sf::Thread thread(&Tests::run_all_tests,&tests);
+        thread.launch();
+
         // run the program as long as the window is open
         while (window.isOpen())
         {
@@ -87,13 +102,19 @@ int main() {
                 if (event.type == sf::Event::Closed){
                     //thread.terminate();
                     window.close();
+                    thread.terminate();
+                    delete traffic;
                 }
             }
             //Traffic copy = tests.m_traffic; // deep copy it
             sf::Time elapsed = clock.restart();
 
             window.clear(sf::Color(255,255,255,255));
-            Traffic copy = traffic;
+
+            mutex.lock();
+            copy = *traffic;
+            mutex.unlock();
+
             window.draw(background);
             window.draw(copy);
 

@@ -16,26 +16,16 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/CXX.includecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/main.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/traffic.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/unittests.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/traffic.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/traffic.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/unittests.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/unittests.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/window.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/window.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/highway" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/highway" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/highway" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/traffic.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/traffic.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/traffic.h" beforeDir="false" afterPath="$PROJECT_DIR$/traffic.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/unittests.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/unittests.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/unittests.h" beforeDir="false" afterPath="$PROJECT_DIR$/unittests.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/window.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/window.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/window.h" beforeDir="false" afterPath="$PROJECT_DIR$/window.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../latex/report.aux" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.aux" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../latex/report.fdb_latexmk" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.fdb_latexmk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../latex/report.fls" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.fls" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../latex/report.log" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../latex/report.out" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../latex/report.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../latex/report.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.synctex.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../latex/report.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../latex/report.toc" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.toc" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/cmake-build-release/" />
@@ -65,8 +55,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="93" selection-start-line="93" selection-end-line="93" />
+            <state relative-caret-position="575">
+              <caret line="76" column="8" selection-start-line="76" selection-start-column="8" selection-end-line="76" selection-end-column="8" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -74,11 +64,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/window.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="123" column="6" selection-start-line="123" selection-start-column="6" selection-end-line="123" selection-end-column="6" />
+            <state relative-caret-position="339">
+              <caret line="116" column="8" selection-start-line="116" selection-start-column="8" selection-end-line="116" selection-end-column="8" />
               <folding>
                 <element signature="e#50#69#0" expanded="true" />
               </folding>
@@ -89,8 +79,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/window.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="353">
-              <caret line="26" column="20" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="20" />
+            <state relative-caret-position="193">
+              <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
               <folding>
                 <element signature="e#50#67#0" expanded="true" />
               </folding>
@@ -98,11 +88,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/traffic.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="986" column="56" selection-start-line="986" selection-start-column="56" selection-end-line="986" selection-end-column="56" />
+            <state relative-caret-position="71">
+              <caret line="1167" column="5" lean-forward="true" selection-start-line="1167" selection-start-column="5" selection-end-line="1167" selection-end-column="5" />
               <folding>
                 <element signature="e#50#70#0" expanded="true" />
               </folding>
@@ -113,7 +103,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/traffic.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="35">
+            <state relative-caret-position="58">
               <caret line="174" column="4" selection-start-line="174" selection-start-column="4" selection-end-line="174" selection-end-column="4" />
               <folding>
                 <element signature="e#49#66#0" expanded="true" />
@@ -125,8 +115,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/unittests.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="191" selection-start-line="191" selection-end-line="191" />
+            <state relative-caret-position="119">
+              <caret line="112" column="23" selection-start-line="112" selection-start-column="23" selection-end-line="112" selection-end-column="23" />
               <folding>
                 <element signature="e#50#72#0" expanded="true" />
               </folding>
@@ -137,8 +127,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/unittests.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="54" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="54" />
+            <state relative-caret-position="255">
+              <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
               <folding>
                 <element signature="e#50#70#0" expanded="true" />
               </folding>
@@ -175,9 +165,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>find_clos</find>
-      <find>get_lane_number</find>
-      <find>std::cout</find>
       <find>get_theta(</find>
       <find>merge_helper</find>
       <find>find_closest_car</find>
@@ -205,6 +192,9 @@
       <find>0x7ff9a577f6e0</find>
       <find>deleted car</find>
       <find>get_theta</find>
+      <find>avoid_collision</find>
+      <find>find_closest</find>
+      <find>update</find>
     </findStrings>
     <replaceStrings>
       <replace>m_theta</replace>
@@ -221,13 +211,13 @@
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/kontur.txt" />
         <option value="$PROJECT_DIR$/road.txt" />
-        <option value="$PROJECT_DIR$/unittests.h" />
-        <option value="$PROJECT_DIR$/window.h" />
-        <option value="$PROJECT_DIR$/unittests.cpp" />
-        <option value="$PROJECT_DIR$/window.cpp" />
-        <option value="$PROJECT_DIR$/main.cpp" />
         <option value="$PROJECT_DIR$/traffic.h" />
+        <option value="$PROJECT_DIR$/window.h" />
+        <option value="$PROJECT_DIR$/unittests.h" />
+        <option value="$PROJECT_DIR$/unittests.cpp" />
+        <option value="$PROJECT_DIR$/main.cpp" />
         <option value="$PROJECT_DIR$/traffic.cpp" />
+        <option value="$PROJECT_DIR$/window.cpp" />
       </list>
     </option>
   </component>
@@ -327,32 +317,34 @@
       <workItem from="1547218076954" duration="504000" />
       <workItem from="1547454072507" duration="1732000" />
       <workItem from="1547559218350" duration="33477000" />
-      <workItem from="1547895698164" duration="11849000" />
+      <workItem from="1547895698164" duration="12113000" />
+      <workItem from="1547979610180" duration="536000" />
+      <workItem from="1547993684239" duration="6030000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="224869000" />
+    <option name="totallyTimeSpent" value="231699000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28640777" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2961165" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.328877" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.47977346" weight="0.26923078" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.43042073" visible="true" weight="0.34203297" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="CMake" order="7" weight="0.328877" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.54530746" side_tool="true" visible="true" weight="0.43956044" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5695793" side_tool="true" visible="true" weight="0.34203297" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.45342466" />
-      <window_info active="true" anchor="bottom" id="Messages" order="11" sideWeight="0.45469254" visible="true" weight="0.43956044" />
+      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.40614888" weight="0.38186812" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -402,10 +394,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/traffic.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="58">
+          <caret line="174" column="4" selection-start-line="174" selection-start-column="4" selection-end-line="174" selection-end-column="4" />
+          <folding>
+            <element signature="e#49#66#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/unittests.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="54" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="54" />
+        <state relative-caret-position="255">
+          <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
           <folding>
             <element signature="e#50#70#0" expanded="true" />
           </folding>
@@ -414,60 +416,50 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/unittests.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="191" selection-start-line="191" selection-end-line="191" />
+        <state relative-caret-position="119">
+          <caret line="112" column="23" selection-start-line="112" selection-start-column="23" selection-end-line="112" selection-end-column="23" />
           <folding>
             <element signature="e#50#72#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/window.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="26" column="20" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="20" />
-          <folding>
-            <element signature="e#50#67#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/window.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="123" column="6" selection-start-line="123" selection-start-column="6" selection-end-line="123" selection-end-column="6" />
-          <folding>
-            <element signature="e#50#69#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="93" selection-start-line="93" selection-end-line="93" />
+        <state relative-caret-position="575">
+          <caret line="76" column="8" selection-start-line="76" selection-start-column="8" selection-end-line="76" selection-end-column="8" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/traffic.h">
+    <entry file="file://$PROJECT_DIR$/window.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="35">
-          <caret line="174" column="4" selection-start-line="174" selection-start-column="4" selection-end-line="174" selection-end-column="4" />
+        <state relative-caret-position="193">
+          <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
           <folding>
-            <element signature="e#49#66#0" expanded="true" />
+            <element signature="e#50#67#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/traffic.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="986" column="56" selection-start-line="986" selection-start-column="56" selection-end-line="986" selection-end-column="56" />
+        <state relative-caret-position="71">
+          <caret line="1167" column="5" lean-forward="true" selection-start-line="1167" selection-start-column="5" selection-end-line="1167" selection-end-column="5" />
           <folding>
             <element signature="e#50#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/window.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="116" column="8" selection-start-line="116" selection-start-column="8" selection-end-line="116" selection-end-column="8" />
+          <folding>
+            <element signature="e#50#69#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -6,6 +6,7 @@
 #include "traffic.h"
 #include "window.h"
 #include <cmath>
+#include <unistd.h>
 
 /*
 void Simulation::draw(sf::RenderTarget &target, sf::RenderStates states) const {
@@ -78,26 +79,46 @@ void Simulation::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 }
 */
 
-Simulation::Simulation() {
-    m_debug = false;
-    m_sim_speed = 1;
-    m_traffic = Traffic();
+
+Simulation::Simulation(Traffic *&traffic, sf::Mutex *&mutex, int sim_speed, int framerate, bool *& exit_bool):
+    M_FRAMERATE(framerate),
+    M_SIM_SPEED(sim_speed),
+    m_traffic(traffic),
+    m_mutex(mutex),
+    m_exit_bool(exit_bool)
+{
+
 }
 
-Simulation::Simulation(bool debug, int speed) {
-    m_debug = debug;
-    m_sim_speed = speed;
-}
+void Simulation::update() {
+    sf::Clock clock;
+    sf::Time time;
+    double spawn_counter = 0.0;
+    double threshold = 0.0;
 
-void Simulation::update(sf::Time elapsed, double & spawn_counter, double & threshold) {
-    float elapsed_time = elapsed.asSeconds();
-    for(int i = 0; i < m_sim_speed; i++){
-        //std::cout<< "boop1\n";
-        m_traffic.update(elapsed_time);
-        //std::cout<< "boop2\n";
-        m_traffic.spawn_cars(spawn_counter,elapsed_time,threshold);
-        //std::cout<< "boop3\n";
-        m_traffic.despawn_cars();
+    while(!*m_exit_bool){
+        m_mutex->lock();
+        std::cout << "calculating\n";
+        for(int i = 0; i < M_SIM_SPEED; i++){
+            std::cout<< "a\n";
+            m_traffic->update(1.0f/(float)M_FRAMERATE);
+            std::cout<< "b\n";
+            m_traffic->spawn_cars(spawn_counter,1.0f/(float)M_FRAMERATE,threshold);
+            std::cout<< "c\n";
+            m_traffic->despawn_cars();
+            std::cout<< "d\n";
+        }
+        std::cout << "calculated\n";
+        m_mutex->unlock();
+
+        time = clock.restart();
+        sf::Int64 acutal_elapsed = time.asMicroseconds();
+        double sim_elapsed = 1.0f/(float)M_FRAMERATE*1000000;
+        /*
+        if(acutal_elapsed < sim_elapsed){
+            usleep((useconds_t)(sim_elapsed-acutal_elapsed));
+        }
+        */
     }
 }
 
@@ -106,20 +127,3 @@ void Simulation::car_debug(sf::Time t0){
     m_traffic.debug(t0);
 }
 */
-
-float Simulation::get_flow() {
-    return m_traffic.get_avg_flow();
-}
-
-void Simulation::get_info(sf::Text & text,sf::Time &elapsed) {
-    //TODO: SOME BUG HERE.
-    float fps = 1.0f/elapsed.asSeconds();
-    float flow = get_flow();
-    std::string speedy = std::to_string(fps).substr(0,2) +
-            " fps, speed: " + std::to_string(m_sim_speed).substr(0,1) + " x\nFlow " +
-            std::to_string(flow).substr(0,4);
-    text.setString(speedy);
-    text.setPosition(0,0);
-    text.setFillColor(sf::Color::Green);
-    //text.setFont(fonts::get_font());
-}
