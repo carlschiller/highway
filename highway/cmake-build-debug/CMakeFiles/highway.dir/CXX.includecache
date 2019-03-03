@@ -6,25 +6,15 @@
 
 #IncludeRegexTransform: 
 
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/traffic.cpp
-traffic.h
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/traffic.h
-cmath
--
-fstream
--
-sstream
--
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/main.cpp
 iostream
 -
-map
--
-random
--
-vector
--
-list
--
+SFML/Graphics.hpp
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/SFML/Graphics.hpp
+window.h
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/window.h
+unittests.h
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/unittests.h
 
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/traffic.h
 random
@@ -33,6 +23,20 @@ vector
 -
 SFML/Graphics.hpp
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/SFML/Graphics.hpp
+
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/unittests.h
+traffic.h
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/traffic.h
+SFML/Graphics.hpp
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/SFML/Graphics.hpp
+
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/window.h
+vector
+-
+SFML/Graphics.hpp
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/SFML/Graphics.hpp
+traffic.h
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/traffic.h
 
 /usr/local/include/SFML/Config.hpp
 TargetConditionals.h
