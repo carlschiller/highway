@@ -120,11 +120,11 @@ void Car::merge(std::vector<RoadNode*> & connections) {
 
         if(current_lane == 0 && it.first->heading_to_node->get_parent_segment()->get_lane_number(it.first->heading_to_node) == 1 ){
             can_merge =
-                    delta_dist > std::max(delta_speed*8.0f/m_aggressiveness,15.0f);
+                    delta_dist > std::max(delta_speed*4.0f/m_aggressiveness,15.0f);
         }
         else if(current_lane == 1 && it.first->heading_to_node->get_parent_segment()->get_lane_number(it.first->heading_to_node) == 0){
             can_merge =
-                     delta_dist > std::max(delta_speed*8.0f/m_aggressiveness,15.0f);
+                     delta_dist > std::max(delta_speed*4.0f/m_aggressiveness,15.0f);
         }
 
         if(!can_merge){
@@ -208,7 +208,7 @@ void Car::do_we_want_to_overtake(Car * & closest_car, int & current_lane) {
         float delta_distance = Util::distance_to_car(this,closest_car);
 
         if(overtake_this_car == nullptr){
-            if(delta_distance > 10 && delta_distance < 40 && target_speed()/closest_car->target_speed() > m_aggressiveness*1.5f && current_lane == 0 && closest_car->current_node->get_parent_segment()->get_lane_number(closest_car->current_node) == 0){
+            if(delta_distance > 10 && delta_distance < 40 && (target_speed()/closest_car->target_speed() > m_aggressiveness*1.0f ) && current_lane == 0 && closest_car->current_node->get_parent_segment()->get_lane_number(closest_car->current_node) == 0){
                 overtake_this_car = closest_car;
             }
         }
@@ -252,7 +252,7 @@ void Car::avoid_collision(float delta_t) {
             m_speed -= std::max(std::max((radius_to_car-min_distance)*0.5f,0.0f),10.0f*delta_t);
         }
         else if(radius_to_car < min_distance){
-            m_speed -= std::max(std::max((min_distance-radius_to_car)*0.5f,0.0f),10.0f*delta_t);
+            m_speed -= std::max(std::max((min_distance-radius_to_car)*0.5f,0.0f),2.0f*delta_t);
         }
         else if(delta_speed < 0 && radius_to_car < detection_distance){
             m_speed -= std::min(
@@ -345,7 +345,7 @@ Car* Car::find_closest_car_ahead() {
 }
 
 std::map<Car *,bool> Car::find_cars_around_car() {
-    const float search_radius = 20;
+    const float search_radius = 40;
     std::map<RoadNode*,bool> visited;
     std::list<RoadNode*> queue;
 
@@ -984,9 +984,9 @@ std::mt19937& Traffic::my_engine() {
 void Traffic::spawn_cars(double & spawn_counter, float elapsed, double & threshold) {
     spawn_counter += elapsed;
     if(spawn_counter > threshold){
-        std::exponential_distribution<double> dis(2);
+        std::exponential_distribution<double> dis(5);
         std::normal_distribution<float> aggro(1.0f,0.2f);
-        float sp = 20.0f;
+        float sp = 30.0f;
         std::uniform_real_distribution<float> lane(0.0f,1.0f);
         std::uniform_real_distribution<float> spawn(0.0f,1.0f);
 
@@ -1130,6 +1130,45 @@ float Traffic::get_avg_flow() {
     }
 }
 
+std::vector<float> Traffic::get_avg_speeds() {
+    std::vector<float> speedy;
+    speedy.reserve(3);
+
+    float flow = 0;
+    float flow_left = 0;
+    float flow_right = 0;
+    float i = 0;
+    float j = 0;
+    float k = 0;
+    for(Car * car : m_cars){
+        i++;
+        flow += car->speed()*3.6f;
+
+        if(car->current_segment->get_total_amount_of_lanes() == 2){
+            if(car->current_segment->get_lane_number(car->current_node) == 1){
+                flow_left += car->speed()*3.6f;
+                j++;
+            }
+            else{
+                flow_right += car->speed()*3.6f;
+                k++;
+            }
+        }
+    }
+    if(m_cars.empty()){
+        return speedy;
+    }
+    else{
+        flow =  flow/i;
+        flow_left = flow_left/j;
+        flow_right = flow_right/k;
+        speedy.push_back(flow);
+        speedy.push_back(flow_left);
+        speedy.push_back(flow_right);
+        return speedy;
+    }
+}
+
 void Traffic::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     // print debug info about node placements and stuff
 
@@ -1217,9 +1256,13 @@ void Traffic::get_info(sf::Text & text,sf::Time &elapsed) {
     float fps = 1.0f/elapsed.asSeconds();
     unsigned long amount_of_cars = n_of_cars();
     float flow = get_avg_flow();
+    std::vector<float> spe = get_avg_speeds();
     std::string speedy = std::to_string(fps).substr(0,2) +
                          " fps, ncars: " + std::to_string(amount_of_cars) + "\n"
                          + "avg_flow: " + std::to_string(flow).substr(0,4) +"\n"
+                         + "avg_speed: " + std::to_string(spe[0]).substr(0,5) +"km/h\n"
+                         + "left_speed: " + std::to_string(spe[1]).substr(0,5) +"km/h\n"
+                         + "right_speed: " + std::to_string(spe[2]).substr(0,5) +"km/h\n"
                          + "sim_multiplier: " + std::to_string(m_multiplier).substr(0,3) + "x";
     text.setString(speedy);
     text.setPosition(0,0);

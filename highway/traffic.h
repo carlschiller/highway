@@ -199,7 +199,7 @@ public:
     void update(float elapsed_time);
     std::vector<Car *> get_car_copies() const;
     float get_avg_flow();
-
+    std::vector<float> get_avg_speeds();
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 public:
