@@ -9,9 +9,9 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(550*2, 600*2), "My window");
     window.setFramerateLimit(60);
 
-    int sim_speed = 1;
+    int sim_speed = 10;
     bool debug = true;
-    bool super_debug = true;
+    bool super_debug = false;
 
     sf::Texture texture;
     if(!texture.loadFromFile("../mall2.png"))

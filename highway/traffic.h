@@ -17,17 +17,20 @@ class Car;
 class RoadNode{
 private:
     float m_x, m_y;
-    std::vector<RoadNode*> m_connecting_nodes; // raw pointers, no ownership
+    std::vector<RoadNode*> m_nodes_from_me; // raw pointers, no ownership
+    std::vector<RoadNode*> m_nodes_to_me;
     RoadSegment* m_is_child_of; // raw pointer, no ownership
 public:
     RoadNode();
     ~RoadNode();
     RoadNode(float x, float y, RoadSegment * segment);
 
-    void set_pointer(RoadNode*);
+    void set_next_node(RoadNode *);
+    void set_previous_node(RoadNode *);
     RoadSegment* get_parent_segment();
     RoadNode * get_next_node(int lane);
-    std::vector<RoadNode*> & get_connections();
+    std::vector<RoadNode*> & get_nodes_from_me();
+    std::vector<RoadNode*> & get_nodes_to_me();
     float get_x();
     float get_y();
     float get_theta(RoadNode*);
@@ -48,7 +51,7 @@ public:
     RoadSegment() = delete;
     RoadSegment(float x, float y, RoadSegment * next_segment, int lanes);
     RoadSegment(float x, float y, float theta, int lanes);
-    RoadSegment(float x, float y, int lanes,bool merge);
+    RoadSegment(float x, float y, int lanes, bool merge);
     ~RoadSegment(); // rule of three
     RoadSegment(const RoadSegment&) = delete; // rule of three
     RoadSegment& operator=(const RoadSegment& rhs) = delete; // rule of three
@@ -136,9 +139,11 @@ public:
     //void remove_pointer(Car * car);
 
     void update_pos(float delta_t);
+    void merge(std::vector<RoadNode*> & connections);
     void accelerate(float delta_t);
     void avoid_collision(float delta_t);
-    Car * find_closest_car();
+    Car * find_closest_car_ahead();
+    std::vector<Car *> find_cars_around_car();
 
     float x_pos();
     float y_pos();

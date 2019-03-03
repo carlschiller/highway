@@ -17,7 +17,7 @@ void Tests::placement_test() {
         std::cout << "next segment" << seg->next_segment() << std::endl;
         std::vector<RoadNode*> nodes =  seg->get_nodes();
         for(RoadNode * node : nodes){
-            std::vector<RoadNode*> connections = node->get_connections();
+            std::vector<RoadNode*> connections = node->get_nodes_from_me();
             std::cout << "node" << node <<" has connections:" <<  std::endl;
             for(RoadNode * pointy : connections){
                 std::cout << pointy << std::endl;
@@ -73,7 +73,7 @@ void Tests::placement_test_2() {
         std::cout << "next segment" << seg->next_segment() << std::endl;
         std::vector<RoadNode*> nodes =  seg->get_nodes();
         for(RoadNode * node : nodes){
-            std::vector<RoadNode*> connections = node->get_connections();
+            std::vector<RoadNode*> connections = node->get_nodes_from_me();
             std::cout << "node" << node <<" has connections:" <<  std::endl;
             for(RoadNode * pointy : connections){
                 std::cout << pointy << std::endl;
