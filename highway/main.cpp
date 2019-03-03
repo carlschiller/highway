@@ -33,7 +33,7 @@ int main() {
         sf::Mutex * mutex1 = &mutex;
         bool * exit = &exit_bool;
         //thread.launch();
-        auto * traffic = new Traffic();
+        auto * traffic = new Traffic(debug);
         Simulation sim = Simulation(traffic, mutex1,sim_speed,60,exit);
         sf::Text debug_info;
         Traffic copy;
@@ -71,6 +71,7 @@ int main() {
             window.draw(copy);
 
             copy.get_info(debug_info,elapsed);
+
             //mutex.unlock();
             window.draw(debug_info);
 

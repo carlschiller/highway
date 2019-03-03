@@ -116,14 +116,15 @@ void Car::merge(std::vector<RoadNode*> & connections) {
 
     for(auto it : cars_around_car){
         float delta_dist = Util::distance_to_car(it.first,this);
-        if(Util::is_car_behind(this,it.first) && it.first != closest_car){
-            can_merge = Util::will_car_paths_cross(this,it.first);
+        float delta_speed = abs(speed()-it.first->speed());
+
+        if(current_lane == 0 && it.first->heading_to_node->get_parent_segment()->get_lane_number(it.first->heading_to_node) == 1 ){
+            can_merge =
+                    delta_dist > std::max(delta_speed*8.0f/m_aggressiveness,15.0f);
         }
-        else if(!Util::is_car_behind(this,it.first) && delta_dist < 20 && current_lane == 1 && it.first->heading_to_node->get_parent_segment()->get_lane_number(it.first->heading_to_node) == 0){
-            can_merge = false;
-        }
-        else if(!Util::is_car_behind(this,it.first) && current_lane == 1 && it.first->heading_to_node->get_parent_segment()->get_lane_number(it.first->heading_to_node) == 1){
-            can_merge = true;
+        else if(current_lane == 1 && it.first->heading_to_node->get_parent_segment()->get_lane_number(it.first->heading_to_node) == 0){
+            can_merge =
+                     delta_dist > std::max(delta_speed*8.0f/m_aggressiveness,15.0f);
         }
 
         if(!can_merge){
@@ -177,23 +178,6 @@ void Car::merge(std::vector<RoadNode*> & connections) {
                 else{
                     heading_to_node = connections[current_lane];
                 }
-                /*
-                else{
-                    if((!Util::is_car_behind(this,this->overtake_this_car) && Util::distance_to_car(this,this->overtake_this_car) > 10) || Util::distance_to_car(this,this->overtake_this_car) > 40){
-                        for(int i = 0; i< overtake_this_car->want_to_overtake_me.size(); i++){
-                            if(this == overtake_this_car->want_to_overtake_me[i]){
-                                overtake_this_car->want_to_overtake_me[i] = nullptr;
-                            }
-                        }
-                        std::vector<Car*>::iterator new_end = std::remove(overtake_this_car->want_to_overtake_me.begin(),overtake_this_car->want_to_overtake_me.end(),static_cast<Car*>(nullptr));
-                        overtake_this_car->want_to_overtake_me.erase(new_end,overtake_this_car->want_to_overtake_me.end());
-
-                        this->overtake_this_car = nullptr;
-                    }
-
-                    heading_to_node = connections[current_lane];
-                }
-                 */
 
             }
             // merge back if overtake this car is nullptr.
@@ -224,7 +208,7 @@ void Car::do_we_want_to_overtake(Car * & closest_car, int & current_lane) {
         float delta_distance = Util::distance_to_car(this,closest_car);
 
         if(overtake_this_car == nullptr){
-            if(delta_distance > 20 && delta_distance < 40 && (target_speed()/closest_car->target_speed() > 1.2 || delta_speed < -2) && current_lane != 1 && closest_car->heading_to_node->get_parent_segment()->get_lane_number(closest_car->heading_to_node) == 0){
+            if(delta_distance > 10 && delta_distance < 40 && target_speed()/closest_car->target_speed() > m_aggressiveness*1.5f && current_lane == 0 && closest_car->current_node->get_parent_segment()->get_lane_number(closest_car->current_node) == 0){
                 overtake_this_car = closest_car;
             }
         }
@@ -243,10 +227,10 @@ void Car::accelerate(float elapsed){
     float d_vel; // proportional control.
 
     if(m_speed < target*0.75){
-        d_vel = m_aggressiveness*elapsed;
+        d_vel = m_aggressiveness*elapsed*2.0f;
     }
     else{
-        d_vel = m_aggressiveness*(target-m_speed)*4*elapsed;
+        d_vel = m_aggressiveness*(target-m_speed)*4*elapsed*2.0f;
     }
 
     m_speed += d_vel;
@@ -264,17 +248,47 @@ void Car::avoid_collision(float delta_t) {
         float radius_to_car = Util::distance_to_car(this, closest_car);
         float delta_speed = closest_car->speed() - this->speed();
 
-        if (radius_to_car < ideal) {
-            m_speed -= std::max((radius_to_car-min_distance)*0.5f,0.0f);
-            m_speed -= std::max((min_distance-radius_to_car)*0.5f,0.0f);
+        if (radius_to_car < ideal && delta_speed < 0 && radius_to_car > min_distance) {
+            m_speed -= std::max(std::max((radius_to_car-min_distance)*0.5f,0.0f),10.0f*delta_t);
+        }
+        else if(radius_to_car < min_distance){
+            m_speed -= std::max(std::max((min_distance-radius_to_car)*0.5f,0.0f),10.0f*delta_t);
         }
         else if(delta_speed < 0 && radius_to_car < detection_distance){
             m_speed -= std::min(
-                    abs(pow(delta_speed, 2.0f)) * pow(ideal * 0.25f / radius_to_car, 2.0f) * m_aggressiveness * 0.05f,
+                    abs(pow(delta_speed, 2.0f)) * pow(ideal * 0.25f / radius_to_car, 2.0f) * m_aggressiveness * 0.15f,
                     10.0f * delta_t);
         }
         else {
             accelerate(delta_t);
+        }
+
+        if(current_segment->merge){
+            std::map<Car*,bool> around = find_cars_around_car();
+            for(auto it : around){
+                float delta_dist = Util::distance_to_car(it.first,this);
+                delta_speed = abs(speed()-it.first->speed());
+
+                if(it.first->current_node->get_parent_segment()->get_lane_number(it.first->current_node) == 0 && delta_dist < ideal && this->current_segment->get_lane_number(current_node) == 1 && speed()/target_speed() > 0.5){
+                    if(Util::is_car_behind(it.first,this)){
+                        accelerate(delta_t);
+                    }
+                    else{
+                        m_speed -= std::max(std::max((ideal-delta_dist)*0.5f,0.0f),10.0f*delta_t);
+                    }
+                }
+                else if(it.first->current_node->get_parent_segment()->get_lane_number(it.first->current_node) == 1 && this->current_segment->get_lane_number(current_node) == 0 && speed()/target_speed() > 0.5 && delta_dist < ideal){
+                    if(Util::is_car_behind(this,it.first)){
+                        m_speed -= std::max(std::max((ideal-delta_dist)*0.5f,0.0f),10.0f*delta_t);
+                    }
+                    else{
+                        accelerate(delta_t);
+                    }
+                }
+            }
+        }
+        else{
+
         }
     }
     else{
@@ -771,78 +785,44 @@ bool Util::is_car_behind(Car * a, Car * b){
 
 //TODO: Bug here
 // true if car paths cross
+// car a has to be after car b
 bool Util::will_car_paths_cross(Car *a, Car *b) {
-    //begin with drawing a straight line
-    std::list<RoadSegment*> segments;
-    std::list<RoadNode*> nodes;
+    //simulate car a driving straight ahead.
+    RoadSegment * inspecting_segment = a->get_segment();
+    //RoadNode * node_0 = a->current_node;
+    RoadNode * node_1 = a->heading_to_node;
 
-    segments.push_back(a->get_segment());
-    nodes.push_back(a->current_node);
-    // make sure this is not true
-    if(a->heading_to_node == nullptr){
-        return false;
-    }
-    nodes.push_back(a->heading_to_node);
+    //int node_0_int = inspecting_segment->get_lane_number(node_0);
+    int node_1_int = node_1->get_parent_segment()->get_lane_number(node_1);
 
-    float dist_between_segments = Util::distance(a->current_segment->get_x(),b->current_segment->get_x(),
-                                                 a->current_segment->get_y(),b->current_segment->get_y());
-    bool found_b = false;
-
-    while(!found_b){
-        //std::cout << "a1\n";
-        for(Car * car : segments.back()->m_cars){
+    while(!node_1->get_nodes_from_me().empty()){
+        for(Car * car : inspecting_segment->m_cars){
             if(car == b){
-                found_b = true;
+                // place logic for evaluating if we cross cars here.
+                // heading to same node, else return false
+                return node_1 == b->heading_to_node;
             }
         }
 
-        if(!found_b){
-            if(nodes.back() == nullptr){
-                return false;
-            }
-            //std::cout << nodes.back() << std::endl;
-            segments.push_back(nodes.back()->get_parent_segment());
-            int seg0_lane_n = segments.back()->get_total_amount_of_lanes();
-            int lane = segments.back()->get_lane_number(nodes.back());
-            std::vector<RoadNode*> node_choices = nodes.back()->get_nodes_from_me();
+        inspecting_segment = node_1->get_parent_segment();
+        //node_0_int = node_1_int;
+        //node_0 = node_1;
 
-            // if seg0==seg1 we keep lane numbering.
-            if(node_choices.size() == seg0_lane_n){
-                nodes.push_back(node_choices[lane]);
-            }
-                // if we only have one choice, stick to it
-            else if(node_choices.size() == 1){
-                lane = 0;
-                nodes.push_back(node_choices[lane]);
-            }
-                // last merge
-            else if(node_choices.size() == 2){
-                lane = std::min(std::max(lane-1,0),0);
-                nodes.push_back(node_choices[lane]);
-            }
-            else if(node_choices.empty()){
-                return false;
-            }
+        // if we are at say, 2 lanes and heading to 2 lanes, keep previous lane numbering.
+        if(inspecting_segment->get_total_amount_of_lanes() == node_1->get_nodes_from_me().size()){
+            node_1 = node_1->get_nodes_from_me()[node_1_int];
+        }
+        // if we get one option, stick to it.
+        else if(node_1->get_nodes_from_me().size() == 1){
+            node_1 = node_1->get_nodes_from_me()[0];
 
         }
-        //std::cout << "hej3\n";
-        float delta_dist = dist_between_segments - distance(b->current_segment->get_x(),segments.back()->get_x(),
-                                                            b->current_segment->get_y(),segments.back()->get_y());
-        if(delta_dist <0){
-            return false;
+        // we merge from 3 to 2.
+        else if(inspecting_segment->get_total_amount_of_lanes() == 3 && inspecting_segment->merge){
+            node_1 = node_1->get_nodes_from_me()[std::max(node_1_int-1,0)];
         }
-    }
 
-    //std::cout << "hej4\n";
-
-    if(nodes.back() == b->heading_to_node){
-        return true;
-    }
-
-    nodes.pop_back();
-    // redo it.
-    if(nodes.back() == b->current_node){
-        return true;
+        node_1_int = node_1->get_parent_segment()->get_lane_number(node_1);
     }
 
     return false;
@@ -922,13 +902,20 @@ float Util::distance(float x1, float x2, float y1, float y2) {
 }
 
 Traffic::Traffic() {
+    debug = false;
+    if(!m_font.loadFromFile("/Library/Fonts/Arial.ttf")){
+        //crash
+    }
+}
+
+Traffic::Traffic(bool debug) : debug(debug){
     if(!m_font.loadFromFile("/Library/Fonts/Arial.ttf")){
         //crash
     }
 }
 
 Traffic::Traffic(const Traffic &ref) :
-    m_multiplier(ref.m_multiplier)
+    m_multiplier(ref.m_multiplier), debug(ref.debug)
 {
     // clear values if there are any.
     for(Car * delete_this : m_cars){
@@ -973,6 +960,7 @@ Traffic& Traffic::operator=(const Traffic & rhs) {
 
     std::swap(m_cars,tmp.m_cars);
     std::swap(m_multiplier,tmp.m_multiplier);
+    std::swap(debug,tmp.debug);
 
     return *this;
 }
@@ -997,15 +985,16 @@ void Traffic::spawn_cars(double & spawn_counter, float elapsed, double & thresho
     spawn_counter += elapsed;
     if(spawn_counter > threshold){
         std::exponential_distribution<double> dis(2);
-        std::normal_distribution<float> aggro(3.0f,0.5f);
-        std::normal_distribution<float> sp(20.0,3.0);
+        std::normal_distribution<float> aggro(1.0f,0.2f);
+        float sp = 20.0f;
         std::uniform_real_distribution<float> lane(0.0f,1.0f);
         std::uniform_real_distribution<float> spawn(0.0f,1.0f);
 
-        float speed = sp(my_engine());
-        float target = speed;
         threshold = dis(my_engine());
         float aggressiveness = aggro(my_engine());
+        float speed = sp*aggressiveness;
+        float target = speed;
+
         spawn_counter = 0;
         float start_lane = lane(my_engine());
         float spawn_pos = spawn(my_engine());
@@ -1143,6 +1132,7 @@ float Traffic::get_avg_flow() {
 
 void Traffic::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     // print debug info about node placements and stuff
+
     sf::CircleShape circle;
     circle.setRadius(4.0f);
     circle.setOutlineColor(sf::Color::Cyan);
@@ -1158,30 +1148,32 @@ void Traffic::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     line[0].color = sf::Color::Blue;
     line[1].color = sf::Color::Blue;
 
-    int i = 0;
+    if(debug){
+        int i = 0;
 
-    for(RoadSegment * segment : Road::shared().segments()){
-        for(RoadNode * node : segment->get_nodes()){
-            circle.setPosition(sf::Vector2f(node->get_x()*2-4,node->get_y()*2-4));
-            line[0].position = sf::Vector2f(node->get_x()*2,node->get_y()*2);
-            for(RoadNode * connected_node : node->get_nodes_from_me()){
-                line[1].position = sf::Vector2f(connected_node->get_x()*2,connected_node->get_y()*2);
-                target.draw(line,states);
+        for(RoadSegment * segment : Road::shared().segments()){
+            for(RoadNode * node : segment->get_nodes()){
+                circle.setPosition(sf::Vector2f(node->get_x()*2-4,node->get_y()*2-4));
+                line[0].position = sf::Vector2f(node->get_x()*2,node->get_y()*2);
+                for(RoadNode * connected_node : node->get_nodes_from_me()){
+                    line[1].position = sf::Vector2f(connected_node->get_x()*2,connected_node->get_y()*2);
+                    target.draw(line,states);
+                }
+                target.draw(circle,states);
+
+
             }
-            target.draw(circle,states);
-
-
+            segment_n.setString(std::to_string(i));
+            segment_n.setPosition(sf::Vector2f(segment->get_x()*2+4,segment->get_y()*2+4));
+            target.draw(segment_n,states);
+            i++;
         }
-        segment_n.setString(std::to_string(i));
-        segment_n.setPosition(sf::Vector2f(segment->get_x()*2+4,segment->get_y()*2+4));
-        target.draw(segment_n,states);
-        i++;
     }
 
     // one rectangle is all we need :)
     sf::RectangleShape rectangle;
     rectangle.setSize(sf::Vector2f(9.4,3.4));
-    rectangle.setFillColor(sf::Color::Green);
+    //rectangle.setFillColor(sf::Color::Green);
     rectangle.setOutlineColor(sf::Color::Black);
     rectangle.setOutlineThickness(2.0f);
 
@@ -1193,15 +1185,19 @@ void Traffic::draw(sf::RenderTarget &target, sf::RenderStates states) const {
             rectangle.setRotation(car->theta()*(float)360.0f/(-2.0f*(float)M_PI));
             unsigned int colval = (unsigned int)std::min(255.0f*(car->speed()/car->target_speed()),255.0f);
             sf::Uint8 colorspeed = static_cast<sf::Uint8> (colval);
-            rectangle.setFillColor(sf::Color(255-colorspeed,colorspeed,0,255));
+
+            if(car->overtake_this_car != nullptr){
+                rectangle.setFillColor(sf::Color(255-colorspeed,0,colorspeed,255));
+            }
+            else{
+                rectangle.setFillColor(sf::Color(255-colorspeed,colorspeed,0,255));
+            }
+
             target.draw(rectangle,states);
 
             // this caused crash earlier
-            if(car->heading_to_node!=nullptr){
+            if(car->heading_to_node!=nullptr && debug){
                 // print debug info about node placements and stuff
-                sf::CircleShape circle;
-
-                circle.setRadius(4.0f);
                 circle.setOutlineColor(sf::Color::Red);
                 circle.setOutlineThickness(2.0f);
                 circle.setFillColor(sf::Color::Transparent);

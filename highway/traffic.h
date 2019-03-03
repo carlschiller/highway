@@ -175,6 +175,7 @@ public:
 class Traffic : public sf::Drawable, public sf::Transformable{
 private:
     std::vector<Car*> m_cars;
+    bool debug;
     std::mt19937 & my_engine();
     sf::Font m_font;
 
@@ -182,6 +183,7 @@ private:
     //float get_theta(float xpos, float ypos, float speed, float current_theta, bool & lane_switch);
 public:
     Traffic();
+    explicit Traffic(bool debug);
     ~Traffic();
     Traffic(const Traffic&); // rule of three
     Traffic& operator=(const Traffic&); // rule of three
