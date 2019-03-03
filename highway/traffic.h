@@ -140,10 +140,11 @@ public:
 
     void update_pos(float delta_t);
     void merge(std::vector<RoadNode*> & connections);
+    void do_we_want_to_overtake(Car * & closest_car, int & current_lane);
     void accelerate(float delta_t);
     void avoid_collision(float delta_t);
     Car * find_closest_car_ahead();
-    std::vector<Car *> find_cars_around_car();
+    std::map<Car *,bool> find_cars_around_car();
 
     float x_pos();
     float y_pos();

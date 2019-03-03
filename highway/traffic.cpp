@@ -111,15 +111,19 @@ void Car::merge(std::vector<RoadNode*> & connections) {
     // check if we merge
     int current_lane = current_segment->get_lane_number(current_node);
     bool can_merge = true;
-    std::vector<Car*> cars_around_car = find_cars_around_car();
+    std::map<Car*,bool> cars_around_car = find_cars_around_car();
+    Car * closest_car = find_closest_car_ahead();
 
-
-    for(Car * car : cars_around_car){
-        if(Util::is_car_behind(this,car)){
-            can_merge = Util::will_car_paths_cross(this,car);
+    for(auto it : cars_around_car){
+        float delta_dist = Util::distance_to_car(it.first,this);
+        if(Util::is_car_behind(this,it.first) && it.first != closest_car){
+            can_merge = Util::will_car_paths_cross(this,it.first);
         }
-        else{
-            can_merge = Util::will_car_paths_cross(car,this);
+        else if(!Util::is_car_behind(this,it.first) && delta_dist < 20 && current_lane == 1 && it.first->heading_to_node->get_parent_segment()->get_lane_number(it.first->heading_to_node) == 0){
+            can_merge = false;
+        }
+        else if(!Util::is_car_behind(this,it.first) && current_lane == 1 && it.first->heading_to_node->get_parent_segment()->get_lane_number(it.first->heading_to_node) == 1){
+            can_merge = true;
         }
 
         if(!can_merge){
@@ -157,17 +161,9 @@ void Car::merge(std::vector<RoadNode*> & connections) {
     else if(current_segment->get_total_amount_of_lanes() == 2){
         // normal way
         if(connections[0]->get_parent_segment()->get_total_amount_of_lanes() == 2){
-            //see if we want to overtake car.
-            Car * closest_car = find_closest_car_ahead();
+            // check if we want to overtake car in front
+            do_we_want_to_overtake(closest_car,current_lane);
 
-            if(closest_car != nullptr && overtake_this_car == nullptr){
-                float delta_speed = closest_car->speed()-speed();
-                float delta_distance = Util::distance_to_car(this,closest_car);
-
-                if(delta_distance/delta_speed > -5 && delta_speed < 4 && current_lane != 1){
-                    overtake_this_car = closest_car;
-                }
-            }
             // commited to overtaking
             if(overtake_this_car != nullptr){
                 if(current_lane != 1){
@@ -199,12 +195,6 @@ void Car::merge(std::vector<RoadNode*> & connections) {
                 }
                  */
 
-                float delta_distance = Util::distance_to_car(this,overtake_this_car);
-
-                if(delta_distance > 30 && Util::is_car_behind(overtake_this_car,this)){
-                    overtake_this_car = nullptr;
-                }
-
             }
             // merge back if overtake this car is nullptr.
             else{
@@ -226,6 +216,28 @@ void Car::merge(std::vector<RoadNode*> & connections) {
     }
 }
 
+void Car::do_we_want_to_overtake(Car * & closest_car, int & current_lane) {
+    //see if we want to overtake car.
+
+    if(closest_car != nullptr){
+        float delta_speed = closest_car->speed()-speed();
+        float delta_distance = Util::distance_to_car(this,closest_car);
+
+        if(overtake_this_car == nullptr){
+            if(delta_distance > 20 && delta_distance < 40 && (target_speed()/closest_car->target_speed() > 1.2 || delta_speed < -2) && current_lane != 1 && closest_car->heading_to_node->get_parent_segment()->get_lane_number(closest_car->heading_to_node) == 0){
+                overtake_this_car = closest_car;
+            }
+        }
+
+    }
+
+    if(overtake_this_car !=nullptr){
+        if(Util::is_car_behind(overtake_this_car,this) && (Util::distance_to_car(this,overtake_this_car) > 30)){
+            overtake_this_car = nullptr;
+        }
+    }
+}
+
 void Car::accelerate(float elapsed){
     float target = m_target_speed;
     float d_vel; // proportional control.
@@ -243,9 +255,9 @@ void Car::accelerate(float elapsed){
 void Car::avoid_collision(float delta_t) {
     float min_distance = 8.0f; // for car distance.
     float ideal = min_distance+min_distance*(m_speed/20.f);
-    float detection_distance = m_speed*4.0f;
     //std::cout << "boop1\n";
     Car * closest_car = find_closest_car_ahead();
+    float detection_distance = m_speed*5.0f;
     //std::cout << "boop2\n";
 
     if(closest_car != nullptr) {
@@ -253,9 +265,10 @@ void Car::avoid_collision(float delta_t) {
         float delta_speed = closest_car->speed() - this->speed();
 
         if (radius_to_car < ideal) {
-            m_speed -= radius_to_car*0.5f;
+            m_speed -= std::max((radius_to_car-min_distance)*0.5f,0.0f);
+            m_speed -= std::max((min_distance-radius_to_car)*0.5f,0.0f);
         }
-        else if(radius_to_car < detection_distance && delta_speed < 0){
+        else if(delta_speed < 0 && radius_to_car < detection_distance){
             m_speed -= std::min(
                     abs(pow(delta_speed, 2.0f)) * pow(ideal * 0.25f / radius_to_car, 2.0f) * m_aggressiveness * 0.05f,
                     10.0f * delta_t);
@@ -276,9 +289,8 @@ void Car::avoid_collision(float delta_t) {
 }
 
 Car* Car::find_closest_car_ahead() {
-    const float search_radius = 100;
-    RoadSegment* origin = this->current_segment;
-    std::map<RoadSegment*,bool> visited;
+    float search_radius = 50;
+    std::map<RoadNode*,bool> visited;
     std::list<RoadNode*> queue;
 
     for(RoadNode * node : (this->current_segment->get_nodes())){
@@ -286,32 +298,28 @@ Car* Car::find_closest_car_ahead() {
     }
 
     Car* answer = nullptr;
-    float best_radius = 1000000;
+
+    float shortest_distance = 10000000;
+
     while(!queue.empty()){
         RoadNode * next_node = queue.back(); // get last element
         queue.pop_back(); // remove element
-        RoadSegment * next_segment = nullptr;
-        if(next_node != nullptr) {
-            next_segment = next_node->get_parent_segment();
-        }
 
-        if(next_segment != nullptr){
-            if(!visited[next_segment] && Util::distance(origin->get_x(),next_segment->get_x(),origin->get_y(),next_segment->get_y()) < search_radius){
-                visited[next_segment] = true;
-                for(Car * car : next_segment->m_cars){
+        if(next_node != nullptr){
+            if(!visited[next_node] && Util::distance(x_pos(),next_node->get_x(),y_pos(),next_node->get_y()) < search_radius){
+                visited[next_node] = true;
+
+                for(Car * car : next_node->get_parent_segment()->m_cars){
                     if(this != car){
                         float radius = Util::distance_to_car(this,car);
-                        if(Util::is_car_behind(this,car) && radius < best_radius){
-                            //std::cout << "a\n";
-                            if(Util::will_car_paths_cross(this,car)){
-                                best_radius = radius;
-                                answer = car;
-                            }
-                            //std::cout << "b\n";
+                        if(Util::is_car_behind(this,car) && Util::will_car_paths_cross(this,car) && radius < shortest_distance){
+                            shortest_distance = radius;
+                            answer = car;
                         }
 
                     }
                 }
+
                 // push in new nodes in front of list.
                 for(RoadNode * node : next_node->get_nodes_from_me()){
                     queue.push_front(node);
@@ -322,31 +330,26 @@ Car* Car::find_closest_car_ahead() {
     return answer;
 }
 
-std::vector<Car *> Car::find_cars_around_car() {
-    const float search_radius = 30;
-    RoadSegment* origin = this->current_segment;
-    std::map<RoadSegment*,bool> visited;
+std::map<Car *,bool> Car::find_cars_around_car() {
+    const float search_radius = 20;
+    std::map<RoadNode*,bool> visited;
     std::list<RoadNode*> queue;
 
     for(RoadNode * node : (this->current_segment->get_nodes())){
         queue.push_front(node);
     }
 
-    std::vector<Car *> answer;
+    std::map<Car *,bool> answer;
     while(!queue.empty()){
         RoadNode * next_node = queue.back(); // get last element
         queue.pop_back(); // remove element
-        RoadSegment * next_segment = nullptr;
-        if(next_node != nullptr) {
-            next_segment = next_node->get_parent_segment();
-        }
 
-        if(next_segment != nullptr){
-            if(!visited[next_segment] && Util::distance(origin->get_x(),next_segment->get_x(),origin->get_y(),next_segment->get_y()) < search_radius){
-                visited[next_segment] = true;
-                for(Car * car : next_segment->m_cars){
+        if(next_node != nullptr){
+            if(!visited[next_node] && Util::distance(x_pos(),next_node->get_x(),y_pos(),next_node->get_y()) < search_radius){
+                visited[next_node] = true;
+                for(Car * car : next_node->get_parent_segment()->m_cars){
                     if(this != car){
-                        answer.push_back(car);
+                        answer[car] = true;
                     }
                 }
                 // push in new nodes in front of list.
@@ -993,9 +996,9 @@ std::mt19937& Traffic::my_engine() {
 void Traffic::spawn_cars(double & spawn_counter, float elapsed, double & threshold) {
     spawn_counter += elapsed;
     if(spawn_counter > threshold){
-        std::exponential_distribution<double> dis(5);
+        std::exponential_distribution<double> dis(2);
         std::normal_distribution<float> aggro(3.0f,0.5f);
-        std::normal_distribution<float> sp(20.0,2.0);
+        std::normal_distribution<float> sp(20.0,3.0);
         std::uniform_real_distribution<float> lane(0.0f,1.0f);
         std::uniform_real_distribution<float> spawn(0.0f,1.0f);
 
@@ -1012,14 +1015,14 @@ void Traffic::spawn_cars(double & spawn_counter, float elapsed, double & thresho
         Car * new_car;
         if(spawn_pos < 0.95){
             seg = segments[0];
-            if(start_lane < 0.33){
-                new_car = new Car(seg,0,speed,target,aggressiveness);
+            if(start_lane < 0.457){
+                new_car = new Car(seg,2,speed,target,aggressiveness);
             }
-            else if(start_lane < 0.67){
+            else if(start_lane < 0.95){
                 new_car = new Car(seg,1,speed,target,aggressiveness);
             }
             else{
-                new_car = new Car(seg,2,speed,target,aggressiveness);
+                new_car = new Car(seg,0,speed,target,aggressiveness);
             }
         }
         else{
@@ -1188,7 +1191,8 @@ void Traffic::draw(sf::RenderTarget &target, sf::RenderStates states) const {
         if(car != nullptr){
             rectangle.setPosition(car->x_pos()*2,car->y_pos()*2);
             rectangle.setRotation(car->theta()*(float)360.0f/(-2.0f*(float)M_PI));
-            sf::Uint8 colorspeed = static_cast<sf::Uint8> ((unsigned int)std::round(255 * car->speed() / car->target_speed()));
+            unsigned int colval = (unsigned int)std::min(255.0f*(car->speed()/car->target_speed()),255.0f);
+            sf::Uint8 colorspeed = static_cast<sf::Uint8> (colval);
             rectangle.setFillColor(sf::Color(255-colorspeed,colorspeed,0,255));
             target.draw(rectangle,states);
 
