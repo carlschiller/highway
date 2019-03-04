@@ -1,9 +1,10 @@
 \documentclass{article}
 
-\usepackage[margin=0.5in]{geometry}
+\usepackage[margin=1in]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{biblatex}
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
@@ -11,6 +12,7 @@
 \usepackage{listings}
 \usepackage{color}
 %\usepackage{biblatex}
+
 
 \author{Carl Schiller, 9705266436}
 \title{Final Project, SI1336}
@@ -47,7 +49,7 @@
   title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
 }
 
-%\bibliography{report2.bib}
+\bibliography{report.bib}
 
 \begin{document}
 \maketitle
@@ -56,15 +58,22 @@
 
 \tableofcontents
 
-\section{Introduction}
+\newpage
 
+\section{Introduction}
+\subsection{Problem formulation}
+This project is intended to simulate the effect of a \textit{ramp meter} on a freeway
+on-ramp in Roslags Näsby trafikplats, Sweden. A \textit{ramp meter} is a device, usually a
+normal stop light, that
+manages the flow of traffic onto the freeway by only allowing one car per green period.
+Ramp metering systems have successfuly been proved to decrease congestion on freeways. ~\cite{noauthor_ramp_2018}
 \section{Method}
 
 \section{Result}
 
 \section{Discussion}
 
-%\printbibliography
+\printbibliography
 \pagebreak
 \appendix
 

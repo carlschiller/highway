@@ -1,0 +1,48 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.7 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist[entry]{nty/global/}
+    \entry{noauthor_ramp_2018}{misc}{}
+      \list{language}{1}{%
+        {en}%
+      }
+      \field{sortinit}{R}
+      \field{sortinithash}{c7387613477035a752d935acfc3e3ea2}
+      \field{labeltitlesource}{title}
+      \field{abstract}{A ramp meter, ramp signal, or metering light is a device, usually a basic traffic light or a two-section signal light (red and green only, no yellow) together with a signal controller, that regulates the flow of traffic entering freeways according to current traffic conditions. Ramp meters are used at freeway on-ramps to manage the rate of automobiles entering the freeway. Ramp metering systems have proved to be successful in decreasing traffic congestion and improving driver safety. Ramp meters are claimed to reduce congestion (increase speed and volume) on freeways by reducing demand and by breaking up platoons of cars. Two variations of demand reduction are commonly cited; one being access rate, the other diversion. Some ramp meters are designed and programmed to operate only at times of peak travel demand; such meters are turned off during off-peak times allowing traffic to merge onto the freeway without stopping. Other ramp meters are designed to operate continuously, only being turned off for maintenance or repairs.}
+      \field{journaltitle}{Wikipedia}
+      \field{month}{12}
+      \field{note}{Page Version ID: 872330664}
+      \field{title}{Ramp meter}
+      \field{urlday}{04}
+      \field{urlmonth}{03}
+      \field{urlyear}{2019}
+      \field{year}{2018}
+      \verb{file}
+      \verb Snapshot:/Users/carlschiller/Zotero/storage/CWWC2Z89/index.html:text/html
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/w/index.php?title=Ramp_meter&oldid=872330664
+      \endverb
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+
