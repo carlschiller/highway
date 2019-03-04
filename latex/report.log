@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.29)  3 MAR 2019 17:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.29)  4 MAR 2019 14:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -699,44 +699,44 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
  [1
 
-{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (../highway/traffic.h
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 4.
+{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (../highway/headers/car.h
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 16.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <8> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 4.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 17.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 16.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 20.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 17.
- [2] [3]) (../highway/window.h [4]) (../highway/unittests.h) (../highway/traffic.cpp [5] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19] [20] [21] [22]) (../highway/window.cpp [23]) (../highway/unittests.cpp [24])
-(../highway/main.cpp [25] [26])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 89.
- [27]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 89.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 20.
+) (../highway/headers/road.h [2]) (../highway/headers/roadnode.h [3]) (../highway/headers/roadsegment.h [4]) (../highway/headers/simulation.h) (../highway/headers/traffic.h [5]) (../highway/headers/unittests.h [6])
+(../highway/headers/util.h) (../highway/cppfiles/car.cpp [7] [8] [9] [10] [11] [12]) [13] (../highway/cppfiles/main.cpp [14]) (../highway/cppfiles/road.cpp [15] [16] [17]) (../highway/cppfiles/roadnode.cpp [18]) [19] (../highway/cppfiles/roadsegment.cpp [20] [21]) [22] (../highway/cppfiles/simulation.cpp [23]) (../highway/cppfiles/traffic.cpp [24] [25] [26] [27] [28] [29]) (../highway/cppfiles/unittests.cpp [30]) (../highway/cppfiles/util.cpp [31] [32] [33])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 108.
+ [34]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 108.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 89.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 89.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 108.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 108.
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 39A9A72076291DEE3FB8A7DFED04B01F;829.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 89.
+(rerunfilecheck)             Checksum: 6E6A3F675DBA8CEEAE5482EA8B59DBB8;1304.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 108.
  ) 
 Here is how much of TeX's memory you used:
- 11379 strings out of 493014
- 162288 string characters out of 6133351
- 741183 words of memory out of 5000000
- 12870 multiletter control sequences out of 15000+600000
+ 11864 strings out of 493014
+ 170622 string characters out of 6133351
+ 728183 words of memory out of 5000000
+ 12860 multiletter control sequences out of 15000+600000
  11503 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 33i,6n,58p,352b,1966s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 33i,6n,58p,355b,1918s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on report.pdf (27 pages, 349837 bytes).
+Output written on report.pdf (34 pages, 410491 bytes).
 PDF statistics:
- 2509 PDF objects out of 2984 (max. 8388607)
- 2446 compressed objects within 25 object streams
- 1914 named destinations out of 2073 (max. 500000)
- 113 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 3137 PDF objects out of 3580 (max. 8388607)
+ 3061 compressed objects within 31 object streams
+ 2383 named destinations out of 2487 (max. 500000)
+ 185 words of extra memory for PDF output out of 10000 (max. 10000000)
 
