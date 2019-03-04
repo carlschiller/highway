@@ -3,17 +3,17 @@
 //
 
 #include <iostream>
-#include "traffic.h"
-#include "window.h"
+#include "../headers/traffic.h"
+#include "../headers/simulation.h"
 #include <cmath>
 #include <unistd.h>
 
 Simulation::Simulation(Traffic *&traffic, sf::Mutex *&mutex, int sim_speed, int framerate, bool *& exit_bool):
-    M_FRAMERATE(framerate),
-    M_SIM_SPEED(sim_speed),
-    m_traffic(traffic),
-    m_mutex(mutex),
-    m_exit_bool(exit_bool)
+        m_mutex(mutex),
+        m_traffic(traffic),
+        m_exit_bool(exit_bool),
+        M_SIM_SPEED(sim_speed),
+        M_FRAMERATE(framerate)
 {
 
 }

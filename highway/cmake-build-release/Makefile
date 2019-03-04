@@ -123,6 +123,33 @@ highway/fast:
 	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/build
 .PHONY : highway/fast
 
+car.o: car.cpp.o
+
+.PHONY : car.o
+
+# target to build an object file
+car.cpp.o:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/car.cpp.o
+.PHONY : car.cpp.o
+
+car.i: car.cpp.i
+
+.PHONY : car.i
+
+# target to preprocess a source file
+car.cpp.i:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/car.cpp.i
+.PHONY : car.cpp.i
+
+car.s: car.cpp.s
+
+.PHONY : car.s
+
+# target to generate assembly for a file
+car.cpp.s:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/car.cpp.s
+.PHONY : car.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -149,6 +176,87 @@ main.s: main.cpp.s
 main.cpp.s:
 	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/main.cpp.s
 .PHONY : main.cpp.s
+
+road.o: road.cpp.o
+
+.PHONY : road.o
+
+# target to build an object file
+road.cpp.o:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/road.cpp.o
+.PHONY : road.cpp.o
+
+road.i: road.cpp.i
+
+.PHONY : road.i
+
+# target to preprocess a source file
+road.cpp.i:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/road.cpp.i
+.PHONY : road.cpp.i
+
+road.s: road.cpp.s
+
+.PHONY : road.s
+
+# target to generate assembly for a file
+road.cpp.s:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/road.cpp.s
+.PHONY : road.cpp.s
+
+roadnode.o: roadnode.cpp.o
+
+.PHONY : roadnode.o
+
+# target to build an object file
+roadnode.cpp.o:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/roadnode.cpp.o
+.PHONY : roadnode.cpp.o
+
+roadnode.i: roadnode.cpp.i
+
+.PHONY : roadnode.i
+
+# target to preprocess a source file
+roadnode.cpp.i:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/roadnode.cpp.i
+.PHONY : roadnode.cpp.i
+
+roadnode.s: roadnode.cpp.s
+
+.PHONY : roadnode.s
+
+# target to generate assembly for a file
+roadnode.cpp.s:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/roadnode.cpp.s
+.PHONY : roadnode.cpp.s
+
+roadsegment.o: roadsegment.cpp.o
+
+.PHONY : roadsegment.o
+
+# target to build an object file
+roadsegment.cpp.o:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/roadsegment.cpp.o
+.PHONY : roadsegment.cpp.o
+
+roadsegment.i: roadsegment.cpp.i
+
+.PHONY : roadsegment.i
+
+# target to preprocess a source file
+roadsegment.cpp.i:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/roadsegment.cpp.i
+.PHONY : roadsegment.cpp.i
+
+roadsegment.s: roadsegment.cpp.s
+
+.PHONY : roadsegment.s
+
+# target to generate assembly for a file
+roadsegment.cpp.s:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/roadsegment.cpp.s
+.PHONY : roadsegment.cpp.s
 
 traffic.o: traffic.cpp.o
 
@@ -204,6 +312,33 @@ unittests.cpp.s:
 	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/unittests.cpp.s
 .PHONY : unittests.cpp.s
 
+util.o: util.cpp.o
+
+.PHONY : util.o
+
+# target to build an object file
+util.cpp.o:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/util.cpp.o
+.PHONY : util.cpp.o
+
+util.i: util.cpp.i
+
+.PHONY : util.i
+
+# target to preprocess a source file
+util.cpp.i:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/util.cpp.i
+.PHONY : util.cpp.i
+
+util.s: util.cpp.s
+
+.PHONY : util.s
+
+# target to generate assembly for a file
+util.cpp.s:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/util.cpp.s
+.PHONY : util.cpp.s
+
 window.o: window.cpp.o
 
 .PHONY : window.o
@@ -240,15 +375,30 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... highway"
+	@echo "... car.o"
+	@echo "... car.i"
+	@echo "... car.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... road.o"
+	@echo "... road.i"
+	@echo "... road.s"
+	@echo "... roadnode.o"
+	@echo "... roadnode.i"
+	@echo "... roadnode.s"
+	@echo "... roadsegment.o"
+	@echo "... roadsegment.i"
+	@echo "... roadsegment.s"
 	@echo "... traffic.o"
 	@echo "... traffic.i"
 	@echo "... traffic.s"
 	@echo "... unittests.o"
 	@echo "... unittests.i"
 	@echo "... unittests.s"
+	@echo "... util.o"
+	@echo "... util.i"
+	@echo "... util.s"
 	@echo "... window.o"
 	@echo "... window.i"
 	@echo "... window.s"

@@ -82,7 +82,31 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/car.cpp">
+			<Option target="highway"/>
+		</Unit>
+		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/car.h">
+			<Option target="highway"/>
+		</Unit>
 		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/main.cpp">
+			<Option target="highway"/>
+		</Unit>
+		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/road.cpp">
+			<Option target="highway"/>
+		</Unit>
+		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/road.h">
+			<Option target="highway"/>
+		</Unit>
+		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/roadnode.cpp">
+			<Option target="highway"/>
+		</Unit>
+		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/roadnode.h">
+			<Option target="highway"/>
+		</Unit>
+		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/roadsegment.cpp">
+			<Option target="highway"/>
+		</Unit>
+		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/roadsegment.h">
 			<Option target="highway"/>
 		</Unit>
 		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/traffic.cpp">
@@ -95,6 +119,12 @@
 			<Option target="highway"/>
 		</Unit>
 		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/unittests.h">
+			<Option target="highway"/>
+		</Unit>
+		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/util.cpp">
+			<Option target="highway"/>
+		</Unit>
+		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/util.h">
 			<Option target="highway"/>
 		</Unit>
 		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/window.cpp">

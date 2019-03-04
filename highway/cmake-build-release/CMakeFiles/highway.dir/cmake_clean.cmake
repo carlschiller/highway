@@ -3,6 +3,11 @@ file(REMOVE_RECURSE
   "CMakeFiles/highway.dir/traffic.cpp.o"
   "CMakeFiles/highway.dir/window.cpp.o"
   "CMakeFiles/highway.dir/unittests.cpp.o"
+  "CMakeFiles/highway.dir/car.cpp.o"
+  "CMakeFiles/highway.dir/roadnode.cpp.o"
+  "CMakeFiles/highway.dir/roadsegment.cpp.o"
+  "CMakeFiles/highway.dir/util.cpp.o"
+  "CMakeFiles/highway.dir/road.cpp.o"
   "highway.pdb"
   "highway"
 )

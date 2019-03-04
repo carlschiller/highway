@@ -1,7 +1,7 @@
 #include <iostream>
 #include "SFML/Graphics.hpp"
-#include "window.h"
-#include "unittests.h"
+#include "../headers/simulation.h"
+#include "../headers/unittests.h"
 
 sf::Mutex mutex;
 

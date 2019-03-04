@@ -109,12 +109,82 @@ CMakeFiles/highway.dir/unittests.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/highway.dir/unittests.cpp.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/unittests.cpp -o CMakeFiles/highway.dir/unittests.cpp.s
 
+CMakeFiles/highway.dir/car.cpp.o: CMakeFiles/highway.dir/flags.make
+CMakeFiles/highway.dir/car.cpp.o: ../car.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cmake-build-release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/highway.dir/car.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/highway.dir/car.cpp.o -c /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/car.cpp
+
+CMakeFiles/highway.dir/car.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/highway.dir/car.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/car.cpp > CMakeFiles/highway.dir/car.cpp.i
+
+CMakeFiles/highway.dir/car.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/highway.dir/car.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/car.cpp -o CMakeFiles/highway.dir/car.cpp.s
+
+CMakeFiles/highway.dir/roadnode.cpp.o: CMakeFiles/highway.dir/flags.make
+CMakeFiles/highway.dir/roadnode.cpp.o: ../roadnode.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cmake-build-release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/highway.dir/roadnode.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/highway.dir/roadnode.cpp.o -c /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/roadnode.cpp
+
+CMakeFiles/highway.dir/roadnode.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/highway.dir/roadnode.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/roadnode.cpp > CMakeFiles/highway.dir/roadnode.cpp.i
+
+CMakeFiles/highway.dir/roadnode.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/highway.dir/roadnode.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/roadnode.cpp -o CMakeFiles/highway.dir/roadnode.cpp.s
+
+CMakeFiles/highway.dir/roadsegment.cpp.o: CMakeFiles/highway.dir/flags.make
+CMakeFiles/highway.dir/roadsegment.cpp.o: ../roadsegment.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cmake-build-release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/highway.dir/roadsegment.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/highway.dir/roadsegment.cpp.o -c /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/roadsegment.cpp
+
+CMakeFiles/highway.dir/roadsegment.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/highway.dir/roadsegment.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/roadsegment.cpp > CMakeFiles/highway.dir/roadsegment.cpp.i
+
+CMakeFiles/highway.dir/roadsegment.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/highway.dir/roadsegment.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/roadsegment.cpp -o CMakeFiles/highway.dir/roadsegment.cpp.s
+
+CMakeFiles/highway.dir/util.cpp.o: CMakeFiles/highway.dir/flags.make
+CMakeFiles/highway.dir/util.cpp.o: ../util.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cmake-build-release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/highway.dir/util.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/highway.dir/util.cpp.o -c /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/util.cpp
+
+CMakeFiles/highway.dir/util.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/highway.dir/util.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/util.cpp > CMakeFiles/highway.dir/util.cpp.i
+
+CMakeFiles/highway.dir/util.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/highway.dir/util.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/util.cpp -o CMakeFiles/highway.dir/util.cpp.s
+
+CMakeFiles/highway.dir/road.cpp.o: CMakeFiles/highway.dir/flags.make
+CMakeFiles/highway.dir/road.cpp.o: ../road.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cmake-build-release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/highway.dir/road.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/highway.dir/road.cpp.o -c /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/road.cpp
+
+CMakeFiles/highway.dir/road.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/highway.dir/road.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/road.cpp > CMakeFiles/highway.dir/road.cpp.i
+
+CMakeFiles/highway.dir/road.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/highway.dir/road.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/road.cpp -o CMakeFiles/highway.dir/road.cpp.s
+
 # Object files for target highway
 highway_OBJECTS = \
 "CMakeFiles/highway.dir/main.cpp.o" \
 "CMakeFiles/highway.dir/traffic.cpp.o" \
 "CMakeFiles/highway.dir/window.cpp.o" \
-"CMakeFiles/highway.dir/unittests.cpp.o"
+"CMakeFiles/highway.dir/unittests.cpp.o" \
+"CMakeFiles/highway.dir/car.cpp.o" \
+"CMakeFiles/highway.dir/roadnode.cpp.o" \
+"CMakeFiles/highway.dir/roadsegment.cpp.o" \
+"CMakeFiles/highway.dir/util.cpp.o" \
+"CMakeFiles/highway.dir/road.cpp.o"
 
 # External object files for target highway
 highway_EXTERNAL_OBJECTS =
@@ -123,6 +193,11 @@ highway: CMakeFiles/highway.dir/main.cpp.o
 highway: CMakeFiles/highway.dir/traffic.cpp.o
 highway: CMakeFiles/highway.dir/window.cpp.o
 highway: CMakeFiles/highway.dir/unittests.cpp.o
+highway: CMakeFiles/highway.dir/car.cpp.o
+highway: CMakeFiles/highway.dir/roadnode.cpp.o
+highway: CMakeFiles/highway.dir/roadsegment.cpp.o
+highway: CMakeFiles/highway.dir/util.cpp.o
+highway: CMakeFiles/highway.dir/road.cpp.o
 highway: CMakeFiles/highway.dir/build.make
 highway: /usr/local/lib/libsfml-system.dylib
 highway: /usr/local/lib/libsfml-window.dylib
@@ -130,7 +205,7 @@ highway: /usr/local/lib/libsfml-graphics.dylib
 highway: /usr/local/lib/libsfml-network.dylib
 highway: /usr/local/lib/libsfml-audio.dylib
 highway: CMakeFiles/highway.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cmake-build-release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable highway"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cmake-build-release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable highway"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/highway.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
