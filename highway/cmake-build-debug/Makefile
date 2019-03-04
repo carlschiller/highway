@@ -258,6 +258,33 @@ cppfiles/roadsegment.cpp.s:
 	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/roadsegment.cpp.s
 .PHONY : cppfiles/roadsegment.cpp.s
 
+cppfiles/simulation.o: cppfiles/simulation.cpp.o
+
+.PHONY : cppfiles/simulation.o
+
+# target to build an object file
+cppfiles/simulation.cpp.o:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/simulation.cpp.o
+.PHONY : cppfiles/simulation.cpp.o
+
+cppfiles/simulation.i: cppfiles/simulation.cpp.i
+
+.PHONY : cppfiles/simulation.i
+
+# target to preprocess a source file
+cppfiles/simulation.cpp.i:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/simulation.cpp.i
+.PHONY : cppfiles/simulation.cpp.i
+
+cppfiles/simulation.s: cppfiles/simulation.cpp.s
+
+.PHONY : cppfiles/simulation.s
+
+# target to generate assembly for a file
+cppfiles/simulation.cpp.s:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/simulation.cpp.s
+.PHONY : cppfiles/simulation.cpp.s
+
 cppfiles/traffic.o: cppfiles/traffic.cpp.o
 
 .PHONY : cppfiles/traffic.o
@@ -339,33 +366,6 @@ cppfiles/util.cpp.s:
 	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/util.cpp.s
 .PHONY : cppfiles/util.cpp.s
 
-cppfiles/window.o: cppfiles/window.cpp.o
-
-.PHONY : cppfiles/window.o
-
-# target to build an object file
-cppfiles/window.cpp.o:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/window.cpp.o
-.PHONY : cppfiles/window.cpp.o
-
-cppfiles/window.i: cppfiles/window.cpp.i
-
-.PHONY : cppfiles/window.i
-
-# target to preprocess a source file
-cppfiles/window.cpp.i:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/window.cpp.i
-.PHONY : cppfiles/window.cpp.i
-
-cppfiles/window.s: cppfiles/window.cpp.s
-
-.PHONY : cppfiles/window.s
-
-# target to generate assembly for a file
-cppfiles/window.cpp.s:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/window.cpp.s
-.PHONY : cppfiles/window.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -390,6 +390,9 @@ help:
 	@echo "... cppfiles/roadsegment.o"
 	@echo "... cppfiles/roadsegment.i"
 	@echo "... cppfiles/roadsegment.s"
+	@echo "... cppfiles/simulation.o"
+	@echo "... cppfiles/simulation.i"
+	@echo "... cppfiles/simulation.s"
 	@echo "... cppfiles/traffic.o"
 	@echo "... cppfiles/traffic.i"
 	@echo "... cppfiles/traffic.s"
@@ -399,9 +402,6 @@ help:
 	@echo "... cppfiles/util.o"
 	@echo "... cppfiles/util.i"
 	@echo "... cppfiles/util.s"
-	@echo "... cppfiles/window.o"
-	@echo "... cppfiles/window.i"
-	@echo "... cppfiles/window.s"
 .PHONY : help
 
 

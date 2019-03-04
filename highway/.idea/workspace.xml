@@ -13,53 +13,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="321491d6-b655-498a-a6fd-c8ab65a98984" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/cppfiles/car.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cppfiles/road.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cppfiles/roadnode.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cppfiles/roadsegment.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cppfiles/traffic.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cppfiles/util.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/headers/car.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/headers/road.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/headers/roadnode.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/headers/roadsegment.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/headers/traffic.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/headers/util.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cmake_clean.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/main.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/traffic.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/unittests.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/window.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/highway" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/highway" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/highway.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/highway.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/highway.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/highway.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/highway.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/highway.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/highway.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/highway.dir/cmake_clean.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/highway.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/highway.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/highway.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/highway.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/progress.marks" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/highway.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/highway.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cppfiles/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/traffic.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/traffic.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/unittests.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cppfiles/unittests.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unittests.h" beforeDir="false" afterPath="$PROJECT_DIR$/headers/unittests.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/window.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cppfiles/simulation.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/window.h" beforeDir="false" afterPath="$PROJECT_DIR$/headers/simulation.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cppfiles/window.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cppfiles/roadsegment.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cppfiles/roadsegment.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cppfiles/simulation.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cppfiles/simulation.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cppfiles/traffic.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cppfiles/traffic.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cppfiles/util.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cppfiles/util.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/cmake-build-release/" />
@@ -87,12 +45,12 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/cppfiles/roadnode.cpp">
+        <entry file="file://$PROJECT_DIR$/cppfiles/util.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="29" column="44" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
+            <state relative-caret-position="285">
+              <caret line="19" column="18" lean-forward="true" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
               <folding>
-                <element signature="e#50#82#0" expanded="true" />
+                <element signature="e#50#78#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -173,7 +131,6 @@
         <option value="$PROJECT_DIR$/roadsegment.h" />
         <option value="$PROJECT_DIR$/unittests.cpp" />
         <option value="$PROJECT_DIR$/cppfiles/main.cpp" />
-        <option value="$PROJECT_DIR$/cppfiles/roadsegment.cpp" />
         <option value="$PROJECT_DIR$/headers/car.h" />
         <option value="$PROJECT_DIR$/headers/roadnode.h" />
         <option value="$PROJECT_DIR$/headers/roadsegment.h" />
@@ -185,6 +142,10 @@
         <option value="$PROJECT_DIR$/cppfiles/road.cpp" />
         <option value="$PROJECT_DIR$/headers/road.h" />
         <option value="$PROJECT_DIR$/cppfiles/roadnode.cpp" />
+        <option value="$PROJECT_DIR$/cppfiles/roadsegment.cpp" />
+        <option value="$PROJECT_DIR$/cppfiles/simulation.cpp" />
+        <option value="$PROJECT_DIR$/cppfiles/traffic.cpp" />
+        <option value="$PROJECT_DIR$/cppfiles/util.cpp" />
       </list>
     </option>
   </component>
@@ -236,7 +197,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -306,12 +267,12 @@
       <workItem from="1551534970759" duration="9131000" />
       <workItem from="1551605608438" duration="22079000" />
       <workItem from="1551691886843" duration="1379000" />
-      <workItem from="1551693926100" duration="3684000" />
+      <workItem from="1551693926100" duration="6636000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="281737000" />
+    <option name="totallyTimeSpent" value="284689000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -322,7 +283,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49919093" weight="0.3282967" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.37783173" visible="true" weight="0.13736264" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.37783173" visible="true" weight="0.20741758" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49919093" weight="0.3997253" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -389,54 +350,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cppfiles/util.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
-          <folding>
-            <element signature="e#50#67#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="59" selection-start-line="8" selection-start-column="59" selection-end-line="8" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cppfiles/simulation.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-95">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-          <folding>
-            <element signature="e#50#69#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cppfiles/traffic.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-          <folding>
-            <element signature="e#50#70#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cppfiles/unittests.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="19" lean-forward="true" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cppfiles/roadsegment.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -454,13 +371,6 @@
           <folding>
             <element signature="e#108#128#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/headers/roadsegment.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="17" lean-forward="true" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -544,10 +454,61 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cppfiles/roadnode.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="29" column="44" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
+        <state relative-caret-position="54">
+          <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
           <folding>
             <element signature="e#50#82#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/headers/roadsegment.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="15" column="17" lean-forward="true" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cppfiles/roadsegment.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3131">
+          <caret line="213" column="44" selection-start-line="213" selection-start-column="44" selection-end-line="213" selection-end-column="44" />
+          <folding>
+            <element signature="e#50#85#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cppfiles/simulation.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="33" column="37" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
+          <folding>
+            <element signature="e#50#69#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cppfiles/traffic.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="428" column="29" selection-start-line="428" selection-start-column="29" selection-end-line="428" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cppfiles/unittests.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1318">
+          <caret line="6" column="19" lean-forward="true" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cppfiles/util.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="18" lean-forward="true" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+          <folding>
+            <element signature="e#50#78#0" expanded="true" />
           </folding>
         </state>
       </provider>

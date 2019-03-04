@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/highway.dir/cppfiles/main.cpp.o"
   "CMakeFiles/highway.dir/cppfiles/traffic.cpp.o"
-  "CMakeFiles/highway.dir/cppfiles/window.cpp.o"
+  "CMakeFiles/highway.dir/cppfiles/simulation.cpp.o"
   "CMakeFiles/highway.dir/cppfiles/unittests.cpp.o"
   "CMakeFiles/highway.dir/cppfiles/car.cpp.o"
   "CMakeFiles/highway.dir/cppfiles/roadnode.cpp.o"

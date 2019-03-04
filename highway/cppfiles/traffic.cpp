@@ -17,14 +17,21 @@ Traffic::Traffic() {
     }
 }
 
+////////////////////////////////////////////////////////////////////////////////
+/// Constructor with debug bool, if we want to use debugging information.
+
 Traffic::Traffic(bool debug) : debug(debug){
     if(!m_font.loadFromFile("/Library/Fonts/Arial.ttf")){
         //crash
     }
 }
 
+////////////////////////////////////////////////////////////////////////////////
+/// Copy constructor, deep copies all content.
+
 Traffic::Traffic(const Traffic &ref) :
-    m_multiplier(ref.m_multiplier), debug(ref.debug)
+    debug(ref.debug),
+    m_multiplier(ref.m_multiplier)
 {
     // clear values if there are any.
     for(Car * delete_this : m_cars){
@@ -64,6 +71,9 @@ Traffic::Traffic(const Traffic &ref) :
     }
 }
 
+////////////////////////////////////////////////////////////////////////////////
+/// Copy-assignment constructor, deep copies all content and swaps.
+
 Traffic& Traffic::operator=(const Traffic & rhs) {
     Traffic tmp(rhs);
 
@@ -74,21 +84,41 @@ Traffic& Traffic::operator=(const Traffic & rhs) {
     return *this;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+/// Destructor, deletes all cars.
+
 Traffic::~Traffic() {
-    for(int i = 0; i<m_cars.size(); i++){
-        delete Traffic::m_cars[i];
+    for(Car * & car : m_cars){
+        delete car;
     }
     Traffic::m_cars.clear();
 }
+
+////////////////////////////////////////////////////////////////////////////////
+/// Returns size of car vector
 
 unsigned long Traffic::n_of_cars(){
     return m_cars.size();
 }
 
+////////////////////////////////////////////////////////////////////////////////
+/// Random generator, returns reference to random generator in order to,
+/// not make unneccesary copies.
+
 std::mt19937& Traffic::my_engine() {
     static std::mt19937 e(std::random_device{}());
     return e;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+/// Logic for spawning cars by looking at how much time has elapsed.
+/// @param spawn_counter : culmulative time elapsed
+/// @param elapsed : time elapsed for one time step.
+/// @param threshold : threshold is set by randomly selecting a poission
+/// distributed number.
+///
+/// Cars that are spawned are poission distributed in time, the speed of the
+/// cars are normally distributed according to their aggresiveness.
 
 void Traffic::spawn_cars(double & spawn_counter, float elapsed, double & threshold) {
     spawn_counter += elapsed;
@@ -149,6 +179,9 @@ void Traffic::spawn_cars(double & spawn_counter, float elapsed, double & thresho
     }
 }
 
+////////////////////////////////////////////////////////////////////////////////
+/// Despawn @param car
+
 void Traffic::despawn_car(Car *& car) {
     unsigned long size = m_cars.size();
     for(int i = 0; i < size; i++){
@@ -164,6 +197,9 @@ void Traffic::despawn_car(Car *& car) {
         }
     }
 }
+
+////////////////////////////////////////////////////////////////////////////////
+/// Despawn cars that are in the despawn segment.
 
 void Traffic::despawn_cars() {
     //std::cout << "e\n";
@@ -199,30 +235,50 @@ void Traffic::despawn_cars() {
     //std::cout << "g\n";
 }
 
+////////////////////////////////////////////////////////////////////////////////
+/// Despawn all cars (by creating a new traffic object).
+
 void Traffic::despawn_all_cars() {
     *this = Traffic();
 }
+
+////////////////////////////////////////////////////////////////////////////////
+/// Force places a new car with user specified inputs.
+///
+/// \param seg : segment of car
+/// \param node : node of car
+/// \param vel : (current)velocity of car
+/// \param target : target velocity of car
+/// \param aggro : agressiveness of car
 
 void Traffic::force_place_car(RoadSegment * seg, RoadNode * node, float vel, float target, float aggro) {
     Car * car = new Car(seg,node,vel,target,aggro);
     m_cars.push_back(car);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+/// Updates traffic according by stepping @param elapsed_time seconds in time.
+
 void Traffic::update(float elapsed_time) {
-    //std::cout<< "updatin1\n";
-    for(Car * car : m_cars){
+    for(Car * & car : m_cars){
         car->avoid_collision(elapsed_time);
     }
-    //std::cout<< "updatin2\n";
-    for(Car * car : m_cars){
+
+    for(Car * & car : m_cars){
         car->update_pos(elapsed_time);
     }
-    //std::cout<< "updatin3\n";
 }
+
+////////////////////////////////////////////////////////////////////////////////
+/// Returns vector of all cars.
 
 std::vector<Car *> Traffic::get_car_copies() const {
     return m_cars;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+/// Returns average flow of all cars. Average value of
+/// quotient of current speed divided by target speed for all cars.
 
 float Traffic::get_avg_flow() {
     float flow = 0;
@@ -238,6 +294,11 @@ float Traffic::get_avg_flow() {
         return flow/i;
     }
 }
+
+////////////////////////////////////////////////////////////////////////////////
+/// Returns average speeds of all cars in km/h. First entry in vector
+/// is average speed of all cars, second entry is average speed of cars in left
+/// lane, third entry is average speed of cars in right lane.
 
 std::vector<float> Traffic::get_avg_speeds() {
     std::vector<float> speedy;
@@ -277,6 +338,12 @@ std::vector<float> Traffic::get_avg_speeds() {
         return speedy;
     }
 }
+
+////////////////////////////////////////////////////////////////////////////////
+/// Draws cars (and nodes if debug = true) to @param target, which could
+/// be a window. Blue cars are cars that want to overtake someone,
+/// green cars are driving as fast as they want (target speed),
+/// red cars are driving slower than they want.
 
 void Traffic::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     // print debug info about node placements and stuff
@@ -358,6 +425,10 @@ void Traffic::draw(sf::RenderTarget &target, sf::RenderStates states) const {
         }
     }
 }
+
+////////////////////////////////////////////////////////////////////////////////
+/// Modifies @param text by inserting information about Traffic,
+/// average speeds and frame rate among other things.
 
 void Traffic::get_info(sf::Text & text,sf::Time &elapsed) {
     //TODO: SOME BUG HERE.

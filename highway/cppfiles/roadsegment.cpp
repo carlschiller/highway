@@ -6,7 +6,9 @@
 #include "../headers/roadnode.h"
 #include <cmath>
 
-// Roadsegment below
+////////////////////////////////////////////////////////////////////////////////
+/// RoadSegment destructor, removes all RodeNode element children because of
+/// ownership.
 
 RoadSegment::~RoadSegment(){
     for(RoadNode * elem : m_nodes){
@@ -15,47 +17,78 @@ RoadSegment::~RoadSegment(){
     m_nodes.clear();
 }
 
+////////////////////////////////////////////////////////////////////////////////
+/// Constructor, creates a new segment with next connecting segment as
+/// @param next_segment
+
 RoadSegment::RoadSegment(float x, float y, RoadSegment * next_segment, int lanes):
-        m_x(x), m_y(y), m_n_lanes(lanes)
+        m_x(x),
+        m_y(y),
+        m_n_lanes(lanes),
+        m_next_segment(next_segment)
 {
-    m_next_segment = next_segment;
     m_theta = atan2(m_y-m_next_segment->m_y,m_next_segment->m_x-m_x);
 
     m_nodes.reserve(m_n_lanes);
 
-    calculate_and_populate_nodes();
+    calculate_and_populate_nodes(); // populates segment with RoadNodes.
 }
+
+////////////////////////////////////////////////////////////////////////////////
+/// Constructor, creates a new segment with manually entered @param theta.
 
 RoadSegment::RoadSegment(float x, float y, float theta, int lanes) :
-        m_x(x), m_y(y), m_theta(theta), m_n_lanes(lanes)
+        m_x(x),
+        m_y(y),
+        m_theta(theta),
+        m_n_lanes(lanes),
+        m_next_segment(nullptr)
 {
-    m_next_segment = nullptr;
-    m_nodes.reserve(lanes);
+    m_nodes.reserve(m_n_lanes);
 
-    calculate_and_populate_nodes();
+    calculate_and_populate_nodes(); // populates segment with RoadNodes.
 }
 
-RoadSegment::RoadSegment(float x, float y, int lanes,bool mer):
-        m_x(x), m_y(y), merge(mer), m_n_lanes(lanes)
+////////////////////////////////////////////////////////////////////////////////
+/// Constructor, creates a new segment without creating RoadNodes. This
+/// needs to be done manually with functions below.
+
+RoadSegment::RoadSegment(float x, float y, int lanes, bool mer):
+        m_x(x),
+        m_y(y),
+        m_n_lanes(lanes),
+        m_next_segment(nullptr),
+        merge(mer)
 {
-    merge = mer;
-    m_next_segment = nullptr;
     m_nodes.reserve(m_n_lanes);
 
     // can't set nodes if we don't have a theta.
 }
 
+////////////////////////////////////////////////////////////////////////////////
+/// Returns theta (angle) of RoadSegment, in which direction the segment points
+
 float RoadSegment::get_theta() {
     return m_theta;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+/// Returns x position of RoadSegment.
 
 const float RoadSegment::get_x() const{
     return m_x;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+/// Returns y position of RoadSegment.
+
 const float RoadSegment::get_y() const {
     return m_y;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+/// Returns int number of @param node. E.g. 0 would be the right-most lane.
+/// Throws exception if we do not find the node in this segment.
 
 int RoadSegment::get_lane_number(RoadNode * node) {
     for(int i = 0; i < m_n_lanes; i++){
@@ -66,9 +99,15 @@ int RoadSegment::get_lane_number(RoadNode * node) {
     throw std::invalid_argument("Node is not in this segment");
 }
 
+////////////////////////////////////////////////////////////////////////////////
+/// Adds a new car to the segment.
+
 void RoadSegment::append_car(Car * car) {
     m_cars.push_back(car);
 }
+
+////////////////////////////////////////////////////////////////////////////////
+/// Removes car from segment, if car is not in list we throw exception
 
 void RoadSegment::remove_car(Car * car) {
     unsigned long size = m_cars.size();
@@ -83,13 +122,20 @@ void RoadSegment::remove_car(Car * car) {
     m_cars.erase(new_end,m_cars.end());
 
     if(!found){
-        //throw std::invalid_argument("Car is not in this segment.");
+        throw std::invalid_argument("Car is not in this segment.");
     }
 }
+
+////////////////////////////////////////////////////////////////////////////////
+/// Sets theta of RoadSegment according to @param theta.
 
 void RoadSegment::set_theta(float theta) {
     m_theta = theta;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+/// Automatically populates segment with nodes according to amount of lanes
+/// specified and theta specified.
 
 void RoadSegment::calculate_and_populate_nodes() {
     // calculates placement of nodes.
@@ -104,27 +150,48 @@ void RoadSegment::calculate_and_populate_nodes() {
     }
 }
 
+////////////////////////////////////////////////////////////////////////////////
+/// Sets next segment to @param next_segment
+
 void RoadSegment::set_next_road_segment(RoadSegment * next_segment) {
     m_next_segment = next_segment;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+/// Calculates theta according to next_segment. Throws if m_next_segment is
+/// nullptr
 
 void RoadSegment::calculate_theta() {
+    if(m_next_segment == nullptr){
+        throw std::invalid_argument("Can't calculate theta if next segment is nullptr");
+    }
     m_theta = atan2(m_y-m_next_segment->m_y,m_next_segment->m_x-m_x);
 }
+
+////////////////////////////////////////////////////////////////////////////////
+/// Returns node of lane number n. E.g. n=0 is the right-most lane.
 
 RoadNode* RoadSegment::get_node_pointer(int n) {
     return m_nodes[n];
 }
 
+////////////////////////////////////////////////////////////////////////////////
+/// Returns all nodes in segment.
+
 std::vector<RoadNode *> RoadSegment::get_nodes() {
     return m_nodes;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+/// Returns next segment
 
 RoadSegment* RoadSegment::next_segment() {
     return m_next_segment;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+/// Automatically populates node connections by connecting current node to
+/// all nodes in next segment.
 
 void RoadSegment::set_all_node_pointers_to_next_segment() {
     for(RoadNode * node: m_nodes){
@@ -134,10 +201,17 @@ void RoadSegment::set_all_node_pointers_to_next_segment() {
     }
 }
 
+////////////////////////////////////////////////////////////////////////////////
+/// Manually set connection to next segment's node. No guarantee is made
+/// on @param from_node_n and @param to_node_n. Can crash if index out of range.
+
 void RoadSegment::set_node_pointer_to_node(int from_node_n, int to_node_n, RoadSegment *next_segment) {
     RoadNode * pointy = next_segment->get_node_pointer(to_node_n);
     m_nodes[from_node_n]->set_next_node(pointy);
 }
+
+////////////////////////////////////////////////////////////////////////////////
+/// Returns amount of lanes in this segment.
 
 const int RoadSegment::get_total_amount_of_lanes() const {
     return m_n_lanes;

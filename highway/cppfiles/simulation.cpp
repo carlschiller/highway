@@ -8,6 +8,17 @@
 #include <cmath>
 #include <unistd.h>
 
+////////////////////////////////////////////////////////////////////////////////
+/// Constructor
+/// @param traffic : pointer reference to Traffic, this is to be able to
+/// draw traffic outside of this class.
+/// @param mutex : mutex thread lock from SFML.
+/// @param sim_speed : Simulation speed multiplier, e.g. 10 would mean 10x
+/// real time speed. If simulation can not keep up it lowers this.
+/// @param framerate : Framerate of simulation, e.g. 60 FPS. This is the
+/// time step of the system.
+/// @param exit_bool : If user wants to exit this is changed outside of the class.
+
 Simulation::Simulation(Traffic *&traffic, sf::Mutex *&mutex, int sim_speed, int framerate, bool *& exit_bool):
         m_mutex(mutex),
         m_traffic(traffic),
@@ -17,6 +28,10 @@ Simulation::Simulation(Traffic *&traffic, sf::Mutex *&mutex, int sim_speed, int 
 {
 
 }
+
+////////////////////////////////////////////////////////////////////////////////
+/// Runs simulation. If M_SIM_SPEED = 10 , then it simulates 10x1/(M_FRAMERATE)
+/// seconds of real time simulation.
 
 void Simulation::update() {
     sf::Clock clock;

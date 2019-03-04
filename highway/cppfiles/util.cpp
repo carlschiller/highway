@@ -7,6 +7,9 @@
 #include <string>
 #include <cmath>
 
+////////////////////////////////////////////////////////////////////////////////
+/// Splits @param str by @param delim, returns vector of tokens obtained.
+
 std::vector<std::string> Util::split_string_by_delimiter(const std::string &str, const char delim) {
     std::stringstream ss(str);
     std::string item;
@@ -17,7 +20,9 @@ std::vector<std::string> Util::split_string_by_delimiter(const std::string &str,
     return answer;
 }
 
-// if a is behind of b, return true. else false
+////////////////////////////////////////////////////////////////////////////////
+/// Returns true if @param a is behind @param b, else false
+
 bool Util::is_car_behind(Car * a, Car * b){
     if(a!=b){
         float theta_to_car_b = atan2(a->y_pos()-b->y_pos(),b->x_pos()-a->x_pos());
@@ -30,9 +35,10 @@ bool Util::is_car_behind(Car * a, Car * b){
 
 }
 
-//TODO: Bug here
-// true if car paths cross
-// car a has to be after car b
+////////////////////////////////////////////////////////////////////////////////
+/// Returns true if @param a will cross paths with @param b, else false.
+/// NOTE: @param a MUST be behind @param b.
+
 bool Util::will_car_paths_cross(Car *a, Car *b) {
     //simulate car a driving straight ahead.
     RoadSegment * inspecting_segment = a->get_segment();
@@ -75,6 +81,8 @@ bool Util::will_car_paths_cross(Car *a, Car *b) {
     return false;
 }
 
+/*
+
 bool Util::merge_helper(Car *a, int merge_to_lane) {
     RoadSegment * seg = a->current_segment;
     for(Car * car : seg->m_cars){
@@ -88,11 +96,18 @@ bool Util::merge_helper(Car *a, int merge_to_lane) {
     return false;
 }
 
+*/
+
+/*
+
 // this works only if a's heading to is b's current segment
 bool Util::is_cars_in_same_lane(Car *a, Car *b) {
     return a->heading_to_node == b->current_node;
 }
 
+*/
+
+/*
 float Util::distance_to_line(const float theta, const float x, const float y){
     float x_hat,y_hat;
     x_hat = cos(theta);
@@ -104,7 +119,9 @@ float Util::distance_to_line(const float theta, const float x, const float y){
 
     return dist;
 }
+*/
 
+/*
 float Util::distance_to_proj_point(const float theta, const float x, const float y){
     float x_hat,y_hat;
     x_hat = cos(theta);
@@ -115,13 +132,23 @@ float Util::distance_to_proj_point(const float theta, const float x, const float
 
     return dist;
 }
+*/
+
+////////////////////////////////////////////////////////////////////////////////
+/// Returns distance between @param a and @param b.
 
 float Util::distance_to_car(Car * a, Car * b){
+    if(a == nullptr || b == nullptr){
+        throw std::invalid_argument("Can't calculate distance if cars are nullptrs");
+    }
+
     float delta_x = a->x_pos()-b->x_pos();
     float delta_y = b->y_pos()-a->y_pos();
 
     return sqrt(abs(pow(delta_x,2.0f))+abs(pow(delta_y,2.0f)));
 }
+
+/*
 
 Car * Util::find_closest_radius(std::vector<Car> &cars, const float x, const float y){
     Car * answer = nullptr;
@@ -138,11 +165,19 @@ Car * Util::find_closest_radius(std::vector<Car> &cars, const float x, const flo
     return answer;
 }
 
+*/
+
+////////////////////////////////////////////////////////////////////////////////
+/// Returns min angle between @param ang1 and @param ang2
+
 float Util::get_min_angle(const float ang1, const float ang2){
     float abs_diff = abs(ang1-ang2);
     float score = std::min(2.0f*(float)M_PI-abs_diff,abs_diff);
     return score;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+/// Returns distance between two points in 2D.
 
 float Util::distance(float x1, float x2, float y1, float y2) {
     return sqrt(abs(pow(x1-x2,2.0f))+abs(pow(y1-y2,2.0f)));
