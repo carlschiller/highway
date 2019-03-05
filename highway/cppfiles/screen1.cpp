@@ -11,7 +11,7 @@
 
 screen_1::screen_1() = default;
 
-int screen_1::Run(sf::RenderWindow &App) {
+int screen_1::Run(sf::RenderWindow &App, std::vector<float> * args) {
     sf::Mutex mutex;
     int sim_speed = 10;
     bool debug = false;
@@ -36,19 +36,22 @@ int screen_1::Run(sf::RenderWindow &App) {
     sf::Clock clock;
     sf::Clock t0;
 
+    bool just_arrived = true;
+
     sf::Event event;
 
     if(!super_debug){
 
         bool exit_bool = false;
 
+        sf::Time time1;
+
         sf::Mutex * mutex1 = &mutex;
         bool * exit = &exit_bool;
         //thread.launch();
-        auto * traffic = new Traffic(debug);
-        Simulation sim = Simulation(traffic, mutex1,sim_speed,60,exit);
+        auto * traffic = new Traffic(debug,*args);
+        Simulation sim = Simulation(traffic, mutex1,args[0][15],args[0][16],exit);
         sf::Text debug_info;
-        Traffic copy;
 
         sf::Thread thread(&Simulation::update,&sim);
         thread.launch();
@@ -68,20 +71,28 @@ int screen_1::Run(sf::RenderWindow &App) {
                     delete traffic;
                     return -1;
                 }
-            }
 
-            if(button.clicked(App)){
-                exit_bool = true;
-                thread.wait();
-                delete traffic;
-                return 0;
+                if(event.type == sf::Event::MouseButtonPressed && just_arrived){
+
+                }
+                else if(!just_arrived){
+                    if(button.clicked(App)){
+                        exit_bool = true;
+                        thread.wait();
+                        delete traffic;
+                        return 0;
+                    }
+                }
+                else{
+                    just_arrived = false;
+                }
             }
 
             sf::Time elapsed = clock.restart();
 
             mutex.lock();
             //std::cout << "copying\n";
-            copy = *traffic;
+            Traffic * copy = new Traffic(*traffic);
             //std::cout << "copied\n";
             mutex.unlock();
 
@@ -89,9 +100,9 @@ int screen_1::Run(sf::RenderWindow &App) {
 
             App.draw(background);
             //mutex.lock();
-            App.draw(copy);
+            App.draw(*copy);
 
-            copy.get_info(debug_info,elapsed);
+            copy->get_info(debug_info,elapsed);
 
             //mutex.unlock();
             App.draw(debug_info);
@@ -100,11 +111,12 @@ int screen_1::Run(sf::RenderWindow &App) {
             App.display();
         }
     }
+    /*
     else{
         //sf::Thread thread(&Tests::run_all_tests,&tests);
         sf::Mutex * mutex1 = &mutex;
         //thread.launch();
-        auto * traffic = new Traffic(debug);
+        auto * traffic = new Traffic(debug,*args);
         Tests tests = Tests(traffic, mutex1);
         Traffic copy;
         sf::Text debug_info;
@@ -144,5 +156,6 @@ int screen_1::Run(sf::RenderWindow &App) {
             App.display();
         }
     }
+    */
     return -1;
 }

@@ -339,6 +339,33 @@ cppfiles/screen1.cpp.s:
 	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/screen1.cpp.s
 .PHONY : cppfiles/screen1.cpp.s
 
+cppfiles/screen2.o: cppfiles/screen2.cpp.o
+
+.PHONY : cppfiles/screen2.o
+
+# target to build an object file
+cppfiles/screen2.cpp.o:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/screen2.cpp.o
+.PHONY : cppfiles/screen2.cpp.o
+
+cppfiles/screen2.i: cppfiles/screen2.cpp.i
+
+.PHONY : cppfiles/screen2.i
+
+# target to preprocess a source file
+cppfiles/screen2.cpp.i:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/screen2.cpp.i
+.PHONY : cppfiles/screen2.cpp.i
+
+cppfiles/screen2.s: cppfiles/screen2.cpp.s
+
+.PHONY : cppfiles/screen2.s
+
+# target to generate assembly for a file
+cppfiles/screen2.cpp.s:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/screen2.cpp.s
+.PHONY : cppfiles/screen2.cpp.s
+
 cppfiles/simulation.o: cppfiles/simulation.cpp.o
 
 .PHONY : cppfiles/simulation.o
@@ -480,6 +507,9 @@ help:
 	@echo "... cppfiles/screen1.o"
 	@echo "... cppfiles/screen1.i"
 	@echo "... cppfiles/screen1.s"
+	@echo "... cppfiles/screen2.o"
+	@echo "... cppfiles/screen2.i"
+	@echo "... cppfiles/screen2.s"
 	@echo "... cppfiles/simulation.o"
 	@echo "... cppfiles/simulation.i"
 	@echo "... cppfiles/simulation.s"

@@ -8,7 +8,7 @@
 
 screen_0::screen_0() = default;
 
-int screen_0::Run(sf::RenderWindow &App) {
+int screen_0::Run(sf::RenderWindow &App, std::vector<float> * args) {
     sf::Color normal = sf::Color(253,246,227);
     sf::Color hover = sf::Color(253,235,227);
 
@@ -41,6 +41,8 @@ int screen_0::Run(sf::RenderWindow &App) {
 
     std::vector<Button *> buttons;
 
+    bool just_arrived = true;
+
     buttons.push_back(&button1);
     buttons.push_back(&button2);
 
@@ -49,14 +51,22 @@ int screen_0::Run(sf::RenderWindow &App) {
             if(event.type == sf::Event::Closed){
                 return -1;
             }
-        }
 
-        for (Button * but : buttons) {
-            if(but->clicked(App)){
-                return 1;
+            if(event.type == sf::Event::MouseButtonPressed && just_arrived){
+
+            }
+            else if(!just_arrived){
+                if(button1.clicked(App)){
+                    return 1;
+                }
+                else if(button2.clicked(App)){
+                    return 2;
+                }
+            }
+            else{
+                just_arrived = false;
             }
         }
-
 
         App.clear();
 

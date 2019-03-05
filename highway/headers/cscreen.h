@@ -6,10 +6,12 @@
 #define HIGHWAY_CSCREEN_H
 
 #include "SFML/Graphics.hpp"
+#include <vector>
 
 class cScreen{
 public:
-    virtual int Run(sf::RenderWindow & App) = 0;
+    //virtual int Run(sf::RenderWindow & App) = 0;
+    virtual int Run(sf::RenderWindow & App, std::vector<float> * args) = 0;
 };
 
 #endif //HIGHWAY_CSCREEN_H

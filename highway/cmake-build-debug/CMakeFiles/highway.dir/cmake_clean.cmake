@@ -11,6 +11,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/highway.dir/cppfiles/screen0.cpp.o"
   "CMakeFiles/highway.dir/cppfiles/screen1.cpp.o"
   "CMakeFiles/highway.dir/cppfiles/button.cpp.o"
+  "CMakeFiles/highway.dir/cppfiles/screen2.cpp.o"
   "highway.pdb"
   "highway"
 )

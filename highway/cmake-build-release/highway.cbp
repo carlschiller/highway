@@ -108,6 +108,9 @@
 		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/screen1.cpp">
 			<Option target="highway"/>
 		</Unit>
+		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/screen2.cpp">
+			<Option target="highway"/>
+		</Unit>
 		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/simulation.cpp">
 			<Option target="highway"/>
 		</Unit>
@@ -142,6 +145,9 @@
 			<Option target="highway"/>
 		</Unit>
 		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/screen1.h">
+			<Option target="highway"/>
+		</Unit>
+		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/screen2.h">
 			<Option target="highway"/>
 		</Unit>
 		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/screens.h">

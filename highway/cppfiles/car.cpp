@@ -11,17 +11,44 @@
 ////////////////////////////////////////////////////////////////////////////////
 /// Constructor.
 
-Car::Car() = default;
+Car::Car() :
+        m_speed(0),
+        m_aggressiveness(0),
+        m_target_speed(0),
+        m_min_dist_to_car_in_front(0),
+        m_min_overtake_dist_trigger(0),
+        m_max_overtake_dist_trigger(0),
+        m_overtake_done_dist(0),
+        m_merge_min_dist(0),
+        m_search_radius_around(0),
+        m_search_radius_to_car_in_front(0),
+        current_segment(nullptr),
+        current_node(nullptr),
+        overtake_this_car(nullptr)
+{
+
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Constructor for new car with specified lane numbering in spawn point.
 /// Lane numbering @param lane must not exceed amount of lanes in
 /// @param spawn_point, otherwise an exception will be thrown.
 
-Car::Car(RoadSegment *spawn_point, int lane, float vel, float target_speed, float aggressivness):
+Car::Car(RoadSegment * spawn_point, int lane, float vel, float target_speed, float agressivness,
+         float m_min_dist_to_car_in_front, float m_min_overtake_dist_trigger, float m_max_overtake_dist_trigger,
+         float m_overtake_done_dist, float m_merge_min_dist, float m_search_radius_around,
+         float m_search_radius_to_car_in_front) :
         m_speed(vel),
-        m_aggressiveness(aggressivness),
+        m_aggressiveness(agressivness),
         m_target_speed(target_speed),
+        m_min_dist_to_car_in_front(m_min_dist_to_car_in_front),
+        m_min_overtake_dist_trigger(m_min_overtake_dist_trigger),
+        m_max_overtake_dist_trigger(m_max_overtake_dist_trigger),
+        m_overtake_done_dist(m_overtake_done_dist),
+        m_merge_min_dist(m_merge_min_dist),
+        m_search_radius_around(m_search_radius_around),
+        m_search_radius_to_car_in_front(m_search_radius_to_car_in_front),
         current_segment(spawn_point),
         current_node(current_segment->get_node_pointer(lane)),
         overtake_this_car(nullptr)
@@ -45,10 +72,20 @@ Car::Car(RoadSegment *spawn_point, int lane, float vel, float target_speed, floa
 /// @param lane must be in @param spawn_point, otherwise no guarantee on
 /// functionality.
 
-Car::Car(RoadSegment *spawn_point, RoadNode *lane, float vel, float target_speed, float agressivness) :
+Car::Car(RoadSegment * spawn_point, RoadNode * lane, float vel, float target_speed, float agressivness,
+         float m_min_dist_to_car_in_front, float m_min_overtake_dist_trigger, float m_max_overtake_dist_trigger,
+         float m_overtake_done_dist, float m_merge_min_dist, float m_search_radius_around,
+         float m_search_radius_to_car_in_front):
         m_speed(vel),
         m_aggressiveness(agressivness),
         m_target_speed(target_speed),
+        m_min_dist_to_car_in_front(m_min_dist_to_car_in_front),
+        m_min_overtake_dist_trigger(m_min_overtake_dist_trigger),
+        m_max_overtake_dist_trigger(m_max_overtake_dist_trigger),
+        m_overtake_done_dist(m_overtake_done_dist),
+        m_merge_min_dist(m_merge_min_dist),
+        m_search_radius_around(m_search_radius_around),
+        m_search_radius_to_car_in_front(m_search_radius_to_car_in_front),
         current_segment(spawn_point),
         current_node(lane),
         overtake_this_car(nullptr)
@@ -79,7 +116,6 @@ Car::~Car(){
     current_segment = nullptr;
     heading_to_node = nullptr;
     current_node = nullptr;
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -128,11 +164,11 @@ void Car::merge(std::vector<RoadNode*> & connections) {
 
         if(current_lane == 0 && it.first->heading_to_node->get_parent_segment()->get_lane_number(it.first->heading_to_node) == 1 ){
             can_merge =
-                    delta_dist > std::max(delta_speed*4.0f/m_aggressiveness,15.0f);
+                    delta_dist > std::max(delta_speed*4.0f/m_aggressiveness,m_merge_min_dist);
         }
         else if(current_lane == 1 && it.first->heading_to_node->get_parent_segment()->get_lane_number(it.first->heading_to_node) == 0){
             can_merge =
-                    delta_dist > std::max(delta_speed*4.0f/m_aggressiveness,15.0f);
+                    delta_dist > std::max(delta_speed*4.0f/m_aggressiveness,m_merge_min_dist);
         }
 
         if(!can_merge){
@@ -220,7 +256,7 @@ void Car::do_we_want_to_overtake(Car * & closest_car, int & current_lane) {
         float delta_distance = Util::distance_to_car(this,closest_car);
 
         if(overtake_this_car == nullptr){
-            if(delta_distance > 10 && delta_distance < 40 && (target_speed()/closest_car->target_speed() > m_aggressiveness*1.0f ) && current_lane == 0 && closest_car->current_node->get_parent_segment()->get_lane_number(closest_car->current_node) == 0){
+            if(delta_distance > m_min_overtake_dist_trigger && delta_distance < m_max_overtake_dist_trigger && (target_speed()/closest_car->target_speed() > m_aggressiveness*1.0f ) && current_lane == 0 && closest_car->current_node->get_parent_segment()->get_lane_number(closest_car->current_node) == 0){
                 overtake_this_car = closest_car;
             }
         }
@@ -228,7 +264,7 @@ void Car::do_we_want_to_overtake(Car * & closest_car, int & current_lane) {
     }
 
     if(overtake_this_car !=nullptr){
-        if(Util::is_car_behind(overtake_this_car,this) && (Util::distance_to_car(this,overtake_this_car) > 30)){
+        if(Util::is_car_behind(overtake_this_car,this) && (Util::distance_to_car(this,overtake_this_car) > m_overtake_done_dist)){
             overtake_this_car = nullptr;
         }
     }
@@ -255,7 +291,7 @@ void Car::accelerate(float elapsed){
 /// Helper function to avoid collision with another car.
 
 void Car::avoid_collision(float delta_t) {
-    float min_distance = 8.0f; // for car distance.
+    float min_distance = m_min_dist_to_car_in_front; // for car distance.
     float ideal = min_distance+min_distance*(m_speed/20.f);
 
     Car * closest_car = find_closest_car_ahead();
@@ -324,7 +360,7 @@ void Car::avoid_collision(float delta_t) {
 /// Returns a car if found, otherwise nullptr.
 
 Car* Car::find_closest_car_ahead() {
-    float search_radius = 50;
+    float search_radius = m_search_radius_to_car_in_front;
     std::map<RoadNode*,bool> visited;
     std::list<RoadNode*> queue;
 
@@ -371,7 +407,7 @@ Car* Car::find_closest_car_ahead() {
 /// Returns a map of cars the function has found.
 
 std::map<Car *,bool> Car::find_cars_around_car() {
-    const float search_radius = 40;
+    float search_radius = m_search_radius_around;
     std::map<RoadNode*,bool> visited;
     std::list<RoadNode*> queue;
 

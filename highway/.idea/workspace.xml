@@ -13,8 +13,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="321491d6-b655-498a-a6fd-c8ab65a98984" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/cppfiles/button.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/headers/button.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
@@ -22,18 +20,20 @@
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/DependInfo.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/build.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cppfiles/button.cpp.o" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cppfiles/car.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cppfiles/car.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cppfiles/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cppfiles/main.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cppfiles/road.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cppfiles/road.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cppfiles/roadnode.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cppfiles/roadnode.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cppfiles/roadsegment.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cppfiles/roadsegment.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cppfiles/screen0.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cppfiles/screen1.cpp.o" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cppfiles/simulation.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cppfiles/simulation.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cppfiles/traffic.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cppfiles/traffic.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cppfiles/unittests.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cppfiles/unittests.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cppfiles/util.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/cppfiles/util.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/depend.internal" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/flags.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/link.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/highway.dir/progress.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
@@ -44,37 +44,26 @@
       <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/highway.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/highway.dir/DependInfo.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/highway.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/highway.dir/build.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/highway.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/highway.dir/cmake_clean.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/highway.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/highway.dir/flags.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/highway.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/highway.dir/link.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/highway.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/highway.dir/progress.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/progress.marks" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-release/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-release/highway.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/highway.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cppfiles/button.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cppfiles/button.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cppfiles/car.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cppfiles/car.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cppfiles/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cppfiles/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cppfiles/roadsegment.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cppfiles/roadsegment.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cppfiles/screen0.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cppfiles/screen0.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cppfiles/screen1.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cppfiles/screen1.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cppfiles/screen2.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cppfiles/screen2.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cppfiles/traffic.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cppfiles/traffic.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cppfiles/unittests.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cppfiles/unittests.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/headers/button.h" beforeDir="false" afterPath="$PROJECT_DIR$/headers/button.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/headers/car.h" beforeDir="false" afterPath="$PROJECT_DIR$/headers/car.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/headers/cscreen.h" beforeDir="false" afterPath="$PROJECT_DIR$/headers/cscreen.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/headers/screen0.h" beforeDir="false" afterPath="$PROJECT_DIR$/headers/screen0.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/headers/screen1.h" beforeDir="false" afterPath="$PROJECT_DIR$/headers/screen1.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/headers/screen2.h" beforeDir="false" afterPath="$PROJECT_DIR$/headers/screen2.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/headers/screens.h" beforeDir="false" afterPath="$PROJECT_DIR$/headers/screens.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/headers/traffic.h" beforeDir="false" afterPath="$PROJECT_DIR$/headers/traffic.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/headers/util.h" beforeDir="false" afterPath="$PROJECT_DIR$/headers/util.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../latex/report.aux" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.aux" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../latex/report.bbl" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.bbl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../latex/report.bcf" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.bcf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../latex/report.bib" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.bib" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../latex/report.blg" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.blg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../latex/report.fdb_latexmk" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.fdb_latexmk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../latex/report.fls" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.fls" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../latex/report.log" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../latex/report.out" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../latex/report.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../latex/report.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.synctex.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../latex/report.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../latex/report.toc" beforeDir="false" afterPath="$PROJECT_DIR$/../latex/report.toc" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/cmake-build-release/" />
@@ -102,19 +91,25 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/headers/screen1.h">
+        <entry file="file://$PROJECT_DIR$/cppfiles/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="7" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
+            <state relative-caret-position="704">
+              <caret line="58" column="30" selection-start-line="58" selection-start-column="30" selection-end-line="58" selection-end-column="30" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/cppfiles/traffic.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="25" column="5" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
+            <state relative-caret-position="319">
+              <caret line="381" column="47" lean-forward="true" selection-start-line="381" selection-start-column="47" selection-end-line="381" selection-end-column="47" />
+              <folding>
+                <element signature="e#50#69#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -122,8 +117,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/headers/button.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="49" selection-start-line="19" selection-start-column="49" selection-end-line="19" selection-end-column="49" />
+            <state relative-caret-position="194">
+              <caret line="40" column="22" lean-forward="true" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
               <folding>
                 <element signature="e#101#129#0" expanded="true" />
               </folding>
@@ -132,19 +127,55 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cppfiles/button.cpp">
+        <entry file="file://$PROJECT_DIR$/headers/simulation.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
-              <caret line="69" column="5" selection-start-line="69" selection-start-column="5" selection-end-line="69" selection-end-column="5" />
+            <state relative-caret-position="155">
+              <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/headers/screen0.h">
+        <entry file="file://$PROJECT_DIR$/cppfiles/simulation.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+            <state relative-caret-position="96">
+              <caret line="43" column="10" selection-start-line="43" selection-start-column="10" selection-end-line="43" selection-end-column="10" />
+              <folding>
+                <element signature="e#50#69#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/headers/roadsegment.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="15" column="17" lean-forward="true" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cppfiles/roadsegment.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="166">
+              <caret line="98" column="53" selection-start-line="98" selection-start-column="33" selection-end-line="98" selection-end-column="53" />
+              <folding>
+                <element signature="e#50#85#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cppfiles/screen2.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="348">
+              <caret line="56" column="30" selection-start-line="56" selection-start-column="30" selection-end-line="56" selection-end-column="30" />
+              <folding>
+                <element signature="e#50#70#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -152,8 +183,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cppfiles/screen0.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-168">
-              <caret line="15" column="24" lean-forward="true" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+            <state relative-caret-position="681">
+              <caret line="58" column="41" selection-start-line="58" selection-start-column="41" selection-end-line="58" selection-end-column="41" />
               <folding>
                 <element signature="e#50#81#0" expanded="true" />
               </folding>
@@ -162,43 +193,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/headers/cscreen.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="2" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/cppfiles/screen1.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="55" column="44" selection-start-line="55" selection-start-column="44" selection-end-line="55" selection-end-column="44" />
+            <state relative-caret-position="138">
+              <caret line="48" column="36" lean-forward="true" selection-start-line="48" selection-start-column="36" selection-end-line="48" selection-end-column="36" />
               <folding>
                 <element signature="e#50#81#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cppfiles/car.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2402">
-              <caret line="74" column="41" selection-start-line="74" selection-start-column="31" selection-end-line="74" selection-end-column="41" />
-              <folding>
-                <element signature="e#50#77#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="56" selection-start-line="6" selection-start-column="56" selection-end-line="6" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -214,9 +215,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>deleted car</find>
-      <find>get_theta</find>
-      <find>avoid_collision</find>
       <find>find_closest</find>
       <find>update</find>
       <find>hej</find>
@@ -244,9 +242,13 @@
       <find>m_aggressive</find>
       <find>remove_car</find>
       <find>Font</find>
+      <find>;</find>
+      <find>Car(</find>
+      <find>get_lane_number</find>
     </findStrings>
     <replaceStrings>
       <replace>m_theta</replace>
+      <replace>(args[0]),</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -276,33 +278,35 @@
         <option value="$PROJECT_DIR$/roadnode.h" />
         <option value="$PROJECT_DIR$/roadsegment.h" />
         <option value="$PROJECT_DIR$/unittests.cpp" />
-        <option value="$PROJECT_DIR$/headers/car.h" />
         <option value="$PROJECT_DIR$/headers/roadnode.h" />
         <option value="$PROJECT_DIR$/headers/roadsegment.h" />
         <option value="$PROJECT_DIR$/headers/simulation.h" />
         <option value="$PROJECT_DIR$/headers/unittests.h" />
-        <option value="$PROJECT_DIR$/cppfiles/car.cpp" />
         <option value="$PROJECT_DIR$/cppfiles/road.cpp" />
         <option value="$PROJECT_DIR$/headers/road.h" />
         <option value="$PROJECT_DIR$/cppfiles/roadnode.cpp" />
-        <option value="$PROJECT_DIR$/cppfiles/simulation.cpp" />
         <option value="$PROJECT_DIR$/cppfiles/util.cpp" />
-        <option value="$PROJECT_DIR$/headers/traffic.h" />
         <option value="$PROJECT_DIR$/headers/util.h" />
         <option value="$PROJECT_DIR$/cppfiles/roadsegment.cpp" />
         <option value="$PROJECT_DIR$/cppfiles/mainmenu.cpp" />
         <option value="$PROJECT_DIR$/cppfiles/screens.cpp" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/cppfiles/unittests.cpp" />
+        <option value="$PROJECT_DIR$/headers/screens.h" />
         <option value="$PROJECT_DIR$/headers/cscreen.h" />
         <option value="$PROJECT_DIR$/headers/screen0.h" />
         <option value="$PROJECT_DIR$/headers/screen1.h" />
-        <option value="$PROJECT_DIR$/headers/screens.h" />
-        <option value="$PROJECT_DIR$/cppfiles/main.cpp" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/cppfiles/unittests.cpp" />
-        <option value="$PROJECT_DIR$/headers/button.h" />
-        <option value="$PROJECT_DIR$/cppfiles/screen0.cpp" />
-        <option value="$PROJECT_DIR$/cppfiles/button.cpp" />
+        <option value="$PROJECT_DIR$/headers/screen2.h" />
+        <option value="$PROJECT_DIR$/headers/car.h" />
+        <option value="$PROJECT_DIR$/cppfiles/car.cpp" />
         <option value="$PROJECT_DIR$/cppfiles/traffic.cpp" />
+        <option value="$PROJECT_DIR$/headers/traffic.h" />
+        <option value="$PROJECT_DIR$/cppfiles/simulation.cpp" />
+        <option value="$PROJECT_DIR$/cppfiles/screen0.cpp" />
+        <option value="$PROJECT_DIR$/headers/button.h" />
+        <option value="$PROJECT_DIR$/cppfiles/button.cpp" />
+        <option value="$PROJECT_DIR$/cppfiles/main.cpp" />
+        <option value="$PROJECT_DIR$/cppfiles/screen2.cpp" />
         <option value="$PROJECT_DIR$/cppfiles/screen1.cpp" />
       </list>
     </option>
@@ -427,12 +431,12 @@
       <workItem from="1551691886843" duration="1379000" />
       <workItem from="1551693926100" duration="13502000" />
       <workItem from="1551712402598" duration="279000" />
-      <workItem from="1551781815640" duration="7186000" />
+      <workItem from="1551781815640" duration="19598000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="299020000" />
+    <option name="totallyTimeSpent" value="311432000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -452,7 +456,7 @@
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.6221683" side_tool="true" weight="0.13736264" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.45342466" />
-      <window_info active="true" anchor="bottom" id="Messages" order="11" sideWeight="0.4579288" visible="true" weight="0.3780822" />
+      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.4579288" weight="0.3780822" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -460,21 +464,21 @@
       <window_info anchor="right" id="Database" order="3" weight="0.32928804" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22411004" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23101777" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49919093" weight="0.3282967" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.37783173" visible="true" weight="0.13736264" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.37783173" visible="true" weight="0.20547946" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49919093" weight="0.3997253" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="CMake" order="7" weight="0.328877" />
+      <window_info anchor="bottom" id="CMake" order="7" weight="0.3282967" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.6221683" side_tool="true" visible="true" weight="0.13736264" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.6221683" side_tool="true" weight="0.13736264" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.45342466" />
-      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.4579288" weight="0.38186812" />
+      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.4579288" weight="0.3780822" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -537,27 +541,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/headers/simulation.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/headers/util.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="51" selection-start-line="22" selection-start-column="51" selection-end-line="22" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/headers/car.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/headers/road.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="166">
@@ -572,23 +555,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/headers/roadsegment.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="17" lean-forward="true" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cppfiles/simulation.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="33" column="36" selection-start-line="33" selection-start-column="36" selection-end-line="33" selection-end-column="36" />
-          <folding>
-            <element signature="e#50#69#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cppfiles/road.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
@@ -599,48 +565,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cppfiles/roadsegment.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1815">
-          <caret line="121" column="36" selection-start-line="121" selection-start-column="36" selection-end-line="121" selection-end-column="36" />
-          <folding>
-            <element signature="e#50#85#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cppfiles/screens.cpp" />
-    <entry file="file://$PROJECT_DIR$/cppfiles/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/headers/screens.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="56" selection-start-line="6" selection-start-column="56" selection-end-line="6" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cppfiles/car.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2402">
-          <caret line="74" column="41" selection-start-line="74" selection-start-column="31" selection-end-line="74" selection-end-column="41" />
-          <folding>
-            <element signature="e#50#77#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -654,9 +583,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/headers/cscreen.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="56" selection-start-line="13" selection-start-column="56" selection-end-line="13" selection-end-column="56" />
+          <folding>
+            <element signature="e#103#131#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/headers/util.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="51" selection-start-line="22" selection-start-column="51" selection-end-line="22" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/headers/unittests.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
+        <state relative-caret-position="80">
           <caret line="12" column="39" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
           <folding>
             <element signature="e#634#654#0" expanded="true" />
@@ -664,62 +610,72 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/headers/screen1.h">
+    <entry file="file://$PROJECT_DIR$/cppfiles/car.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="7" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
+        <state relative-caret-position="-873">
+          <caret line="117" column="27" selection-start-line="117" selection-start-column="27" selection-end-line="117" selection-end-column="27" />
+          <folding>
+            <element signature="e#50#77#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/headers/screens.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+          <folding>
+            <element signature="e#105#125#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/headers/car.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="34" column="29" selection-start-line="34" selection-start-column="29" selection-end-line="34" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/headers/traffic.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="48" column="79" lean-forward="true" selection-start-line="48" selection-start-column="22" selection-end-line="48" selection-end-column="79" />
+        <state relative-caret-position="134">
+          <caret line="36" column="36" selection-start-line="36" selection-start-column="36" selection-end-line="36" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/headers/cscreen.h">
+    <entry file="file://$PROJECT_DIR$/headers/screen1.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
-          <caret line="12" column="2" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cppfiles/button.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="69" column="5" selection-start-line="69" selection-start-column="5" selection-end-line="69" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/headers/button.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="49" selection-start-line="19" selection-start-column="49" selection-end-line="19" selection-end-column="49" />
-          <folding>
-            <element signature="e#101#129#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cppfiles/traffic.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="25" column="5" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
+          <caret line="12" column="56" selection-start-line="12" selection-start-column="56" selection-end-line="12" selection-end-column="56" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/headers/screen0.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+        <state relative-caret-position="180">
+          <caret line="12" column="56" selection-start-line="12" selection-start-column="56" selection-end-line="12" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/headers/screen2.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="2" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cppfiles/button.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="179" column="19" lean-forward="true" selection-start-line="179" selection-start-column="19" selection-end-line="179" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cppfiles/screen0.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-168">
-          <caret line="15" column="24" lean-forward="true" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+        <state relative-caret-position="681">
+          <caret line="58" column="41" selection-start-line="58" selection-start-column="41" selection-end-line="58" selection-end-column="41" />
           <folding>
             <element signature="e#50#81#0" expanded="true" />
           </folding>
@@ -728,10 +684,84 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cppfiles/screen1.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="55" column="44" selection-start-line="55" selection-start-column="44" selection-end-line="55" selection-end-column="44" />
+        <state relative-caret-position="138">
+          <caret line="48" column="36" lean-forward="true" selection-start-line="48" selection-start-column="36" selection-end-line="48" selection-end-column="36" />
           <folding>
             <element signature="e#50#81#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/headers/simulation.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cppfiles/simulation.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="43" column="10" selection-start-line="43" selection-start-column="10" selection-end-line="43" selection-end-column="10" />
+          <folding>
+            <element signature="e#50#69#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/headers/roadsegment.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="17" lean-forward="true" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cppfiles/roadsegment.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="98" column="53" selection-start-line="98" selection-start-column="33" selection-end-line="98" selection-end-column="53" />
+          <folding>
+            <element signature="e#50#85#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cppfiles/screen2.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="56" column="30" selection-start-line="56" selection-start-column="30" selection-end-line="56" selection-end-column="30" />
+          <folding>
+            <element signature="e#50#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cppfiles/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="704">
+          <caret line="58" column="30" selection-start-line="58" selection-start-column="30" selection-end-line="58" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/headers/button.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="40" column="22" lean-forward="true" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
+          <folding>
+            <element signature="e#101#129#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cppfiles/traffic.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="381" column="47" lean-forward="true" selection-start-line="381" selection-start-column="47" selection-end-line="381" selection-end-column="47" />
+          <folding>
+            <element signature="e#50#69#0" expanded="true" />
           </folding>
         </state>
       </provider>

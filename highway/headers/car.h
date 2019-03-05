@@ -26,11 +26,27 @@ private:
     float m_aggressiveness; // how fast to accelerate;
     float m_target_speed;
 
+    const float m_min_dist_to_car_in_front;
+    const float m_min_overtake_dist_trigger;
+    const float m_max_overtake_dist_trigger;
+    const float m_overtake_done_dist;
+    const float m_merge_min_dist;
+    const float m_search_radius_around;
+    const float m_search_radius_to_car_in_front;
+
 public:
     Car();
     ~Car();
-    Car(RoadSegment * spawn_point, int lane, float vel, float target_speed, float agressivness);
-    Car(RoadSegment * spawn_point, RoadNode * lane, float vel, float target_speed, float agressivness);
+    Car& operator=(const Car&) = default;
+
+    Car(RoadSegment * spawn_point, int lane, float vel, float target_speed, float agressivness,
+        float m_min_dist_to_car_in_front, float m_min_overtake_dist_trigger, float m_max_overtake_dist_trigger,
+        float m_overtake_done_dist, float m_merge_min_dist, float m_search_radius_around,
+        float m_search_radius_to_car_in_front);
+    Car(RoadSegment * spawn_point, RoadNode * lane, float vel, float target_speed, float agressivness,
+        float m_min_dist_to_car_in_front, float m_min_overtake_dist_trigger, float m_max_overtake_dist_trigger,
+        float m_overtake_done_dist, float m_merge_min_dist, float m_search_radius_around,
+        float m_search_radius_to_car_in_front);
 
     // all are raw pointers
     RoadSegment * current_segment;

@@ -26,9 +26,28 @@ private:
     std::mt19937 & my_engine();
     sf::Font m_font;
 
+    const float m_aggro;
+    const float m_aggro_sigma;
+    const float m_spawn_freq;
+    const float m_speed;
+
+    const float m_lane_0_spawn_prob;
+    const float m_lane_1_spawn_prob;
+    const float m_lane_2_spawn_prob;
+    const float m_ramp_0_spawn_prob;
+
+    const float m_min_dist_to_car_in_front;
+    const float m_min_overtake_dist_trigger;
+    const float m_max_overtake_dist_trigger;
+    const float m_overtake_done_dist;
+    const float m_merge_min_dist;
+    const float m_search_radius_around;
+    const float m_search_radius_to_car_in_front;
+
+    std::vector<float> probs;
 public:
-    Traffic();
-    explicit Traffic(bool debug);
+    Traffic() = delete;
+    Traffic(bool debug, std::vector<float> args);
     ~Traffic();
     Traffic(const Traffic&); // rule of three
     Traffic& operator=(const Traffic&); // rule of three

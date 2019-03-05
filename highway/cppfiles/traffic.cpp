@@ -2,6 +2,7 @@
 // Created by Carl Schiller on 2018-12-19.
 //
 
+#include <iostream>
 #include "../headers/traffic.h"
 #include "../headers/car.h"
 #include "../headers/road.h"
@@ -10,17 +11,44 @@
 ////////////////////////////////////////////////////////////////////////////////
 /// Constructor.
 
+/*
 Traffic::Traffic() {
     debug = false;
     if(!m_font.loadFromFile("/Library/Fonts/Andale mono.ttf")){
 
     }
 }
+*/
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Constructor with debug bool, if we want to use debugging information.
 
-Traffic::Traffic(bool debug) : debug(debug){
+Traffic::Traffic(bool debug, std::vector<float> args) :
+    debug(debug),
+    m_aggro(args[0]),
+    m_aggro_sigma(args[1]),
+    m_spawn_freq(args[2]),
+    m_speed(args[3]),
+    
+    m_lane_0_spawn_prob(args[4]),
+    m_lane_1_spawn_prob(args[5]),
+    m_lane_2_spawn_prob(args[6]),
+    m_ramp_0_spawn_prob(args[7]),
+    
+    m_min_dist_to_car_in_front(args[8]),
+    m_min_overtake_dist_trigger(args[9]),
+    m_max_overtake_dist_trigger(args[10]),
+    m_overtake_done_dist(args[11]),
+    m_merge_min_dist(args[12]),
+    m_search_radius_around(args[13]),
+    m_search_radius_to_car_in_front(args[14]),
+    m_multiplier(args[15])
+{
+    probs.push_back(m_lane_0_spawn_prob);
+    probs.push_back(m_lane_1_spawn_prob);
+    probs.push_back(m_lane_2_spawn_prob);
+    probs.push_back(m_ramp_0_spawn_prob);
+
     if(!m_font.loadFromFile("/Library/Fonts/Andale mono.ttf")){
 
     }
@@ -31,7 +59,25 @@ Traffic::Traffic(bool debug) : debug(debug){
 
 Traffic::Traffic(const Traffic &ref) :
     debug(ref.debug),
+    m_font(ref.m_font),
+    m_aggro(ref.m_aggro),
+    m_aggro_sigma(ref.m_aggro_sigma),
+    m_spawn_freq(ref.m_spawn_freq),
+    m_speed(ref.m_speed),
+    m_lane_0_spawn_prob(ref.m_lane_0_spawn_prob),
+    m_lane_1_spawn_prob(ref.m_lane_1_spawn_prob),
+    m_lane_2_spawn_prob(ref.m_lane_2_spawn_prob),
+    m_ramp_0_spawn_prob(ref.m_ramp_0_spawn_prob),
+    m_min_dist_to_car_in_front(ref.m_min_dist_to_car_in_front),
+    m_min_overtake_dist_trigger(ref.m_min_overtake_dist_trigger),
+    m_max_overtake_dist_trigger(ref.m_max_overtake_dist_trigger),
+    m_overtake_done_dist(ref.m_overtake_done_dist),
+    m_merge_min_dist(ref.m_merge_min_dist),
+    m_search_radius_around(ref.m_search_radius_around),
+    m_search_radius_to_car_in_front(ref.m_search_radius_to_car_in_front),
+    probs(ref.probs),
     m_multiplier(ref.m_multiplier)
+
 {
     // clear values if there are any.
     for(Car * delete_this : m_cars){
@@ -44,8 +90,8 @@ Traffic::Traffic(const Traffic &ref) :
 
     // copy values into new pointers
     for(Car * car : ref.m_cars){
-        auto new_car_pointer = new Car;
-        *new_car_pointer = *car;
+        Car * new_car_pointer = new Car;
+        new_car_pointer = car;
         m_cars.push_back(new_car_pointer);
     }
 
@@ -77,9 +123,11 @@ Traffic::Traffic(const Traffic &ref) :
 Traffic& Traffic::operator=(const Traffic & rhs) {
     Traffic tmp(rhs);
 
+    std::swap(debug,tmp.debug);
+    std::swap(m_font,tmp.m_font);
     std::swap(m_cars,tmp.m_cars);
     std::swap(m_multiplier,tmp.m_multiplier);
-    std::swap(debug,tmp.debug);
+    std::swap(probs,tmp.probs);
 
     return *this;
 }
@@ -123,57 +171,61 @@ std::mt19937& Traffic::my_engine() {
 void Traffic::spawn_cars(double & spawn_counter, float elapsed, double & threshold) {
     spawn_counter += elapsed;
     if(spawn_counter > threshold){
-        std::exponential_distribution<double> dis(1);
-        std::normal_distribution<float> aggro(1.0f,0.2f);
-        float sp = 30.0f;
-        std::uniform_real_distribution<float> lane(0.0f,1.0f);
+        std::exponential_distribution<double> dis(m_spawn_freq);
+        std::normal_distribution<float> aggro(m_aggro,m_aggro_sigma);
         std::uniform_real_distribution<float> spawn(0.0f,1.0f);
 
         threshold = dis(my_engine());
         float aggressiveness = aggro(my_engine());
-        float speed = sp*aggressiveness;
+        float speed = m_speed*aggressiveness;
         float target = speed;
 
         spawn_counter = 0;
-        float start_lane = lane(my_engine());
         float spawn_pos = spawn(my_engine());
 
         std::vector<RoadSegment*> segments = Road::shared().spawn_positions();
-        RoadSegment * seg;
-        Car * new_car;
-        if(spawn_pos < 0.95){
-            seg = segments[0];
-            if(start_lane < 0.457){
-                new_car = new Car(seg,2,speed,target,aggressiveness);
+        Car * new_car = nullptr;
+        
+        float culm_prob = 1;
+        
+        int counter = 0;
+        for(const float & prob : probs){
+            culm_prob -= prob;
+            if(spawn_pos > culm_prob){
+                if(counter < 3){
+                    new_car = new Car(segments[0],counter,speed,target,aggressiveness,m_min_dist_to_car_in_front,
+                            m_min_overtake_dist_trigger,m_max_overtake_dist_trigger,m_overtake_done_dist,
+                            m_merge_min_dist,m_search_radius_around,m_search_radius_to_car_in_front);
+                    break;
+                }
+                else if(counter == 3){
+                    new_car = new Car(segments[1],0,speed,target,aggressiveness,m_min_dist_to_car_in_front,
+                                      m_min_overtake_dist_trigger,m_max_overtake_dist_trigger,m_overtake_done_dist,
+                                      m_merge_min_dist,m_search_radius_around,m_search_radius_to_car_in_front);
+                    break;
+                }
             }
-            else if(start_lane < 0.95){
-                new_car = new Car(seg,1,speed,target,aggressiveness);
-            }
-            else{
-                new_car = new Car(seg,0,speed,target,aggressiveness);
-            }
+            counter++;
         }
-        else{
-            seg = segments[1];
-            new_car = new Car(seg,0,speed,target,aggressiveness);
-        }
+        
+        if(new_car != nullptr){
+            Car * closest_car_ahead = new_car->find_closest_car_ahead();
 
-        Car * closest_car_ahead = new_car->find_closest_car_ahead();
-
-        if(closest_car_ahead == nullptr && closest_car_ahead != new_car){
-            m_cars.push_back(new_car);
-        }
-        else{
-            float dist = Util::distance_to_car(new_car,closest_car_ahead);
-            if(dist < 10){
-                delete new_car;
-            }
-            else if (dist < 150){
-                new_car->speed() = closest_car_ahead->speed();
+            if(closest_car_ahead == nullptr && closest_car_ahead != new_car){
                 m_cars.push_back(new_car);
             }
             else{
-                m_cars.push_back(new_car);
+                float dist = Util::distance_to_car(new_car,closest_car_ahead);
+                if(dist < 10){
+                    delete new_car;
+                }
+                else if (dist < 150){
+                    new_car->speed() = closest_car_ahead->speed();
+                    m_cars.push_back(new_car);
+                }
+                else{
+                    m_cars.push_back(new_car);
+                }
             }
         }
     }
@@ -236,10 +288,19 @@ void Traffic::despawn_cars() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// Despawn all cars (by creating a new traffic object).
+/// Despawn all cars.
 
 void Traffic::despawn_all_cars() {
-    *this = Traffic();
+    for(Car * car : m_cars){
+        car->overtake_this_car = nullptr;
+    }
+
+    for(Car * & car : m_cars){
+        delete car;
+        car = nullptr;
+    }
+
+    m_cars.clear();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -252,7 +313,9 @@ void Traffic::despawn_all_cars() {
 /// \param aggro : agressiveness of car
 
 void Traffic::force_place_car(RoadSegment * seg, RoadNode * node, float vel, float target, float aggro) {
-    Car * car = new Car(seg,node,vel,target,aggro);
+    Car * car = new Car(seg,node,vel,target,aggro,m_min_dist_to_car_in_front,
+                        m_min_overtake_dist_trigger,m_max_overtake_dist_trigger,m_overtake_done_dist,
+                        m_merge_min_dist,m_search_radius_around,m_search_radius_to_car_in_front);
     m_cars.push_back(car);
 }
 

@@ -10,7 +10,7 @@
 class screen_0 : public cScreen{
 public:
     screen_0();
-    virtual int Run(sf::RenderWindow & App);
+    virtual int Run(sf::RenderWindow & App, std::vector<float> * args);
 };
 
 #endif //HIGHWAY_SCREEN0_H
