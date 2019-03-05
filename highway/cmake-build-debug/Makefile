@@ -123,6 +123,33 @@ highway/fast:
 	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/build
 .PHONY : highway/fast
 
+cppfiles/button.o: cppfiles/button.cpp.o
+
+.PHONY : cppfiles/button.o
+
+# target to build an object file
+cppfiles/button.cpp.o:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/button.cpp.o
+.PHONY : cppfiles/button.cpp.o
+
+cppfiles/button.i: cppfiles/button.cpp.i
+
+.PHONY : cppfiles/button.i
+
+# target to preprocess a source file
+cppfiles/button.cpp.i:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/button.cpp.i
+.PHONY : cppfiles/button.cpp.i
+
+cppfiles/button.s: cppfiles/button.cpp.s
+
+.PHONY : cppfiles/button.s
+
+# target to generate assembly for a file
+cppfiles/button.cpp.s:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/button.cpp.s
+.PHONY : cppfiles/button.cpp.s
+
 cppfiles/car.o: cppfiles/car.cpp.o
 
 .PHONY : cppfiles/car.o
@@ -258,6 +285,60 @@ cppfiles/roadsegment.cpp.s:
 	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/roadsegment.cpp.s
 .PHONY : cppfiles/roadsegment.cpp.s
 
+cppfiles/screen0.o: cppfiles/screen0.cpp.o
+
+.PHONY : cppfiles/screen0.o
+
+# target to build an object file
+cppfiles/screen0.cpp.o:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/screen0.cpp.o
+.PHONY : cppfiles/screen0.cpp.o
+
+cppfiles/screen0.i: cppfiles/screen0.cpp.i
+
+.PHONY : cppfiles/screen0.i
+
+# target to preprocess a source file
+cppfiles/screen0.cpp.i:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/screen0.cpp.i
+.PHONY : cppfiles/screen0.cpp.i
+
+cppfiles/screen0.s: cppfiles/screen0.cpp.s
+
+.PHONY : cppfiles/screen0.s
+
+# target to generate assembly for a file
+cppfiles/screen0.cpp.s:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/screen0.cpp.s
+.PHONY : cppfiles/screen0.cpp.s
+
+cppfiles/screen1.o: cppfiles/screen1.cpp.o
+
+.PHONY : cppfiles/screen1.o
+
+# target to build an object file
+cppfiles/screen1.cpp.o:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/screen1.cpp.o
+.PHONY : cppfiles/screen1.cpp.o
+
+cppfiles/screen1.i: cppfiles/screen1.cpp.i
+
+.PHONY : cppfiles/screen1.i
+
+# target to preprocess a source file
+cppfiles/screen1.cpp.i:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/screen1.cpp.i
+.PHONY : cppfiles/screen1.cpp.i
+
+cppfiles/screen1.s: cppfiles/screen1.cpp.s
+
+.PHONY : cppfiles/screen1.s
+
+# target to generate assembly for a file
+cppfiles/screen1.cpp.s:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/screen1.cpp.s
+.PHONY : cppfiles/screen1.cpp.s
+
 cppfiles/simulation.o: cppfiles/simulation.cpp.o
 
 .PHONY : cppfiles/simulation.o
@@ -375,6 +456,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... highway"
+	@echo "... cppfiles/button.o"
+	@echo "... cppfiles/button.i"
+	@echo "... cppfiles/button.s"
 	@echo "... cppfiles/car.o"
 	@echo "... cppfiles/car.i"
 	@echo "... cppfiles/car.s"
@@ -390,6 +474,12 @@ help:
 	@echo "... cppfiles/roadsegment.o"
 	@echo "... cppfiles/roadsegment.i"
 	@echo "... cppfiles/roadsegment.s"
+	@echo "... cppfiles/screen0.o"
+	@echo "... cppfiles/screen0.i"
+	@echo "... cppfiles/screen0.s"
+	@echo "... cppfiles/screen1.o"
+	@echo "... cppfiles/screen1.i"
+	@echo "... cppfiles/screen1.s"
 	@echo "... cppfiles/simulation.o"
 	@echo "... cppfiles/simulation.i"
 	@echo "... cppfiles/simulation.s"

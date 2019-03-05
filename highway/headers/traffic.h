@@ -19,20 +19,6 @@
 #include "SFML/Graphics.hpp"
 #include "car.h"
 
-/**
- * Car class
- * =========
- * Private:
- * position, width of car, and velocities are stored.
- * -------------------
- * Public:
- * .update_pos(float delta_t): updates position by updating position.
- * .accelerate(float delta_v): accelerates car.
- * .steer(float delta_theta): change direction of speed.
- * .x_pos(): return reference to x_pos.
- * .y_pos(): -||- y_pos.
- */
-
 class Traffic : public sf::Drawable, public sf::Transformable{
 private:
     std::vector<Car*> m_cars;
@@ -40,8 +26,6 @@ private:
     std::mt19937 & my_engine();
     sf::Font m_font;
 
-    //void update_speed(int i, float & elapsed_time);
-    //float get_theta(float xpos, float ypos, float speed, float current_theta, bool & lane_switch);
 public:
     Traffic();
     explicit Traffic(bool debug);

@@ -12,8 +12,8 @@
 
 Traffic::Traffic() {
     debug = false;
-    if(!m_font.loadFromFile("/Library/Fonts/Arial.ttf")){
-        //crash
+    if(!m_font.loadFromFile("/Library/Fonts/Andale mono.ttf")){
+
     }
 }
 
@@ -21,8 +21,8 @@ Traffic::Traffic() {
 /// Constructor with debug bool, if we want to use debugging information.
 
 Traffic::Traffic(bool debug) : debug(debug){
-    if(!m_font.loadFromFile("/Library/Fonts/Arial.ttf")){
-        //crash
+    if(!m_font.loadFromFile("/Library/Fonts/Andale mono.ttf")){
+
     }
 }
 
@@ -123,7 +123,7 @@ std::mt19937& Traffic::my_engine() {
 void Traffic::spawn_cars(double & spawn_counter, float elapsed, double & threshold) {
     spawn_counter += elapsed;
     if(spawn_counter > threshold){
-        std::exponential_distribution<double> dis(5);
+        std::exponential_distribution<double> dis(1);
         std::normal_distribution<float> aggro(1.0f,0.2f);
         float sp = 30.0f;
         std::uniform_real_distribution<float> lane(0.0f,1.0f);

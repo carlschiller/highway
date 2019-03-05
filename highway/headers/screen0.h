@@ -5,4 +5,12 @@
 #ifndef HIGHWAY_SCREEN0_H
 #define HIGHWAY_SCREEN0_H
 
+#include "cscreen.h"
+
+class screen_0 : public cScreen{
+public:
+    screen_0();
+    virtual int Run(sf::RenderWindow & App);
+};
+
 #endif //HIGHWAY_SCREEN0_H

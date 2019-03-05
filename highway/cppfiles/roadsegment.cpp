@@ -107,7 +107,7 @@ void RoadSegment::append_car(Car * car) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// Removes car from segment, if car is not in list we throw exception
+/// Removes car from segment, if car is not in list we do nothing.
 
 void RoadSegment::remove_car(Car * car) {
     unsigned long size = m_cars.size();
@@ -121,9 +121,11 @@ void RoadSegment::remove_car(Car * car) {
     std::vector<Car*>::iterator new_end = std::remove(m_cars.begin(),m_cars.end(),static_cast<Car*>(nullptr));
     m_cars.erase(new_end,m_cars.end());
 
+    /*
     if(!found){
         throw std::invalid_argument("Car is not in this segment.");
     }
+    */
 }
 
 ////////////////////////////////////////////////////////////////////////////////

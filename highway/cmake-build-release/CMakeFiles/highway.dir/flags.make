@@ -6,5 +6,5 @@ CXX_FLAGS =  -std=c++11 -Wall -g -Ofast -O3 -DNDEBUG
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/usr/local/include 
+CXX_INCLUDES = -I/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers -I/usr/local/include 
 

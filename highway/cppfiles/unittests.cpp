@@ -2,8 +2,8 @@
 // Created by Carl Schiller on 2019-01-16.
 //
 
-#include "../headers/unittests.h"
-#include "../headers/road.h"
+#include "unittests.h"
+#include "road.h"
 #include <unistd.h>
 #include <iostream>
 

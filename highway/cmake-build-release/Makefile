@@ -123,248 +123,329 @@ highway/fast:
 	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/build
 .PHONY : highway/fast
 
-car.o: car.cpp.o
+cppfiles/button.o: cppfiles/button.cpp.o
 
-.PHONY : car.o
-
-# target to build an object file
-car.cpp.o:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/car.cpp.o
-.PHONY : car.cpp.o
-
-car.i: car.cpp.i
-
-.PHONY : car.i
-
-# target to preprocess a source file
-car.cpp.i:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/car.cpp.i
-.PHONY : car.cpp.i
-
-car.s: car.cpp.s
-
-.PHONY : car.s
-
-# target to generate assembly for a file
-car.cpp.s:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/car.cpp.s
-.PHONY : car.cpp.s
-
-main.o: main.cpp.o
-
-.PHONY : main.o
+.PHONY : cppfiles/button.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/main.cpp.o
-.PHONY : main.cpp.o
+cppfiles/button.cpp.o:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/button.cpp.o
+.PHONY : cppfiles/button.cpp.o
 
-main.i: main.cpp.i
+cppfiles/button.i: cppfiles/button.cpp.i
 
-.PHONY : main.i
+.PHONY : cppfiles/button.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/main.cpp.i
-.PHONY : main.cpp.i
+cppfiles/button.cpp.i:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/button.cpp.i
+.PHONY : cppfiles/button.cpp.i
 
-main.s: main.cpp.s
+cppfiles/button.s: cppfiles/button.cpp.s
 
-.PHONY : main.s
+.PHONY : cppfiles/button.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/main.cpp.s
-.PHONY : main.cpp.s
+cppfiles/button.cpp.s:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/button.cpp.s
+.PHONY : cppfiles/button.cpp.s
 
-road.o: road.cpp.o
+cppfiles/car.o: cppfiles/car.cpp.o
 
-.PHONY : road.o
+.PHONY : cppfiles/car.o
 
 # target to build an object file
-road.cpp.o:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/road.cpp.o
-.PHONY : road.cpp.o
+cppfiles/car.cpp.o:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/car.cpp.o
+.PHONY : cppfiles/car.cpp.o
 
-road.i: road.cpp.i
+cppfiles/car.i: cppfiles/car.cpp.i
 
-.PHONY : road.i
+.PHONY : cppfiles/car.i
 
 # target to preprocess a source file
-road.cpp.i:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/road.cpp.i
-.PHONY : road.cpp.i
+cppfiles/car.cpp.i:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/car.cpp.i
+.PHONY : cppfiles/car.cpp.i
 
-road.s: road.cpp.s
+cppfiles/car.s: cppfiles/car.cpp.s
 
-.PHONY : road.s
+.PHONY : cppfiles/car.s
 
 # target to generate assembly for a file
-road.cpp.s:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/road.cpp.s
-.PHONY : road.cpp.s
+cppfiles/car.cpp.s:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/car.cpp.s
+.PHONY : cppfiles/car.cpp.s
 
-roadnode.o: roadnode.cpp.o
+cppfiles/main.o: cppfiles/main.cpp.o
 
-.PHONY : roadnode.o
+.PHONY : cppfiles/main.o
 
 # target to build an object file
-roadnode.cpp.o:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/roadnode.cpp.o
-.PHONY : roadnode.cpp.o
+cppfiles/main.cpp.o:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/main.cpp.o
+.PHONY : cppfiles/main.cpp.o
 
-roadnode.i: roadnode.cpp.i
+cppfiles/main.i: cppfiles/main.cpp.i
 
-.PHONY : roadnode.i
+.PHONY : cppfiles/main.i
 
 # target to preprocess a source file
-roadnode.cpp.i:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/roadnode.cpp.i
-.PHONY : roadnode.cpp.i
+cppfiles/main.cpp.i:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/main.cpp.i
+.PHONY : cppfiles/main.cpp.i
 
-roadnode.s: roadnode.cpp.s
+cppfiles/main.s: cppfiles/main.cpp.s
 
-.PHONY : roadnode.s
+.PHONY : cppfiles/main.s
 
 # target to generate assembly for a file
-roadnode.cpp.s:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/roadnode.cpp.s
-.PHONY : roadnode.cpp.s
+cppfiles/main.cpp.s:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/main.cpp.s
+.PHONY : cppfiles/main.cpp.s
 
-roadsegment.o: roadsegment.cpp.o
+cppfiles/road.o: cppfiles/road.cpp.o
 
-.PHONY : roadsegment.o
+.PHONY : cppfiles/road.o
 
 # target to build an object file
-roadsegment.cpp.o:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/roadsegment.cpp.o
-.PHONY : roadsegment.cpp.o
+cppfiles/road.cpp.o:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/road.cpp.o
+.PHONY : cppfiles/road.cpp.o
 
-roadsegment.i: roadsegment.cpp.i
+cppfiles/road.i: cppfiles/road.cpp.i
 
-.PHONY : roadsegment.i
+.PHONY : cppfiles/road.i
 
 # target to preprocess a source file
-roadsegment.cpp.i:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/roadsegment.cpp.i
-.PHONY : roadsegment.cpp.i
+cppfiles/road.cpp.i:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/road.cpp.i
+.PHONY : cppfiles/road.cpp.i
 
-roadsegment.s: roadsegment.cpp.s
+cppfiles/road.s: cppfiles/road.cpp.s
 
-.PHONY : roadsegment.s
+.PHONY : cppfiles/road.s
 
 # target to generate assembly for a file
-roadsegment.cpp.s:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/roadsegment.cpp.s
-.PHONY : roadsegment.cpp.s
+cppfiles/road.cpp.s:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/road.cpp.s
+.PHONY : cppfiles/road.cpp.s
 
-traffic.o: traffic.cpp.o
+cppfiles/roadnode.o: cppfiles/roadnode.cpp.o
 
-.PHONY : traffic.o
+.PHONY : cppfiles/roadnode.o
 
 # target to build an object file
-traffic.cpp.o:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/traffic.cpp.o
-.PHONY : traffic.cpp.o
+cppfiles/roadnode.cpp.o:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/roadnode.cpp.o
+.PHONY : cppfiles/roadnode.cpp.o
 
-traffic.i: traffic.cpp.i
+cppfiles/roadnode.i: cppfiles/roadnode.cpp.i
 
-.PHONY : traffic.i
+.PHONY : cppfiles/roadnode.i
 
 # target to preprocess a source file
-traffic.cpp.i:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/traffic.cpp.i
-.PHONY : traffic.cpp.i
+cppfiles/roadnode.cpp.i:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/roadnode.cpp.i
+.PHONY : cppfiles/roadnode.cpp.i
 
-traffic.s: traffic.cpp.s
+cppfiles/roadnode.s: cppfiles/roadnode.cpp.s
 
-.PHONY : traffic.s
+.PHONY : cppfiles/roadnode.s
 
 # target to generate assembly for a file
-traffic.cpp.s:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/traffic.cpp.s
-.PHONY : traffic.cpp.s
+cppfiles/roadnode.cpp.s:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/roadnode.cpp.s
+.PHONY : cppfiles/roadnode.cpp.s
 
-unittests.o: unittests.cpp.o
+cppfiles/roadsegment.o: cppfiles/roadsegment.cpp.o
 
-.PHONY : unittests.o
+.PHONY : cppfiles/roadsegment.o
 
 # target to build an object file
-unittests.cpp.o:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/unittests.cpp.o
-.PHONY : unittests.cpp.o
+cppfiles/roadsegment.cpp.o:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/roadsegment.cpp.o
+.PHONY : cppfiles/roadsegment.cpp.o
 
-unittests.i: unittests.cpp.i
+cppfiles/roadsegment.i: cppfiles/roadsegment.cpp.i
 
-.PHONY : unittests.i
+.PHONY : cppfiles/roadsegment.i
 
 # target to preprocess a source file
-unittests.cpp.i:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/unittests.cpp.i
-.PHONY : unittests.cpp.i
+cppfiles/roadsegment.cpp.i:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/roadsegment.cpp.i
+.PHONY : cppfiles/roadsegment.cpp.i
 
-unittests.s: unittests.cpp.s
+cppfiles/roadsegment.s: cppfiles/roadsegment.cpp.s
 
-.PHONY : unittests.s
+.PHONY : cppfiles/roadsegment.s
 
 # target to generate assembly for a file
-unittests.cpp.s:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/unittests.cpp.s
-.PHONY : unittests.cpp.s
+cppfiles/roadsegment.cpp.s:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/roadsegment.cpp.s
+.PHONY : cppfiles/roadsegment.cpp.s
 
-util.o: util.cpp.o
+cppfiles/screen0.o: cppfiles/screen0.cpp.o
 
-.PHONY : util.o
+.PHONY : cppfiles/screen0.o
 
 # target to build an object file
-util.cpp.o:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/util.cpp.o
-.PHONY : util.cpp.o
+cppfiles/screen0.cpp.o:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/screen0.cpp.o
+.PHONY : cppfiles/screen0.cpp.o
 
-util.i: util.cpp.i
+cppfiles/screen0.i: cppfiles/screen0.cpp.i
 
-.PHONY : util.i
+.PHONY : cppfiles/screen0.i
 
 # target to preprocess a source file
-util.cpp.i:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/util.cpp.i
-.PHONY : util.cpp.i
+cppfiles/screen0.cpp.i:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/screen0.cpp.i
+.PHONY : cppfiles/screen0.cpp.i
 
-util.s: util.cpp.s
+cppfiles/screen0.s: cppfiles/screen0.cpp.s
 
-.PHONY : util.s
+.PHONY : cppfiles/screen0.s
 
 # target to generate assembly for a file
-util.cpp.s:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/util.cpp.s
-.PHONY : util.cpp.s
+cppfiles/screen0.cpp.s:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/screen0.cpp.s
+.PHONY : cppfiles/screen0.cpp.s
 
-window.o: window.cpp.o
+cppfiles/screen1.o: cppfiles/screen1.cpp.o
 
-.PHONY : window.o
+.PHONY : cppfiles/screen1.o
 
 # target to build an object file
-window.cpp.o:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/window.cpp.o
-.PHONY : window.cpp.o
+cppfiles/screen1.cpp.o:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/screen1.cpp.o
+.PHONY : cppfiles/screen1.cpp.o
 
-window.i: window.cpp.i
+cppfiles/screen1.i: cppfiles/screen1.cpp.i
 
-.PHONY : window.i
+.PHONY : cppfiles/screen1.i
 
 # target to preprocess a source file
-window.cpp.i:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/window.cpp.i
-.PHONY : window.cpp.i
+cppfiles/screen1.cpp.i:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/screen1.cpp.i
+.PHONY : cppfiles/screen1.cpp.i
 
-window.s: window.cpp.s
+cppfiles/screen1.s: cppfiles/screen1.cpp.s
 
-.PHONY : window.s
+.PHONY : cppfiles/screen1.s
 
 # target to generate assembly for a file
-window.cpp.s:
-	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/window.cpp.s
-.PHONY : window.cpp.s
+cppfiles/screen1.cpp.s:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/screen1.cpp.s
+.PHONY : cppfiles/screen1.cpp.s
+
+cppfiles/simulation.o: cppfiles/simulation.cpp.o
+
+.PHONY : cppfiles/simulation.o
+
+# target to build an object file
+cppfiles/simulation.cpp.o:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/simulation.cpp.o
+.PHONY : cppfiles/simulation.cpp.o
+
+cppfiles/simulation.i: cppfiles/simulation.cpp.i
+
+.PHONY : cppfiles/simulation.i
+
+# target to preprocess a source file
+cppfiles/simulation.cpp.i:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/simulation.cpp.i
+.PHONY : cppfiles/simulation.cpp.i
+
+cppfiles/simulation.s: cppfiles/simulation.cpp.s
+
+.PHONY : cppfiles/simulation.s
+
+# target to generate assembly for a file
+cppfiles/simulation.cpp.s:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/simulation.cpp.s
+.PHONY : cppfiles/simulation.cpp.s
+
+cppfiles/traffic.o: cppfiles/traffic.cpp.o
+
+.PHONY : cppfiles/traffic.o
+
+# target to build an object file
+cppfiles/traffic.cpp.o:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/traffic.cpp.o
+.PHONY : cppfiles/traffic.cpp.o
+
+cppfiles/traffic.i: cppfiles/traffic.cpp.i
+
+.PHONY : cppfiles/traffic.i
+
+# target to preprocess a source file
+cppfiles/traffic.cpp.i:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/traffic.cpp.i
+.PHONY : cppfiles/traffic.cpp.i
+
+cppfiles/traffic.s: cppfiles/traffic.cpp.s
+
+.PHONY : cppfiles/traffic.s
+
+# target to generate assembly for a file
+cppfiles/traffic.cpp.s:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/traffic.cpp.s
+.PHONY : cppfiles/traffic.cpp.s
+
+cppfiles/unittests.o: cppfiles/unittests.cpp.o
+
+.PHONY : cppfiles/unittests.o
+
+# target to build an object file
+cppfiles/unittests.cpp.o:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/unittests.cpp.o
+.PHONY : cppfiles/unittests.cpp.o
+
+cppfiles/unittests.i: cppfiles/unittests.cpp.i
+
+.PHONY : cppfiles/unittests.i
+
+# target to preprocess a source file
+cppfiles/unittests.cpp.i:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/unittests.cpp.i
+.PHONY : cppfiles/unittests.cpp.i
+
+cppfiles/unittests.s: cppfiles/unittests.cpp.s
+
+.PHONY : cppfiles/unittests.s
+
+# target to generate assembly for a file
+cppfiles/unittests.cpp.s:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/unittests.cpp.s
+.PHONY : cppfiles/unittests.cpp.s
+
+cppfiles/util.o: cppfiles/util.cpp.o
+
+.PHONY : cppfiles/util.o
+
+# target to build an object file
+cppfiles/util.cpp.o:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/util.cpp.o
+.PHONY : cppfiles/util.cpp.o
+
+cppfiles/util.i: cppfiles/util.cpp.i
+
+.PHONY : cppfiles/util.i
+
+# target to preprocess a source file
+cppfiles/util.cpp.i:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/util.cpp.i
+.PHONY : cppfiles/util.cpp.i
+
+cppfiles/util.s: cppfiles/util.cpp.s
+
+.PHONY : cppfiles/util.s
+
+# target to generate assembly for a file
+cppfiles/util.cpp.s:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/util.cpp.s
+.PHONY : cppfiles/util.cpp.s
 
 # Help Target
 help:
@@ -375,33 +456,42 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... highway"
-	@echo "... car.o"
-	@echo "... car.i"
-	@echo "... car.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
-	@echo "... road.o"
-	@echo "... road.i"
-	@echo "... road.s"
-	@echo "... roadnode.o"
-	@echo "... roadnode.i"
-	@echo "... roadnode.s"
-	@echo "... roadsegment.o"
-	@echo "... roadsegment.i"
-	@echo "... roadsegment.s"
-	@echo "... traffic.o"
-	@echo "... traffic.i"
-	@echo "... traffic.s"
-	@echo "... unittests.o"
-	@echo "... unittests.i"
-	@echo "... unittests.s"
-	@echo "... util.o"
-	@echo "... util.i"
-	@echo "... util.s"
-	@echo "... window.o"
-	@echo "... window.i"
-	@echo "... window.s"
+	@echo "... cppfiles/button.o"
+	@echo "... cppfiles/button.i"
+	@echo "... cppfiles/button.s"
+	@echo "... cppfiles/car.o"
+	@echo "... cppfiles/car.i"
+	@echo "... cppfiles/car.s"
+	@echo "... cppfiles/main.o"
+	@echo "... cppfiles/main.i"
+	@echo "... cppfiles/main.s"
+	@echo "... cppfiles/road.o"
+	@echo "... cppfiles/road.i"
+	@echo "... cppfiles/road.s"
+	@echo "... cppfiles/roadnode.o"
+	@echo "... cppfiles/roadnode.i"
+	@echo "... cppfiles/roadnode.s"
+	@echo "... cppfiles/roadsegment.o"
+	@echo "... cppfiles/roadsegment.i"
+	@echo "... cppfiles/roadsegment.s"
+	@echo "... cppfiles/screen0.o"
+	@echo "... cppfiles/screen0.i"
+	@echo "... cppfiles/screen0.s"
+	@echo "... cppfiles/screen1.o"
+	@echo "... cppfiles/screen1.i"
+	@echo "... cppfiles/screen1.s"
+	@echo "... cppfiles/simulation.o"
+	@echo "... cppfiles/simulation.i"
+	@echo "... cppfiles/simulation.s"
+	@echo "... cppfiles/traffic.o"
+	@echo "... cppfiles/traffic.i"
+	@echo "... cppfiles/traffic.s"
+	@echo "... cppfiles/unittests.o"
+	@echo "... cppfiles/unittests.i"
+	@echo "... cppfiles/unittests.s"
+	@echo "... cppfiles/util.o"
+	@echo "... cppfiles/util.i"
+	@echo "... cppfiles/util.s"
 .PHONY : help
 
 

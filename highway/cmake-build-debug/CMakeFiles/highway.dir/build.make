@@ -174,6 +174,45 @@ CMakeFiles/highway.dir/cppfiles/road.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/highway.dir/cppfiles/road.cpp.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/road.cpp -o CMakeFiles/highway.dir/cppfiles/road.cpp.s
 
+CMakeFiles/highway.dir/cppfiles/screen0.cpp.o: CMakeFiles/highway.dir/flags.make
+CMakeFiles/highway.dir/cppfiles/screen0.cpp.o: ../cppfiles/screen0.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/highway.dir/cppfiles/screen0.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/highway.dir/cppfiles/screen0.cpp.o -c /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/screen0.cpp
+
+CMakeFiles/highway.dir/cppfiles/screen0.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/highway.dir/cppfiles/screen0.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/screen0.cpp > CMakeFiles/highway.dir/cppfiles/screen0.cpp.i
+
+CMakeFiles/highway.dir/cppfiles/screen0.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/highway.dir/cppfiles/screen0.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/screen0.cpp -o CMakeFiles/highway.dir/cppfiles/screen0.cpp.s
+
+CMakeFiles/highway.dir/cppfiles/screen1.cpp.o: CMakeFiles/highway.dir/flags.make
+CMakeFiles/highway.dir/cppfiles/screen1.cpp.o: ../cppfiles/screen1.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/highway.dir/cppfiles/screen1.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/highway.dir/cppfiles/screen1.cpp.o -c /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/screen1.cpp
+
+CMakeFiles/highway.dir/cppfiles/screen1.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/highway.dir/cppfiles/screen1.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/screen1.cpp > CMakeFiles/highway.dir/cppfiles/screen1.cpp.i
+
+CMakeFiles/highway.dir/cppfiles/screen1.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/highway.dir/cppfiles/screen1.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/screen1.cpp -o CMakeFiles/highway.dir/cppfiles/screen1.cpp.s
+
+CMakeFiles/highway.dir/cppfiles/button.cpp.o: CMakeFiles/highway.dir/flags.make
+CMakeFiles/highway.dir/cppfiles/button.cpp.o: ../cppfiles/button.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/highway.dir/cppfiles/button.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/highway.dir/cppfiles/button.cpp.o -c /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/button.cpp
+
+CMakeFiles/highway.dir/cppfiles/button.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/highway.dir/cppfiles/button.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/button.cpp > CMakeFiles/highway.dir/cppfiles/button.cpp.i
+
+CMakeFiles/highway.dir/cppfiles/button.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/highway.dir/cppfiles/button.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/button.cpp -o CMakeFiles/highway.dir/cppfiles/button.cpp.s
+
 # Object files for target highway
 highway_OBJECTS = \
 "CMakeFiles/highway.dir/cppfiles/main.cpp.o" \
@@ -184,7 +223,10 @@ highway_OBJECTS = \
 "CMakeFiles/highway.dir/cppfiles/roadnode.cpp.o" \
 "CMakeFiles/highway.dir/cppfiles/roadsegment.cpp.o" \
 "CMakeFiles/highway.dir/cppfiles/util.cpp.o" \
-"CMakeFiles/highway.dir/cppfiles/road.cpp.o"
+"CMakeFiles/highway.dir/cppfiles/road.cpp.o" \
+"CMakeFiles/highway.dir/cppfiles/screen0.cpp.o" \
+"CMakeFiles/highway.dir/cppfiles/screen1.cpp.o" \
+"CMakeFiles/highway.dir/cppfiles/button.cpp.o"
 
 # External object files for target highway
 highway_EXTERNAL_OBJECTS =
@@ -198,6 +240,9 @@ highway: CMakeFiles/highway.dir/cppfiles/roadnode.cpp.o
 highway: CMakeFiles/highway.dir/cppfiles/roadsegment.cpp.o
 highway: CMakeFiles/highway.dir/cppfiles/util.cpp.o
 highway: CMakeFiles/highway.dir/cppfiles/road.cpp.o
+highway: CMakeFiles/highway.dir/cppfiles/screen0.cpp.o
+highway: CMakeFiles/highway.dir/cppfiles/screen1.cpp.o
+highway: CMakeFiles/highway.dir/cppfiles/button.cpp.o
 highway: CMakeFiles/highway.dir/build.make
 highway: /usr/local/lib/libsfml-system.dylib
 highway: /usr/local/lib/libsfml-window.dylib
@@ -205,7 +250,7 @@ highway: /usr/local/lib/libsfml-graphics.dylib
 highway: /usr/local/lib/libsfml-network.dylib
 highway: /usr/local/lib/libsfml-audio.dylib
 highway: CMakeFiles/highway.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable highway"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable highway"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/highway.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

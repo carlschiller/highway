@@ -11,6 +11,7 @@
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{color}
+\usepackage{multicol}
 %\usepackage{biblatex}
 
 
@@ -61,14 +62,80 @@
 \newpage
 
 \section{Introduction}
-\subsection{Problem formulation}
-This project is intended to simulate the effect of a \textit{ramp meter} on a freeway
-on-ramp in Roslags Näsby trafikplats, Sweden. A \textit{ramp meter} is a device, usually a
-normal stop light, that
-manages the flow of traffic onto the freeway by only allowing one car per green period.
-Ramp metering systems have successfuly been proved to decrease congestion on freeways. ~\cite{noauthor_ramp_2018}
+  \subsection{Problem formulation}
+    This project is intended to simulate the traffic flow effect of a \textit{time fixed ramp
+    meter} a freeway
+    on-ramp in Roslags Näsby trafikplats, Sweden. A \textit{ramp meter} is a device that
+    manages the flow of traffic onto the freeway, an example of a \textit{ramp meter} can be seen in figure \ref{pic:ramp}.
+    More specifically, a \textit{time fixed ramp
+    meter} that only allow one car per green signal period will be examined. There are also
+    more active variants of \textit{ramp meters} which measure gaps in the traffic on the freeway
+    to determine when to release vehicles, but this is beyond the scope of this project.
+    Ramp metering systems have successfuly been proven to decrease congestion and
+    reduce travel time on freeways.
+    ~\cite{u.s._department_of_transportation_federal_highway_administration_ramp_nodate}
+    \begin{figure}
+      \includegraphics[width=\linewidth]{"ramp meter"}
+      \caption{A typical ramp meter, image courtesy of \cite{patriarca12_english:_2008}}
+      \label{pic:ramp}
+    \end{figure}
+  \subsection{Complex systems}
+    Traffic flow is a typical example of a complex system. As described in \textit{An Introduction to Computer Simulation Methods Third Edition (revised)},
+    traffic flow can be simulated by modelling the system as a \textit{Cellular Automaton}. A \textit{Cellular Automaton} is a
+    grid lattice which changes state on each tick based on rules and the current configuration of the lattice. \cite{gould_introduction_nodate}
 \section{Method}
+  \textit{Cellular Automata} was determined to not be satisfactory when trying to model the flow of the freeway.
+  This is because lane change and collision detection worked poorly on a grid lattice in two dimensions. Another
+  approach was considered instead.
 
+  \subsection{Graphs}
+  \begin{multicols}{2}
+    In order to model the road with several lanes, a \textit{directed graph} was
+    implemented with blocks of vertices as lanes, with directed edges as paths
+    for the cars to drive. In other terms, cars drive on ''rails'' and can
+    only change lanes on specified vertices, as can be seen in figure \ref{pic:graph}. \cite{noauthor_gerichteter_2018}
+
+    When using a \textit{directed graph} instead of a grid lattice, collision avoidance becomes a lot easier
+    to implement. Time complexity also decreases, which improves simulation performance.
+    The collision avoidance method inmplemented is $\mathcal{O}(n\cdot m^{2})$, where $n$ is the amount of cars and $m$ is the
+    search area. The grid lattice as previously metioned had dimensions 550x600, which was replaced
+    by a graph with approximately 140 edges which improved performance by approximately
+    2000 times (if the whole system is searched for potential obstructions i.e. other cars).
+
+    \vfill\null
+    \columnbreak
+
+    \begin{figure}[H]
+      \begin{center}
+        \includegraphics[width=0.8\linewidth]{"pic2"}
+        \caption{Setup of road with vertices and edges.}
+        \label{pic:graph}
+      \end{center}
+    \end{figure}
+  \end{multicols}
+
+  \subsection{Discretization}
+    In contrast to \textit{Cellular Automata}
+    there is no grid discretization, and thus the cars run on continuous ''tracks''.
+    The distance traveled by each car is determined by the individual car's speed and
+    the system wide time step size,
+    which has been capped at $1/60$ seconds because of rendering considerations.
+    Another benefit from the \textit{directed graph} implementation is that
+    the directions of the cars is not required as a parameter. All that is needed in
+    order to simulate a car is the speed and the distance
+    to the next vertex as well as knowing which vertex the car originated from.
+    When stepping in time the distance traveled is subtracted from the distance to the next vertex, and
+    when the car has reached the next vertex a new target vertex is selected.
+
+    Cars make decisions independently according to simple rules, and generates
+    a complex behavior when interacting with each other i.e. braking or changing lanes.
+
+  \subsection{Graphics rendering}
+    When tweaking parameters involved in the cars' descision making, it is hard to
+    get an overview of how each parameter influences the system wide behavior of the
+    traffic. Thus a lot of effort has been spent on developing a graphical interface
+    that shows how the traffic flows in the given configuration of parameters.
+    An example of a test run is shown in the link below.
 \section{Result}
 
 \section{Discussion}

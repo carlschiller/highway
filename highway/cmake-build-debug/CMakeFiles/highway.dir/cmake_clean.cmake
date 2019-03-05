@@ -8,6 +8,9 @@ file(REMOVE_RECURSE
   "CMakeFiles/highway.dir/cppfiles/roadsegment.cpp.o"
   "CMakeFiles/highway.dir/cppfiles/util.cpp.o"
   "CMakeFiles/highway.dir/cppfiles/road.cpp.o"
+  "CMakeFiles/highway.dir/cppfiles/screen0.cpp.o"
+  "CMakeFiles/highway.dir/cppfiles/screen1.cpp.o"
+  "CMakeFiles/highway.dir/cppfiles/button.cpp.o"
   "highway.pdb"
   "highway"
 )

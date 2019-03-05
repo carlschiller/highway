@@ -44,6 +44,7 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include"/>
@@ -66,6 +67,7 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include"/>
@@ -82,6 +84,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/button.cpp">
+			<Option target="highway"/>
+		</Unit>
 		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/car.cpp">
 			<Option target="highway"/>
 		</Unit>
@@ -97,6 +102,12 @@
 		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/roadsegment.cpp">
 			<Option target="highway"/>
 		</Unit>
+		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/screen0.cpp">
+			<Option target="highway"/>
+		</Unit>
+		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/screen1.cpp">
+			<Option target="highway"/>
+		</Unit>
 		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/simulation.cpp">
 			<Option target="highway"/>
 		</Unit>
@@ -109,7 +120,13 @@
 		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/util.cpp">
 			<Option target="highway"/>
 		</Unit>
+		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/button.h">
+			<Option target="highway"/>
+		</Unit>
 		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/car.h">
+			<Option target="highway"/>
+		</Unit>
+		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/cscreen.h">
 			<Option target="highway"/>
 		</Unit>
 		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/road.h">
@@ -119,6 +136,15 @@
 			<Option target="highway"/>
 		</Unit>
 		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/roadsegment.h">
+			<Option target="highway"/>
+		</Unit>
+		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/screen0.h">
+			<Option target="highway"/>
+		</Unit>
+		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/screen1.h">
+			<Option target="highway"/>
+		</Unit>
+		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/screens.h">
 			<Option target="highway"/>
 		</Unit>
 		<Unit filename="/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/simulation.h">
