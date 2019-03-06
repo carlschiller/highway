@@ -18,6 +18,8 @@ int main() {
     Screens.push_back(&s1);
     screen_2 s2;
     Screens.push_back(&s2);
+    screen_3 s3;
+    Screens.push_back(&s3);
 
     std::vector<float> args;
 

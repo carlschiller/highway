@@ -25,6 +25,7 @@ public:
     void set_dim(int x, int y);
     bool clicked(sf::RenderWindow & App);
     sf::FloatRect get_bounds();
+    void set_text(const std::string & name);
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };

@@ -5,6 +5,7 @@
 #include "screen2.h"
 #include <iostream>
 #include "button.h"
+#include <unistd.h>
 
 screen_2::screen_2() = default;
 
@@ -87,6 +88,9 @@ int screen_2::Run(sf::RenderWindow &App, std::vector<float> * args,std::vector<b
     bool_button1.center_text();
 
     Input * current_input = nullptr;
+
+    int micro = 1000000;
+    usleep((useconds_t)micro/8);
 
     while(true){
 

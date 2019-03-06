@@ -10,5 +10,6 @@
 #include "screen0.h"
 #include "screen1.h"
 #include "screen2.h"
+#include "screen3.h"
 
 #endif //HIGHWAY_MAINMENU_H

@@ -366,6 +366,33 @@ cppfiles/screen2.cpp.s:
 	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/screen2.cpp.s
 .PHONY : cppfiles/screen2.cpp.s
 
+cppfiles/screen3.o: cppfiles/screen3.cpp.o
+
+.PHONY : cppfiles/screen3.o
+
+# target to build an object file
+cppfiles/screen3.cpp.o:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/screen3.cpp.o
+.PHONY : cppfiles/screen3.cpp.o
+
+cppfiles/screen3.i: cppfiles/screen3.cpp.i
+
+.PHONY : cppfiles/screen3.i
+
+# target to preprocess a source file
+cppfiles/screen3.cpp.i:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/screen3.cpp.i
+.PHONY : cppfiles/screen3.cpp.i
+
+cppfiles/screen3.s: cppfiles/screen3.cpp.s
+
+.PHONY : cppfiles/screen3.s
+
+# target to generate assembly for a file
+cppfiles/screen3.cpp.s:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/screen3.cpp.s
+.PHONY : cppfiles/screen3.cpp.s
+
 cppfiles/simulation.o: cppfiles/simulation.cpp.o
 
 .PHONY : cppfiles/simulation.o
@@ -392,6 +419,33 @@ cppfiles/simulation.s: cppfiles/simulation.cpp.s
 cppfiles/simulation.cpp.s:
 	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/simulation.cpp.s
 .PHONY : cppfiles/simulation.cpp.s
+
+cppfiles/simulation2.o: cppfiles/simulation2.cpp.o
+
+.PHONY : cppfiles/simulation2.o
+
+# target to build an object file
+cppfiles/simulation2.cpp.o:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/simulation2.cpp.o
+.PHONY : cppfiles/simulation2.cpp.o
+
+cppfiles/simulation2.i: cppfiles/simulation2.cpp.i
+
+.PHONY : cppfiles/simulation2.i
+
+# target to preprocess a source file
+cppfiles/simulation2.cpp.i:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/simulation2.cpp.i
+.PHONY : cppfiles/simulation2.cpp.i
+
+cppfiles/simulation2.s: cppfiles/simulation2.cpp.s
+
+.PHONY : cppfiles/simulation2.s
+
+# target to generate assembly for a file
+cppfiles/simulation2.cpp.s:
+	$(MAKE) -f CMakeFiles/highway.dir/build.make CMakeFiles/highway.dir/cppfiles/simulation2.cpp.s
+.PHONY : cppfiles/simulation2.cpp.s
 
 cppfiles/traffic.o: cppfiles/traffic.cpp.o
 
@@ -510,9 +564,15 @@ help:
 	@echo "... cppfiles/screen2.o"
 	@echo "... cppfiles/screen2.i"
 	@echo "... cppfiles/screen2.s"
+	@echo "... cppfiles/screen3.o"
+	@echo "... cppfiles/screen3.i"
+	@echo "... cppfiles/screen3.s"
 	@echo "... cppfiles/simulation.o"
 	@echo "... cppfiles/simulation.i"
 	@echo "... cppfiles/simulation.s"
+	@echo "... cppfiles/simulation2.o"
+	@echo "... cppfiles/simulation2.i"
+	@echo "... cppfiles/simulation2.s"
 	@echo "... cppfiles/traffic.o"
 	@echo "... cppfiles/traffic.i"
 	@echo "... cppfiles/traffic.s"

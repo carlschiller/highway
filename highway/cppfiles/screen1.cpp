@@ -8,6 +8,7 @@
 #include "../headers/unittests.h"
 #include "button.h"
 #include <iostream>
+#include <unistd.h>
 
 screen_1::screen_1() = default;
 
@@ -54,6 +55,9 @@ int screen_1::Run(sf::RenderWindow &App, std::vector<float> * args,std::vector<b
 
     Button button = Button(font,24,0,215,"Go back",sf::Color(253,246,227),sf::Color::Black,sf::Color(253,235,227));
     button.center_text();
+
+    int micro = 1000000;
+    usleep((useconds_t)micro/8);
 
     while(true){
         // check all the window's events that were triggered since the last iteration of the loop

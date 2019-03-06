@@ -5,6 +5,7 @@
 #include "../headers/screen0.h"
 #include <iostream>
 #include "button.h"
+#include <unistd.h>
 
 screen_0::screen_0() = default;
 
@@ -39,12 +40,21 @@ int screen_0::Run(sf::RenderWindow &App, std::vector<float> * args,std::vector<b
     button2.set_dim(App.getSize().x,100);
     button2.center_text();
 
+    Button button3 = Button(font,28*2,500,500,"Run simulation",normal,sf::Color::Black,hover);
+    button3.set_origin(0,200);
+    button3.set_dim(App.getSize().x,100);
+    button3.center_text();
+
     std::vector<Button *> buttons;
 
     bool just_arrived = true;
 
     buttons.push_back(&button1);
     buttons.push_back(&button2);
+    buttons.push_back(&button3);
+
+    int micro = 1000000;
+    usleep((useconds_t)micro/8);
 
     while(true){
         while(App.pollEvent(event)){
@@ -61,6 +71,9 @@ int screen_0::Run(sf::RenderWindow &App, std::vector<float> * args,std::vector<b
                 }
                 else if(button2.clicked(App)){
                     return 2;
+                }
+                else if(button3.clicked(App)){
+                    return 3;
                 }
             }
             else{

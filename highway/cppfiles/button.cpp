@@ -90,6 +90,11 @@ void Button::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     target.draw(text);
 }
 
+void Button::set_text(const std::string &name) {
+    text.setString(name);
+    center_text();
+}
+
 
 Input::Input(sf::Font &font_copy, unsigned int font_size, int x_pos, int y_pos, const std::string &name,
              sf::Color button_col, sf::Color text_col, sf::Color pressed, sf::Color typ, std::string val) :
