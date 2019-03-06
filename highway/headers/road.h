@@ -38,6 +38,7 @@ public:
     std::vector<RoadSegment*> & spawn_positions();
     std::vector<RoadSegment*> & despawn_positions();
     std::vector<RoadSegment*> & segments();
+    RoadSegment * ramp_meter_position;
 };
 
 #endif //HIGHWAY_ROAD_H

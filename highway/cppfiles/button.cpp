@@ -170,6 +170,12 @@ Input * Input::inputing(sf::RenderWindow &App,std::string & str) {
             rect.setFillColor(normal);
             return nullptr;
         }
+        else if(str == "\b"){
+            input.pop_back();
+            text.setString(string+input);
+            center_text();
+            return this;
+        }
         else{
             input += str;
             text.setString(string+input);

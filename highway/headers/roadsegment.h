@@ -40,6 +40,8 @@ public:
 
     bool merge;
     std::vector<Car*> m_cars; // raw pointer, no ownership
+    float ramp_counter;
+    bool car_passed;
 
     RoadNode * get_node_pointer(int n);
     std::vector<RoadNode *> get_nodes();

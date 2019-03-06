@@ -87,6 +87,11 @@ bool Road::load_road() {
                 RoadSegment * seg = new RoadSegment(std::stof(vec[1]),std::stof(vec[2]),std::stoi(vec[3]),true);
                 m_segments.push_back(seg);
             }
+            else if(vec[4] == "ramp"){
+                RoadSegment * seg = new RoadSegment(std::stof(vec[1]),std::stof(vec[2]),std::stoi(vec[3]),false);
+                m_segments.push_back(seg);
+                ramp_meter_position = seg;
+            }
             else{
                 RoadSegment * seg = new RoadSegment(std::stof(vec[1]),std::stof(vec[2]),std::stoi(vec[3]),false);
                 m_segments.push_back(seg);
@@ -129,13 +134,12 @@ bool Road::load_road() {
                 // make this a spawn segment
                 m_spawn_positions.push_back(m_segments[i]);
             }
-            else if(road_vector[i][4] == "merge"){
+            else if(road_vector[i][4] == "merge" || road_vector[i][4] == "ramp"){
                 m_segments[i]->set_next_road_segment(m_segments[i+1]);
                 m_segments[i]->calculate_theta();
                 // calculate nodes based on theta.
                 m_segments[i]->calculate_and_populate_nodes();
             }
-
         }
             // else we connect one by one.
         else{
@@ -156,10 +160,7 @@ bool Road::load_road() {
             if(road_vector[i][4] == "false"){
                 // but do not connect nodes to new ones.
             }
-            else if(road_vector[i][4] == "true"){
-                m_segments[i]->set_all_node_pointers_to_next_segment();
-            }
-            else if(road_vector[i][4] == "merge"){
+            else if(road_vector[i][4] == "true" || road_vector[i][4] == "merge" || road_vector[i][4] == "ramp"){
                 m_segments[i]->set_all_node_pointers_to_next_segment();
             }
 

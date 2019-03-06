@@ -54,6 +54,8 @@ Traffic::Traffic(std::vector<bool> bargs, std::vector<float> args) :
     if(!m_font.loadFromFile("/Library/Fonts/Andale mono.ttf")){
 
     }
+
+    Road::shared().ramp_meter_position->ramp_counter = 0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -326,6 +328,16 @@ void Traffic::force_place_car(RoadSegment * seg, RoadNode * node, float vel, flo
 /// Updates traffic according by stepping @param elapsed_time seconds in time.
 
 void Traffic::update(float elapsed_time) {
+    if(m_ramp_meter){
+        float temp = Road::shared().ramp_meter_position->ramp_counter;
+        temp += elapsed_time;
+        if(temp >= m_ramp_meter_period){
+            temp -= m_ramp_meter_period;
+            Road::shared().ramp_meter_position->car_passed = false;
+        }
+        Road::shared().ramp_meter_position->ramp_counter = temp;
+    }
+
     for(Car * & car : m_cars){
         car->avoid_collision(elapsed_time);
     }
@@ -442,13 +454,28 @@ void Traffic::draw(sf::RenderTarget &target, sf::RenderStates states) const {
                 }
                 target.draw(circle,states);
 
-
             }
             segment_n.setString(std::to_string(i));
             segment_n.setPosition(sf::Vector2f(segment->get_x()*2+4,segment->get_y()*2+4));
             target.draw(segment_n,states);
+
             i++;
         }
+    }
+    if(m_ramp_meter){
+        RoadSegment * meter = Road::shared().ramp_meter_position;
+        circle.setPosition(sf::Vector2f(meter->get_x()*2+4-25,meter->get_y()*2-4));
+        circle.setOutlineColor(sf::Color::Black);
+        if(meter->ramp_counter > m_ramp_meter_period*0.5f){
+            circle.setFillColor(sf::Color::Green);
+
+        }
+        else{
+            circle.setFillColor(sf::Color::Red);
+        }
+        target.draw(circle,states);
+        circle.setOutlineColor(sf::Color::Cyan);
+        circle.setFillColor(sf::Color::Transparent);
     }
 
     // one rectangle is all we need :)
