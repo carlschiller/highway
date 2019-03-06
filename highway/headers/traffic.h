@@ -47,7 +47,7 @@ private:
     std::vector<float> probs;
 public:
     Traffic() = delete;
-    Traffic(bool debug, std::vector<float> args);
+    Traffic(std::vector<bool> bargs, std::vector<float> args);
     ~Traffic();
     Traffic(const Traffic&); // rule of three
     Traffic& operator=(const Traffic&); // rule of three

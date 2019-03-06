@@ -8,7 +8,7 @@
 
 screen_0::screen_0() = default;
 
-int screen_0::Run(sf::RenderWindow &App, std::vector<float> * args) {
+int screen_0::Run(sf::RenderWindow &App, std::vector<float> * args,std::vector<bool> * bargs) {
     sf::Color normal = sf::Color(253,246,227);
     sf::Color hover = sf::Color(253,235,227);
 

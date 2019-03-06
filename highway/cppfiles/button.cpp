@@ -209,3 +209,28 @@ sf::FloatRect Input::get_bounds() {
 const sf::Vector2f Input::get_pos() {
     return rect.getPosition();
 }
+
+
+Button_bool* Button_bool::clicked(sf::RenderWindow &App) {
+    if(is_mouse_in_rect(App)){
+        rect.setFillColor(pressed);
+        if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+            rect.setFillColor(normal);
+            toggled = !toggled;
+            text.setString(string+std::to_string(toggled));
+            center_text();
+            return this;
+        }
+        else{
+            return nullptr;
+        }
+    }
+    else{
+        rect.setFillColor(normal);
+        return nullptr;
+    }
+}
+
+bool Button_bool::get_bool() {
+    return toggled;
+}

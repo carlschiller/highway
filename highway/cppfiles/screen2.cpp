@@ -8,7 +8,7 @@
 
 screen_2::screen_2() = default;
 
-int screen_2::Run(sf::RenderWindow &App, std::vector<float> * args) {
+int screen_2::Run(sf::RenderWindow &App, std::vector<float> * args,std::vector<bool> * bargs) {
     sf::Color normal = sf::Color(253,246,227);
     sf::Color hover = sf::Color(253,235,227);
 
@@ -73,6 +73,11 @@ int screen_2::Run(sf::RenderWindow &App, std::vector<float> * args) {
         inputs.push_back(input);
     }
 
+    Button_bool bool_button = Button_bool(font,28,500,500,"Debug: ",normal,sf::Color::Black,hover,sf::Color::White,"false");
+    bool_button.set_origin(0,input->get_bounds().height + input->get_pos().y);
+    bool_button.set_dim(App.getSize().x,50);
+    bool_button.center_text();
+
     Input * current_input = nullptr;
 
     while(true){
@@ -92,6 +97,7 @@ int screen_2::Run(sf::RenderWindow &App, std::vector<float> * args) {
                         args[0][i] = inp->get_val();
                         i++;
                     }
+                    bargs[0][0] = bool_button.get_bool();
 
                     return 0;
                 }
@@ -101,6 +107,7 @@ int screen_2::Run(sf::RenderWindow &App, std::vector<float> * args) {
                         break;
                     }
                 }
+                bool_button.clicked(App);
             }
             else{
                 just_arrived = false;
@@ -121,6 +128,7 @@ int screen_2::Run(sf::RenderWindow &App, std::vector<float> * args) {
         for(Input * inp : inputs){
             App.draw(*inp);
         }
+        App.draw(bool_button);
 
         App.display();
     }

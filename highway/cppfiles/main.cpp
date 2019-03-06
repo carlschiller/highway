@@ -58,8 +58,14 @@ int main() {
     float framerate = 60;
     args.push_back(framerate);
 
+    std::vector<bool> bool_args;
+    bool debug = false;
+    bool_args.push_back(debug);
+    bool ramp_meter = false;
+    bool_args.push_back(ramp_meter);
+
     while(screen >= 0){
-        screen = Screens[screen]->Run(App,&args);
+        screen = Screens[screen]->Run(App,&args,&bool_args);
     }
 
     return 0;

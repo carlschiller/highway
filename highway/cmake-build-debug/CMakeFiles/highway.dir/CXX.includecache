@@ -22,19 +22,19 @@ vector
 cscreen.h
 ../headers/cscreen.h
 
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/main.cpp
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/button.cpp
+utility
+-
+button.h
+-
+
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/screen0.cpp
+../headers/screen0.h
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/screen0.h
 iostream
 -
-vector
--
-SFML/Graphics.hpp
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/SFML/Graphics.hpp
-../headers/simulation.h
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/simulation.h
-../headers/unittests.h
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/unittests.h
-../headers/screens.h
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/screens.h
+button.h
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/button.h
 
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/screen1.cpp
 ../headers/screen1.h
@@ -91,20 +91,6 @@ cscreen.h
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/screen1.h
 cscreen.h
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/cscreen.h
-
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/screen2.h
-cscreen.h
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/cscreen.h
-
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/screens.h
-cscreen.h
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/cscreen.h
-screen0.h
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/screen0.h
-screen1.h
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/screen1.h
-screen2.h
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/screen2.h
 
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/simulation.h
 vector

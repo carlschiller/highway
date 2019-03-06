@@ -23,8 +23,8 @@ Traffic::Traffic() {
 ////////////////////////////////////////////////////////////////////////////////
 /// Constructor with debug bool, if we want to use debugging information.
 
-Traffic::Traffic(bool debug, std::vector<float> args) :
-    debug(debug),
+Traffic::Traffic(std::vector<bool> bargs, std::vector<float> args) :
+    debug(bargs[0]),
     m_aggro(args[0]),
     m_aggro_sigma(args[1]),
     m_spawn_freq(args[2]),

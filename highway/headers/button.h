@@ -43,23 +43,32 @@ private:
 
     bool bool_typing;
 
-    bool is_mouse_in_rect(sf::RenderWindow & App);
 public:
+
     Input(sf::Font & font_copy, unsigned int font_size, int x_pos, int y_pos,
             const std::string & name, sf::Color button_col, sf::Color text_col, sf::Color pressed,
             sf::Color typing, std::string val);
 
+    bool is_mouse_in_rect(sf::RenderWindow & App);
     void center_text();
     void set_origin(int x, int y);
     void set_dim(int x, int y);
-    Input * clicked(sf::RenderWindow & App);
+    virtual Input * clicked(sf::RenderWindow & App);
     Input * inputing(sf::RenderWindow & App, std::string & str);
     float get_val();
     sf::FloatRect get_bounds();
     const sf::Vector2f get_pos();
+    friend class Button_bool;
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 
+class Button_bool : public Input {
+    bool toggled = false;
+public:
+    using Input::Input;
+    virtual Button_bool * clicked(sf::RenderWindow & App);
+    bool get_bool();
+};
 
 #endif //HIGHWAY_BUTTON_H
