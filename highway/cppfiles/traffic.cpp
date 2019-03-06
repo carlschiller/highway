@@ -90,8 +90,8 @@ Traffic::Traffic(const Traffic &ref) :
 
     // copy values into new pointers
     for(Car * car : ref.m_cars){
-        Car * new_car_pointer = new Car;
-        new_car_pointer = car;
+        Car * new_car_pointer = new Car(*car);
+        //*new_car_pointer = *car;
         m_cars.push_back(new_car_pointer);
     }
 
@@ -455,15 +455,15 @@ void Traffic::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     rectangle.setOutlineColor(sf::Color::Black);
     rectangle.setOutlineThickness(2.0f);
 
-    //std::cout << "start drawing\n";
+    std::cout << "start drawing\n";
     for(Car * car : m_cars){
-        //std::cout << "drawing" << car << std::endl;
         if(car != nullptr){
+            std::cout << "a\n";
             rectangle.setPosition(car->x_pos()*2,car->y_pos()*2);
             rectangle.setRotation(car->theta()*(float)360.0f/(-2.0f*(float)M_PI));
             unsigned int colval = (unsigned int)std::min(255.0f*(car->speed()/car->target_speed()),255.0f);
             sf::Uint8 colorspeed = static_cast<sf::Uint8> (colval);
-
+            std::cout << "b\n";
             if(car->overtake_this_car != nullptr){
                 rectangle.setFillColor(sf::Color(255-colorspeed,0,colorspeed,255));
             }
@@ -487,6 +487,7 @@ void Traffic::draw(sf::RenderTarget &target, sf::RenderStates states) const {
             }
         }
     }
+    std::cout << "stop drawing\n";
 }
 
 ////////////////////////////////////////////////////////////////////////////////

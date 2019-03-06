@@ -6,57 +6,17 @@
 
 #IncludeRegexTransform: 
 
-../headers/button.h
-SFML/Graphics.hpp
-../headers/SFML/Graphics.hpp
-string
--
-
-../headers/cscreen.h
-SFML/Graphics.hpp
-../headers/SFML/Graphics.hpp
-vector
--
-
-../headers/screen2.h
-cscreen.h
-../headers/cscreen.h
-
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/button.cpp
-utility
--
-button.h
--
-
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/screen0.cpp
-../headers/screen0.h
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/screen0.h
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/traffic.cpp
 iostream
 -
-button.h
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/button.h
-
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/screen1.cpp
-../headers/screen1.h
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/screen1.h
 ../headers/traffic.h
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/traffic.h
-../headers/simulation.h
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/simulation.h
-../headers/unittests.h
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/unittests.h
-button.h
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/button.h
-iostream
--
-
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/screen2.cpp
-screen2.h
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/screen2.h
-iostream
--
-button.h
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/button.h
+../headers/car.h
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/car.h
+../headers/road.h
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/road.h
+../headers/util.h
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/util.h
 
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/car.h
 map
@@ -66,10 +26,12 @@ roadnode.h
 roadsegment.h
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/roadsegment.h
 
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/cscreen.h
-SFML/Graphics.hpp
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/SFML/Graphics.hpp
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/road.h
+roadsegment.h
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/roadsegment.h
 vector
+-
+string
 -
 
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/roadnode.h
@@ -83,22 +45,6 @@ roadsegment.h
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/roadsegment.h
 vector
 -
-
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/screen0.h
-cscreen.h
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/cscreen.h
-
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/screen1.h
-cscreen.h
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/cscreen.h
-
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/simulation.h
-vector
--
-SFML/Graphics.hpp
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/SFML/Graphics.hpp
-traffic.h
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/traffic.h
 
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/traffic.h
 random
@@ -110,11 +56,9 @@ SFML/Graphics.hpp
 car.h
 /Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/car.h
 
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/unittests.h
-traffic.h
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/traffic.h
-SFML/Graphics.hpp
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/SFML/Graphics.hpp
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/util.h
+car.h
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/headers/car.h
 
 /usr/local/include/SFML/Config.hpp
 TargetConditionals.h
