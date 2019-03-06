@@ -42,6 +42,8 @@ Traffic::Traffic(std::vector<bool> bargs, std::vector<float> args) :
     m_merge_min_dist(args[12]),
     m_search_radius_around(args[13]),
     m_search_radius_to_car_in_front(args[14]),
+    m_ramp_meter_period(args[16]),
+    m_ramp_meter(bargs[1]),
     m_multiplier(args[15])
 {
     probs.push_back(m_lane_0_spawn_prob);
@@ -75,9 +77,10 @@ Traffic::Traffic(const Traffic &ref) :
     m_merge_min_dist(ref.m_merge_min_dist),
     m_search_radius_around(ref.m_search_radius_around),
     m_search_radius_to_car_in_front(ref.m_search_radius_to_car_in_front),
+    m_ramp_meter_period(ref.m_ramp_meter_period),
+    m_ramp_meter(ref.m_ramp_meter),
     probs(ref.probs),
     m_multiplier(ref.m_multiplier)
-
 {
     // clear values if there are any.
     for(Car * delete_this : m_cars){
@@ -455,15 +458,15 @@ void Traffic::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     rectangle.setOutlineColor(sf::Color::Black);
     rectangle.setOutlineThickness(2.0f);
 
-    std::cout << "start drawing\n";
+    //std::cout << "start drawing\n";
     for(Car * car : m_cars){
         if(car != nullptr){
-            std::cout << "a\n";
+            //std::cout << "a\n";
             rectangle.setPosition(car->x_pos()*2,car->y_pos()*2);
             rectangle.setRotation(car->theta()*(float)360.0f/(-2.0f*(float)M_PI));
             unsigned int colval = (unsigned int)std::min(255.0f*(car->speed()/car->target_speed()),255.0f);
             sf::Uint8 colorspeed = static_cast<sf::Uint8> (colval);
-            std::cout << "b\n";
+            //std::cout << "b\n";
             if(car->overtake_this_car != nullptr){
                 rectangle.setFillColor(sf::Color(255-colorspeed,0,colorspeed,255));
             }
@@ -487,7 +490,7 @@ void Traffic::draw(sf::RenderTarget &target, sf::RenderStates states) const {
             }
         }
     }
-    std::cout << "stop drawing\n";
+    //std::cout << "stop drawing\n";
 }
 
 ////////////////////////////////////////////////////////////////////////////////

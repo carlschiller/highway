@@ -44,6 +44,9 @@ private:
     const float m_search_radius_around;
     const float m_search_radius_to_car_in_front;
 
+    const float m_ramp_meter_period;
+    const bool m_ramp_meter;
+
     std::vector<float> probs;
 public:
     Traffic() = delete;

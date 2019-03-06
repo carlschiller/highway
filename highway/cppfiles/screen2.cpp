@@ -55,6 +55,7 @@ int screen_2::Run(sf::RenderWindow &App, std::vector<float> * args,std::vector<b
     names[14] = "Search radius front: ";
     names[15] = "Sim multiplier: ";
     names[16] = "Framerate: ";
+    names[17] = "Ramp meter period: ";
 
     std::vector<Input*> inputs;
 
@@ -79,6 +80,12 @@ int screen_2::Run(sf::RenderWindow &App, std::vector<float> * args,std::vector<b
     bool_button.set_toggled(bargs[0][0]);
     bool_button.center_text();
 
+    Button_bool bool_button1 = Button_bool(font,28,500,500,"Ramp meter: ",normal,sf::Color::Black,hover,sf::Color::White,"false");
+    bool_button1.set_origin(0,bool_button.get_bounds().height + bool_button.get_pos().y);
+    bool_button1.set_dim(App.getSize().x,50);
+    bool_button1.set_toggled(bargs[0][1]);
+    bool_button1.center_text();
+
     Input * current_input = nullptr;
 
     while(true){
@@ -99,6 +106,7 @@ int screen_2::Run(sf::RenderWindow &App, std::vector<float> * args,std::vector<b
                         i++;
                     }
                     bargs[0][0] = bool_button.get_bool();
+                    bargs[0][1] = bool_button1.get_bool();
 
                     return 0;
                 }
@@ -109,6 +117,7 @@ int screen_2::Run(sf::RenderWindow &App, std::vector<float> * args,std::vector<b
                     }
                 }
                 bool_button.clicked(App);
+                bool_button1.clicked(App);
             }
             else{
                 just_arrived = false;
@@ -130,6 +139,7 @@ int screen_2::Run(sf::RenderWindow &App, std::vector<float> * args,std::vector<b
             App.draw(*inp);
         }
         App.draw(bool_button);
+        App.draw(bool_button1);
 
         App.display();
     }

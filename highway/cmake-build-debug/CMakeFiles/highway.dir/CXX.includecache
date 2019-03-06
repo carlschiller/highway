@@ -12,11 +12,23 @@ SFML/Graphics.hpp
 string
 -
 
-/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/button.cpp
-utility
+../headers/cscreen.h
+SFML/Graphics.hpp
+../headers/SFML/Graphics.hpp
+vector
+-
+
+../headers/screen2.h
+cscreen.h
+../headers/cscreen.h
+
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/screen2.cpp
+screen2.h
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/screen2.h
+iostream
 -
 button.h
--
+/Users/carlschiller/Documents/KTH/Anteckningar/year3/Simulering/Project/highway/cppfiles/button.h
 
 /usr/local/include/SFML/Config.hpp
 TargetConditionals.h

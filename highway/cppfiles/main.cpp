@@ -57,6 +57,8 @@ int main() {
     args.push_back(sim_speed);
     float framerate = 60;
     args.push_back(framerate);
+    float ramp_meter_period = 10;
+    args.push_back(ramp_meter_period);
 
     std::vector<bool> bool_args;
     bool debug = false;
