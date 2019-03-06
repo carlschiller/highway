@@ -6,6 +6,7 @@
 #include <map>
 #include <cmath>
 #include <list>
+#include <iostream>
 #include "../headers/util.h"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -130,7 +131,11 @@ void Car::update_pos(float delta_t) {
         current_segment = heading_to_node->get_parent_segment(); // set new segment
         if(current_segment != nullptr){
             current_segment->append_car(this); // add car to new segment
+            if(current_segment->meter){
+                current_segment->car_passed = true;
+            }
         }
+
         current_node = heading_to_node; // set new current node as previous one.
 
         //TODO: place logic for choosing next node
@@ -342,6 +347,22 @@ void Car::avoid_collision(float delta_t) {
         }
         else{
 
+        }
+    }
+
+    if(heading_to_node->get_parent_segment()->meter){
+        if(heading_to_node->get_parent_segment()->car_passed || heading_to_node->get_parent_segment()->ramp_counter < heading_to_node->get_parent_segment()->period*0.5f){
+            if (m_dist_to_next_node < ideal) {
+                m_speed -= std::max(std::max((m_dist_to_next_node-min_distance)*0.5f,0.0f),10.0f*delta_t);
+            }
+            else if(m_dist_to_next_node < detection_distance){
+                m_speed -= std::min(
+                        abs(pow(m_speed, 2.0f)) * pow(ideal * 0.25f / m_dist_to_next_node, 2.0f) * m_aggressiveness * 0.15f,
+                        10.0f * delta_t);
+            }
+        }
+        else{
+            accelerate(delta_t);
         }
     }
     else{

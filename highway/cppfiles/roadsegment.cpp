@@ -33,6 +33,8 @@ RoadSegment::RoadSegment(float x, float y, RoadSegment * next_segment, int lanes
 
     ramp_counter = 0;
     car_passed = false;
+    meter = false;
+    period = 0;
 
     calculate_and_populate_nodes(); // populates segment with RoadNodes.
 }
@@ -51,6 +53,8 @@ RoadSegment::RoadSegment(float x, float y, float theta, int lanes) :
 
     ramp_counter = 0;
     car_passed = false;
+    meter = false;
+    period = 0;
 
     calculate_and_populate_nodes(); // populates segment with RoadNodes.
 }
@@ -70,6 +74,8 @@ RoadSegment::RoadSegment(float x, float y, int lanes, bool mer):
 
     ramp_counter = 0;
     car_passed = false;
+    meter = false;
+    period = 0;
 
     // can't set nodes if we don't have a theta.
 }

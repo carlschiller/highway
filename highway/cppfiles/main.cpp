@@ -30,13 +30,13 @@ int main() {
     float m_speed = 20.f;
     args.push_back(m_speed);
 
-    float m_lane_0_spawn_prob = 0.9f/3;
+    float m_lane_0_spawn_prob = 0.25f;
     args.push_back(m_lane_0_spawn_prob);
-    float m_lane_1_spawn_prob = 0.9f/3;
+    float m_lane_1_spawn_prob = 0.25f;
     args.push_back(m_lane_1_spawn_prob);
-    float m_lane_2_spawn_prob = 0.9f/3;
+    float m_lane_2_spawn_prob = 0.25f;
     args.push_back(m_lane_2_spawn_prob);
-    float m_ramp_0_spawn_prob = 0.1f/2;
+    float m_ramp_0_spawn_prob = 0.25f;
     args.push_back(m_ramp_0_spawn_prob);
 
     float m_min_dist_to_car_in_front = 8;

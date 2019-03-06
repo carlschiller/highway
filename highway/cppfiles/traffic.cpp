@@ -42,7 +42,7 @@ Traffic::Traffic(std::vector<bool> bargs, std::vector<float> args) :
     m_merge_min_dist(args[12]),
     m_search_radius_around(args[13]),
     m_search_radius_to_car_in_front(args[14]),
-    m_ramp_meter_period(args[16]),
+    m_ramp_meter_period(args[17]),
     m_ramp_meter(bargs[1]),
     m_multiplier(args[15])
 {
@@ -56,6 +56,8 @@ Traffic::Traffic(std::vector<bool> bargs, std::vector<float> args) :
     }
 
     Road::shared().ramp_meter_position->ramp_counter = 0;
+    Road::shared().ramp_meter_position->meter = m_ramp_meter;
+    Road::shared().ramp_meter_position->period = m_ramp_meter_period;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
