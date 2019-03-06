@@ -8,6 +8,9 @@
 #include "../headers/simulation2.h"
 #include <cmath>
 #include <unistd.h>
+#include <iomanip>
+#include <sstream>
+#include <fstream>
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Constructor
@@ -20,7 +23,7 @@
 /// time step of the system.
 /// @param exit_bool : If user wants to exit this is changed outside of the class.
 
-Sim::Sim(Traffic *&traffic, int framerate, int * time, bool * finish_bool):
+Sim::Sim(Traffic *&traffic, int framerate, long * time, bool * finish_bool):
         m_traffic(traffic),
         m_finish_bool(finish_bool),
         M_FRAMERATE(framerate),
@@ -39,11 +42,39 @@ void Sim::update() {
     double spawn_counter = 0.0;
     double threshold = 0.0;
 
+    std::vector<double> answer;
+    answer.reserve(*sim_time * M_FRAMERATE);
+
     for(int i = 0; i < *sim_time*M_FRAMERATE; i++){
         m_traffic->update(1.0f/(float)M_FRAMERATE);
         m_traffic->spawn_cars(spawn_counter,1.0f/(float)M_FRAMERATE,threshold);
         m_traffic->despawn_cars();
+        answer.push_back(m_traffic->get_avg_flow());
     }
 
+    print_to_file(&answer,*sim_time*M_FRAMERATE);
+
     *m_finish_bool = true;
+}
+
+void Sim::print_to_file(std::vector<double> * vec, long time_steps){
+    std::string filename;
+    auto t = std::time(nullptr);
+    auto tm = *std::localtime(&t);
+
+    std::ostringstream oss;
+    oss << std::put_time(&tm, "%d-%m-%Y-%H-%M-%S");
+    auto str = oss.str();
+
+    filename += str + "steps" + std::to_string(time_steps) + ".txt";
+
+    std::ofstream file_stream;
+    file_stream.open(filename);
+
+    for(auto subvec : *vec){
+        file_stream << subvec << std::endl;
+    }
+    file_stream.close();
+
+    std::cout << filename << " has been created\n";
 }

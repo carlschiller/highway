@@ -13,13 +13,14 @@ class Sim{
 private:
     Traffic * m_traffic;
     bool * m_finish_bool;
-    const int M_FRAMERATE;
-    int * sim_time;
+    const long M_FRAMERATE;
+    long * sim_time;
 public:
     Sim() = delete;
-    Sim(Traffic *& traffic, int m_framerate, int * time, bool * exitbool);
+    Sim(Traffic *& traffic, int m_framerate, long * time, bool * exitbool);
 
     void update();
+    void print_to_file(std::vector<double> * vec, long time_steps);
 };
 
 

@@ -11,8 +11,8 @@
 class screen_3 : public cScreen{
 private:
     bool run_bool;
-    int sim_time;
-    int frame_rate;
+    long sim_time;
+    long frame_rate;
 public:
     screen_3();
     virtual int Run(sf::RenderWindow & App, std::vector<float> * args,std::vector<bool> * bargs);
