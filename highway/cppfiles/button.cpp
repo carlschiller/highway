@@ -217,7 +217,7 @@ Button_bool* Button_bool::clicked(sf::RenderWindow &App) {
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
             rect.setFillColor(normal);
             toggled = !toggled;
-            text.setString(string+std::to_string(toggled));
+            text.setString(string+(toggled ? "true" : "false"));
             center_text();
             return this;
         }
@@ -233,4 +233,9 @@ Button_bool* Button_bool::clicked(sf::RenderWindow &App) {
 
 bool Button_bool::get_bool() {
     return toggled;
+}
+
+void Button_bool::set_toggled(bool tog) {
+    toggled = tog;
+    text.setString(string+(toggled ? "true" : "false"));
 }

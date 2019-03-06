@@ -76,6 +76,7 @@ int screen_2::Run(sf::RenderWindow &App, std::vector<float> * args,std::vector<b
     Button_bool bool_button = Button_bool(font,28,500,500,"Debug: ",normal,sf::Color::Black,hover,sf::Color::White,"false");
     bool_button.set_origin(0,input->get_bounds().height + input->get_pos().y);
     bool_button.set_dim(App.getSize().x,50);
+    bool_button.set_toggled(bargs[0][0]);
     bool_button.center_text();
 
     Input * current_input = nullptr;

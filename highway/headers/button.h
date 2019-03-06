@@ -64,8 +64,9 @@ public:
 };
 
 class Button_bool : public Input {
-    bool toggled = false;
+    bool toggled;
 public:
+    void set_toggled(bool tog);
     using Input::Input;
     virtual Button_bool * clicked(sf::RenderWindow & App);
     bool get_bool();
