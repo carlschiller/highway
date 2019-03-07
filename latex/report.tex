@@ -22,8 +22,9 @@
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{mylight}{rgb}{0.9,0.9,0.9}
 \lstset{
-  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+  backgroundcolor=\color{mylight},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
   basicstyle=\footnotesize,        % the size of the fonts that are used for the code
   breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
   breaklines=true,                 % sets automatic line breaking
@@ -118,8 +119,7 @@
     In contrast to \textit{Cellular Automata}
     there is no grid discretization, and thus the cars run on continuous ''tracks''.
     The distance traveled by each car is determined by the individual car's speed and
-    the system wide time step size,
-    which has been capped at $1/60$ seconds because of rendering considerations.
+    the system wide time step size.
     Another benefit from the \textit{directed graph} implementation is that
     the directions of the cars is not required as a parameter. All that is needed in
     order to simulate a car is the speed and the distance
@@ -129,7 +129,88 @@
 
     Cars make decisions independently according to simple rules, and generates
     a complex behavior when interacting with each other i.e. braking or changing lanes.
+    Some parameters are tweakable without changing the code, and each parameter
+    influences the simulation in different ways.
+    \subsubsection{Speed}
+      The cars' speed is determined by a mean speed multiplied by a normally distributed
+      variable $x \in N(1,\sigma)$, which is referred to in the code as
+      ''m\_aggressiveness''. ''m\_aggressiveness'' is also involved collision detection
+      and to determine when to overtake the car in front. $\sigma$ is user tweakable.
+    \subsubsection{Spawn rate and car headway}
+      Cars appear in two segments, either on the on-ramp or on the beginning of the freeway.
+      The rate of
+      which cars appear on freeways is determined by a gamma distribution
+      with probability density function according to equation \ref{eq:1}. \cite{abdel-rahim_ce571:_nodate}
+      \begin{equation}
+        f(t) = \frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}
+        \label{eq:1}
+      \end{equation}
+      where $\alpha$ is the ''shape'' factor and $\beta$ is the ''rate'' factor which are
+      tweakable according to which behavior is sought after. The expected mean of a
+      stochastic varaiable is $\frac{\alpha}{\beta}$, with variance $\frac{\alpha}{\beta^{2}}$.
+      This means, a larger $\beta$ implies a less spread out function.
+    \subsubsection{Collision detection}
+      If a car is too close to a car in front, the speed is reduced according the following rules.
+      \begin{lstlisting}[language=C++]
+      if (radius_to_car < ideal && delta_speed < 0 && radius_to_car > min_distance) {
+          m_speed -= std::min(std::max((radius_to_car-min_distance)*0.5f,0.0f),10.0f*delta_t);
+      }
+      else if(radius_to_car < min_distance){
+          m_speed -= std::min(std::max((min_distance-radius_to_car)*0.5f,0.0f),2.0f*delta_t);
+      }
+      else if(delta_speed < 0 && radius_to_car < detection_distance){
+          m_speed -= std::min(
+                  abs(pow(delta_speed, 2.0f)) * pow(ideal * 0.25f / radius_to_car, 2.0f) * m_aggressiveness * 0.15f,
+                  10.0f * delta_t);
+      }
+      \end{lstlisting}
+      This ensures that a car slowly approaches the car in front. The first if statement
+      guarantees that it will not surpass the ''min\_distance'' distance, because the
+      speed reduction follows this diverging sum.
+      \begin{equation}
+        d - \sum_{n = 2}^{\infty} \frac{d}{n^{2}} = 0
+      \end{equation}
+      where $d$ is ''radius\_to\_car-min\_distance''.
+    \subsubsection{Acceleration}
+      If no obstruction is in the way, a car will accelerate according to:
+      \begin{lstlisting}[language=C++]
+      float target = m_target_speed;
+      float d_vel; // proportional control.
 
+      if(m_speed < target*0.75){
+          d_vel = m_aggressiveness*elapsed*2.0f;
+      }
+      else{
+          d_vel = m_aggressiveness*(target-m_speed)*4*elapsed*2.0f;
+      }
+
+      m_speed += d_vel;
+      \end{lstlisting}
+
+    \subsubsection{Overtake logic and merging}
+      A car decides to overtake another car if the following conditions are met.
+      \begin{lstlisting}[language=C++]
+          //see if we want to overtake car.
+
+       if(closest_car != nullptr){
+           //float delta_speed = closest_car->speed()-speed();
+           float delta_distance = Util::distance_to_car(this,closest_car);
+
+           if(overtake_this_car == nullptr){
+               if(delta_distance > m_min_overtake_dist_trigger && delta_distance < m_max_overtake_dist_trigger && (target_speed()/closest_car->target_speed() > m_aggressiveness*1.0f ) && current_lane == 0 && closest_car->current_node->get_parent_segment()->get_lane_number(closest_car->current_node) == 0){
+                   overtake_this_car = closest_car;
+               }
+           }
+
+       }
+
+       if(overtake_this_car !=nullptr){
+           if(Util::is_car_behind(overtake_this_car,this) && (Util::distance_to_car(this,overtake_this_car) > m_overtake_done_dist)){
+               overtake_this_car = nullptr;
+           }
+       }
+      \end{lstlisting}
+      A car will not merge if another car is occupying the lane it want to switch too.
   \subsection{Graphics rendering}
     When tweaking parameters involved in the cars' descision making, it is hard to
     get an overview of how each parameter influences the system wide behavior of the
@@ -137,7 +218,27 @@
     that shows how the traffic flows in the given configuration of parameters.
     An example of a test run is shown in the link below.
 \section{Result}
-
+  The following parameters have been used.
+  \begin{tabular}{| l | l |}
+    \hline
+    Agressiveness & 1.0 \\ \hline
+    Agressiveness sigma & 0.2 \\ \hline
+    Global alpha & 2.0 \\ \hline
+    Mean speed & 20 (m/s) \\ \hline
+    Lane 0 beta & 5.0 \\ \hline
+    Lane 1 beta & 1.0 \\ \hline
+    Lane 2 beta & 1.0 \\ \hline
+    Ramp 0 beta & 5.0 \\ \hline
+    Minimum distance to car in front & 8.0 (m) \\ \hline
+    Minimum overtake distance cutoff & 10.0 (m) \\ \hline
+    Maximum overtake distance cutoff & 40.0 (m) \\ \hline
+    Overtake distance shutoff & 30.0 (m) \\ \hline
+    Minimum merge distance & 15.0 (m) \\ \hline
+    Radial search distance & 30.0 (m) \\ \hline
+    Search distance forward & 50.0 (m) \\ \hline
+    Time step & 1/60.0 (s) \\ \hline
+    Ramp meter period & 10.0 (s) \\ \hline
+  \end{tabular}
 \section{Discussion}
 
 \printbibliography

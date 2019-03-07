@@ -27,18 +27,18 @@ int main() {
     args.push_back(m_aggro);
     float m_aggro_sigma = 0.2f;
     args.push_back(m_aggro_sigma);
-    float m_spawn_freq = 1.0f;
+    float m_spawn_freq = 2.0f;
     args.push_back(m_spawn_freq);
     float m_speed = 20.f;
     args.push_back(m_speed);
 
-    float m_lane_0_spawn_prob = 0.25f;
+    float m_lane_0_spawn_prob = 5.f;
     args.push_back(m_lane_0_spawn_prob);
-    float m_lane_1_spawn_prob = 0.25f;
+    float m_lane_1_spawn_prob = 1.f;
     args.push_back(m_lane_1_spawn_prob);
-    float m_lane_2_spawn_prob = 0.25f;
+    float m_lane_2_spawn_prob = 1.f;
     args.push_back(m_lane_2_spawn_prob);
-    float m_ramp_0_spawn_prob = 0.25f;
+    float m_ramp_0_spawn_prob = 5.f;
     args.push_back(m_ramp_0_spawn_prob);
 
     float m_min_dist_to_car_in_front = 8;

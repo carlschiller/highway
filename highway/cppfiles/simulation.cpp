@@ -36,8 +36,16 @@ Simulation::Simulation(Traffic *&traffic, sf::Mutex *&mutex, int sim_speed, int 
 void Simulation::update() {
     sf::Clock clock;
     sf::Time time;
-    double spawn_counter = 0.0;
-    double threshold = 0.0;
+    double spawn_counter_0 = 0.0;
+    double spawn_counter_1 = 0.0;
+    double spawn_counter_2 = 0.0;
+    double spawn_counter_3 = 0.0;
+    
+    std::vector<double *> counter;
+    counter.push_back(&spawn_counter_0);
+    counter.push_back(&spawn_counter_1);
+    counter.push_back(&spawn_counter_2);
+    counter.push_back(&spawn_counter_3);
 
     while(!*m_exit_bool){
         m_mutex->lock();
@@ -46,7 +54,7 @@ void Simulation::update() {
             //std::cout<< "a\n";
             m_traffic->update(1.0f/(float)M_FRAMERATE);
             //std::cout<< "b\n";
-            m_traffic->spawn_cars(spawn_counter,1.0f/(float)M_FRAMERATE,threshold);
+            m_traffic->spawn_cars(counter,1.0f/(float)M_FRAMERATE);
             //m_mutex->lock();
             //std::cout<< "c\n";
             m_traffic->despawn_cars();

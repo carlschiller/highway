@@ -51,16 +51,17 @@ void Tests::delete_cars_test() {
 void Tests::run_one_car() {
     double ten = 10.0;
     double zero = 0;
-    m_traffic->spawn_cars(ten,0,zero);
+    //m_traffic->spawn_cars(ten,0,zero);
     double fps = 60.0;
     double multiplier = 10.0;
-
+/*
     std::cout << "running one car\n";
     while(m_traffic->n_of_cars() != 0) {
         usleep((useconds_t)(1000000.0/(fps*multiplier)));
         m_traffic->update(1.0f/(float)fps);
         m_traffic->despawn_cars();
     }
+    */
 }
 
 void Tests::placement_test_2() {

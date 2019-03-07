@@ -56,7 +56,7 @@ public:
     Traffic& operator=(const Traffic&); // rule of three
 
     unsigned long n_of_cars();
-    void spawn_cars(double & spawn_counter, float elapsed, double & threshold);
+    void spawn_cars(std::vector<double*> & counters, float elapsed);
     void despawn_cars();
     void despawn_all_cars();
     void despawn_car(Car*& car);

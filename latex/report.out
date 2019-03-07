@@ -4,25 +4,30 @@
 \BOOKMARK [1][-]{section.2}{Method}{}% 4
 \BOOKMARK [2][-]{subsection.2.1}{Graphs}{section.2}% 5
 \BOOKMARK [2][-]{subsection.2.2}{Discretization}{section.2}% 6
-\BOOKMARK [2][-]{subsection.2.3}{Graphics rendering}{section.2}% 7
-\BOOKMARK [1][-]{section.3}{Result}{}% 8
-\BOOKMARK [1][-]{section.4}{Discussion}{}% 9
-\BOOKMARK [1][-]{appendix.A}{Header files}{}% 10
-\BOOKMARK [2][-]{subsection.A.1}{cars.h}{appendix.A}% 11
-\BOOKMARK [2][-]{subsection.A.2}{road.h}{appendix.A}% 12
-\BOOKMARK [2][-]{subsection.A.3}{roadnode.h}{appendix.A}% 13
-\BOOKMARK [2][-]{subsection.A.4}{roadsegment.h}{appendix.A}% 14
-\BOOKMARK [2][-]{subsection.A.5}{simulation.h}{appendix.A}% 15
-\BOOKMARK [2][-]{subsection.A.6}{traffic.h}{appendix.A}% 16
-\BOOKMARK [2][-]{subsection.A.7}{unittests.h}{appendix.A}% 17
-\BOOKMARK [2][-]{subsection.A.8}{util.h}{appendix.A}% 18
-\BOOKMARK [1][-]{appendix.B}{Source files}{}% 19
-\BOOKMARK [2][-]{subsection.B.1}{cars.cpp}{appendix.B}% 20
-\BOOKMARK [2][-]{subsection.B.2}{main.cpp}{appendix.B}% 21
-\BOOKMARK [2][-]{subsection.B.3}{road.cpp}{appendix.B}% 22
-\BOOKMARK [2][-]{subsection.B.4}{roadnode.cpp}{appendix.B}% 23
-\BOOKMARK [2][-]{subsection.B.5}{roadsegment.cpp}{appendix.B}% 24
-\BOOKMARK [2][-]{subsection.B.6}{simulation.cpp}{appendix.B}% 25
-\BOOKMARK [2][-]{subsection.B.7}{traffic.cpp}{appendix.B}% 26
-\BOOKMARK [2][-]{subsection.B.8}{unittests.cpp}{appendix.B}% 27
-\BOOKMARK [2][-]{subsection.B.9}{util.cpp}{appendix.B}% 28
+\BOOKMARK [3][-]{subsubsection.2.2.1}{Speed}{subsection.2.2}% 7
+\BOOKMARK [3][-]{subsubsection.2.2.2}{Spawn rate and car headway}{subsection.2.2}% 8
+\BOOKMARK [3][-]{subsubsection.2.2.3}{Collision detection}{subsection.2.2}% 9
+\BOOKMARK [3][-]{subsubsection.2.2.4}{Acceleration}{subsection.2.2}% 10
+\BOOKMARK [3][-]{subsubsection.2.2.5}{Overtake logic and merging}{subsection.2.2}% 11
+\BOOKMARK [2][-]{subsection.2.3}{Graphics rendering}{section.2}% 12
+\BOOKMARK [1][-]{section.3}{Result}{}% 13
+\BOOKMARK [1][-]{section.4}{Discussion}{}% 14
+\BOOKMARK [1][-]{appendix.A}{Header files}{}% 15
+\BOOKMARK [2][-]{subsection.A.1}{cars.h}{appendix.A}% 16
+\BOOKMARK [2][-]{subsection.A.2}{road.h}{appendix.A}% 17
+\BOOKMARK [2][-]{subsection.A.3}{roadnode.h}{appendix.A}% 18
+\BOOKMARK [2][-]{subsection.A.4}{roadsegment.h}{appendix.A}% 19
+\BOOKMARK [2][-]{subsection.A.5}{simulation.h}{appendix.A}% 20
+\BOOKMARK [2][-]{subsection.A.6}{traffic.h}{appendix.A}% 21
+\BOOKMARK [2][-]{subsection.A.7}{unittests.h}{appendix.A}% 22
+\BOOKMARK [2][-]{subsection.A.8}{util.h}{appendix.A}% 23
+\BOOKMARK [1][-]{appendix.B}{Source files}{}% 24
+\BOOKMARK [2][-]{subsection.B.1}{cars.cpp}{appendix.B}% 25
+\BOOKMARK [2][-]{subsection.B.2}{main.cpp}{appendix.B}% 26
+\BOOKMARK [2][-]{subsection.B.3}{road.cpp}{appendix.B}% 27
+\BOOKMARK [2][-]{subsection.B.4}{roadnode.cpp}{appendix.B}% 28
+\BOOKMARK [2][-]{subsection.B.5}{roadsegment.cpp}{appendix.B}% 29
+\BOOKMARK [2][-]{subsection.B.6}{simulation.cpp}{appendix.B}% 30
+\BOOKMARK [2][-]{subsection.B.7}{traffic.cpp}{appendix.B}% 31
+\BOOKMARK [2][-]{subsection.B.8}{unittests.cpp}{appendix.B}% 32
+\BOOKMARK [2][-]{subsection.B.9}{util.cpp}{appendix.B}% 33

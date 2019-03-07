@@ -12,46 +12,56 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.2}Discretization}{3}{subsection.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3}Graphics rendering}{3}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.2.1}Speed}{3}{subsubsection.2.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3}Result}{4}{section.3}
+\contentsline {subsubsection}{\numberline {2.2.2}Spawn rate and car headway}{3}{subsubsection.2.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}Discussion}{4}{section.4}
+\contentsline {subsubsection}{\numberline {2.2.3}Collision detection}{4}{subsubsection.2.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A}Header files}{5}{appendix.A}
+\contentsline {subsubsection}{\numberline {2.2.4}Acceleration}{4}{subsubsection.2.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.1}cars.h}{5}{subsection.A.1}
+\contentsline {subsubsection}{\numberline {2.2.5}Overtake logic and merging}{4}{subsubsection.2.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.2}road.h}{6}{subsection.A.2}
+\contentsline {subsection}{\numberline {2.3}Graphics rendering}{5}{subsection.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.3}roadnode.h}{6}{subsection.A.3}
+\contentsline {section}{\numberline {3}Result}{5}{section.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.4}roadsegment.h}{7}{subsection.A.4}
+\contentsline {section}{\numberline {4}Discussion}{5}{section.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.5}simulation.h}{8}{subsection.A.5}
+\contentsline {section}{\numberline {A}Header files}{7}{appendix.A}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.6}traffic.h}{9}{subsection.A.6}
+\contentsline {subsection}{\numberline {A.1}cars.h}{7}{subsection.A.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.7}unittests.h}{10}{subsection.A.7}
+\contentsline {subsection}{\numberline {A.2}road.h}{8}{subsection.A.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.8}util.h}{10}{subsection.A.8}
+\contentsline {subsection}{\numberline {A.3}roadnode.h}{9}{subsection.A.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {B}Source files}{11}{appendix.B}
+\contentsline {subsection}{\numberline {A.4}roadsegment.h}{9}{subsection.A.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {B.1}cars.cpp}{11}{subsection.B.1}
+\contentsline {subsection}{\numberline {A.5}simulation.h}{10}{subsection.A.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {B.2}main.cpp}{18}{subsection.B.2}
+\contentsline {subsection}{\numberline {A.6}traffic.h}{11}{subsection.A.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {B.3}road.cpp}{19}{subsection.B.3}
+\contentsline {subsection}{\numberline {A.7}unittests.h}{12}{subsection.A.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {B.4}roadnode.cpp}{22}{subsection.B.4}
+\contentsline {subsection}{\numberline {A.8}util.h}{13}{subsection.A.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {B.5}roadsegment.cpp}{23}{subsection.B.5}
+\contentsline {section}{\numberline {B}Source files}{14}{appendix.B}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {B.6}simulation.cpp}{27}{subsection.B.6}
+\contentsline {subsection}{\numberline {B.1}cars.cpp}{14}{subsection.B.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {B.7}traffic.cpp}{28}{subsection.B.7}
+\contentsline {subsection}{\numberline {B.2}main.cpp}{22}{subsection.B.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {B.8}unittests.cpp}{35}{subsection.B.8}
+\contentsline {subsection}{\numberline {B.3}road.cpp}{23}{subsection.B.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {B.9}util.cpp}{37}{subsection.B.9}
+\contentsline {subsection}{\numberline {B.4}roadnode.cpp}{26}{subsection.B.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {B.5}roadsegment.cpp}{28}{subsection.B.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {B.6}simulation.cpp}{31}{subsection.B.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {B.7}traffic.cpp}{33}{subsection.B.7}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {B.8}unittests.cpp}{41}{subsection.B.8}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {B.9}util.cpp}{43}{subsection.B.9}

@@ -19,6 +19,34 @@
 
 \refsection{0}
   \sortlist[entry]{nty/global/}
+    \entry{abdel-rahim_ce571:_nodate}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=1fb580dd38fb548be88fcb081d7a7c0f}{%
+           family={Abdel-Rahim},
+           family_i={A\bibinithyphendelim R\bibinitperiod},
+           given={Ahmed},
+           given_i={A\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {English (United States), en-US}%
+      }
+      \strng{namehash}{1fb580dd38fb548be88fcb081d7a7c0f}
+      \strng{fullhash}{1fb580dd38fb548be88fcb081d7a7c0f}
+      \field{sortinit}{A}
+      \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{CE}571: {Traffic} {Flow} {Theory} - {Spring} 2011}
+      \field{urlday}{07}
+      \field{urlmonth}{03}
+      \field{urlyear}{2019}
+      \verb{file}
+      \verb Week 2 modeling headway distribution 2011.pdf:/Users/carlschiller/Zotero/storage/Y9FZY62P/Week 2 modeling headway distribution 2011.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb https://www.webpages.uidaho.edu/ce571/class%20notes/Week%202%20modeling%20headway%20distribution%202011.pdf
+      \endverb
+    \endentry
     \entry{noauthor_gerichteter_2018}{misc}{}
       \list{language}{1}{%
         {de}%

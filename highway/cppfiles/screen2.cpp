@@ -41,12 +41,12 @@ int screen_2::Run(sf::RenderWindow &App, std::vector<float> * args,std::vector<b
 
     names[0] = "Aggresiveness: ";
     names[1] = "Aggro sigma: ";
-    names[2] = "Spawn frequency: ";
+    names[2] = "Global alpha: ";
     names[3] = "Speed: ";
-    names[4] = "Spawn prob lane 0: ";
-    names[5] = "Spawn prob lane 1: ";
-    names[6] = "Spawn prob lane 2: ";
-    names[7] = "Spawn prob ramp 0: ";
+    names[4] = "Lane 0 beta: ";
+    names[5] = "Lane 1 beta: ";
+    names[6] = "Lane 2 beta: ";
+    names[7] = "Ramp 0 beta: ";
     names[8] = "Min car distance: ";
     names[9] = "Min overtake dist: ";
     names[10] = "Max overtake dist: ";

@@ -39,15 +39,23 @@ Sim::Sim(Traffic *&traffic, int framerate, long * time, bool * finish_bool):
 void Sim::update() {
     sf::Clock clock;
     sf::Time time;
-    double spawn_counter = 0.0;
-    double threshold = 0.0;
+    double spawn_counter_0 = 0.0;
+    double spawn_counter_1 = 0.0;
+    double spawn_counter_2 = 0.0;
+    double spawn_counter_3 = 0.0;
+
+    std::vector<double *> counter;
+    counter.push_back(&spawn_counter_0);
+    counter.push_back(&spawn_counter_1);
+    counter.push_back(&spawn_counter_2);
+    counter.push_back(&spawn_counter_3);
 
     std::vector<double> answer;
     answer.reserve(*sim_time * M_FRAMERATE);
 
     for(int i = 0; i < *sim_time*M_FRAMERATE; i++){
         m_traffic->update(1.0f/(float)M_FRAMERATE);
-        m_traffic->spawn_cars(spawn_counter,1.0f/(float)M_FRAMERATE,threshold);
+        m_traffic->spawn_cars(counter,1.0f/(float)M_FRAMERATE);
         m_traffic->despawn_cars();
         answer.push_back(m_traffic->get_avg_flow());
     }

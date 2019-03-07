@@ -175,63 +175,59 @@ std::mt19937& Traffic::my_engine() {
 /// Cars that are spawned are poission distributed in time, the speed of the
 /// cars are normally distributed according to their aggresiveness.
 
-void Traffic::spawn_cars(double & spawn_counter, float elapsed, double & threshold) {
-    spawn_counter += elapsed;
-    if(spawn_counter > threshold){
-        std::exponential_distribution<double> dis(m_spawn_freq);
-        std::normal_distribution<float> aggro(m_aggro,m_aggro_sigma);
-        std::uniform_real_distribution<float> spawn(0.0f,1.0f);
+void Traffic::spawn_cars(std::vector<double*> & spawn_counter, float elapsed) {
+    int i = 0;
+    std::vector<RoadSegment*> segments = Road::shared().spawn_positions();
+    std::vector<Car *> cars;
+    for(int j = 0; j < 4; j++){
+        cars.push_back(nullptr);
+    }
 
-        threshold = dis(my_engine());
-        float aggressiveness = aggro(my_engine());
-        float speed = m_speed*aggressiveness;
-        float target = speed;
+    for(double * counter : spawn_counter){
+        if(*counter < 0){
+            std::gamma_distribution<double> dis(m_spawn_freq,probs[i]);
+            std::normal_distribution<float> aggro(m_aggro,m_aggro_sigma);
 
-        spawn_counter = 0;
-        float spawn_pos = spawn(my_engine());
+            *counter = dis(my_engine());
+            float aggressiveness = aggro(my_engine());
+            float speed = m_speed*aggressiveness;
+            float target = speed;
 
-        std::vector<RoadSegment*> segments = Road::shared().spawn_positions();
-        Car * new_car = nullptr;
-        
-        float culm_prob = 1;
-        
-        int counter = 0;
-        for(const float & prob : probs){
-            culm_prob -= prob;
-            if(spawn_pos > culm_prob){
-                if(counter < 3){
-                    new_car = new Car(segments[0],counter,speed,target,aggressiveness,m_min_dist_to_car_in_front,
-                            m_min_overtake_dist_trigger,m_max_overtake_dist_trigger,m_overtake_done_dist,
-                            m_merge_min_dist,m_search_radius_around,m_search_radius_to_car_in_front);
-                    break;
-                }
-                else if(counter == 3){
-                    new_car = new Car(segments[1],0,speed,target,aggressiveness,m_min_dist_to_car_in_front,
-                                      m_min_overtake_dist_trigger,m_max_overtake_dist_trigger,m_overtake_done_dist,
-                                      m_merge_min_dist,m_search_radius_around,m_search_radius_to_car_in_front);
-                    break;
-                }
-            }
-            counter++;
-        }
-        
-        if(new_car != nullptr){
-            Car * closest_car_ahead = new_car->find_closest_car_ahead();
-
-            if(closest_car_ahead == nullptr && closest_car_ahead != new_car){
-                m_cars.push_back(new_car);
+            if(i < 3){
+                Car * new_car = new Car(segments[0],i,speed,target,aggressiveness,m_min_dist_to_car_in_front,
+                                  m_min_overtake_dist_trigger,m_max_overtake_dist_trigger,m_overtake_done_dist,
+                                  m_merge_min_dist,m_search_radius_around,m_search_radius_to_car_in_front);
+                cars[i] = new_car;
             }
             else{
-                float dist = Util::distance_to_car(new_car,closest_car_ahead);
+                Car * new_car = new Car(segments[1],0,speed,target,aggressiveness,m_min_dist_to_car_in_front,
+                                  m_min_overtake_dist_trigger,m_max_overtake_dist_trigger,m_overtake_done_dist,
+                                  m_merge_min_dist,m_search_radius_around,m_search_radius_to_car_in_front);
+                cars[i] = new_car;
+            }
+        }
+        i++;
+        *counter -= elapsed;
+    }
+
+    for(Car * car : cars) {
+        if(car != nullptr){
+            Car * closest_car_ahead = car->find_closest_car_ahead();
+
+            if(closest_car_ahead == nullptr && closest_car_ahead != car){
+                m_cars.push_back(car);
+            }
+            else{
+                float dist = Util::distance_to_car(car,closest_car_ahead);
                 if(dist < 10){
-                    delete new_car;
+                    delete car;
                 }
                 else if (dist < 150){
-                    new_car->speed() = closest_car_ahead->speed();
-                    m_cars.push_back(new_car);
+                    car->speed() = closest_car_ahead->speed();
+                    m_cars.push_back(car);
                 }
                 else{
-                    m_cars.push_back(new_car);
+                    m_cars.push_back(car);
                 }
             }
         }
