@@ -62,9 +62,12 @@ int screen_3::Run(sf::RenderWindow &App, std::vector<float> * args,std::vector<b
     int micro = 1000000;
     usleep((useconds_t)micro/8);
 
+    int * percent = new int;
+    *percent = 0;
+
     auto traffic = new Traffic(*bargs,*args);
     frame_rate = (int)args[0][16];
-    Sim sim = Sim(traffic,frame_rate,&sim_time,&run_bool);
+    Sim sim = Sim(traffic,frame_rate,&sim_time,&run_bool,percent);
 
     sim_time = 1000;
     sf::Thread thread(&Sim::update,&sim);
@@ -83,6 +86,7 @@ int screen_3::Run(sf::RenderWindow &App, std::vector<float> * args,std::vector<b
             } else if (!just_arrived && current_input == nullptr && !stop_bool) {
                 if (button1.clicked(App)) {
                     delete traffic;
+                    delete percent;
                     return 0;
                 }
                 else if (button2.clicked(App)) {
@@ -118,7 +122,12 @@ int screen_3::Run(sf::RenderWindow &App, std::vector<float> * args,std::vector<b
         for (Input *inp : inputs) {
             App.draw(*inp);
         }
+
+        if(stop_bool){
+            button2.set_text("Wait ..." + std::to_string(*percent) + "%");
+        }
         App.draw(button2);
+
 
         App.display();
 

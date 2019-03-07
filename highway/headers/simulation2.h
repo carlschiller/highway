@@ -15,9 +15,10 @@ private:
     bool * m_finish_bool;
     const long M_FRAMERATE;
     long * sim_time;
+    int * m_percent;
 public:
     Sim() = delete;
-    Sim(Traffic *& traffic, int m_framerate, long * time, bool * exitbool);
+    Sim(Traffic *& traffic, int m_framerate, long * time, bool * exitbool, int * percent);
 
     void update();
     void print_to_file(std::vector<double> * vec, long time_steps);

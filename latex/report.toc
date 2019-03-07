@@ -26,7 +26,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3}Result}{5}{section.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}Discussion}{5}{section.4}
+\contentsline {subsection}{\numberline {3.1}Parameters}{5}{subsection.3.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4}Discussion}{6}{section.4}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {A}Header files}{7}{appendix.A}
 \defcounter {refsection}{0}\relax 

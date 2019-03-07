@@ -58,6 +58,14 @@ Traffic::Traffic(std::vector<bool> bargs, std::vector<float> args) :
     Road::shared().ramp_meter_position->ramp_counter = 0;
     Road::shared().ramp_meter_position->meter = m_ramp_meter;
     Road::shared().ramp_meter_position->period = m_ramp_meter_period;
+
+    road_length = 0;
+
+    for(RoadSegment * seg : Road::shared().segments()){
+        if(seg->next_segment() != nullptr){
+            road_length += Util::distance(seg->get_x(),seg->next_segment()->get_x(),seg->get_y(),seg->next_segment()->get_y());
+        }
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -83,6 +91,7 @@ Traffic::Traffic(const Traffic &ref) :
     m_search_radius_to_car_in_front(ref.m_search_radius_to_car_in_front),
     m_ramp_meter_period(ref.m_ramp_meter_period),
     m_ramp_meter(ref.m_ramp_meter),
+    road_length(ref.road_length),
     probs(ref.probs),
     m_multiplier(ref.m_multiplier)
 {
@@ -185,7 +194,7 @@ void Traffic::spawn_cars(std::vector<double*> & spawn_counter, float elapsed) {
 
     for(double * counter : spawn_counter){
         if(*counter < 0){
-            std::gamma_distribution<double> dis(m_spawn_freq,probs[i]);
+            std::gamma_distribution<double> dis(probs[i],m_spawn_freq);
             std::normal_distribution<float> aggro(m_aggro,m_aggro_sigma);
 
             *counter = dis(my_engine());
@@ -358,16 +367,14 @@ std::vector<Car *> Traffic::get_car_copies() const {
 
 float Traffic::get_avg_flow() {
     float flow = 0;
-    float i = 0;
     for(Car * car : m_cars){
-        i++;
-        flow += car->speed()/car->target_speed();
+        flow += car->speed();
     }
     if(m_cars.empty()){
         return 0;
     }
     else{
-        return flow/i;
+        return flow/(road_length);
     }
 }
 

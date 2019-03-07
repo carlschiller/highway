@@ -47,6 +47,8 @@ private:
     const float m_ramp_meter_period;
     const bool m_ramp_meter;
 
+    float road_length;
+
     std::vector<float> probs;
 public:
     Traffic() = delete;

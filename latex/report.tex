@@ -142,13 +142,13 @@
       which cars appear on freeways is determined by a gamma distribution
       with probability density function according to equation \ref{eq:1}. \cite{abdel-rahim_ce571:_nodate}
       \begin{equation}
-        f(t) = \frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}
+        f(t) = \frac{1}{\Gamma(\alpha)\beta^{\alpha}}x^{\alpha-1}e^{-x/\beta}
         \label{eq:1}
       \end{equation}
       where $\alpha$ is the ''shape'' factor and $\beta$ is the ''rate'' factor which are
       tweakable according to which behavior is sought after. The expected mean of a
-      stochastic varaiable is $\frac{\alpha}{\beta}$, with variance $\frac{\alpha}{\beta^{2}}$.
-      This means, a larger $\beta$ implies a less spread out function.
+      stochastic varaiable is $\alpha\beta$, with variance $\alpha\beta^{2}$.
+      This means, a larger $\beta$ implies a more spread out function.
     \subsubsection{Collision detection}
       If a car is too close to a car in front, the speed is reduced according the following rules.
       \begin{lstlisting}[language=C++]
@@ -218,27 +218,34 @@
     that shows how the traffic flows in the given configuration of parameters.
     An example of a test run is shown in the link below.
 \section{Result}
-  The following parameters have been used.
-  \begin{tabular}{| l | l |}
-    \hline
-    Agressiveness & 1.0 \\ \hline
-    Agressiveness sigma & 0.2 \\ \hline
-    Global alpha & 2.0 \\ \hline
-    Mean speed & 20 (m/s) \\ \hline
-    Lane 0 beta & 5.0 \\ \hline
-    Lane 1 beta & 1.0 \\ \hline
-    Lane 2 beta & 1.0 \\ \hline
-    Ramp 0 beta & 5.0 \\ \hline
-    Minimum distance to car in front & 8.0 (m) \\ \hline
-    Minimum overtake distance cutoff & 10.0 (m) \\ \hline
-    Maximum overtake distance cutoff & 40.0 (m) \\ \hline
-    Overtake distance shutoff & 30.0 (m) \\ \hline
-    Minimum merge distance & 15.0 (m) \\ \hline
-    Radial search distance & 30.0 (m) \\ \hline
-    Search distance forward & 50.0 (m) \\ \hline
-    Time step & 1/60.0 (s) \\ \hline
-    Ramp meter period & 10.0 (s) \\ \hline
-  \end{tabular}
+  \subsection{Parameters}
+    The following parameters have been used in the simulation.
+    \begin{table}[H]
+      \centering
+      \begin{tabular}{| l | l |}
+        \hline
+        Agressiveness & 1.0 \\ \hline
+        Agressiveness $\sigma$ & 0.2 \\ \hline
+        Global $\beta$ & 1.5 \\ \hline
+        Mean speed & 20 (m/s) \\ \hline
+        Lane 0 $\alpha$ & 4.0 \\ \hline
+        Lane 1 $\alpha$ & 2.0 to 0.2 with step 0.1 \\ \hline
+        Lane 2 $\alpha$ & 2.0 to 0.2 with step 0.1 \\ \hline
+        Ramp 0 $\alpha$ & 4.0 \\ \hline
+        Minimum distance to car in front & 8.0 (m) \\ \hline
+        Minimum overtake distance cutoff & 10.0 (m) \\ \hline
+        Maximum overtake distance cutoff & 40.0 (m) \\ \hline
+        Overtake distance shutoff & 30.0 (m) \\ \hline
+        Minimum merge distance & 15.0 (m) \\ \hline
+        Radial search distance & 30.0 (m) \\ \hline
+        Search distance forward & 50.0 (m) \\ \hline
+        Time step & 1/60.0 (s) \\ \hline
+        Ramp meter period & 6.0 (s) \\ \hline
+      \end{tabular}
+      \caption{Parameters used}
+      \label{tb:1}
+    \end{table}
+
 \section{Discussion}
 
 \printbibliography

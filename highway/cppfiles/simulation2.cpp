@@ -23,11 +23,12 @@
 /// time step of the system.
 /// @param exit_bool : If user wants to exit this is changed outside of the class.
 
-Sim::Sim(Traffic *&traffic, int framerate, long * time, bool * finish_bool):
+Sim::Sim(Traffic *&traffic, int framerate, long * time, bool * finish_bool, int * percent):
         m_traffic(traffic),
         m_finish_bool(finish_bool),
         M_FRAMERATE(framerate),
-        sim_time(time)
+        sim_time(time),
+        m_percent(percent)
 {
 
 }
@@ -44,6 +45,9 @@ void Sim::update() {
     double spawn_counter_2 = 0.0;
     double spawn_counter_3 = 0.0;
 
+    long one_percent = *sim_time*M_FRAMERATE/100;
+    int per = 0;
+
     std::vector<double *> counter;
     counter.push_back(&spawn_counter_0);
     counter.push_back(&spawn_counter_1);
@@ -58,6 +62,11 @@ void Sim::update() {
         m_traffic->spawn_cars(counter,1.0f/(float)M_FRAMERATE);
         m_traffic->despawn_cars();
         answer.push_back(m_traffic->get_avg_flow());
+
+        if(i%one_percent == 0){
+            *m_percent = per;
+            per++;
+        }
     }
 
     print_to_file(&answer,*sim_time*M_FRAMERATE);
