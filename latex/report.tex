@@ -12,6 +12,7 @@
 \usepackage{listings}
 \usepackage{color}
 \usepackage{multicol}
+\usepackage{subcaption}
 %\usepackage{biblatex}
 
 
@@ -142,7 +143,7 @@
       which cars appear on freeways is determined by a gamma distribution
       with probability density function according to equation \ref{eq:1}. \cite{abdel-rahim_ce571:_nodate}
       \begin{equation}
-        f(t) = \frac{1}{\Gamma(\alpha)\beta^{\alpha}}x^{\alpha-1}e^{-x/\beta}
+        f(x) = \frac{1}{\Gamma(\alpha)\beta^{\alpha}}x^{\alpha-1}e^{-x/\beta}
         \label{eq:1}
       \end{equation}
       where $\alpha$ is the ''shape'' factor and $\beta$ is the ''rate'' factor which are
@@ -217,9 +218,15 @@
     traffic. Thus a lot of effort has been spent on developing a graphical interface
     that shows how the traffic flows in the given configuration of parameters.
     An example of a test run is shown in the link below.
+    \url{https://youtu.be/I7Jx8SScYZ8}
+
 \section{Result}
   \subsection{Parameters}
     The following parameters have been used in the simulation.
+    By varying Lane 1 $\alpha$ and Lane 2 $\alpha$ (the rate of which cars spawn on the
+    freeway), the effect of a ramp meter
+    on the system flow was determined. This was done by simulating the flow of different
+    spawn rates with a ramp meter and without a ramp meter.
     \begin{table}[H]
       \centering
       \begin{tabular}{| l | l |}
@@ -229,8 +236,8 @@
         Global $\beta$ & 1.5 \\ \hline
         Mean speed & 20 (m/s) \\ \hline
         Lane 0 $\alpha$ & 4.0 \\ \hline
-        Lane 1 $\alpha$ & 2.0 to 0.2 with step 0.1 \\ \hline
-        Lane 2 $\alpha$ & 2.0 to 0.2 with step 0.1 \\ \hline
+        Lane 1 $\alpha$ & 2.0 to 0.1 with step 0.1 \\ \hline
+        Lane 2 $\alpha$ & 2.0 to 0.1 with step 0.1 \\ \hline
         Ramp 0 $\alpha$ & 4.0 \\ \hline
         Minimum distance to car in front & 8.0 (m) \\ \hline
         Minimum overtake distance cutoff & 10.0 (m) \\ \hline
@@ -245,9 +252,85 @@
       \caption{Parameters used}
       \label{tb:1}
     \end{table}
-
+  \subsection{Null hypothesis}
+    Let $X$ be the stochastic variable associated with the mean flow of traffic
+    without a ramp meter over all simulated time.
+    I.e, the outcome of $X$ is the mean flow of a simulation at a given
+    $\alpha$. Let $Y$ be the stochastic variable associated with the mean flow of traffic
+    with a ramp meter over all simulated time. Then formulate the null hypothesis:
+    \begin{equation}
+      \begin{split}
+        H_{0} & : X \textrm{ and } Y \textrm{ has the same distribution}\\
+        H_{1} & : X\textrm{'s distribution is skewed in relation to } Y
+      \end{split}
+      \label{eq:null}
+    \end{equation}
+  \subsection{Plots}
+    \begin{figure}
+      \centering
+      \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{fig1.png}
+        \caption{ }
+        \label{sub:1}
+      \end{subfigure}%
+      \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{fig2.png}
+        \caption{ }
+        \label{sub:2}
+      \end{subfigure}
+      \caption{\ref{sub:1}) Fundamental diagram of flow as a function of $\alpha$ with time step 1/60 seconds. Total
+      60000 steps. Errorbars represent $\pm\sigma$ of deviation in flow.
+      \ref{sub:2}) Flow versus time of different $\alpha$ with time step 1/60 seconds, no ramp meter applied. Total of 600000 steps}
+      \label{fig:fund}
+    \end{figure}
+    Figure \ref{sub:2} has characteristics typical of stop-and-go traffic for higher densities. The fluctuations of the flow
+    increases as the expected spawn time $\alpha\beta$ decreases, which also can be seen by looking at figure \ref{sub:1}. The error bars
+    are larger for smaller $\alpha$, which indicates a larger standard deviation from the mean flow. By using
+    Wilcoxons rank sum test with equation \ref{eq:null} in mind, the p-value of the means in figure \ref{sub:1} is $p=0.9887$.
+    \begin{figure}
+      \centering
+      \begin{subfigure}{0.33\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{fig3.png}
+        \caption{ }
+        \label{sub:3}
+      \end{subfigure}%
+      \begin{subfigure}{0.33\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{fig4.png}
+        \caption{ }
+        \label{sub:4}
+      \end{subfigure}%
+      \begin{subfigure}{0.33\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{fig5.png}
+        \caption{ }
+        \label{sub:5}
+      \end{subfigure}
+      \caption{Histograms of flow for selected values of $\alpha$. Time step 1/60 seconds, total of 60000 steps}
+      \label{fig:hist}
+    \end{figure}
 \section{Discussion}
+  Since $p=0.9887 > 0.05$ the null hypothesis as formulated in equation \ref{eq:null} can not be
+  rejected. I.e. there is no significant difference between using a ramp meter and not using
+  a ramp meter on a 95 \% confidence level with the configuration as given in table \ref{tb:1}.
+  Although for some specific values of $\alpha$ as can be seen in figure \ref{fig:hist} a
+  ramp meter allows for better flow.
+  \subsection{Considerations for further research}
+    In this study only one parameter has been examined in table \ref{tb:1}, and
+    there might be configurations where a ramp meter allows for better flow over all.
+    The way cars overtake, merge, and avoid cars is also might not
+    be a realistic representation of how cars behave. There might be better
+    ways to model the merging, espescially in the merging segment where
+    the on-ramp connects to the freeway.
 
+    It is also worth mentioning that flow was defined as the sum of all cars divided
+    by the total road length. That is, the whole system's flow was considered.
+    If the flow instead was defined as the flow on the freeway only, and not the
+    on-ramp, the result might have been different. This depends on what matters more,
+    the total flow in the whole system or the flow on the freeway only.
 \printbibliography
 \pagebreak
 \appendix

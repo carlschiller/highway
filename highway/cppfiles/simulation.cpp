@@ -1,5 +1,5 @@
 //
-// Created by Carl Schiller on 2018-12-19.
+// Created by Carl Schiller on 2019-03-04.
 //
 
 #include <iostream>
@@ -40,7 +40,7 @@ void Simulation::update() {
     double spawn_counter_1 = 0.0;
     double spawn_counter_2 = 0.0;
     double spawn_counter_3 = 0.0;
-    
+
     std::vector<double *> counter;
     counter.push_back(&spawn_counter_0);
     counter.push_back(&spawn_counter_1);
