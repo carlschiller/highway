@@ -58,6 +58,12 @@
 \maketitle
 
 \section*{Abstract}
+  The effects of ramp meters on freeway on ramps were studied on a simulated
+  freeway in Roslags-Näsby, Sweden. Model of road was made using
+  a directed graph with vertices spaced approximately every 30 meters. Cars were
+  simulated by traversing the graph with a time step size of 1/60th of a second.
+  No significant increase in freeway flow was noticed by deploying ramp meters
+  on the on-ramp.
 
 \tableofcontents
 
@@ -336,16 +342,32 @@
 \appendix
 
 \section{Header files}
+  \subsection{button.h}
+    \lstinputlisting[language=C++]{../highway/headers/button.h}
   \subsection{cars.h}
     \lstinputlisting[language=C++]{../highway/headers/car.h}
+  \subsection{cscreen.h}
+    \lstinputlisting[language=C++]{../highway/headers/cscreen.h}
   \subsection{road.h}
     \lstinputlisting[language=C++]{../highway/headers/road.h}
   \subsection{roadnode.h}
     \lstinputlisting[language=C++]{../highway/headers/roadnode.h}
   \subsection{roadsegment.h}
     \lstinputlisting[language=C++]{../highway/headers/roadsegment.h}
+  \subsection{screen0.h}
+    \lstinputlisting[language=C++]{../highway/headers/screen0.h}
+  \subsection{screen1.h}
+    \lstinputlisting[language=C++]{../highway/headers/screen1.h}
+  \subsection{screen2.h}
+    \lstinputlisting[language=C++]{../highway/headers/screen2.h}
+  \subsection{screen3.h}
+    \lstinputlisting[language=C++]{../highway/headers/screen3.h}
+  \subsection{screens.h}
+    \lstinputlisting[language=C++]{../highway/headers/screens.h}
   \subsection{simulation.h}
     \lstinputlisting[language=C++]{../highway/headers/simulation.h}
+  \subsection{simulation2.h}
+    \lstinputlisting[language=C++]{../highway/headers/simulation2.h}
   \subsection{traffic.h}
     \lstinputlisting[language=C++]{../highway/headers/traffic.h}
   \subsection{unittests.h}
@@ -353,6 +375,8 @@
   \subsection{util.h}
     \lstinputlisting[language=C++]{../highway/headers/util.h}
 \section{Source files}
+  \subsection{button.cpp}
+    \lstinputlisting[language=C++]{../highway/cppfiles/button.cpp}
   \subsection{cars.cpp}
     \lstinputlisting[language=C++]{../highway/cppfiles/car.cpp}
   \subsection{main.cpp}
@@ -363,13 +387,24 @@
     \lstinputlisting[language=C++]{../highway/cppfiles/roadnode.cpp}
   \subsection{roadsegment.cpp}
     \lstinputlisting[language=C++]{../highway/cppfiles/roadsegment.cpp}
+  \subsection{screen0.cpp}
+    \lstinputlisting[language=C++]{../highway/cppfiles/screen0.cpp}
+  \subsection{screen1.cpp}
+    \lstinputlisting[language=C++]{../highway/cppfiles/screen1.cpp}
+  \subsection{screen2.cpp}
+    \lstinputlisting[language=C++]{../highway/cppfiles/screen2.cpp}
+  \subsection{screen3.cpp}
+    \lstinputlisting[language=C++]{../highway/cppfiles/screen3.cpp}
   \subsection{simulation.cpp}
     \lstinputlisting[language=C++]{../highway/cppfiles/simulation.cpp}
+  \subsection{simulation2.cpp}
+    \lstinputlisting[language=C++]{../highway/cppfiles/simulation2.cpp}
   \subsection{traffic.cpp}
     \lstinputlisting[language=C++]{../highway/cppfiles/traffic.cpp}
   \subsection{unittests.cpp}
     \lstinputlisting[language=C++]{../highway/cppfiles/unittests.cpp}
   \subsection{util.cpp}
     \lstinputlisting[language=C++]{../highway/cppfiles/util.cpp}
-
+\section{Matlab}
+  \lstinputlisting[language=Matlab]{../highway/plotter.m}
 \end{document}

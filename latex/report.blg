@@ -1,15 +1,15 @@
-[0] Config.pm:343> INFO - This is Biber 2.5
-[1] Config.pm:346> INFO - Logfile is 'report.blg'
-[102] biber-darwin:290> INFO - === Fri Mar  8, 2019, 10:52:43
-[146] Biber.pm:351> INFO - Reading 'report.bcf'
-[344] Biber.pm:776> INFO - Found 5 citekeys in bib section 0
-[372] Biber.pm:3493> INFO - Processing section 0
-[405] Biber.pm:3657> INFO - Looking for bibtex format file 'report.bib' for section 0
-[409] bibtex.pm:1187> INFO - Decoding LaTeX character macros into UTF-8
-[413] bibtex.pm:1048> INFO - Found BibTeX data source 'report.bib'
-[473] UCollate.pm:66> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[473] UCollate.pm:66> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[473] Biber.pm:3306> INFO - Sorting list 'nty/global/' of type 'entry' with scheme 'nty' and locale 'en-US'
-[473] Biber.pm:3310> INFO - No sort tailoring available for locale 'en-US'
-[483] bbl.pm:526> INFO - Writing 'report.bbl' with encoding 'UTF-8'
-[486] bbl.pm:619> INFO - Output to report.bbl
+[1] Config.pm:343> INFO - This is Biber 2.5
+[2] Config.pm:346> INFO - Logfile is 'report.blg'
+[88] biber-darwin:290> INFO - === Fri Mar  8, 2019, 15:45:27
+[130] Biber.pm:351> INFO - Reading 'report.bcf'
+[368] Biber.pm:776> INFO - Found 5 citekeys in bib section 0
+[448] Biber.pm:3493> INFO - Processing section 0
+[488] Biber.pm:3657> INFO - Looking for bibtex format file 'report.bib' for section 0
+[490] bibtex.pm:1187> INFO - Decoding LaTeX character macros into UTF-8
+[493] bibtex.pm:1048> INFO - Found BibTeX data source 'report.bib'
+[546] UCollate.pm:66> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[546] UCollate.pm:66> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[547] Biber.pm:3306> INFO - Sorting list 'nty/global/' of type 'entry' with scheme 'nty' and locale 'en-US'
+[547] Biber.pm:3310> INFO - No sort tailoring available for locale 'en-US'
+[557] bbl.pm:526> INFO - Writing 'report.bbl' with encoding 'UTF-8'
+[559] bbl.pm:619> INFO - Output to report.bbl
