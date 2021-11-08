@@ -5,6 +5,8 @@
 #include "../headers/roadsegment.h"
 #include "../headers/roadnode.h"
 #include <cmath>
+#include <stdexcept>
+#include <algorithm>
 
 ////////////////////////////////////////////////////////////////////////////////
 /// RoadSegment destructor, removes all RodeNode element children because of

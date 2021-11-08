@@ -20,7 +20,7 @@ int screen_2::Run(sf::RenderWindow &App, std::vector<float> * args,std::vector<b
     if(!texture.loadFromFile("../iu.png")){
         return -1;
     }
-    if(!font.loadFromFile("/Library/Fonts/Andale mono.ttf")){
+    if(!font.loadFromFile("/usr/share/fonts/TTF/OpenSans-Regular.ttf")){
         return -1;
     }
 
@@ -62,7 +62,7 @@ int screen_2::Run(sf::RenderWindow &App, std::vector<float> * args,std::vector<b
 
     Input * input = new Input(font,28,500,500,names[0],normal,sf::Color::Black,hover,sf::Color(240,255,255,255),std::to_string(args[0][0]));
     input->set_origin(0,button1.get_bounds().height);
-    input->set_dim(App.getSize().x,50);
+    input->set_dim(App.getSize().x,40);
     input->center_text();
 
     inputs.push_back(input);
@@ -70,20 +70,20 @@ int screen_2::Run(sf::RenderWindow &App, std::vector<float> * args,std::vector<b
     for(int i = 1; i < args->size(); i++){
         input = new Input(font,28,500,500,names[i],normal,sf::Color::Black,hover,sf::Color(240,255,255,255),std::to_string(args[0][i]));
         input->set_origin(0,inputs[i-1]->get_bounds().height+inputs[i-1]->get_pos().y);
-        input->set_dim(App.getSize().x,50);
+        input->set_dim(App.getSize().x,40);
         input->center_text();
         inputs.push_back(input);
     }
 
     Button_bool bool_button = Button_bool(font,28,500,500,"Debug: ",normal,sf::Color::Black,hover,sf::Color::White,"false");
     bool_button.set_origin(0,input->get_bounds().height + input->get_pos().y);
-    bool_button.set_dim(App.getSize().x,50);
+    bool_button.set_dim(App.getSize().x,40);
     bool_button.set_toggled(bargs[0][0]);
     bool_button.center_text();
 
     Button_bool bool_button1 = Button_bool(font,28,500,500,"Ramp meter: ",normal,sf::Color::Black,hover,sf::Color::White,"false");
     bool_button1.set_origin(0,bool_button.get_bounds().height + bool_button.get_pos().y);
-    bool_button1.set_dim(App.getSize().x,50);
+    bool_button1.set_dim(App.getSize().x,40);
     bool_button1.set_toggled(bargs[0][1]);
     bool_button1.center_text();
 
@@ -129,8 +129,7 @@ int screen_2::Run(sf::RenderWindow &App, std::vector<float> * args,std::vector<b
 
             if(event.type == sf::Event::TextEntered && current_input != nullptr){
                 sf::String str = event.text.unicode;
-                std::string to_str = str.toAnsiString();
-                current_input = current_input->inputing(App,to_str);
+                current_input = current_input->inputing(App,str);
             }
         }
 

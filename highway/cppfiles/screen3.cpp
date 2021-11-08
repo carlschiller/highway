@@ -24,7 +24,7 @@ int screen_3::Run(sf::RenderWindow &App, std::vector<float> * args,std::vector<b
     if(!texture.loadFromFile("../iu.png")){
         return -1;
     }
-    if(!font.loadFromFile("/Library/Fonts/Andale mono.ttf")){
+    if(!font.loadFromFile("/usr/share/fonts/TTF/OpenSans-Regular.ttf")){
         return -1;
     }
 
@@ -109,8 +109,7 @@ int screen_3::Run(sf::RenderWindow &App, std::vector<float> * args,std::vector<b
 
             if (event.type == sf::Event::TextEntered && current_input != nullptr) {
                 sf::String str = event.text.unicode;
-                std::string to_str = str.toAnsiString();
-                current_input = current_input->inputing(App, to_str);
+                current_input = current_input->inputing(App, str);
             }
         }
 

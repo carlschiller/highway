@@ -315,7 +315,7 @@ void Car::avoid_collision(float delta_t) {
         else if(delta_speed < 0 && radius_to_car < detection_distance){
             m_speed -= std::min(
                     abs(pow(delta_speed, 2.0f)) * pow(ideal * 0.25f / radius_to_car, 2.0f) * m_aggressiveness * 0.15f,
-                    10.0f * delta_t);
+                    (double)10.0f * delta_t);
         }
         else {
             accelerate(delta_t);
@@ -358,7 +358,7 @@ void Car::avoid_collision(float delta_t) {
             else if(m_dist_to_next_node < detection_distance){
                 m_speed -= std::min(
                         abs(pow(m_speed, 2.0f)) * pow(ideal * 0.25f / m_dist_to_next_node, 2.0f) * m_aggressiveness * 0.15f,
-                        10.0f * delta_t);
+                        (double)10.0f * delta_t);
             }
         }
         else{

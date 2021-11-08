@@ -14,7 +14,7 @@
 /*
 Traffic::Traffic() {
     debug = false;
-    if(!m_font.loadFromFile("/Library/Fonts/Andale mono.ttf")){
+    if(!m_font.loadFromFile("/usr/share/fonts/TTF/OpenSans-Regular.ttf")){
 
     }
 }
@@ -51,7 +51,7 @@ Traffic::Traffic(std::vector<bool> bargs, std::vector<float> args) :
     probs.push_back(m_lane_2_spawn_prob);
     probs.push_back(m_ramp_0_spawn_prob);
 
-    if(!m_font.loadFromFile("/Library/Fonts/Andale mono.ttf")){
+    if(!m_font.loadFromFile("/usr/share/fonts/TTF/OpenSans-Regular.ttf")){
 
     }
 

@@ -23,7 +23,7 @@ int screen_1::Run(sf::RenderWindow &App, std::vector<float> * args,std::vector<b
 
     }
 
-    if(!font.loadFromFile("/Library/Fonts/Andale mono.ttf")){
+    if(!font.loadFromFile("/usr/share/fonts/TTF/OpenSans-Regular.ttf")){
         return -1;
     }
 

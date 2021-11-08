@@ -55,7 +55,7 @@ public:
     void set_origin(int x, int y);
     void set_dim(int x, int y);
     virtual Input * clicked(sf::RenderWindow & App);
-    Input * inputing(sf::RenderWindow & App, std::string & str);
+    Input * inputing(sf::RenderWindow & App, sf::String & str);
     float get_val();
     sf::FloatRect get_bounds();
     const sf::Vector2f get_pos();

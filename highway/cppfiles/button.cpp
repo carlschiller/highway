@@ -5,6 +5,7 @@
 //
 
 #include <button.h>
+#include <iostream>
 
 Button::Button(sf::Font & font_copy, unsigned int font_size, int x_pos, int y_pos,
         const std::string & name, sf::Color button_col, sf::Color text_col, sf::Color pressed) :
@@ -168,21 +169,26 @@ bool Input::is_mouse_in_rect(sf::RenderWindow & App) {
     }
 }
 
-Input * Input::inputing(sf::RenderWindow &App,std::string & str) {
+Input * Input::inputing(sf::RenderWindow &App,sf::String & str) {
+    std::string normal_text = str.toAnsiString();
+    
     if(bool_typing){
-        if(str == "\n"){
+        if(*str.getData() == 13){
             bool_typing = false;
             rect.setFillColor(normal);
             return nullptr;
         }
-        else if(str == "\b"){
-            input.pop_back();
-            text.setString(string+input);
-            center_text();
+        else if(*str.getData() == 8){
+            if (!input.empty()){
+                input.pop_back();
+                text.setString(string+input);
+                center_text();
+                return this;
+            }
             return this;
         }
         else{
-            input += str;
+            input += normal_text;
             text.setString(string+input);
             center_text();
             return this;

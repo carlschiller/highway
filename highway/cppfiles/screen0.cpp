@@ -20,7 +20,7 @@ int screen_0::Run(sf::RenderWindow &App, std::vector<float> * args,std::vector<b
     if(!texture.loadFromFile("../iu.png")){
         return -1;
     }
-    if(!font.loadFromFile("/Library/Fonts/Andale mono.ttf")){
+    if(!font.loadFromFile("/usr/share/fonts/TTF/OpenSans-Regular.ttf")){
         return -1;
     }
 
