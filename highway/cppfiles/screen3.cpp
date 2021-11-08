@@ -24,7 +24,7 @@ int screen_3::Run(sf::RenderWindow &App, std::vector<float> * args,std::vector<b
     if(!texture.loadFromFile("../iu.png")){
         return -1;
     }
-    if(!font.loadFromFile("/usr/share/fonts/TTF/OpenSans-Regular.ttf")){
+    if(!font.loadFromFile("/usr/share/fonts/truetype/open-sans/OpenSans-Regular.ttf")){
         return -1;
     }
 
