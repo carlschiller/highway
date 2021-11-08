@@ -24,6 +24,6 @@ sudo ./build_and_run_image.sh
 ## Dependencies
 Application was built using the following dependencies
 
-- [SFML](https://github.com/SFML/SFML) v2.5.1
-- [fonts-open-sans](https://packages.debian.org/sid/fonts-open-sans) v1.11-2
+- [SFML](https://github.com/SFML/SFML) v2.4.2+dfsg-4
+- [fonts-open-sans](https://packages.debian.org/sid/fonts-open-sans) v1.11-1
 
