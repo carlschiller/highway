@@ -2,7 +2,7 @@
 Simulating traffic flow at Roslags Näsby trafikplats in Täby, Sweden as a part of KTH course work in SI1336. Model of road is constructed by using a directed graph with vertices spaced approximately every 30
 meters. Cars are simulated by traversing the graph with a time step size of 1/60th of a second.
  
-![](/latex/pic2.png =500x600)
+<img src=latex/pic2.png width=300>
 
 ## Installation on Linux
 A Dockerfile is provided to automatically compile the code and it's dependencies. To use the GUI, some Xauthority configuration is needed to be performed. A safe manner is provided by running the shell script provided
@@ -13,4 +13,17 @@ sudo ./build_and_run_image.sh
 ```
 
 ## Features
-- 
+- Easily visualize traffic from a birds eye view.
+- Simulate in real time speed, or with a multiplier.
+- Tune spawn rate of cars to your heart's content.
+- Variable driver "aggressiveness".
+- Ramp. meter.
+- Skip visualization and get the raw data written in a text file.
+- And much more :)
+
+## Dependencies
+Application was built using the following dependencies
+
+- [SFML](https://github.com/SFML/SFML) v2.5.1
+- [fonts-open-sans](https://packages.debian.org/sid/fonts-open-sans) v1.11-2
+
