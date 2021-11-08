@@ -23,7 +23,7 @@ cd build && ./highway
 - Easily visualize traffic from a birds eye view.
 - Simulate in real time speed, or with a multiplier.
 - Tune spawn rate of cars to your heart's content.
-- Variable driver "aggressiveness".
+- Variable driver "aggressiveness", which makes drivers want accelerate and overtake slower drivers.
 - Ramp. Meter.
 - Skip visualization and get the raw data written in a text file.
 - And much more :)
