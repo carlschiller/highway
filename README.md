@@ -4,7 +4,7 @@ meters. Cars are simulated by traversing the graph with a time step size of 1/60
  
 Built with a *custom* GUI using [SFML](https://github.com/SFML/SFML) in the C++11 standard. Multiprocessing of the simulation is enabled by default. 
 
-<img src=latex/pic2.png width=300>
+<img src=latex/animation.gif width=300>
 
 ## Installation on Linux
 A Dockerfile is provided to automatically compile the code and it's dependencies. To use the GUI, some Xauthority configuration is needed to be performed. A safe manner is provided by running the shell script provided
@@ -23,7 +23,7 @@ cd build && ./highway
 - Easily visualize traffic from a birds eye view.
 - Simulate in real time speed, or with a multiplier.
 - Tune spawn rate of cars to your heart's content.
-- Variable driver "aggressiveness", which makes drivers want accelerate and overtake slower drivers.
+- Variable driver "aggressiveness", which makes drivers want to accelerate and overtake slower drivers.
 - Ramp. Meter.
 - Skip visualization and get the raw data written in a text file.
 - And much more :)
